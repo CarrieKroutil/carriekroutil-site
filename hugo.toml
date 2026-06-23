@@ -23,3 +23,50 @@ enable = true
 type = "flexsearch"
 [params.search.flexsearch]
 index = "content"
+
+# Suppress Hextra's "Powered by Hextra" credit — the footer is a single muted
+# line with only GitHub/LinkedIn operable (Story 1.3, UX-DR9). Footer theme
+# switches are already off by default (enableFooterSwitches=false in the module).
+[params.footer]
+displayPoweredBy = false
+
+# Header right-side controls (Story 1.3, UX-DR6), rendered by Hextra in ascending
+# weight order: Posts · About · search ⌕ · theme ☾ · GitHub · LinkedIn.
+# Posts/About use literal URLs — those pages arrive in Epics 2/3; a literal URL
+# avoids build-time pageRef validation against not-yet-existent content.
+[[menu.main]]
+name = "Posts"
+url = "/posts/"
+weight = 10
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 20
+
+[[menu.main]]
+name = "Search"
+weight = 30
+[menu.main.params]
+type = "search"
+
+[[menu.main]]
+name = "Theme"
+weight = 40
+[menu.main.params]
+type = "theme-toggle"
+label = false
+
+[[menu.main]]
+name = "GitHub"
+url = "https://github.com/CarrieKroutil"
+weight = 50
+[menu.main.params]
+icon = "github"
+
+[[menu.main]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/carriekroutil"
+weight = 60
+[menu.main.params]
+icon = "linkedin"

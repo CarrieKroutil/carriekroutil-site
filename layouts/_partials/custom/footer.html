@@ -1,0 +1,14 @@
+{{- /*
+  carriekroutil.com — footer content (Story 1.3, UX-DR9)
+  Fills Hextra's footer content slot (module footer.html invokes
+  `partial "custom/footer.html"`). A thin decorative gradient rule above a
+  single muted line; GitHub + LinkedIn are the ONLY operable elements.
+  "Powered by Hextra" is suppressed via [params.footer] displayPoweredBy=false;
+  footer theme switches are off by default. The module is never edited (AD-5).
+*/ -}}
+<div class="ck-footer-rule" aria-hidden="true"></div>
+<p class="ck-footer-line">
+  carriekroutil.com ·
+  <a href="https://github.com/CarrieKroutil" target="_blank" rel="noreferrer">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/carriekroutil" target="_blank" rel="noreferrer">LinkedIn</a>
+</p>
