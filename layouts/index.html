@@ -1,0 +1,29 @@
+{{- /*
+  index.html — the Home front door (Epic 3). Shadows Hextra's home template.
+  Defines only `main`; Hextra's baseof supplies the Epic-1 navbar + footer.
+  920px content width (UX-DR10). Renders as static HTML with JS off (AD-13).
+
+  Sections, top to bottom:
+    - Hero (Story 3.1): avatar-ring · greeting · one-liner · topic chips.
+    - Latest posts + Featured slot arrive in Stories 3.2 / 3.3.
+*/ -}}
+{{ define "main" }}
+{{- /* Mobile nav drawer for the navbar hamburger (same pattern as posts/single.html):
+   hidden on desktop, rendered so the mobile menu has something to open. */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+<main id="content" class="ck-home">
+  <section class="ck-hero">
+    {{ partial "custom/avatar.html" . }}
+    <div class="ck-hero-text">
+      <h1 class="ck-hero-greeting">{{ .Params.greeting }}</h1>
+      {{- with .Params.oneliner }}<p class="ck-hero-oneliner">{{ . }}</p>{{ end -}}
+      {{- /* Topic chips straight from the live `tags` taxonomy (most-written first), so every
+         chip links to a real /tags/{topic}/ term page — no broken links, no maintenance as
+         topics grow. Same renderer + per-topic tint as cards/posts (custom/post-tags.html). */ -}}
+      {{- $terms := slice -}}
+      {{- range site.Taxonomies.tags.ByCount -}}{{- $terms = $terms | append .Page -}}{{- end -}}
+      {{- with $terms }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
+    </div>
+  </section>
+</main>
+{{ end }}

@@ -449,3 +449,89 @@ samp {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================================
+   Story 3.1 — Home hero
+   (FR-1 · UX-DR3 avatar-ring · UX-DR10 layout · UX-DR13 voice)
+   Centered 920px content column; hero is avatar + greeting/one-liner/chips,
+   collapsing to a stacked single column on narrow screens. No animation here.
+   ========================================================================== */
+.ck-home {
+  max-width: var(--ck-content-max);   /* 920px */
+  margin: 0 auto;
+  padding: 0 var(--ck-gutter) 48px;   /* 22px gutters */
+}
+.ck-hero {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 54px 0 34px;
+}
+.ck-hero-text {
+  flex: 1;
+  min-width: 240px;
+}
+.ck-hero-greeting {
+  margin: 0 0 10px;
+  font-size: var(--ck-scale-h1);          /* 2.5rem (display weight/tracking from base h1) */
+  line-height: 1.1;
+}
+.ck-hero-oneliner {
+  margin: 0;
+  color: var(--ck-muted);                 /* AA floor on dark */
+  font-size: 1.08rem;
+  max-width: 52ch;
+}
+.ck-hero .ck-tags {
+  margin: 18px 0 0;
+}
+
+/* ----- avatar-ring (UX-DR3) — gradient ring around a surface-2 circle, decorative -----
+   Shared by Home (default 128px) and About (--lg 150px). Shows site.Params.avatar
+   photo when set, else an on-brand gradient monogram. */
+.ck-avatar {
+  width: 128px;
+  height: 128px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  padding: 3px;                            /* the gradient ring */
+  background: var(--ck-accent-gradient);
+}
+.ck-avatar--lg {
+  width: 150px;
+  height: 150px;
+}
+.ck-avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--ck-surface-2);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.ck-avatar-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ck-avatar-monogram {
+  font-weight: var(--ck-weight-display);   /* 800 */
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  /* solid fuchsia fallback, then gradient text-clip (matches the wordmark treatment) */
+  color: var(--ck-accent-fuchsia);
+  background: var(--ck-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (forced-colors: active), print {
+  .ck-avatar-monogram {
+    background: none;
+    -webkit-text-fill-color: var(--ck-accent-fuchsia);
+    color: var(--ck-accent-fuchsia);
+  }
+}
