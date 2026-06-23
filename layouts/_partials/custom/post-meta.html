@@ -1,0 +1,20 @@
+{{- /*
+  custom/post-meta.html — the single source for a post's date + read-time meta line.
+  Reused by the single post page (Story 2.2) and the post-card (Story 2.3); do NOT
+  duplicate date/read-time logic elsewhere.
+
+  Enforces the AD-3 front-matter contract at build time:
+    - Missing/zero `date` -> errorf aborts the build (a malformed date already fails
+      natively at parse time, so only the missing/zero case needs an explicit guard).
+  Date is formatted with the one site-wide Go layout `Jan 2, 2006` (AD-3 / Conventions;
+  the spine's abbreviated form wins over the mock's full-month "June 22, 2026").
+  Read-time is derived from .ReadingTime with an explicit floor of 1 — never hand-entered.
+
+  Call as:  {{ partial "custom/post-meta.html" . }}   (context = the post Page)
+*/ -}}
+{{- if .Date.IsZero -}}
+  {{- errorf "post %q is missing a required `date` in front matter (AD-3 contract: date is RFC-3339/ISO and must be present)" .Path -}}
+{{- end -}}
+{{- $rt := .ReadingTime -}}
+{{- if lt $rt 1 -}}{{- $rt = 1 -}}{{- end -}}
+<div class="ck-post-meta">{{ .Date.Format "Jan 2, 2006" }} &middot; {{ $rt }} min read</div>

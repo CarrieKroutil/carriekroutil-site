@@ -11,6 +11,7 @@
   --ck-surface: #15151a;
   --ck-surface-2: #1c1c23;
   --ck-border: #2a2a33;
+  --ck-border-bright: #3a3a46;   /* one step up from --ck-border — hover/active card edge */
   --ck-fg: #ededed;
   --ck-muted: #a0a0ab;        /* muted / meta — AA floor; never lighter than this on dark */
   --ck-meta-min: #a0a0ab;
@@ -26,6 +27,10 @@
   --ck-chip-violet-text: #c9b8ff;
   --ck-chip-fuchsia-text: #f3a8ff;
   --ck-chip-amber-text: #ffd591;
+  /* dimmed accent borders that pair with each chip text colour */
+  --ck-chip-violet-border: #5b3da8;
+  --ck-chip-fuchsia-border: #9a2fa3;
+  --ck-chip-amber-border: #8a6a1f;
 
   /* ----- Typography ----- */
   --ck-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -241,5 +246,206 @@ samp {
   }
   .hextra-nav-container-blur {
     transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+}
+
+/* ============================================================================
+   Story 2.2 — single post page + shared tag chips
+   (FR-5 · AD-9 · UX-DR4 chips · UX-DR10 reading width · UX-DR11 a11y/motion)
+   Reading column 720px; metadata via custom/post-meta.html; chips via
+   custom/post-tags.html (reused by card 2.3 + term page Epic 4).
+   ========================================================================== */
+
+/* ----- Reading column (UX-DR10) — 720px reading-max, 22px gutters ----- */
+.ck-reading {
+  max-width: var(--ck-reading-max);   /* 720px */
+  margin: 0 auto;
+  padding: 24px var(--ck-gutter) 40px; /* 22px side gutters */
+}
+
+/* ----- Back-to-stream link (a way back to the Post Stream) ----- */
+.ck-back {
+  display: inline-block;
+  font-size: var(--ck-scale-small);    /* 0.85rem */
+  font-weight: var(--ck-weight-strong);
+  color: var(--ck-muted);
+  text-decoration: none;
+}
+.ck-back:hover {
+  color: var(--ck-fg);
+}
+.ck-postnav {
+  margin-top: 36px;
+}
+
+/* ----- Tag chips (UX-DR4) — pill, uppercase, one accent tint per chip -----
+   Shared renderer custom/post-tags.html. Labels authored lowercase; uppercased here. */
+.ck-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 10px;
+}
+.ck-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: var(--ck-radius-pill);
+  border: 1px solid var(--ck-border);
+  background: var(--ck-surface);
+  text-decoration: none;
+  line-height: 1.5;
+}
+.ck-tag:hover {
+  text-decoration: none;
+  border-color: var(--ck-fg);
+}
+/* Accent tint per chip — text on surface, dimmed accent border (chips clear AA: 9.7–12.5:1). */
+.ck-tag--violet  { color: var(--ck-chip-violet-text);  border-color: var(--ck-chip-violet-border); }
+.ck-tag--fuchsia { color: var(--ck-chip-fuchsia-text); border-color: var(--ck-chip-fuchsia-border); }
+.ck-tag--amber   { color: var(--ck-chip-amber-text);   border-color: var(--ck-chip-amber-border); }
+
+/* ----- Post title + meta ----- */
+.ck-post-title {
+  font-size: 2.3rem;
+  line-height: 1.15;
+  margin: 0.2em 0 0.15em;
+}
+.ck-post-meta {
+  color: var(--ck-muted);            /* never below #a0a0ab on dark (AA floor) */
+  font-size: 0.88rem;
+  margin-bottom: 22px;
+}
+
+/* ----- Hero image — rounded, responsive, lazy-loaded ----- */
+.ck-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--ck-radius-card);  /* 18px */
+  margin: 8px 0 28px;
+}
+
+/* ============================================================================
+   Story 2.3 — shared post-card partial
+   (AR-9/AD-6 one card renderer · UX-DR5 card · UX-DR11 motion/a11y)
+   ONE card; grid-agnostic (block-level). The 2-up→1-up grid is the consumer's
+   (stream 2.4 / Home 3.2). Reuses .ck-tag chips + custom/post-meta.html.
+   ========================================================================== */
+.ck-card {
+  position: relative;                       /* anchor for the overlay link (::after) */
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);   /* 18px */
+  overflow: hidden;
+}
+/* Title link — its ::after overlays the whole card, so the ENTIRE surface navigates to
+   the post (UX-DR5 single click target) while staying valid HTML (card is an <article>). */
+.ck-card-link {
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.ck-card-link:hover {
+  text-decoration: none;
+}
+/* The tag chip is a REAL link to its term page (Story 2.4 AC2) — raise it above the
+   overlay so it stays independently clickable. */
+.ck-card .ck-tags {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 8px;
+}
+
+/* Thumb — image fills the slot; gradient fallback when no hero (a garnish, low-key). */
+.ck-card-thumb {
+  height: 120px;
+  background: var(--ck-surface-2);
+  position: relative;
+  overflow: hidden;
+}
+.ck-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ck-card-thumb--g1 { background: linear-gradient(135deg, #2a1d4a, #3a1d3f); }
+.ck-card-thumb--g2 { background: linear-gradient(135deg, #3a1d3f, #3d2a12); }
+.ck-card-thumb--g3 { background: linear-gradient(135deg, #1d2a4a, #2a1d4a); }
+.ck-card-thumb--g4 { background: linear-gradient(135deg, #3d2a12, #2a1d4a); }
+
+.ck-card-body {
+  padding: 14px 16px 18px;
+}
+.ck-card-title {
+  margin: 6px 0;
+  font-size: 1.02rem;
+  font-weight: var(--ck-weight-strong);    /* 600 */
+  letter-spacing: -0.01em;
+  color: var(--ck-fg);
+}
+.ck-card-excerpt {
+  margin: 0;
+  color: var(--ck-muted);
+  font-size: 0.9rem;
+  /* one-line clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ck-card .ck-post-meta {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 0.78rem;
+}
+
+/* Hover lift + border brighten — only when motion is welcome (UX-DR11: the media query
+   is wired, so reduced-motion users get a static card with no transform). */
+@media (prefers-reduced-motion: no-preference) {
+  .ck-card {
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .ck-card:hover,
+  .ck-card:focus-within {
+    transform: translateY(-3px);
+    border-color: var(--ck-border-bright);
+  }
+}
+
+/* ============================================================================
+   Story 2.4 — the post stream at /posts/
+   (FR-4 · AD-4/AD-6 · UX-DR10 layout) — 920px content width, 2-up card grid
+   collapsing to 1-up under ~620px. The grid lives here, not in the card.
+   ========================================================================== */
+.ck-stream {
+  max-width: var(--ck-content-max);   /* 920px */
+  margin: 0 auto;
+  padding: 32px var(--ck-gutter) 48px; /* 22px gutters */
+}
+.ck-stream-title {
+  font-size: 2rem;
+  margin: 0 0 6px;
+}
+.ck-stream-intro {
+  color: var(--ck-muted);
+  margin-bottom: 18px;
+}
+.ck-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 620px) {
+  .ck-grid {
+    grid-template-columns: 1fr;
   }
 }
