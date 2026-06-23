@@ -1,6 +1,6 @@
 # carriekroutil.com
 
-Personal site — a Hugo static site using the [Hextra](https://github.com/imfing/hextra) theme, consumed via Hugo Modules. Authored in Markdown; published by `git push` (build pipeline lands in a later story).
+Personal site — a Hugo static site using the [Hextra](https://github.com/imfing/hextra) theme, consumed via Hugo Modules. Authored in Markdown; published by `git push` to `main`, which AWS Amplify builds and serves at carriekroutil.com. For the deploy pipeline and one-time AWS setup, see **[SETUP.md](SETUP.md)**.
 
 ## Prerequisites
 
@@ -35,6 +35,7 @@ hugo --gc --minify
 
 ```text
 hugo.toml          # site config: baseURL, title, Hextra module import, theme/search/taxonomy
+amplify.yml        # AWS Amplify build spec (single deploy pipeline) — see SETUP.md
 go.mod / go.sum    # Hugo Module — Hextra theme version lock
 content/           # Markdown content (content/_index.md is the home page)
 layouts/           # project layout/partial overrides (shadow the theme; never edit the module)

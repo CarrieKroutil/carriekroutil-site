@@ -1,0 +1,50 @@
+# AWS Amplify build spec — the single source of build truth (AD-11).
+# One pipeline, production only, default branch (`main`) only (AD-2). See SETUP.md
+# for the AWS console + Route 53 steps that pair with this file.
+#
+# Why this installs its own toolchain (don't remove): Amplify's default build
+# image ships Hugo 0.75.1 (2020) and NO Go toolchain — both fatal here. So we
+# pin and install Hugo EXTENDED (Hextra needs SCSS) and Go (Hugo Modules need it)
+# in preBuild. Versions are pinned, never `latest` — upgrades are deliberate (AD-10).
+version: 1
+env:
+  variables:
+    HUGO_VERSION: 0.163.3        # extended edition; ≥ 0.146.0 Hextra v0.12.3 floor
+    GO_VERSION: 1.26.4           # ≥ 1.21 Hugo Modules floor
+    HUGO_CACHEDIR: ${PWD}/.cache/hugo
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - mkdir -p "${HOME}/.local"
+        # Go — Amplify's image has none; required for Hugo Modules / `hugo mod get`.
+        - echo "Installing Go ${GO_VERSION}..."
+        - curl -sLO "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz"
+        - tar -C "${HOME}/.local" -xf "go${GO_VERSION}.linux-amd64.tar.gz"
+        - rm "go${GO_VERSION}.linux-amd64.tar.gz"
+        - export PATH="${HOME}/.local/go/bin:${PATH}"
+        # Hugo EXTENDED — note the `_extended_` in the asset name (the plain
+        # `hugo_${VERSION}_...` is the standard edition and breaks Hextra's SCSS).
+        - echo "Installing Hugo extended ${HUGO_VERSION}..."
+        - curl -sLO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+        - mkdir -p "${HOME}/.local/hugo"
+        - tar -C "${HOME}/.local/hugo" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+        - rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+        - export PATH="${HOME}/.local/hugo:${PATH}"
+        # Verify the toolchain (build log must show `+extended`).
+        - go version
+        - hugo version
+        # Fetch + lock the Hextra module before building (AD-11).
+        - echo "Fetching Hugo modules..."
+        - hugo mod get
+    build:
+      commands:
+        - echo "Building site..."
+        - hugo --gc --minify
+  artifacts:
+    baseDirectory: public
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .cache/hugo/**/*
