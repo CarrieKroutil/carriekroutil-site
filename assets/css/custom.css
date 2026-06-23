@@ -218,3 +218,28 @@ samp {
   outline: var(--ck-focus-ring);
   outline-offset: 2px;
 }
+
+/* ============================================================================
+   Story 1.4 — theme toggle: smooth transition, gated by reduced-motion
+   (UX-DR7 theme-toggle · UX-DR11 reduced-motion)
+   Persistence, the dark default, and the toggle UI ship with Hextra
+   (head/theme.js pre-paints from localStorage["color-theme"], falling back to
+   params.theme.default = dark; core/theme.js writes the pref on toggle). We add
+   only the color transition between themes — and only when motion is welcome.
+   ========================================================================== */
+
+/* "Smooth, quick theme transition" (EXPERIENCE.md). Authored ONLY under
+   prefers-reduced-motion: no-preference, so reduced-motion users get an instant
+   swap by construction (the media query is wired, not merely intended — UX-DR11).
+   Each selector transitions only the color-bearing properties it actually uses
+   (never `all` → would animate layout): the page surfaces ease background + text;
+   the frosted header eases its background + brand border. */
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .hextra-nav-container-blur {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+}
