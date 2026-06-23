@@ -1,20 +1,20 @@
 {{- /*
-  custom/post-card.html — THE post-card renderer (Story 2.3, AR-9/AD-6). The native
-  hextra-card is NOT used for posts. Reused by the stream (2.4), Home (3.2), and term
-  pages (4.1). Context = a post Page.
+  custom/post-card.html — THE post-card renderer (Story 2.3, evolved in 2.4; AR-9/AD-6).
+  The native hextra-card is NOT used for posts. Reused by the stream (2.4), Home (3.2),
+  and term pages (4.1). Context = a post Page.
 
-  The WHOLE card is a single <a> to the post (UX-DR5). HTML forbids a nested <a>, so the
-  tag is a non-interactive <span> (same .ck-tag chip look as the single page, no href) —
-  the clickable-chip partial custom/post-tags.html is intentionally NOT used here.
+  Accessible overlay pattern (UX-DR5 single click target + Story 2.4 AC2 clickable tag):
+    - The card root is an <article>; the title link's ::after (see .ck-card-link in CSS)
+      overlays the whole card, so the ENTIRE surface navigates to the post.
+    - The tag is a REAL <a> to its term page (via custom/post-tags.html), raised above the
+      overlay (z-index) so it stays independently clickable — /tags/{topic}/.
+  Two real anchors (card→post primary, tag→term secondary), both keyboard-focusable.
 
-  Thumb: the hero image when present (decorative in the card → alt="", lazy), otherwise a
-  gradient fallback. Date + read-time reuse custom/post-meta.html (also keeps the date-gate
-  live). Excerpt: .Description, else .Summary, one line (CSS-clamped).
+  Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback.
+  Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
 */ -}}
-{{- $tints := slice "violet" "fuchsia" "amber" -}}
-{{- $tag := index .Params.tags 0 -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
-<a class="ck-card" href="{{ .RelPermalink }}">
+<article class="ck-card">
   {{- with .Params.hero -}}
     {{- $img := $.Resources.GetMatch .src -}}
     <div class="ck-card-thumb">
@@ -25,10 +25,10 @@
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}
   <div class="ck-card-body">
-    {{- with $tag -}}<span class="ck-tag ck-tag--{{ index $tints (mod (len .) 3) }}">{{ . }}</span>{{- end -}}
-    <h3 class="ck-card-title">{{ .Title }}</h3>
+    {{ partial "custom/post-tags.html" (dict "page" . "limit" 1) }}
+    <h3 class="ck-card-title"><a class="ck-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     {{- $excerpt := or .Description (.Summary | plainify) -}}
     {{- with $excerpt -}}<p class="ck-card-excerpt">{{ . }}</p>{{- end -}}
     {{ partial "custom/post-meta.html" . }}
   </div>
-</a>
+</article>

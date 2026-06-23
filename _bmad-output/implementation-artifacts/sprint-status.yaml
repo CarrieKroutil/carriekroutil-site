@@ -70,7 +70,7 @@ development_status:
   2-1-establish-the-post-content-model-front-matter-contract-and-read-time: review
   2-2-render-a-single-post-page: review
   2-3-build-the-shared-post-card-partial: review
-  2-4-browse-the-full-post-stream-at-posts: backlog
+  2-4-browse-the-full-post-stream-at-posts: review
   epic-2-retrospective: optional
 
   # Epic 3: The front door — Home & About

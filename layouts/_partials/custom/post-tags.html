@@ -5,7 +5,8 @@
 
   Each chip links the real taxonomy term page (/tags/{topic}/) via .GetTerms, so links stay
   correct once Epic 4 styles the term page. Labels are lowercase as authored; CSS uppercases.
-  Accent tint rotates violet -> fuchsia -> amber by index.
+  Accent tint is a stable hash of the topic name, so a topic keeps the SAME color everywhere
+  it appears (single page, card, term page) — recognizable, and varied as topics diversify.
 
   Context: a Page, OR a dict { page: <Page>, limit: <int> } (limit 0/absent = all tags).
 */ -}}
@@ -17,8 +18,8 @@
 {{- $tints := slice "violet" "fuchsia" "amber" -}}
 {{- with $terms -}}
 <div class="ck-tags">
-  {{- range $i, $t := . -}}
-  <a class="ck-tag ck-tag--{{ index $tints (mod $i 3) }}" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>
+  {{- range $t := . -}}
+  <a class="ck-tag ck-tag--{{ index $tints (mod (hash.FNV32a $t.LinkTitle) 3) }}" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>
   {{- end -}}
 </div>
 {{- end -}}

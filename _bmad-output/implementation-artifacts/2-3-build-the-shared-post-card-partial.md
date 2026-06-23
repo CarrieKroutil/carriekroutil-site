@@ -143,3 +143,4 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | --- | --- |
 | 2026-06-23 | Story 2.3 drafted via create-story. Status → ready-for-dev. |
 | 2026-06-23 | Story 2.3 implemented: `post-card.html` (image/gradient thumb, span tag, title, excerpt, meta; single click target; reduced-motion lift), card CSS, heroless reference post; relocated single layout to `layouts/blog/` + cascaded `type: blog` for coherent routing. All ACs verified. Status → review. |
+| 2026-06-23 | Forward note: Story 2.4 evolved `post-card.html` from the single-`<a>`+`<span>`-tag form to the accessible overlay pattern (card `<article>` + title-link `::after` overlay + real clickable tag link), to satisfy 2.4 AC2 ("tag chips link to /tags/{topic}/") while preserving UX-DR5's single click target. The card now also reuses `post-tags.html`. The 2.3 card behavior (single click target, gradient/image thumb) is unchanged; only the tag became a real link. |

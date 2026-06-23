@@ -330,16 +330,33 @@ samp {
    (stream 2.4 / Home 3.2). Reuses .ck-tag chips + custom/post-meta.html.
    ========================================================================== */
 .ck-card {
-  display: block;
+  position: relative;                       /* anchor for the overlay link (::after) */
   background: var(--ck-surface);
   border: 1px solid var(--ck-border);
   border-radius: var(--ck-radius-card);   /* 18px */
   overflow: hidden;
-  color: inherit;
+}
+/* Title link — its ::after overlays the whole card, so the ENTIRE surface navigates to
+   the post (UX-DR5 single click target) while staying valid HTML (card is an <article>). */
+.ck-card-link {
+  color: var(--ck-fg);
   text-decoration: none;
 }
-.ck-card:hover {
+.ck-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.ck-card-link:hover {
   text-decoration: none;
+}
+/* The tag chip is a REAL link to its term page (Story 2.4 AC2) — raise it above the
+   overlay so it stays independently clickable. */
+.ck-card .ck-tags {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 8px;
 }
 
 /* Thumb — image fills the slot; gradient fallback when no hero (a garnish, low-key). */
@@ -362,11 +379,6 @@ samp {
 
 .ck-card-body {
   padding: 14px 16px 18px;
-}
-/* tag <span> on the card reuses .ck-tag chip styling; sits above the title. */
-.ck-card-body .ck-tag {
-  display: inline-block;
-  margin-bottom: 8px;
 }
 .ck-card-title {
   margin: 6px 0;
@@ -397,8 +409,38 @@ samp {
   .ck-card {
     transition: transform 0.15s ease, border-color 0.15s ease;
   }
-  .ck-card:hover {
+  .ck-card:hover,
+  .ck-card:focus-within {
     transform: translateY(-3px);
     border-color: #3a3a46;
+  }
+}
+
+/* ============================================================================
+   Story 2.4 — the post stream at /posts/
+   (FR-4 · AD-4/AD-6 · UX-DR10 layout) — 920px content width, 2-up card grid
+   collapsing to 1-up under ~620px. The grid lives here, not in the card.
+   ========================================================================== */
+.ck-stream {
+  max-width: var(--ck-content-max);   /* 920px */
+  margin: 0 auto;
+  padding: 32px var(--ck-gutter) 48px; /* 22px gutters */
+}
+.ck-stream-title {
+  font-size: 2rem;
+  margin: 0 0 6px;
+}
+.ck-stream-intro {
+  color: var(--ck-muted);
+  margin-bottom: 18px;
+}
+.ck-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 620px) {
+  .ck-grid {
+    grid-template-columns: 1fr;
   }
 }
