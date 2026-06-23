@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- carriekroutil.com favicon: the site avatar in miniature (gradient ring,
+       surface-2 disc, gradient CK monogram). Palette matches the accent gradient. -->
+  <defs>
+    <linearGradient id="ck-grad" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="0.5" stop-color="#d946ef"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="31" fill="url(#ck-grad)"/>
+  <circle cx="32" cy="32" r="28" fill="#1c1c23"/>
+  <text x="32" y="41.5" text-anchor="middle"
+        font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        font-weight="800" font-size="27" letter-spacing="-1.5" fill="url(#ck-grad)">CK</text>
+</svg>
