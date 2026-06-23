@@ -53,13 +53,16 @@ to follow once, then keep for reference.
 
 4. **First deploy.** Save and deploy. Watch the build log — `preBuild` should print a Hugo
    version line containing **`+extended`** and a Go version; `build` runs `hugo --gc --minify`
-   and publishes `public/`. The app gets a default `*.amplifyapp.com` URL first.
+   and publishes `public/`. The app gets a default `*.amplifyapp.com` URL first. *If the build
+   fails, read the build log top-to-bottom for the first failing command (usually a version
+   pin that 404s, or a network blip on `hugo mod get`) and fix that before retrying.*
 
 5. **Custom domain via Route 53.** Amplify → **Hosting** → **Custom domains** → **Add domain**
    → `carriekroutil.com`. Because the hosted zone is in Route 53 on the same account, Amplify
    provisions the ACM certificate and writes the DNS records automatically. Map the apex
-   `carriekroutil.com` (and, if desired, `www` → apex redirect). Wait for the domain to
-   activate (cert validation can take a few minutes to tens of minutes).
+   `carriekroutil.com` **and** add `www` → apex redirect (so `www.carriekroutil.com` resolves
+   rather than erroring — a common entry point). Wait for the domain to activate (cert
+   validation can take a few minutes to tens of minutes).
 
 6. **Verify.** Visit **https://carriekroutil.com/** — it should serve the built site over HTTPS.
 
@@ -78,3 +81,7 @@ Versions are pinned in [`amplify.yml`](amplify.yml) (`HUGO_VERSION`, `GO_VERSION
 Hextra theme is locked in `go.mod`. To upgrade: bump the pin(s) and/or run
 `hugo mod get -u github.com/imfing/hextra`, re-test locally (`hugo --gc --minify`), then push.
 Never float to `latest`.
+
+When bumping Go, keep `go.mod`'s `go` directive **≤** the installed `GO_VERSION`. If the
+directive ever exceeds the installed toolchain, modern Go silently downloads a matching
+toolchain over the network mid-build — an unpinned fetch that defeats the point of pinning.

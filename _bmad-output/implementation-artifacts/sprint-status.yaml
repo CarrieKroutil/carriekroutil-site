@@ -45,7 +45,7 @@ last_updated: 2026-06-23
 # story 1.1 done; story 1.2 reviewed (3 patches applied) → done; epic-1 → in-progress
 # story 1.3 contexted → ready-for-dev → in-progress → review → done (3 patches applied, 1 deferred) — branch story-1.3-wordmark-header-footer off main @81335ba
 # story 1.4 contexted → ready-for-dev → in-progress → review → done (1 patch applied, 1 deferred, 6 dismissed) — branch story-1.4-theme-toggle off main @a6686d0
-# story 1.5 contexted → ready-for-dev → in-progress → review (amplify.yml + SETUP.md; build verified; AWS console app+domain remain Carrie's manual task) — branch story-1.5-amplify-pipeline off main @bf22e08
+# story 1.5 contexted → ready-for-dev → in-progress → review → done (2 patches applied, 4 dismissed; site live at carriekroutil.com built from this amplify.yml) — branch story-1.5-amplify-pipeline off main @bf22e08, merged PR #4
 project: carriekroutil-site
 project_key: NOKEY
 tracking_system: file-system
@@ -58,7 +58,7 @@ development_status:
   1-2-apply-the-design-tokens-and-dark-default-theme: done
   1-3-build-the-gradient-wordmark-sticky-header-nav-and-footer: done
   1-4-dark-light-theme-toggle-with-persistence: done
-  1-5-stand-up-the-single-amplify-pipeline-on-the-correct-brand: review
+  1-5-stand-up-the-single-amplify-pipeline-on-the-correct-brand: done
   1-6-publish-a-post-by-push: backlog
   1-7-surface-build-outcomes-so-a-broken-push-is-never-silent: backlog
   epic-1-retrospective: optional
