@@ -155,3 +155,4 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | --- | --- |
 | 2026-06-23 | Story 2.2 drafted via create-story. Status → ready-for-dev. |
 | 2026-06-23 | Story 2.2 implemented: `posts/single.html` (720px, chips, meta, hero), `post-tags.html`, `render-image.html` alt gate, single-post CSS, enriched reference post. All ACs verified. Status → review. |
+| 2026-06-23 | Follow-up during Story 2.3: the single layout was relocated `layouts/posts/single.html` → `layouts/blog/single.html` and `cascade: { type: blog }` added to `content/posts/_index.md`, so the whole post family resolves under `layouts/blog/` (lets 2.4's stream override win the typed-section lookup). Single page re-verified — no behavior change. |

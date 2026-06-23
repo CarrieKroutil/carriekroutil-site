@@ -322,3 +322,83 @@ samp {
   border-radius: var(--ck-radius-card);  /* 18px */
   margin: 8px 0 28px;
 }
+
+/* ============================================================================
+   Story 2.3 — shared post-card partial
+   (AR-9/AD-6 one card renderer · UX-DR5 card · UX-DR11 motion/a11y)
+   ONE card; grid-agnostic (block-level). The 2-up→1-up grid is the consumer's
+   (stream 2.4 / Home 3.2). Reuses .ck-tag chips + custom/post-meta.html.
+   ========================================================================== */
+.ck-card {
+  display: block;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);   /* 18px */
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+}
+.ck-card:hover {
+  text-decoration: none;
+}
+
+/* Thumb — image fills the slot; gradient fallback when no hero (a garnish, low-key). */
+.ck-card-thumb {
+  height: 120px;
+  background: var(--ck-surface-2);
+  position: relative;
+  overflow: hidden;
+}
+.ck-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ck-card-thumb--g1 { background: linear-gradient(135deg, #2a1d4a, #3a1d3f); }
+.ck-card-thumb--g2 { background: linear-gradient(135deg, #3a1d3f, #3d2a12); }
+.ck-card-thumb--g3 { background: linear-gradient(135deg, #1d2a4a, #2a1d4a); }
+.ck-card-thumb--g4 { background: linear-gradient(135deg, #3d2a12, #2a1d4a); }
+
+.ck-card-body {
+  padding: 14px 16px 18px;
+}
+/* tag <span> on the card reuses .ck-tag chip styling; sits above the title. */
+.ck-card-body .ck-tag {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.ck-card-title {
+  margin: 6px 0;
+  font-size: 1.02rem;
+  font-weight: var(--ck-weight-strong);    /* 600 */
+  letter-spacing: -0.01em;
+  color: var(--ck-fg);
+}
+.ck-card-excerpt {
+  margin: 0;
+  color: var(--ck-muted);
+  font-size: 0.9rem;
+  /* one-line clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ck-card .ck-post-meta {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 0.78rem;
+}
+
+/* Hover lift + border brighten — only when motion is welcome (UX-DR11: the media query
+   is wired, so reduced-motion users get a static card with no transform). */
+@media (prefers-reduced-motion: no-preference) {
+  .ck-card {
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .ck-card:hover {
+    transform: translateY(-3px);
+    border-color: #3a3a46;
+  }
+}
