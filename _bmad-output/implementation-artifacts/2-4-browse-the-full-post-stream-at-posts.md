@@ -35,7 +35,7 @@ so that I can scan everything Carrie has written.
   - [x] Both ACs hold: whole card → post (UX-DR5), tag → term page (AC2). Two real anchors, both keyboard-focusable; lift now also fires on `:focus-within`. Supersedes 2.3's `<span>` tag (forward-noted in 2.3).
 
 - [x] **Task 2 — The stream layout** (AC: 1, 2)
-  - [x] Created `layouts/blog/list.html` (`define "main"`, `<main id="content" class="ck-stream">`). Resolves here via the 2.3 `cascade: type: blog`; fully replaces Hextra's blog/list (no pager / Read-more / sidebar).
+  - [x] Created the stream list (`define "main"`, `<main id="content" class="ck-stream">`); fully replaces Hextra's list (no pager / Read-more / sidebar). *(Originally `layouts/blog/list.html`; moved to `layouts/posts/list.html` under Option B — resolves by section name `posts`, no `type`.)*
   - [x] 920px content width + 22px gutters; optional `_index.md` title/intro. Ranges `(where site.RegularPages "Section" "posts").ByDate.Reverse` → `post-card.html`. No client-side filtering.
 
 - [x] **Task 3 — Grid styles** (AC: 1)
@@ -63,7 +63,7 @@ so that I can scan everything Carrie has written.
 
 ### Stream content (AD-4 / AD-6)
 - `/posts/` is the full reverse-chron stream — every non-draft post, no curation, no JS filter. Topic narrowing = navigate to `/tags/{topic}/` (term page styled in Epic 4; links are live now via Hugo core). [Source: ARCHITECTURE-SPINE.md#AD-4, AD-8]
-- Override fully replaces Hextra's `blog/list.html` (pager, "Read more →", sidebar) with our card grid. Resolves at `layouts/blog/list.html` because of the 2.3 `cascade: type: blog`. [Source: 2-3-*.md routing fix]
+- Override fully replaces Hextra's list (pager, "Read more →", sidebar) with our card grid. Resolves at `layouts/posts/list.html` by the section name `posts` (Option B; no `type`). [Source: AD-4 (revised); Story 2.1/2.3 notes]
 
 ### Reuse / no-duplication
 - Cards: `custom/post-card.html` (2.3, evolved here). Date/read-time: `custom/post-meta.html` (2.1). Chips: `custom/post-tags.html` (2.2). The stream layout itself adds only the grid + page frame. [Source: AR-9]
@@ -74,7 +74,7 @@ so that I can scan everything Carrie has written.
 ### Anti-patterns
 - ❌ Re-deriving cards/meta/chips. ✅ Call the shared partials.
 - ❌ Client-side JS filtering of the stream. ✅ Full static list; topic via term-page links.
-- ❌ Leaving Hextra's `blog/list.html` (pager/Read-more) in place. ✅ Full override at `layouts/blog/list.html`.
+- ❌ Leaving Hextra's list (pager/Read-more) in place. ✅ Full override at `layouts/posts/list.html`.
 - ❌ Grid baked into the card. ✅ Grid in the stream container.
 - ❌ Tag as a non-link on the stream (fails AC2). ✅ Overlay card → tag is a real term-page link.
 
@@ -87,7 +87,7 @@ OUT of scope: styled `/tags/{topic}/` term page (Epic 4.1 — links resolve to H
 
 ### References
 - [Source: epics.md#Story 2.4: Browse the full post stream at /posts/] — ACs
-- [Source: ARCHITECTURE-SPINE.md#AD-4, AD-6, AD-8] — type:blog section, one card renderer, term-page (no JS) topic browse
+- [Source: ARCHITECTURE-SPINE.md#AD-4, AD-6, AD-8] — posts section (section-name routing, no `type`), one card renderer, term-page (no JS) topic browse
 - [Source: DESIGN.md §Layout; mockups/home.html] — 920px content width, 2-up→1-up grid breakpoint
 - [Source: 2-1-*.md, 2-2-*.md, 2-3-*.md] — the shared partials this story composes
 
@@ -115,7 +115,7 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 
 ### File List
 
-- `layouts/blog/list.html` (new) — the full post stream at /posts/ (card grid, 920px)
+- `layouts/posts/list.html` (new) — the full post stream at /posts/ (card grid, 920px). *(Authored as `layouts/blog/list.html`; moved to `layouts/posts/` under Option B.)*
 - `layouts/_partials/custom/post-card.html` (modified) — evolved to the accessible overlay pattern; reuses `post-tags.html` for the now-clickable tag
 - `layouts/_partials/custom/post-tags.html` (modified) — stable per-topic tint via `hash.FNV32a`
 - `assets/css/custom.css` (modified) — `.ck-stream`/`.ck-grid` (2-up→1-up), overlay-link `::after`, raised `.ck-tags`, `:focus-within` lift
@@ -126,4 +126,5 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | Date | Change |
 | --- | --- |
 | 2026-06-23 | Story 2.4 drafted via create-story. Status → ready-for-dev. |
-| 2026-06-23 | Story 2.4 implemented: `blog/list.html` stream (920px card grid, 2-up→1-up), evolved `post-card` to the accessible overlay pattern (whole-card→post + clickable tag→term page, satisfying UX-DR5 AND AC2), per-topic chip tint. All ACs verified. Status → review. |
+| 2026-06-23 | Story 2.4 implemented: stream (920px card grid, 2-up→1-up), evolved `post-card` to the accessible overlay pattern (whole-card→post + clickable tag→term page, satisfying UX-DR5 AND AC2), per-topic chip tint. All ACs verified. Status → review. |
+| 2026-06-23 | Post-merge-review pivot (Option B, Carrie): stream layout moved `layouts/blog/list.html` → `layouts/posts/list.html`; dropped `type: blog`/cascade — routes by section name `posts`. AD-4 updated. Re-verified: stream renders our grid, no Hextra-blog leakage, RSS intact. |

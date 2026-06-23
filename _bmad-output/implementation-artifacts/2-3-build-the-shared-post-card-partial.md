@@ -55,9 +55,9 @@ so that scanning posts feels coherent everywhere they appear.
   - [x] `prefers-reduced-motion` drops the lift (rules inside the `no-preference` query).
   - [x] `hugo --gc --minify` exit 0; no brand remnants.
 
-- [x] **Task 4 — Make the typed-section routing coherent (relocate single)** (AC: 3)
-  - [x] Root-caused the override-lookup split: `type: blog` on `_index.md` routes the **section list** via the `blog` type-slot, while individual posts (default type `posts`) route via the `posts` section-slot — so `posts/single.html` won but `posts/list.html` lost to Hextra's `blog/list.html`.
-  - [x] Fix: added `cascade: { type: blog }` to `_index.md` so every post is type `blog`, and relocated the single layout `layouts/posts/single.html` → `layouts/blog/single.html`. Now BOTH single and (2.4's) list resolve to `layouts/blog/*`, shadowing the Hextra module — coherent, and faithful to AD-4's "type: blog activates the blog layout slot". URLs stay `/posts/{slug}/` (slug = bundle folder, not type). Re-verified the single page still renders.
+- [x] **Task 4 — Make the override routing coherent** (AC: 3)
+  - [x] Root-caused the override-lookup split: with `type: blog` on `_index.md`, the **section list** routed via the `blog` type-slot while individual posts (default type `posts`) routed via the `posts` section-slot — so `posts/single.html` won but `posts/list.html` lost to Hextra's `blog/list.html`.
+  - [x] ~~Initial fix: `cascade: type: blog` + relocate to `layouts/blog/`.~~ **Superseded 2026-06-23 (Option B, Carrie):** the cleaner fix is to **drop `type: blog` entirely** and route everything by the section name `posts`. Both `single.html` and `list.html` live in `layouts/posts/` and win by section match — no cascade, no `blog`-named folder, same `/posts/` URLs. AD-4 was updated to remove the `type: blog` requirement. Re-verified: single + stream both render via `layouts/posts/`, no Hextra-blog leakage.
 
 ## Dev Notes
 
@@ -125,7 +125,7 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 - **AC3 met:** `post-card.html` is the one renderer; `hextra-card` not used for posts. Stream (2.4), Home (3.2), term (4.1) will all call it.
 - **Anchor-in-anchor solved:** card tag is a `<span>` (not the anchor-emitting `post-tags.html`), so the single click target stays valid HTML.
 - **Reuse:** `post-meta.html` for date/read-time (and the live date-gate); `.ck-tag*` CSS from 2.2 for the chip look; tokens for everything else.
-- **Routing fix (also updates Story 2.2's footprint):** relocated `layouts/posts/single.html` → `layouts/blog/single.html` and cascaded `type: blog` so the whole post family resolves under `layouts/blog/`. This makes 2.4's stream override (`layouts/blog/list.html`) win cleanly. See Story 2.2 change log note.
+- **Routing fix (superseded by Option B):** initially cascaded `type: blog` + moved layouts to `layouts/blog/`; **reverted 2026-06-23** to drop `type: blog` and route by section name — both layouts stay in `layouts/posts/`. See Task 4 + AD-4 (revised).
 - **Tint coincidence:** both sample tags ("code","golf") are length-4 → both fuchsia. Deterministic, harmless; more tag-length variety would spread tints. Not worth forcing.
 
 ### File List
@@ -133,8 +133,8 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 - `layouts/_partials/custom/post-card.html` (new) — the shared post-card renderer
 - `assets/css/custom.css` (modified) — card styles (`.ck-card*`, gradient thumbs, reduced-motion lift)
 - `content/posts/the-next-round/index.md` (new) — heroless reference post (gradient-thumb path)
-- `content/posts/_index.md` (modified) — added `cascade: { type: blog }`
-- `layouts/blog/single.html` (renamed from `layouts/posts/single.html`) — relocated for coherent typed-section routing
+- `content/posts/_index.md` (modified) — ~~added `cascade: type: blog`~~ reverted to no `type` (Option B)
+- `layouts/posts/single.html` — briefly at `layouts/blog/single.html`; moved back under Option B (now in `layouts/posts/`)
 - `_bmad-output/implementation-artifacts/sprint-status.yaml` (modified) — 2.3 → review
 
 ## Change Log
@@ -144,3 +144,4 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | 2026-06-23 | Story 2.3 drafted via create-story. Status → ready-for-dev. |
 | 2026-06-23 | Story 2.3 implemented: `post-card.html` (image/gradient thumb, span tag, title, excerpt, meta; single click target; reduced-motion lift), card CSS, heroless reference post; relocated single layout to `layouts/blog/` + cascaded `type: blog` for coherent routing. All ACs verified. Status → review. |
 | 2026-06-23 | Forward note: Story 2.4 evolved `post-card.html` from the single-`<a>`+`<span>`-tag form to the accessible overlay pattern (card `<article>` + title-link `::after` overlay + real clickable tag link), to satisfy 2.4 AC2 ("tag chips link to /tags/{topic}/") while preserving UX-DR5's single click target. The card now also reuses `post-tags.html`. The 2.3 card behavior (single click target, gradient/image thumb) is unchanged; only the tag became a real link. |
+| 2026-06-23 | Post-merge-review pivot (Option B, Carrie): reverted the `cascade: type: blog` + `layouts/blog/` relocation from Task 4; posts now route by section name to `layouts/posts/` (no `type`). AD-4 updated. Build re-verified green. |

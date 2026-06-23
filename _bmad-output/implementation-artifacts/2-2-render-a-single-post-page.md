@@ -155,4 +155,5 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | --- | --- |
 | 2026-06-23 | Story 2.2 drafted via create-story. Status → ready-for-dev. |
 | 2026-06-23 | Story 2.2 implemented: `posts/single.html` (720px, chips, meta, hero), `post-tags.html`, `render-image.html` alt gate, single-post CSS, enriched reference post. All ACs verified. Status → review. |
-| 2026-06-23 | Follow-up during Story 2.3: the single layout was relocated `layouts/posts/single.html` → `layouts/blog/single.html` and `cascade: { type: blog }` added to `content/posts/_index.md`, so the whole post family resolves under `layouts/blog/` (lets 2.4's stream override win the typed-section lookup). Single page re-verified — no behavior change. |
+| 2026-06-23 | Follow-up during Story 2.3: single layout briefly relocated to `layouts/blog/single.html` + `cascade: type: blog` to make the typed-section list resolve to our override. |
+| 2026-06-23 | Post-merge-review pivot (Option B, Carrie): reverted that — dropped `type: blog`/cascade and moved the layout BACK to `layouts/posts/single.html`. Hugo routes by section name `posts`; same `/posts/` URLs, no `blog`-named folder. Single re-verified green (chips, hero, alt gate, highlight). See AD-4 (revised) + Story 2.1 notes. |

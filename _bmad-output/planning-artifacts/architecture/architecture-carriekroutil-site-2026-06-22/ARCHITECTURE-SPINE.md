@@ -71,10 +71,11 @@ flowchart TD
   - `hero` (optional map: `{ src: <path within the bundle>, alt: <required string> }`) — the **one** named hero field; the OG/Twitter partial (FR-18) reads `hero.src` / `hero.alt`, so there is a single source.
   - Read-time is **derived** from `.ReadingTime` — never hand-entered — and rendered as `"{n} min read"`, floor **1 min**.
 
-### AD-4 — Post stream is a `type: blog` section at `/posts/` `[ADOPTED]`
+### AD-4 — Post stream is a `posts` section at `/posts/` `[ADOPTED]`
 - **Binds:** FR-4, FR-5, URL scheme
-- **Prevents:** Hextra's default `content/blog/` (which would change the public URL) or a plain section that misses Hextra's blog layout; two posts diverging on what determines their URL.
-- **Rule:** Posts live in `content/posts/`, whose `_index.md` sets `type: blog` and is the **only** home for section-level config. This preserves the `/posts/{slug}/` URLs and activates Hextra's native blog list + single layouts. **The slug derives from the post bundle's folder name**; a front-matter `slug:` is permitted only as a deliberate override; the title never determines the URL. Slugs are stable and human-readable.
+- **Prevents:** Hextra's default `content/blog/` (which would change the public URL) or two posts diverging on what determines their URL.
+- **Rule:** Posts live in `content/posts/`, whose `_index.md` is the **only** home for section-level config. The `/posts/{slug}/` URL derives from the content directory + bundle folder name — **not** from any `type`. **The slug derives from the post bundle's folder name**; a front-matter `slug:` is permitted only as a deliberate override; the title never determines the URL. Slugs are stable and human-readable.
+- **Layouts:** the post single and the `/posts/` stream are custom project overrides in `layouts/posts/` (`single.html`, `list.html`), which Hugo routes to by the **section name `posts`** and which shadow the Hextra module. We fully replace Hextra's blog list/single rather than restyle them, so **no `type: blog` is set** — it would only pull in Hextra's blog templates we don't use, and (because Hugo routes a typed-section *list* via the type slot) it forced a `blog`-named layout folder + a `type` cascade for no benefit. *(Decision revised 2026-06-23 during Epic 2: original AD-4 set `type: blog`; removed in favor of section-name routing — same `/posts/` URLs, simpler layout tree. See Story 2.x notes.)*
 
 ### AD-5 — All customization lives in project overrides, never in the module
 - **Binds:** every custom layout/partial/style; NFR-4
@@ -164,7 +165,7 @@ carriekroutil-site/
     _index.md          # home content
     about.md           # /about/ (FR-3)
     posts/
-      _index.md        # type: blog  (AD-4)
+      _index.md        # posts section config; URL /posts/ (AD-4) — no type set
       {slug}/          # page bundle = post + its images (AD-9)
         index.md
         hero.jpg
@@ -188,7 +189,7 @@ carriekroutil-site/
 | Home hero + preview grid (FR-1, FR-2) | `_partials/custom/post-card.html`, home layout | AD-6, AD-13 |
 | Featured post (FR-15) | front-matter `featured` + home cards partial | AD-7, AD-6 |
 | About (FR-3) | `content/about.md` | AD-13 |
-| Post stream + single (FR-4, FR-5) | `content/posts/` (`type: blog`) + Hextra blog layouts | AD-4, AD-9 |
+| Post stream + single (FR-4, FR-5) | `content/posts/` + custom `layouts/posts/{single,list}.html` (section-name routing, no `type`) | AD-4, AD-9 |
 | Read-time + metadata (FR-6) | read-time partial override | AD-3, AD-5 |
 | Topic chips + tag pages (FR-7, FR-8) | front-matter `tags` + custom `_default/term.html` | AD-8, AD-5, AD-3 |
 | Search (FR-9) | Hextra FlexSearch (config) | AD-13 |

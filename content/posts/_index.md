@@ -1,14 +1,8 @@
 ---
 title: "Posts"
-# type: blog activates Hextra's native blog layout slot AND preserves the /posts/{slug}/
-# public URL (vs Hextra's default content/blog/). This file is the ONLY home for
-# section-level config — no manual post list/curation here (AD-4).
-type: blog
-# Cascade the type to every post so singles AND the section list both resolve to the
-# `blog` layout slot, where our overrides live (layouts/blog/single.html + list.html)
-# shadowing the Hextra module. Without this, singles route via the `posts` section slot
-# and the list via the `blog` type slot — a confusing split. (URLs stay /posts/{slug}/;
-# the slug comes from the bundle folder, not the type.)
-cascade:
-  type: blog
+# The posts section. This file is the ONLY home for section-level config — no manual post
+# list/curation here (AD-4). The public URL stays /posts/{slug}/ because it derives from the
+# content directory + bundle folder name, not from any `type`. Hugo routes both the section
+# list and each post to our overrides in layouts/posts/ by the section name "posts", so no
+# `type: blog` (and no cascade) is needed — we fully replace Hextra's blog layouts anyway.
 ---

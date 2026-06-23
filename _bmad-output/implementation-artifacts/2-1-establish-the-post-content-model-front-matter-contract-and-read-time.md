@@ -18,11 +18,13 @@ so that independently-authored posts never diverge and metadata stays consistent
 
 ## Acceptance Criteria
 
-**AC1 — Posts section is a `type: blog` section at `/posts/`, slug = bundle folder**
+**AC1 — Posts section at `/posts/`, slug = bundle folder**
 **Given** the posts section
 **When** set up
-**Then** posts live in `content/posts/`, whose `_index.md` sets `type: blog` and is the only home for section-level config
+**Then** posts live in `content/posts/`, whose `_index.md` is the only home for section-level config
 **And** each post URL is `/posts/{slug}/` where the slug derives from the post bundle's folder name (a front-matter `slug:` is allowed only as a deliberate override; the title never sets the URL).
+
+> **Revised 2026-06-23 (Option B):** AD-4 originally required `_index.md` to set `type: blog`. We pivoted to **section-name routing** — no `type` set; overrides live in `layouts/posts/` and Hugo routes to them by the section name `posts`. Same `/posts/{slug}/` URLs, simpler layout tree (no `blog`-named folder, no `type` cascade). AD-4 updated to match.
 
 **AC2 — Front-matter contract is enforced at build**
 **Given** a post's YAML front matter
@@ -44,9 +46,9 @@ so that independently-authored posts never diverge and metadata stays consistent
 ## Tasks / Subtasks
 
 - [x] **Task 1 — Create the posts section** (AC: 1)
-  - [x] Create `content/posts/_index.md` with front matter `type: blog` (+ `title: "Posts"`). Only section-level config home — no manual list/curation.
+  - [x] Create `content/posts/_index.md` with `title: "Posts"`, the only section-level config home — no manual list/curation. *(Revised: no `type: blog` — section-name routing per Option B, see AC1 note.)*
   - [x] Confirmed Hugo serves `/posts/` and the bundle at `/posts/hello-corner-of-the-internet/` (slug = folder name). No `[permalinks]` block needed — default handling yields the correct URL.
-  - [x] Did NOT author `layouts/posts/list.html` (Story 2.4). Hextra native blog list renders the section for now.
+  - [x] Did NOT author `layouts/posts/list.html` (Story 2.4). Hextra native list renders the section for now.
 
 - [x] **Task 2 — Pin content-model config in `hugo.toml`** (AC: 2)
   - [x] Added `buildFuture = false` (explicit, commented) at top level.
@@ -166,7 +168,7 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 
 ### Completion Notes List
 
-- **AC1 met:** `content/posts/_index.md` sets `type: blog` (sole section-config home); seed post bundle resolves to `/posts/{slug}/` with slug = folder name; no `[permalinks]` override needed.
+- **AC1 met:** `content/posts/_index.md` is the sole section-config home; seed post bundle resolves to `/posts/{slug}/` with slug = folder name; no `[permalinks]` override needed. *(Revised 2026-06-23 — Option B: no `type: blog`; section-name routing to `layouts/posts/`.)*
 - **AC2 met:** front-matter contract enforced at build — missing `date` fails via `post-meta`'s `errorf` guard; invalid `date` fails Hugo-native (plus our guard); `buildFuture = false` withholds future-dated posts (verified both directions). `featured`/`hero` carried in the contract (consumed in Epic 3 / Story 2.2 respectively).
 - **AC3 met:** read-time derived from `.ReadingTime` with explicit floor 1 (`1 min read` on the short seed post); date formats site-wide as `Jan 2, 2006` ("Jun 23, 2026").
 - **AC4 met:** tags are a lowercase open list (`[code, ai]`); adding a new value needs no code change (Hugo core generates term pages natively).
@@ -176,7 +178,7 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 
 ### File List
 
-- `content/posts/_index.md` (new) — posts section config (`type: blog`)
+- `content/posts/_index.md` (new) — posts section config (no `type` — section-name routing, Option B)
 - `content/posts/hello-corner-of-the-internet/index.md` (new) — canonical reference post (page bundle, heroless)
 - `layouts/_partials/custom/post-meta.html` (new) — date + read-time metadata primitive with the AD-3 date guard
 - `hugo.toml` (modified) — added `buildFuture = false`
@@ -188,3 +190,4 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | --- | --- |
 | 2026-06-23 | Story 2.1 drafted via create-story (ultimate context engine). Status → ready-for-dev. |
 | 2026-06-23 | Story 2.1 implemented: posts `type: blog` section, `post-meta.html` (date guard + `Jan 2, 2006` + read-time floor 1), `buildFuture=false`, canonical seed post. All ACs verified via build + gate checks. Status → review. |
+| 2026-06-23 | Post-merge-review pivot (Option B, Carrie): dropped `type: blog` from `_index.md`; posts now route by section name to `layouts/posts/` (see updated AD-4). Same `/posts/` URLs; rebuilt + re-verified green. |
