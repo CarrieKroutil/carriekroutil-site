@@ -11,6 +11,7 @@
   --ck-surface: #15151a;
   --ck-surface-2: #1c1c23;
   --ck-border: #2a2a33;
+  --ck-border-bright: #3a3a46;   /* one step up from --ck-border — hover/active card edge */
   --ck-fg: #ededed;
   --ck-muted: #a0a0ab;        /* muted / meta — AA floor; never lighter than this on dark */
   --ck-meta-min: #a0a0ab;
@@ -26,6 +27,10 @@
   --ck-chip-violet-text: #c9b8ff;
   --ck-chip-fuchsia-text: #f3a8ff;
   --ck-chip-amber-text: #ffd591;
+  /* dimmed accent borders that pair with each chip text colour */
+  --ck-chip-violet-border: #5b3da8;
+  --ck-chip-fuchsia-border: #9a2fa3;
+  --ck-chip-amber-border: #8a6a1f;
 
   /* ----- Typography ----- */
   --ck-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -298,9 +303,9 @@ samp {
   border-color: var(--ck-fg);
 }
 /* Accent tint per chip — text on surface, dimmed accent border (chips clear AA: 9.7–12.5:1). */
-.ck-tag--violet  { color: var(--ck-chip-violet-text);  border-color: #5b3da8; }
-.ck-tag--fuchsia { color: var(--ck-chip-fuchsia-text); border-color: #9a2fa3; }
-.ck-tag--amber   { color: var(--ck-chip-amber-text);   border-color: #8a6a1f; }
+.ck-tag--violet  { color: var(--ck-chip-violet-text);  border-color: var(--ck-chip-violet-border); }
+.ck-tag--fuchsia { color: var(--ck-chip-fuchsia-text); border-color: var(--ck-chip-fuchsia-border); }
+.ck-tag--amber   { color: var(--ck-chip-amber-text);   border-color: var(--ck-chip-amber-border); }
 
 /* ----- Post title + meta ----- */
 .ck-post-title {
@@ -412,7 +417,7 @@ samp {
   .ck-card:hover,
   .ck-card:focus-within {
     transform: translateY(-3px);
-    border-color: #3a3a46;
+    border-color: var(--ck-border-bright);
   }
 }
 

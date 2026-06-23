@@ -14,13 +14,11 @@
   Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
 */ -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
+{{- $img := false -}}
+{{- with .Params.hero -}}{{- $img = $.Resources.GetMatch .src -}}{{- end -}}
 <article class="ck-card">
-  {{- with .Params.hero -}}
-    {{- $img := $.Resources.GetMatch .src -}}
-    <div class="ck-card-thumb">
-      {{- if $img -}}<img src="{{ $img.RelPermalink }}" alt="" loading="lazy">
-      {{- else -}}<img src="{{ .src | relURL }}" alt="" loading="lazy">{{- end -}}
-    </div>
+  {{- if $img -}}
+    <div class="ck-card-thumb"><img src="{{ $img.RelPermalink }}" alt="" loading="lazy"></div>
   {{- else -}}
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}
