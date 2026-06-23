@@ -517,23 +517,11 @@ samp {
   object-fit: cover;
 }
 .ck-avatar-monogram {
+  /* gradient text-clip + forced-colors fallback come from the .ck-grad-text utility */
   font-weight: var(--ck-weight-display);   /* 800 */
   font-size: 2.4rem;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  /* solid fuchsia fallback, then gradient text-clip (matches the wordmark treatment) */
-  color: var(--ck-accent-fuchsia);
-  background: var(--ck-accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-@media (forced-colors: active), print {
-  .ck-avatar-monogram {
-    background: none;
-    -webkit-text-fill-color: var(--ck-accent-fuchsia);
-    color: var(--ck-accent-fuchsia);
-  }
 }
 
 /* ============================================================================

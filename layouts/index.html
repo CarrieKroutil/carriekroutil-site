@@ -21,9 +21,7 @@
       {{- /* Topic chips straight from the live `tags` taxonomy (most-written first), so every
          chip links to a real /tags/{topic}/ term page — no broken links, no maintenance as
          topics grow. Same renderer + per-topic tint as cards/posts (custom/post-tags.html). */ -}}
-      {{- $terms := slice -}}
-      {{- range site.Taxonomies.tags.ByCount -}}{{- $terms = $terms | append .Page -}}{{- end -}}
-      {{- with $terms }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
+      {{- with partial "custom/topic-terms.html" . }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
     </div>
   </section>
 

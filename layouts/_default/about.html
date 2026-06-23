@@ -17,9 +17,7 @@
     <h1 class="ck-about-title">Hi, I'm <span class="ck-grad-text">Carrie</span> 👋</h1>
     {{- with .Params.lead }}<p class="ck-about-lead">{{ . }}</p>{{ end -}}
     {{- /* Topic chips from the live taxonomy — same renderer + tint as the hero. */ -}}
-    {{- $terms := slice -}}
-    {{- range site.Taxonomies.tags.ByCount -}}{{- $terms = $terms | append .Page -}}{{- end -}}
-    {{- with $terms }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
+    {{- with partial "custom/topic-terms.html" . }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
     <div class="content ck-about-body">
       {{ .Content }}
     </div>

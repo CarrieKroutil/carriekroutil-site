@@ -1,0 +1,9 @@
+{{- /*
+  custom/topic-terms.html — returns the site's `tags` taxonomy terms as a slice of term
+  Pages, most-written first (ByCount). Single source for the topic-chip term list shared
+  by the Home hero (Story 3.1) and the About page (Story 3.4); feed the result to
+  custom/post-tags.html via (dict "terms" ...). Returns an empty slice when no tags exist.
+*/ -}}
+{{- $terms := slice -}}
+{{- range site.Taxonomies.tags.ByCount -}}{{- $terms = $terms | append .Page -}}{{- end -}}
+{{- return $terms -}}
