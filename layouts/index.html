@@ -5,7 +5,8 @@
 
   Sections, top to bottom:
     - Hero (Story 3.1): avatar-ring · greeting · one-liner · topic chips.
-    - Latest posts + Featured slot arrive in Stories 3.2 / 3.3.
+    - Latest posts (Story 3.2): grid of the most-recent posts + "all posts →".
+    - Featured slot arrives in Story 3.3.
 */ -}}
 {{ define "main" }}
 {{- /* Mobile nav drawer for the navbar hamburger (same pattern as posts/single.html):
@@ -25,5 +26,22 @@
       {{- with $terms }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
     </div>
   </section>
+
+  {{- /* Latest posts (Story 3.2, FR-2): the most-recent posts as shared post-cards,
+     newest first, 2-up→1-up grid (.ck-grid, from Story 2.4). The section only renders
+     when posts exist, so an empty site stays intentional (the hero carries it) instead
+     of showing a "Latest posts" header over an empty grid. "all posts →" → /posts/. */ -}}
+  {{- $recent := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- with $recent }}
+  <section class="ck-latest">
+    <div class="ck-sec-head">
+      <h2 class="ck-sec-title">Latest posts</h2>
+      <a class="ck-sec-link" href="/posts/">all posts &rarr;</a>
+    </div>
+    <div class="ck-grid">
+      {{- range first 6 . -}}{{ partial "custom/post-card.html" . }}{{- end -}}
+    </div>
+  </section>
+  {{- end }}
 </main>
 {{ end }}

@@ -535,3 +535,32 @@ samp {
     color: var(--ck-accent-fuchsia);
   }
 }
+
+/* ============================================================================
+   Story 3.2 — Home "Latest posts" section
+   (FR-2 · UX-DR5 reuse · UX-DR10 · UX-DR13 casual section labels)
+   A baseline-aligned section head ("Latest posts" / "all posts →") above the
+   shared 2-up→1-up card grid (.ck-grid). Cards + grid are reused, no new markup.
+   ========================================================================== */
+.ck-sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 40px 0 16px;
+}
+.ck-sec-title {
+  margin: 0;
+  font-size: var(--ck-scale-h2);     /* 1.15rem */
+  letter-spacing: -0.01em;
+}
+.ck-sec-link {
+  flex: 0 0 auto;
+  font-size: var(--ck-scale-small);  /* 0.85rem */
+  font-weight: var(--ck-weight-strong);
+  color: var(--ck-muted);            /* AA floor on dark */
+  text-decoration: none;
+}
+.ck-sec-link:hover {
+  color: var(--ck-fg);
+}
