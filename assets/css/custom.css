@@ -564,3 +564,49 @@ samp {
 .ck-sec-link:hover {
   color: var(--ck-fg);
 }
+
+/* ============================================================================
+   Story 3.3 — Home featured slot
+   (FR-15 · AR-10/AD-7 · UX-DR5 reuse) — ONE pinned post, reusing the post-card.
+   Distinguished from the recent grid by a fuchsia "Featured" eyebrow + a wider,
+   horizontal card (thumb beside the body) with a brighter accent border.
+   ========================================================================== */
+.ck-featured {
+  margin-top: 40px;
+}
+.ck-featured-label {
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ck-accent-fuchsia);   /* 5.7:1 on --ck-bg — clears AA */
+}
+/* Accent the featured card's edge so it reads as pinned, not just another grid card. */
+.ck-featured .ck-card {
+  border-color: var(--ck-chip-fuchsia-border);
+}
+/* Side-by-side on wider screens; collapses to the stacked card on narrow (<=620px),
+   matching the grid's 1-up breakpoint so featured + grid feel of a piece on mobile. */
+@media (min-width: 621px) {
+  .ck-featured .ck-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    align-items: stretch;
+  }
+  .ck-featured .ck-card-thumb {
+    height: 100%;
+    min-height: 210px;
+  }
+  .ck-featured .ck-card-body {
+    align-self: center;
+    padding: 22px 26px;
+  }
+  .ck-featured .ck-card-title {
+    font-size: 1.3rem;
+  }
+}
+/* Featured excerpt can breathe to two lines (grid cards stay one-line). */
+.ck-featured .ck-card-excerpt {
+  -webkit-line-clamp: 2;
+}

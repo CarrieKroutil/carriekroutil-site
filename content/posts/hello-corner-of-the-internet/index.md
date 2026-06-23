@@ -3,6 +3,10 @@ title: "Hello from my corner of the internet"
 date: 2026-06-23T09:00:00-07:00
 tags: [code, ai]
 draft: false
+# Holds the single Home featured slot regardless of recency (Story 3.3, AD-7).
+# When the BMAD launch post (Story 5.2) ships featured, date-desc makes it win and
+# this post falls back into the recent grid — no second curation surface.
+featured: true
 hero:
   src: hero.svg
   alt: "Abstract violet-to-amber gradient banner with a bright fuchsia accent stripe"
