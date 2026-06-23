@@ -102,3 +102,119 @@ kbd,
 samp {
   font-family: var(--ck-font-mono);
 }
+
+/* ============================================================================
+   Story 1.3 — gradient wordmark, sticky header nav, footer
+   (UX-DR2 wordmark · UX-DR6 header-nav · UX-DR9 footer · UX-DR11 focus ring)
+   Consumes the Story 1.2 token layer; gradient stays a garnish (wordmark +
+   footer rule only — never a large fill behind body text).
+   ========================================================================== */
+
+/* ----- Wordmark (UX-DR2) — accent-gradient text-clip, weight 800 ----- */
+.ck-wordmark {
+  font-weight: var(--ck-weight-display);   /* 800 */
+  letter-spacing: -0.02em;
+  font-size: 1.12rem;
+  /* Solid fallback first: rendered wherever background-clip:text is unsupported. */
+  color: var(--ck-accent-fuchsia);
+  background: var(--ck-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Forced-colors / print drop background-clip:text — restore solid fuchsia so the
+   wordmark is never invisible (UX-DR2 fallback). */
+@media (forced-colors: active), print {
+  .ck-wordmark {
+    background: none;
+    -webkit-text-fill-color: var(--ck-accent-fuchsia);
+    color: var(--ck-accent-fuchsia);
+  }
+}
+
+/* ----- Sticky header (UX-DR6) — translucent frosted backdrop + brand border -----
+   Sticky/top/z-index are already on .hextra-nav-container (navbar.html); we only
+   restyle the separate z-[-1] backdrop layer. Scoped to .dark (light is deferred). */
+.dark .hextra-nav-container-blur {
+  background: rgba(10, 10, 10, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ck-border);
+  box-shadow: none;
+}
+
+/* Header nav links + control/social icons: muted, weight 600, brighten to fg on
+   hover (UX-DR6). Scoped to the navbar so body links keep the fuchsia accent.
+   The wordmark anchor is excluded by class (robust under subpath/multilingual
+   deploys where Home's RelPermalink isn't "/") — it sets its own gradient fill.
+   The theme-toggle's popup option buttons (`[data-item]`) are excluded so their
+   own contrast tokens stand on the dropdown surface. */
+.dark .hextra-nav-container nav a:not(.ck-wordmark-link),
+.dark .hextra-nav-container nav button:not([data-item]) {
+  color: var(--ck-muted);
+  font-weight: var(--ck-weight-strong);
+}
+.dark .hextra-nav-container nav a:not(.ck-wordmark-link):hover {
+  color: var(--ck-fg);
+}
+
+/* ----- Footer (UX-DR9) — thin gradient rule + one muted line -----
+   Neutralize Hextra's footer surface (default hx:dark:bg-neutral-900 +
+   hx:dark:text-gray-400) to the dark page bg + the AA-floor muted token. */
+.dark .hextra-footer {
+  background: var(--ck-bg);
+  padding-top: 40px;
+  /* keep the iOS home-indicator inset the module footer carried */
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+
+.hextra-custom-footer {
+  text-align: center;
+}
+
+.ck-footer-rule {
+  height: 3px;
+  width: 80px;
+  margin: 0 auto 18px;
+  border-radius: 3px;
+  background: var(--ck-accent-gradient);   /* garnish — decorative, aria-hidden */
+}
+
+.ck-footer-line {
+  margin: 0;
+  font-size: var(--ck-scale-small);        /* 0.85rem */
+}
+
+/* Muted line never lighter than #a0a0ab (UX-DR11 / AC3 — the mock's #70707c is
+   not used). Scoped over Hextra's gray-400 footer text. */
+.dark .hextra-custom-footer .ck-footer-line,
+.dark .hextra-custom-footer .ck-footer-line a {
+  color: var(--ck-muted);
+}
+
+.ck-footer-line a {
+  text-decoration: none;
+}
+
+.ck-footer-line a:hover {
+  color: var(--ck-fg);
+  text-decoration: underline;
+}
+
+/* ----- Focus ring (UX-DR11) — brand 2px fuchsia on keyboard focus -----
+   The --ck-focus-ring token was declared in Story 1.2 but no :focus-visible rule
+   was emitted (deferred to this story, where the real interactive elements land:
+   wordmark, nav links, search, theme toggle, social links). Applies site-wide. */
+:focus-visible {
+  outline: var(--ck-focus-ring);   /* 2px solid #d946ef */
+  outline-offset: 2px;
+}
+
+/* Hextra styles the search input's focus with higher specificity than the
+   generic rule above; brand it so every control shares the fuchsia ring. */
+.hextra-search-input:focus-visible,
+.hextra-search-input:focus {
+  outline: var(--ck-focus-ring);
+  outline-offset: 2px;
+}

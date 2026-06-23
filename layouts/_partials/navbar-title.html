@@ -1,0 +1,10 @@
+{{- /*
+  carriekroutil.com — gradient wordmark (Story 1.3, UX-DR2)
+  Overrides Hextra's _partials/navbar-title.html (invoked from navbar.html).
+  Keeps `hx:ltr:mr-auto` — that margin is what pushes the nav controls to the
+  right edge (Hextra has no separate spacer element). The Hextra module is
+  never edited in place (AD-5). Gradient + solid fallback styled in custom.css.
+*/ -}}
+<a class="ck-wordmark-link hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="{{ .Site.Home.RelPermalink }}">
+  <span class="ck-wordmark hx:select-none">{{- .Site.Title -}}</span>
+</a>
