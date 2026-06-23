@@ -5,6 +5,11 @@
   The <main> keeps id="content" so baseof's skip-to-content link still targets it (a11y).
 */ -}}
 {{ define "main" }}
+{{- /* Mobile nav drawer: the navbar hamburger (md:hidden) toggles this aside. We pass
+   disableSidebar=true + displayPlaceholder=false so it is hidden on desktop (no sidebar
+   column / placeholder — our pages are centered single-column) but still rendered for the
+   mobile menu. Without it the hamburger has nothing to open. */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
 <main id="content" class="ck-reading ck-post">
   <article>
     <a class="ck-back" href="/posts/">&larr; all posts</a>

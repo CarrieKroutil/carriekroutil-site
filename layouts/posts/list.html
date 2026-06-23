@@ -8,6 +8,9 @@
   Defines only `main`; Hextra baseof supplies the Epic-1 navbar + footer.
 */ -}}
 {{ define "main" }}
+{{- /* Mobile nav drawer for the navbar hamburger (see posts/single.html). Hidden on
+   desktop (disableSidebar + no placeholder), rendered for the mobile menu. */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
 <main id="content" class="ck-stream">
   {{ if .Title }}<h1 class="ck-stream-title">{{ .Title }}</h1>{{ end }}
   {{- with .Content }}<div class="content ck-stream-intro">{{ . }}</div>{{ end -}}
