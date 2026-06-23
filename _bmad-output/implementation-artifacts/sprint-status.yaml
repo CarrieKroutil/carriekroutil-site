@@ -1,0 +1,91 @@
+# generated: 2026-06-22
+# last_updated: 2026-06-22
+# project: carriekroutil-site
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; sprint-status surfaces open ones
+
+generated: 2026-06-22
+last_updated: 2026-06-22
+# story 1.1 reviewed (clean pass) → done; epic-1 → in-progress
+project: carriekroutil-site
+project_key: NOKEY
+tracking_system: file-system
+story_location: "{project-root}/_bmad-output/implementation-artifacts"
+
+development_status:
+  # Epic 1: Publish-by-push foundation — a live, branded site
+  epic-1: in-progress
+  1-1-scaffold-the-greenfield-hugo-hextra-site-with-local-preview: done
+  1-2-apply-the-design-tokens-and-dark-default-theme: backlog
+  1-3-build-the-gradient-wordmark-sticky-header-nav-and-footer: backlog
+  1-4-dark-light-theme-toggle-with-persistence: backlog
+  1-5-stand-up-the-single-amplify-pipeline-on-the-correct-brand: backlog
+  1-6-publish-a-post-by-push: backlog
+  1-7-surface-build-outcomes-so-a-broken-push-is-never-silent: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: The post reading experience
+  epic-2: backlog
+  2-1-establish-the-post-content-model-front-matter-contract-and-read-time: backlog
+  2-2-render-a-single-post-page: backlog
+  2-3-build-the-shared-post-card-partial: backlog
+  2-4-browse-the-full-post-stream-at-posts: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: The front door — Home & About
+  epic-3: backlog
+  3-1-build-the-home-hero: backlog
+  3-2-show-the-latest-posts-preview-grid-on-home: backlog
+  3-3-pin-a-featured-post-on-home: backlog
+  3-4-build-the-about-page: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Wayfinding — topics & search
+  epic-4: backlog
+  4-1-styled-tag-term-pages-at-tags-topic: backlog
+  4-2-header-full-text-search: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Discoverability & launch
+  epic-5: backlog
+  5-1-basic-discoverability-sitemap-robots-and-clean-share-metadata: backlog
+  5-2-publish-the-bmad-build-in-public-launch-post: backlog
+  5-3-wire-a-lightweight-privacy-friendly-analytics-include: backlog
+  5-4-on-brand-custom-404-page: backlog
+  epic-5-retrospective: optional

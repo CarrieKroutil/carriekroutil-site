@@ -1,0 +1,12 @@
+# Hugo build output and caches — reproducible from source, never committed.
+/public/
+/resources/
+.hugo_build.lock
+
+# OS / editor noise
+.DS_Store
+
+# BMad tooling install — the framework itself, not site content or planning artifacts.
+# (Planning docs under _bmad-output/ are intentionally tracked for build-in-public.)
+.claude/
+_bmad/

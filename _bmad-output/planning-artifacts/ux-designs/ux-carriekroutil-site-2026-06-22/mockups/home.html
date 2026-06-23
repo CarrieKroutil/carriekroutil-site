@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>carriekroutil.com — home direction A</title>
+<style>
+  :root{
+    --violet:#8b5cf6; --fuchsia:#d946ef; --amber:#f59e0b;
+    --bg:#0a0a0a; --surface:#15151a; --surface-2:#1c1c23;
+    --fg:#ededed; --muted:#a0a0ab; --border:#2a2a33;
+    --grad:linear-gradient(90deg,var(--violet),var(--fuchsia),var(--amber));
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+
+  /* Header */
+  header{position:sticky;top:0;backdrop-filter:blur(10px);
+    background:rgba(10,10,10,.72);border-bottom:1px solid var(--border);z-index:10}
+  .nav{display:flex;align-items:center;gap:18px;height:62px}
+  .brand{font-weight:800;letter-spacing:-.02em;font-size:1.12rem;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav .spacer{flex:1}
+  .nav a.link{color:var(--muted);font-weight:600;font-size:.93rem}
+  .nav a.link:hover{color:var(--fg)}
+  .icon{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--border);
+    border-radius:10px;color:var(--muted);font-size:.9rem}
+
+  /* Hero */
+  .hero{display:flex;gap:28px;align-items:center;padding:54px 0 34px;flex-wrap:wrap}
+  .avatar{width:128px;height:128px;border-radius:50%;flex:0 0 auto;
+    background:var(--grad);padding:3px}
+  .avatar div{width:100%;height:100%;border-radius:50%;background:var(--surface-2);
+    display:grid;place-items:center;color:var(--muted);font-size:.8rem;text-align:center}
+  .hello{flex:1;min-width:240px}
+  .hello h1{margin:0 0 6px;font-size:2.5rem;letter-spacing:-.03em;line-height:1.1}
+  .hello h1 .name{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hello p{margin:0;color:var(--muted);font-size:1.08rem;max-width:48ch}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chip{font-size:.8rem;font-weight:600;padding:5px 11px;border-radius:999px;
+    border:1px solid var(--border);background:var(--surface);color:var(--fg)}
+  .chip.v{border-color:#5b3da8;color:#c9b8ff}
+  .chip.f{border-color:#9a2fa3;color:#f3a8ff}
+  .chip.a{border-color:#8a5a12;color:#ffd591}
+
+  /* Posts */
+  .sec{display:flex;align-items:baseline;justify-content:space-between;margin:40px 0 16px}
+  .sec h2{font-size:1.15rem;margin:0;letter-spacing:-.01em}
+  .sec a{font-size:.85rem;color:var(--muted);font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;transition:transform .15s ease,border-color .15s ease}
+  .card:hover{transform:translateY(-3px);border-color:#3a3a46}
+  .thumb{height:120px;background:var(--surface-2);position:relative}
+  .thumb.g1{background:linear-gradient(135deg,#2a1d4a,#3a1d3f)}
+  .thumb.g2{background:linear-gradient(135deg,#3a1d3f,#3d2a12)}
+  .thumb.g3{background:linear-gradient(135deg,#1d2a4a,#2a1d4a)}
+  .thumb.g4{background:linear-gradient(135deg,#3d2a12,#2a1d4a)}
+  .card .body{padding:14px 16px 18px}
+  .card .tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--fuchsia)}
+  .card h3{margin:6px 0 6px;font-size:1.02rem;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--muted);font-size:.9rem}
+  .card .meta{margin-top:10px;color:#70707c;font-size:.78rem}
+
+  footer{margin:54px 0 40px;color:#70707c;font-size:.85rem;text-align:center}
+  footer .accent{height:3px;width:80px;margin:0 auto 18px;border-radius:3px;background:var(--grad)}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <span class="brand">carrie kroutil</span>
+      <div class="spacer"></div>
+      <a class="link" href="#">Posts</a>
+      <a class="link" href="#">About</a>
+      <span class="icon" title="search">⌕</span>
+      <span class="icon" title="theme">☾</span>
+      <span class="icon" title="GitHub">GH</span>
+      <span class="icon" title="LinkedIn">in</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="avatar"><div>your<br>photo</div></div>
+      <div class="hello">
+        <h1>Hey, I'm Carrie 👋</h1>
+        <p>Engineering leader who's always up for the next round of golf, loves her dogs unconditionally, and builds things with AI for fun. This is my corner of the internet — come hang out.</p>
+        <div class="chips">
+          <span class="chip v">golf</span>
+          <span class="chip f">dogs</span>
+          <span class="chip a">code</span>
+          <span class="chip v">AI</span>
+          <span class="chip f">leadership</span>
+          <span class="chip a">trips</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="sec"><h2>Latest posts</h2><a href="#">all posts →</a></div>
+    <div class="grid">
+      <a class="card" href="#"><div class="thumb g1"></div><div class="body">
+        <span class="tag">code · AI</span><h3>I built this site greenfield with the BMAD method</h3>
+        <p>From empty folder to live site — and how easy it actually was.</p>
+        <div class="meta">Jun 22, 2026 · 6 min</div></div></a>
+      <a class="card" href="#"><div class="thumb g2"></div><div class="body">
+        <span class="tag">golf</span><h3>Breaking 100, finally (sort of)</h3>
+        <p>What three months of Saturday tee times taught me.</p>
+        <div class="meta">Jun 14, 2026 · 4 min</div></div></a>
+      <a class="card" href="#"><div class="thumb g3"></div><div class="body">
+        <span class="tag">leadership</span><h3>The 1:1 question I steal from everyone</h3>
+        <p>One prompt that makes every check-in better.</p>
+        <div class="meta">Jun 2, 2026 · 3 min</div></div></a>
+      <a class="card" href="#"><div class="thumb g4"></div><div class="body">
+        <span class="tag">dogs · trips</span><h3>Road-tripping with two dogs and a bad map</h3>
+        <p>A long weekend, a lot of fur, zero regrets.</p>
+        <div class="meta">May 28, 2026 · 5 min</div></div></a>
+    </div>
+
+    <footer><div class="accent"></div>carriekroutil.com · made with Hugo + a lot of coffee</footer>
+  </main>
+</body>
+</html>

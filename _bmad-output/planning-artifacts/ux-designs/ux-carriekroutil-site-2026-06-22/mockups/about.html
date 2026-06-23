@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — carrie kroutil</title>
+<style>
+  :root{
+    --violet:#8b5cf6;--fuchsia:#d946ef;--amber:#f59e0b;
+    --bg:#0a0a0a;--surface:#15151a;--surface-2:#1c1c23;--fg:#ededed;--muted:#a0a0ab;--border:#2a2a33;
+    --grad:linear-gradient(90deg,var(--violet),var(--fuchsia),var(--amber));--radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px}
+  header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(10,10,10,.72);border-bottom:1px solid var(--border);z-index:10}
+  .nav{display:flex;align-items:center;gap:18px;height:62px;max-width:920px;margin:0 auto;padding:0 22px}
+  .brand{font-weight:800;letter-spacing:-.02em;font-size:1.12rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav .spacer{flex:1}.nav a.link{color:var(--muted);font-weight:600;font-size:.93rem}.nav a.link:hover{color:var(--fg)}
+  .icon{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:.9rem}
+
+  .about{padding:48px 0 20px;text-align:center}
+  .avatar{width:150px;height:150px;border-radius:50%;margin:0 auto 22px;background:var(--grad);padding:3px}
+  .avatar div{width:100%;height:100%;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;color:var(--muted);font-size:.8rem}
+  .about h1{font-size:2.2rem;letter-spacing:-.03em;margin:0 0 6px}
+  .about h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);font-size:1.1rem;max-width:52ch;margin:0 auto}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:22px 0 8px}
+  .chip{font-size:.8rem;font-weight:600;padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:var(--surface)}
+  .chip.v{border-color:#5b3da8;color:#c9b8ff}.chip.f{border-color:#9a2fa3;color:#f3a8ff}.chip.a{border-color:#8a5a12;color:#ffd591}
+  .body{text-align:left;font-size:1.06rem;margin-top:30px}
+  .body h2{font-size:1.25rem;letter-spacing:-.01em;margin:1.6em 0 .3em}
+  .socials{display:flex;gap:12px;justify-content:center;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:12px;border:1px solid var(--border);
+    background:var(--surface);color:var(--fg);font-weight:600;font-size:.92rem}
+  .btn:hover{border-color:var(--fuchsia)}
+  footer{margin:48px 0;color:#70707c;font-size:.85rem;text-align:center}
+  footer .accent{height:3px;width:80px;margin:0 auto 18px;border-radius:3px;background:var(--grad)}
+</style>
+</head>
+<body>
+  <header><div class="nav">
+    <span class="brand">carrie kroutil</span><div class="spacer"></div>
+    <a class="link" href="#">Posts</a><a class="link" href="#">About</a>
+    <span class="icon">⌕</span><span class="icon">☾</span><span class="icon">GH</span><span class="icon">in</span>
+  </div></header>
+
+  <main class="wrap">
+    <section class="about">
+      <div class="avatar"><div>your photo</div></div>
+      <h1>Hi, I'm <span class="g">Carrie</span> 👋</h1>
+      <p class="lead">Engineering leader who's always up for the next round of golf, loves her dogs
+      unconditionally, and builds things with AI for fun.</p>
+      <div class="chips">
+        <span class="chip v">golf</span><span class="chip f">dogs</span><span class="chip a">code</span>
+        <span class="chip v">AI</span><span class="chip f">leadership</span><span class="chip a">trips</span>
+      </div>
+
+      <div class="body">
+        <p>This is my corner of the internet — a place to share what I'm into and what I'm learning,
+        without an algorithm deciding who sees it. Some posts are about leading engineering teams and
+        building with AI. Others are about my dogs, a good golf round, or somewhere I traveled.
+        It's all me.</p>
+        <h2>What I do</h2>
+        <p>I lead engineering teams and love turning fuzzy ideas into things that ship. Lately I've
+        been building side projects with AI tooling — this site is one of them.</p>
+        <h2>Say hi</h2>
+        <p>Find me where I actually post:</p>
+      </div>
+
+      <div class="socials">
+        <a class="btn" href="https://github.com/carriekroutil">⌥ GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/carriekroutil">in LinkedIn</a>
+      </div>
+    </section>
+    <footer><div class="accent"></div>carriekroutil.com</footer>
+  </main>
+</body>
+</html>

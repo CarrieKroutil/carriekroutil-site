@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I built this site with BMAD — carrie kroutil</title>
+<style>
+  :root{
+    --violet:#8b5cf6;--fuchsia:#d946ef;--amber:#f59e0b;
+    --bg:#0a0a0a;--surface:#15151a;--surface-2:#1c1c23;--fg:#ededed;--muted:#a0a0ab;--border:#2a2a33;
+    --grad:linear-gradient(90deg,var(--violet),var(--fuchsia),var(--amber));--radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--fuchsia);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px}
+  header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(10,10,10,.72);
+    border-bottom:1px solid var(--border);z-index:10}
+  .nav{display:flex;align-items:center;gap:18px;height:62px;max-width:920px;margin:0 auto;padding:0 22px}
+  .brand{font-weight:800;letter-spacing:-.02em;font-size:1.12rem;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav .spacer{flex:1}.nav a.link{color:var(--muted);font-weight:600;font-size:.93rem}.nav a.link:hover{color:var(--fg);text-decoration:none}
+  .icon{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:.9rem}
+
+  article{padding:40px 0 30px}
+  .back{font-size:.85rem;color:var(--muted);font-weight:600}
+  .tags{display:flex;gap:8px;margin:18px 0 10px}
+  .tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 10px;border-radius:999px;border:1px solid #5b3da8;color:#c9b8ff}
+  .tag.f{border-color:#9a2fa3;color:#f3a8ff}
+  h1{font-size:2.3rem;letter-spacing:-.03em;line-height:1.15;margin:.2em 0 .15em}
+  .meta{color:var(--muted);font-size:.88rem;margin-bottom:22px}
+  .hero-img{height:300px;border-radius:var(--radius);background:linear-gradient(135deg,#2a1d4a,#3a1d3f,#3d2a12);
+    display:grid;place-items:center;color:#b9a9d6;font-size:.85rem;margin:8px 0 28px}
+  article p{font-size:1.08rem}
+  h2{font-size:1.4rem;letter-spacing:-.02em;margin:1.6em 0 .4em}
+  pre{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:16px;overflow:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;color:#d7d7e0}
+  pre .c{color:#a0a0ab}pre .k{color:#f3a8ff}
+  blockquote{border-left:3px solid var(--fuchsia);margin:1.2em 0;padding:.2em 0 .2em 16px;color:var(--muted);font-style:italic}
+  .inline-img{height:220px;border-radius:14px;background:linear-gradient(135deg,#1d2a4a,#2a1d4a);display:grid;place-items:center;color:#9fb0d6;font-size:.82rem;margin:22px 0}
+  .navfoot{display:flex;justify-content:space-between;margin:36px 0 10px;font-size:.9rem;font-weight:600}
+  footer{margin:40px 0;color:#70707c;font-size:.85rem;text-align:center}
+  footer .accent{height:3px;width:80px;margin:0 auto 18px;border-radius:3px;background:var(--grad)}
+</style>
+</head>
+<body>
+  <header><div class="nav">
+    <span class="brand">carrie kroutil</span><div class="spacer"></div>
+    <a class="link" href="#">Posts</a><a class="link" href="#">About</a>
+    <span class="icon">⌕</span><span class="icon">☾</span><span class="icon">GH</span><span class="icon">in</span>
+  </div></header>
+
+  <main class="wrap">
+    <article>
+      <a class="back" href="#">← all posts</a>
+      <div class="tags"><span class="tag">code</span><span class="tag f">AI</span></div>
+      <h1>I built this site greenfield with the BMAD method</h1>
+      <div class="meta">June 22, 2026 · 6 min read</div>
+      <div class="hero-img">hero image (optional)</div>
+
+      <p>I wanted a little corner of the internet that was actually <em>mine</em> — somewhere to post
+      about golf, my dogs, code, and whatever else I'm into. Here's the surprising part: going from
+      an empty folder to a live site took an afternoon, not a weekend.</p>
+
+      <h2>Where I started</h2>
+      <p>No design, no plan, just an idea and a domain. I used the BMAD method to turn the idea into
+      a brief, then a look-and-feel, then the actual build.</p>
+
+      <div class="inline-img">photo: my desk + a dog photobomb</div>
+
+      <h2>Publishing is just markdown</h2>
+      <p>The thing I care about most: posting has to be effortless. It is.</p>
+      <pre><span class="c"># write a new post</span>
+hugo new content content/posts/<span class="k">my-golf-weekend</span>.md
+<span class="c"># ...write markdown, drop in photos...</span>
+git push   <span class="c"># Amplify builds &amp; it's live in ~2 min</span></pre>
+
+      <blockquote>No CMS, no dashboard, no friction. Write, push, done.</blockquote>
+
+      <p>That's the whole trick. If you've been meaning to make your own site, this is your sign.</p>
+
+      <div class="navfoot"><a href="#">← Breaking 100, finally</a><a href="#">The 1:1 question →</a></div>
+    </article>
+    <footer><div class="accent"></div>carriekroutil.com</footer>
+  </main>
+</body>
+</html>

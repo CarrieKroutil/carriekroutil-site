@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>carriekroutil.com — Architecture Walkthrough</title>
+<style>
+  :root{
+    --bg:#0a0a0a; --surface:#15151a; --surface-2:#1c1c23; --border:#2a2a33;
+    --fg:#ededed; --muted:#a0a0ab;
+    --violet:#8b5cf6; --fuchsia:#d946ef; --amber:#f59e0b;
+    --grad:linear-gradient(90deg,#8b5cf6,#d946ef,#f59e0b);
+    --link:#d946ef;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--fg);
+    font:1.05rem/1.65 ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:48px 22px 96px}
+  header.top{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:8px}
+  .wordmark{font-weight:800;letter-spacing:-.03em;font-size:1.5rem;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  @media (forced-colors:active){.wordmark{color:var(--fuchsia)}}
+  .sub{color:var(--muted);font-size:.9rem;margin-top:4px}
+  h1{font-weight:800;letter-spacing:-.03em;font-size:2.5rem;line-height:1.1;margin:32px 0 8px}
+  h2{font-weight:800;letter-spacing:-.02em;font-size:1.6rem;margin:56px 0 8px;padding-top:8px}
+  h3{font-weight:600;font-size:1.1rem;margin:28px 0 6px}
+  .lead{color:var(--muted);font-size:1.15rem;max-width:62ch}
+  a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+  .rule{height:3px;border:0;background:var(--grad);border-radius:999px;margin:14px 0 0;opacity:.9}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:1px 6px}
+  .chip{display:inline-block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border)}
+  .chip.v{color:#c9b8ff;border-color:#3a2f63}
+  .chip.f{color:#f3a8ff;border-color:#5a2a5e}
+  .chip.a{color:#ffd591;border-color:#5e4520}
+  .pipeline{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:24px 0}
+  .stage{flex:1;min-width:150px;background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:14px 16px}
+  .stage b{display:block;font-size:.95rem}
+  .stage span{color:var(--muted);font-size:.82rem}
+  .arrow{align-self:center;color:var(--fuchsia);font-weight:800;font-size:1.4rem}
+  .ad{background:var(--surface);border:1px solid var(--border);border-left:3px solid transparent;
+    border-image:var(--grad) 1;border-radius:0 14px 14px 0;padding:16px 18px;margin:14px 0}
+  .ad h3{margin:0 0 8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .ad .id{font-family:ui-monospace,monospace;font-weight:700;color:var(--amber);font-size:.95rem}
+  .ad .adopted{font-size:.66rem;color:var(--violet);border:1px solid #3a2f63;border-radius:999px;
+    padding:1px 7px;text-transform:uppercase;letter-spacing:.05em}
+  .ad p{margin:5px 0}
+  .ad .k{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  td code{white-space:nowrap}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;
+    overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:620px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+  .card .k{color:var(--amber);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+  ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:4px 0}
+  .deferred li b{color:var(--fg)}
+  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem}
+  .toc{font-size:.9rem;color:var(--muted);margin:18px 0 0}
+  .toc a{margin-right:14px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="wordmark">carrie kroutil</div>
+    <div class="sub">Architecture Walkthrough · build-substrate spine · feature altitude · 2026-06-22</div>
+  </header>
+
+  <h1>How the site is built</h1>
+  <p class="lead">A fast, static personal site whose entire architecture exists to protect one habit:
+  write markdown, <code>git push</code>, it's live. Everything below is in service of that — and of it
+  still being true in three years.</p>
+  <hr class="rule">
+  <nav class="toc">
+    <a href="#paradigm">Paradigm</a><a href="#flow">Build flow</a><a href="#rules">The 13 rules</a>
+    <a href="#conventions">Conventions</a><a href="#stack">Stack</a><a href="#tree">Source tree</a>
+    <a href="#deferred">Deferred</a>
+  </nav>
+
+  <h2 id="paradigm">The paradigm</h2>
+  <p><b>Build-time static generation, content-as-source.</b> There is no server and no runtime state.
+  The git repository is the single source of truth; every deploy is reproducible from source. Content is
+  markdown, the presentation layer is project overrides shadowing the Hextra theme, and delivery is one
+  Amplify pipeline. Authoring touches only <code>content/</code> — everything downstream is mechanical.</p>
+
+  <div class="pipeline" id="flow">
+    <div class="stage"><b>Markdown + front matter</b><span><code>content/</code> in git</span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>Hugo extended + Hextra</b><span>build at pinned version</span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>Static HTML/CSS/JS</b><span><code>public/</code></span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>AWS Amplify CDN</b><span>carriekroutil.com · Route 53</span></div>
+  </div>
+
+  <h2 id="rules">The 13 rules</h2>
+  <p class="lead" style="font-size:1.02rem">These are the invariants — the calls a future post or layout file
+  couldn't safely guess. <span class="chip v">ADOPTED</span> means reality or an upstream doc already settled it.</p>
+
+  <div class="ad"><h3><span class="id">AD-1</span> The authoring loop is inviolable <span class="adopted">adopted</span></h3>
+    <p><span class="k">Rule</span> Publishing is exactly <code>write markdown → git push</code>. No CMS, login, web editor, or manual copy step ever enters the path. Any feature that adds a manual authoring step is a regression.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-2</span> Exactly one deploy pipeline <span class="adopted">adopted</span></h3>
+    <p><span class="k">Rule</span> AWS Amplify is the only pipeline; it builds from source on push to the <b>default branch only</b> and serves at carriekroutil.com via Route 53. Branch/PR previews off; local <code>hugo server</code> is the only pre-publish preview. One environment: production.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-3</span> Canonical post front-matter contract</h3>
+    <p><span class="k">Why</span> The highest-divergence-risk surface on the site — if two posts name fields differently, the build quietly breaks.</p>
+    <p><span class="k">Rule</span> Every post carries YAML: <code>title</code>, <code>date</code> (bad/missing <b>fails the build</b>), <code>tags</code> (lowercase), <code>draft</code>, optional <code>featured</code>, and an optional <code>hero: {src, alt}</code> map — the one named hero field, also read by the OG tags. Read-time is derived (<code>"{n} min read"</code>, floor 1), never typed.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-4</span> Post stream is a <code>type: blog</code> section at <code>/posts/</code> <span class="adopted">adopted</span></h3>
+    <p><span class="k">Rule</span> Posts live in <code>content/posts/</code> with <code>_index.md</code> setting <code>type: blog</code> — keeps the <code>/posts/{slug}/</code> URLs and activates Hextra's blog layouts. <b>Slug = bundle folder name</b>; front-matter <code>slug:</code> only as a deliberate override; the title never sets the URL.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-5</span> Customization lives in project overrides, never in the module</h3>
+    <p><span class="k">Rule</span> Custom partials, layouts, and CSS live in the project's own <code>layouts/</code> and <code>assets/</code>, shadowing the Hextra module. The module is read-only and never edited in place — so theme upgrades don't clobber your work.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-6</span> One card renderer for home, list, and tags</h3>
+    <p><span class="k">Rule</span> A single custom partial (<code>post-card.html</code>) renders the card design ported from the UX <code>home.html</code> mockup, and is the <b>one renderer</b> used by the home grid, the <code>/posts/</code> list, and tag pages — so they can never drift into three designs. Hextra doesn't auto-populate a latest-posts feed; this partial does the query.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-7</span> Featured post is a front-matter flag, single slot</h3>
+    <p><span class="k">Rule</span> A post sets <code>featured: true</code>. Home renders exactly one slot: candidates sorted by <code>date</code> descending, first taken (deterministic if more than one); falls back to most-recent when none flagged. Pinning stays markdown-only.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-8</span> Topic filtering is tag term-pages, no client JS</h3>
+    <p><span class="k">Rule</span> A topic chip links to <code>/tags/{topic}/</code>. Hugo core generates and filters the term page; Hextra ships <b>no styled term layout</b>, so a custom <code>_default/term.html</code> styles it as a post list (reusing the AD-6 card). No in-place JS filtering of the stream.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-9</span> Page bundles; alt enforced; processing deferred</h3>
+    <p><span class="k">Rule</span> Each post is a page bundle (images beside the markdown). <b>Alt text is enforced, not requested</b> — a <code>render-image.html</code> markup hook fails the build on empty alt. Lazy-loading is native. Resize/WebP <i>processing</i> is deferred (the markup hook still ships in v1).</p></div>
+
+  <div class="ad"><h3><span class="id">AD-10</span> Versions pinned; upgrades deliberate</h3>
+    <p><span class="k">Rule</span> Hugo extended pinned via <code>HUGO_VERSION</code>; Hextra locked in <code>go.mod</code>. Upgrades happen on purpose (<code>hugo mod get -u</code> + re-test), never automatically — so a content-only push can't be broken by a release you didn't choose.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-11</span> <code>amplify.yml</code> is the single source of build truth</h3>
+    <p><span class="k">Rule</span> One file at the repo root: <code>preBuild</code> fetches the module (<code>hugo mod get</code>), <code>build</code> runs <code>hugo --gc --minify</code> at the pinned version, artifacts = <code>public/</code>.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-12</span> Build failure must notify, never silently no-op</h3>
+    <p><span class="k">Rule</span> Amplify's native email-on-failure is on. Amplify only swaps on success, so a failed build keeps the prior good site live <b>and</b> emails you. A clean build with no new post is distinguishable from a failure.</p></div>
+
+  <div class="ad"><h3><span class="id">AD-13</span> Core reading works without JavaScript <span class="adopted">adopted</span></h3>
+    <p><span class="k">Rule</span> Home, posts, stream, about, and tag pages render as static HTML with JS off. FlexSearch is the single accepted JS exception and degrades gracefully. System fonts only — no web-font network load.</p></div>
+
+  <h2 id="conventions">Conventions</h2>
+  <p>Defaults that bind where independent authoring would otherwise drift.</p>
+  <table>
+    <tr><th>Concern</th><th>Convention</th></tr>
+    <tr><td>Front matter</td><td>YAML for all content</td></tr>
+    <tr><td>Slug / URL</td><td><code>content/posts/{slug}/</code> → <code>/posts/{slug}/</code>; slug = folder name</td></tr>
+    <tr><td>Overrides</td><td>project <code>layouts/</code> + <code>assets/</code> only</td></tr>
+    <tr><td>Tags</td><td>open taxonomy; authored lowercase so <code>Golf</code>/<code>golf</code> don't split</td></tr>
+    <tr><td>Dates</td><td>ISO in front matter; invalid fails the build; displayed <code>Jan 2, 2006</code></td></tr>
+    <tr><td>Drafts vs future dates</td><td><code>draft: true</code> withholds; <code>buildFuture = false</code> so a future date withholds until then — never a silent vanish</td></tr>
+    <tr><td>Read-time</td><td><code>"{n} min read"</code>, floor 1 min</td></tr>
+    <tr><td>Alt text</td><td>required, build-failing, via the image hook + <code>hero.alt</code></td></tr>
+    <tr><td>Theme</td><td>dark by default (AA-guaranteed); light ships untuned Hextra defaults</td></tr>
+    <tr><td>Visual tokens</td><td>owned by the UX spine (<code>DESIGN.md</code>) — authoritative, not restated here</td></tr>
+    <tr><td>Branding</td><td><code>baseURL = https://carriekroutil.com/</code>; zero SheBytes / ananke / quickstart remnants</td></tr>
+    <tr><td>Privacy</td><td>no consent cookies, no PII; analytics is a single script include</td></tr>
+  </table>
+
+  <h2 id="stack">Stack</h2>
+  <p class="sub" style="margin-bottom:0">Seed — web-verified current at authoring (2026-06-22); the code owns it once it exists.</p>
+  <table>
+    <tr><th>Name</th><th>Version</th></tr>
+    <tr><td>Hugo (extended)</td><td>≥ 0.146.0 (Hextra floor); pin a current release (~0.163.x) via <code>HUGO_VERSION</code></td></tr>
+    <tr><td>Hextra theme</td><td>v0.12.3, locked in <code>go.mod</code>, via Hugo Modules <code>github.com/imfing/hextra</code></td></tr>
+    <tr><td>Hosting / CDN</td><td>AWS Amplify (build-from-source)</td></tr>
+    <tr><td>DNS</td><td>AWS Route 53 — carriekroutil.com</td></tr>
+    <tr><td>Search</td><td>Hextra FlexSearch (built-in, client-side)</td></tr>
+    <tr><td>Fallback theme</td><td>FixIt (candidate, if Hextra disappoints)</td></tr>
+  </table>
+
+  <h2 id="tree">Source tree</h2>
+  <p>The greenfield build lands fresh in <code>carriekroutil-site</code> — nothing carried over from the old <code>~/code/quickstart</code> scaffold.</p>
+<pre>carriekroutil-site/
+  hugo.toml            # baseURL, title, module import, params (theme.default=dark, search)
+  go.mod / go.sum      # Hextra version lock              (AD-10)
+  amplify.yml          # build spec — pinned Hugo, public/ (AD-11)
+  content/
+    _index.md          # home content
+    about.md           # /about/
+    posts/
+      _index.md        # type: blog                       (AD-4)
+      {slug}/          # page bundle = post + its images  (AD-9)
+        index.md
+        hero.jpg
+  layouts/
+    _partials/custom/  # post-card.html (one renderer)    (AD-6)
+    blog/              # list.html → post-card; single.html
+    _default/
+      term.html        # styled tag pages                 (AD-8)
+      _markup/render-image.html   # fails on empty alt     (AD-9)
+  assets/              # custom CSS realizing UX tokens    (AD-5)
+  static/              # favicon, shared assets</pre>
+
+  <h2 id="deferred">Deferred — on purpose</h2>
+  <p>None are launch gates. Naming them is half the contract.</p>
+  <div class="grid2 deferred">
+    <div class="card"><div class="k">Analytics tool</div>GoatCounter vs Cloudflare Web Analytics — a single privacy-friendly include, chosen at/just after launch. <i>Revisit at launch; don't let it drift.</i></div>
+    <div class="card"><div class="k">Light-mode AA</div>Re-verify the three accents on Hextra's light surfaces before relying on light mode. Dark is the AA-guaranteed v1 path.</div>
+    <div class="card"><div class="k">Image resize/WebP</div>A custom render hook using Hugo image processing — added only if images get heavy.</div>
+    <div class="card"><div class="k">Custom 404</div>On-brand "wandered off the fairway" copy. Non-blocking.</div>
+    <div class="card"><div class="k">Legacy deploy cleanup</div>Disabling the old S3-sync action + GCP artifacts in <code>~/code/quickstart</code> — a manual one-time task, outside this repo.</div>
+  </div>
+
+  <footer>
+    Distilled from <code>.memlog.md</code> · reviewed by three lenses (rubric, tech-currency, adversarial) before finalize ·
+    the build-substrate spine is <code>ARCHITECTURE-SPINE.md</code> in this folder. The spine wins on any conflict with this page.
+  </footer>
+
+</div>
+</body>
+</html>

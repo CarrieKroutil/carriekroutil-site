@@ -1,0 +1,25 @@
+# carriekroutil.com — Hugo + Hextra config (AR-1, AD-5, AD-10)
+# TOML by architecture decision; baseURL/title reflect carriekroutil.com only — no retired-project branding.
+baseURL = "https://carriekroutil.com/"
+title = "carrie kroutil"
+
+# Hextra consumed as a Hugo Module, version-locked in go.mod (AD-10) — never vendored/edited in place (AD-5).
+[module]
+[[module.imports]]
+path = "github.com/imfing/hextra"
+
+# Only the lowercase `tags` taxonomy (drops Hugo's default `categories`); open taxonomy, authored lowercase.
+[taxonomies]
+tag = "tags"
+
+[params]
+[params.theme]
+# Dark is the default paint + AA-guaranteed path; functional toggle/persistence is Story 1.4.
+default = "dark"
+displayToggle = true
+
+[params.search]
+enable = true
+type = "flexsearch"
+[params.search.flexsearch]
+index = "content"
