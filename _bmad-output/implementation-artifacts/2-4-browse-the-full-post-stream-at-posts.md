@@ -4,7 +4,7 @@ baseline_commit: 4ed9de1
 
 # Story 2.4: Browse the full post stream at /posts/
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

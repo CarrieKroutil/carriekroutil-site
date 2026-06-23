@@ -4,7 +4,7 @@ baseline_commit: d3fdfcf
 
 # Story 2.2: Render a single post page
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

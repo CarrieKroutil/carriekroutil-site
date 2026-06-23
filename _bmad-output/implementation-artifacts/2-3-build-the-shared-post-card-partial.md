@@ -4,7 +4,7 @@ baseline_commit: 7299385
 
 # Story 2.3: Build the shared post-card partial
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

@@ -4,7 +4,7 @@ baseline_commit: 7e04a52
 
 # Story 2.1: Establish the post content model, front-matter contract, and read-time
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
