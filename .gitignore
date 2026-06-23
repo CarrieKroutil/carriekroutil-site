@@ -6,6 +6,9 @@
 # OS / editor noise
 .DS_Store
 
+# Playwright MCP verification snapshots (local only)
+.playwright-mcp/
+
 # BMad tooling install — the framework itself, not site content or planning artifacts.
 # (Planning docs under _bmad-output/ are intentionally tracked for build-in-public.)
 .claude/

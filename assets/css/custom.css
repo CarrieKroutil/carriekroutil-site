@@ -1,0 +1,104 @@
+/* ============================================================================
+   carriekroutil.com — design tokens + base theme (Story 1.2)
+   Source of truth: DESIGN.md. Loaded last by Hextra's head.html
+   (variables.css -> main.css -> custom.css), so these rules win by cascade.
+   The Hextra module is never edited in place (AD-5).
+   ========================================================================== */
+
+:root {
+  /* ----- Palette ----- */
+  --ck-bg: #0a0a0a;
+  --ck-surface: #15151a;
+  --ck-surface-2: #1c1c23;
+  --ck-border: #2a2a33;
+  --ck-fg: #ededed;
+  --ck-muted: #a0a0ab;        /* muted / meta — AA floor; never lighter than this on dark */
+  --ck-meta-min: #a0a0ab;
+
+  --ck-accent-violet: #8b5cf6;
+  --ck-accent-fuchsia: #d946ef;
+  --ck-accent-amber: #f59e0b;
+  --ck-accent-gradient: linear-gradient(90deg, #8b5cf6, #d946ef, #f59e0b);
+
+  --ck-link: #d946ef;
+  --ck-focus: #d946ef;
+
+  --ck-chip-violet-text: #c9b8ff;
+  --ck-chip-fuchsia-text: #f3a8ff;
+  --ck-chip-amber-text: #ffd591;
+
+  /* ----- Typography ----- */
+  --ck-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ck-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ck-scale-h1: 2.5rem;
+  --ck-scale-h2: 1.15rem;
+  --ck-scale-body: 1.05rem;
+  --ck-scale-small: 0.85rem;
+  --ck-weight-body: 400;
+  --ck-weight-strong: 600;
+  --ck-weight-display: 800;
+  --ck-tracking-display: -0.03em;
+  --ck-leading-body: 1.6;
+
+  /* ----- Radii ----- */
+  --ck-radius-card: 18px;
+  --ck-radius-control: 10px;
+  --ck-radius-pill: 999px;
+
+  /* ----- Spacing & layout ----- */
+  --ck-space-base: 4px;
+  --ck-gutter: 22px;
+  --ck-content-max: 920px;
+  --ck-reading-max: 720px;
+
+  /* ----- Focus ----- */
+  --ck-focus-ring: 2px solid #d946ef;
+
+  /* Map Hextra's HSL-derived primary scale onto fuchsia #d946ef.
+     Hextra computes --hx-color-primary-* from these three vars at runtime.
+     Precise HSL of #d946ef so the derived accent lands byte-exact (not #d948ef). */
+  --primary-hue: 292.2deg;
+  --primary-saturation: 84.1%;
+  --primary-lightness: 60.6%;
+}
+
+/* Hextra also defines a primary triple under .dark (204deg); override it too so the
+   fuchsia accent wins in dark mode regardless of source order. */
+.dark {
+  --primary-hue: 292.2deg;
+  --primary-saturation: 84.1%;
+  --primary-lightness: 60.6%;
+}
+
+/* ----- Base palette + typography (first-paint on-brand) ----- */
+body {
+  font-family: var(--ck-font-sans);
+  font-size: var(--ck-scale-body);
+  line-height: var(--ck-leading-body);
+}
+
+/* Hextra paints the dark body via `background-color: var(--hx-color-dark)` (#111) on a
+   `:where(.dark, .dark *)`-wrapped rule (specificity 0,0,1). Override the background
+   directly: `.dark body` (0,1,1) wins. html.dark covers any area showing behind the body. */
+html.dark,
+.dark body {
+  background-color: var(--ck-bg);
+}
+
+.dark body {
+  color: var(--ck-fg);
+}
+
+/* Display headings: heavy weight + tight tracking (hero scale realized per-page later). */
+h1 {
+  font-weight: var(--ck-weight-display);
+  letter-spacing: var(--ck-tracking-display);
+}
+
+/* Code uses the system mono stack (no web-font load — NFR-1). */
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--ck-font-mono);
+}
