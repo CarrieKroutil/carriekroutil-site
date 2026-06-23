@@ -610,3 +610,93 @@ samp {
 .ck-featured .ck-card-excerpt {
   -webkit-line-clamp: 2;
 }
+
+/* ============================================================================
+   Story 3.4 — About page
+   (FR-3 · UX-DR10 reading width · UX-DR3 avatar reuse · UX-DR11 a11y · UX-DR13)
+   Centered 720px column: avatar-ring · greeting · lead · centered topic chips ·
+   left-aligned prose body · GitHub/LinkedIn buttons.
+   ========================================================================== */
+.ck-about {
+  max-width: var(--ck-reading-max);   /* 720px */
+  margin: 0 auto;
+  padding: 48px var(--ck-gutter) 24px;
+  text-align: center;
+}
+.ck-about .ck-avatar {
+  margin: 0 auto 22px;
+}
+.ck-about-title {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+.ck-about-lead {
+  color: var(--ck-muted);             /* AA floor on dark */
+  font-size: 1.1rem;
+  max-width: 52ch;
+  margin: 0 auto;
+}
+.ck-about .ck-tags {
+  justify-content: center;
+  margin: 22px 0 8px;
+}
+/* Prose body reads left-aligned within the centered column. */
+.ck-about-body {
+  text-align: left;
+  font-size: 1.06rem;
+  margin-top: 30px;
+}
+.ck-about-body h2 {
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin: 1.6em 0 0.3em;
+}
+
+/* ----- Social buttons — real <a>s with a visible label + decorative glyph ----- */
+.ck-socials {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.ck-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--ck-border);
+  background: var(--ck-surface);
+  color: var(--ck-fg);
+  font-weight: var(--ck-weight-strong);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.ck-btn:hover {
+  border-color: var(--ck-accent-fuchsia);
+}
+.ck-btn-icon {
+  flex: 0 0 auto;
+  color: var(--ck-muted);
+}
+.ck-btn:hover .ck-btn-icon {
+  color: var(--ck-fg);
+}
+
+/* ----- Reusable gradient-clip text (accent name on About) — solid fuchsia fallback ----- */
+.ck-grad-text {
+  color: var(--ck-accent-fuchsia);
+  background: var(--ck-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (forced-colors: active), print {
+  .ck-grad-text {
+    background: none;
+    -webkit-text-fill-color: var(--ck-accent-fuchsia);
+    color: var(--ck-accent-fuchsia);
+  }
+}
