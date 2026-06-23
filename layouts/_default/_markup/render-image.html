@@ -1,0 +1,19 @@
+{{- /*
+  render-image.html — markup hook for standard markdown images ![alt](src) (Story 2.2, AD-9).
+  Enforces alt text: a content image with empty/whitespace alt FAILS the build, so missing
+  alt can never ship. Resolves bundle-relative src to the page resource; native lazy-load.
+
+  Note: decorative gradient thumbs use alt="" deliberately, but those are rendered by the
+  card partial (Story 2.3), not markdown — so this hook enforces non-empty alt for every
+  inline content image without exception.
+*/ -}}
+{{- $alt := .PlainText | strings.TrimSpace -}}
+{{- if eq $alt "" -}}
+  {{- errorf "image %q in %q has empty alt text — every content image must carry alt (AD-9)" .Destination .Page.Path -}}
+{{- end -}}
+{{- $src := .Destination -}}
+{{- $img := .Page.Resources.GetMatch .Destination -}}
+{{- if $img -}}{{- $src = $img.RelPermalink -}}{{- end -}}
+<img src="{{ $src | safeURL }}" alt="{{ .PlainText }}" loading="lazy"
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>

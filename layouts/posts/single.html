@@ -1,0 +1,29 @@
+{{- /*
+  posts/single.html — the single post page (Story 2.2, FR-5/AD-9).
+  Defines only the `main` block; Hextra's baseof supplies the Epic-1 navbar + footer.
+  Centered 720px reading column. Order: back-link -> tags -> h1 -> meta -> hero -> body.
+  The <main> keeps id="content" so baseof's skip-to-content link still targets it (a11y).
+*/ -}}
+{{ define "main" }}
+<main id="content" class="ck-reading ck-post">
+  <article>
+    <a class="ck-back" href="/posts/">&larr; all posts</a>
+    {{ partial "custom/post-tags.html" . }}
+    <h1 class="ck-post-title">{{ .Title }}</h1>
+    {{ partial "custom/post-meta.html" . }}
+    {{- with .Params.hero -}}
+      {{- if not .alt -}}{{- errorf "post %q hero is missing required alt text (AD-9: hero.alt is required)" $.Path -}}{{- end -}}
+      {{- $img := $.Resources.GetMatch .src -}}
+      {{- if $img -}}
+        <img class="ck-hero" src="{{ $img.RelPermalink }}" alt="{{ .alt }}" loading="lazy">
+      {{- else -}}
+        <img class="ck-hero" src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy">
+      {{- end -}}
+    {{- end -}}
+    <div class="content ck-prose">
+      {{ .Content }}
+    </div>
+    <nav class="ck-postnav"><a class="ck-back" href="/posts/">&larr; all posts</a></nav>
+  </article>
+</main>
+{{ end }}

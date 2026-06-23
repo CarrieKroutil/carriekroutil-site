@@ -68,7 +68,7 @@ development_status:
   # Epic 2: The post reading experience  — all 4 stories ship on ONE branch (epic-2-post-reading-experience), one review + one PR at epic end (Carrie's instruction 2026-06-23)
   epic-2: in-progress
   2-1-establish-the-post-content-model-front-matter-contract-and-read-time: review
-  2-2-render-a-single-post-page: backlog
+  2-2-render-a-single-post-page: review
   2-3-build-the-shared-post-card-partial: backlog
   2-4-browse-the-full-post-stream-at-posts: backlog
   epic-2-retrospective: optional

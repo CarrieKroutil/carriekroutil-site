@@ -243,3 +243,82 @@ samp {
     transition: background-color 0.2s ease, border-color 0.2s ease;
   }
 }
+
+/* ============================================================================
+   Story 2.2 — single post page + shared tag chips
+   (FR-5 · AD-9 · UX-DR4 chips · UX-DR10 reading width · UX-DR11 a11y/motion)
+   Reading column 720px; metadata via custom/post-meta.html; chips via
+   custom/post-tags.html (reused by card 2.3 + term page Epic 4).
+   ========================================================================== */
+
+/* ----- Reading column (UX-DR10) — 720px reading-max, 22px gutters ----- */
+.ck-reading {
+  max-width: var(--ck-reading-max);   /* 720px */
+  margin: 0 auto;
+  padding: 24px var(--ck-gutter) 40px; /* 22px side gutters */
+}
+
+/* ----- Back-to-stream link (a way back to the Post Stream) ----- */
+.ck-back {
+  display: inline-block;
+  font-size: var(--ck-scale-small);    /* 0.85rem */
+  font-weight: var(--ck-weight-strong);
+  color: var(--ck-muted);
+  text-decoration: none;
+}
+.ck-back:hover {
+  color: var(--ck-fg);
+}
+.ck-postnav {
+  margin-top: 36px;
+}
+
+/* ----- Tag chips (UX-DR4) — pill, uppercase, one accent tint per chip -----
+   Shared renderer custom/post-tags.html. Labels authored lowercase; uppercased here. */
+.ck-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 10px;
+}
+.ck-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: var(--ck-radius-pill);
+  border: 1px solid var(--ck-border);
+  background: var(--ck-surface);
+  text-decoration: none;
+  line-height: 1.5;
+}
+.ck-tag:hover {
+  text-decoration: none;
+  border-color: var(--ck-fg);
+}
+/* Accent tint per chip — text on surface, dimmed accent border (chips clear AA: 9.7–12.5:1). */
+.ck-tag--violet  { color: var(--ck-chip-violet-text);  border-color: #5b3da8; }
+.ck-tag--fuchsia { color: var(--ck-chip-fuchsia-text); border-color: #9a2fa3; }
+.ck-tag--amber   { color: var(--ck-chip-amber-text);   border-color: #8a6a1f; }
+
+/* ----- Post title + meta ----- */
+.ck-post-title {
+  font-size: 2.3rem;
+  line-height: 1.15;
+  margin: 0.2em 0 0.15em;
+}
+.ck-post-meta {
+  color: var(--ck-muted);            /* never below #a0a0ab on dark (AA floor) */
+  font-size: 0.88rem;
+  margin-bottom: 22px;
+}
+
+/* ----- Hero image — rounded, responsive, lazy-loaded ----- */
+.ck-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--ck-radius-card);  /* 18px */
+  margin: 8px 0 28px;
+}

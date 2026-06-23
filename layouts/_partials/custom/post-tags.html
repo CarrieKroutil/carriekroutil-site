@@ -1,0 +1,24 @@
+{{- /*
+  custom/post-tags.html — THE clickable topic-chip renderer. Reused by the single post
+  (Story 2.2, all tags), the post-card (Story 2.3, primary tag via limit), and the term
+  page (Epic 4). Do not duplicate chip markup elsewhere.
+
+  Each chip links the real taxonomy term page (/tags/{topic}/) via .GetTerms, so links stay
+  correct once Epic 4 styles the term page. Labels are lowercase as authored; CSS uppercases.
+  Accent tint rotates violet -> fuchsia -> amber by index.
+
+  Context: a Page, OR a dict { page: <Page>, limit: <int> } (limit 0/absent = all tags).
+*/ -}}
+{{- $page := . -}}
+{{- $limit := 0 -}}
+{{- if reflect.IsMap . -}}{{- $page = .page -}}{{- $limit = .limit | default 0 -}}{{- end -}}
+{{- $terms := $page.GetTerms "tags" -}}
+{{- if and $limit (gt (len $terms) $limit) -}}{{- $terms = first $limit $terms -}}{{- end -}}
+{{- $tints := slice "violet" "fuchsia" "amber" -}}
+{{- with $terms -}}
+<div class="ck-tags">
+  {{- range $i, $t := . -}}
+  <a class="ck-tag ck-tag--{{ index $tints (mod $i 3) }}" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>
+  {{- end -}}
+</div>
+{{- end -}}
