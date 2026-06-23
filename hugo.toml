@@ -3,6 +3,11 @@
 baseURL = "https://carriekroutil.com/"
 title = "carrie kroutil"
 
+# Post content-model contract (Story 2.1, AD-3). A future `date` intentionally withholds
+# a post until that date rather than vanishing silently; `draft: true` is the explicit
+# withhold mechanism. This is also Hugo's default — set explicitly so the intent is visible.
+buildFuture = false
+
 # Hextra consumed as a Hugo Module, version-locked in go.mod (AD-10) — never vendored/edited in place (AD-5).
 [module]
 [[module.imports]]
