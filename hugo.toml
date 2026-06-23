@@ -18,6 +18,10 @@ path = "github.com/imfing/hextra"
 tag = "tags"
 
 [params]
+# Avatar photo for the Home hero + About page (custom/avatar.html). Lives in static/,
+# so the path is site-root-relative. Unset → falls back to the on-brand "CK" monogram.
+avatar = "/carrie-avatar.png"
+
 [params.theme]
 # Dark is the default paint + AA-guaranteed path; functional toggle/persistence is Story 1.4.
 default = "dark"
