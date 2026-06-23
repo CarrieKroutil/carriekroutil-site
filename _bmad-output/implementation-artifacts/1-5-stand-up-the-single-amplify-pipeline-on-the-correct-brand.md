@@ -4,7 +4,7 @@ baseline_commit: bf22e08
 
 # Story 1.5: Stand up the single Amplify pipeline on the correct brand
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -80,6 +80,15 @@ so that the site builds reproducibly with no leftover paths or branding from the
   - [x] Ran a clean local production build: `hugo --gc --minify` → exit 0, `public/` emitted (23 files), no errors/warnings — the same command `amplify.yml`'s `build` phase runs.
   - [x] Confirmed `amplify.yml` is valid YAML (`ruby -ryaml`).
   - [x] Recorded the exact commands and outcomes in the Dev Agent Record.
+
+### Review Findings
+
+*Code review 2026-06-23 (3-layer adversarial: Blind Hunter, Edge Case Hunter, Acceptance Auditor). 0 decision-needed · 2 patch · 0 defer · 4 dismissed. Acceptance Auditor: clean pass on all ACs. Site is live at carriekroutil.com, built by the new Amplify app from this `amplify.yml` (old manual-deploy app deleted first) — happy path empirically validated.*
+
+- [x] [Review][Patch] Use `curl -fsSLO` (add `-f`) for the Go/Hugo downloads so a bad version pin fails fast instead of writing a 404 body that dies cryptically at `tar` [amplify.yml — 2 curl calls in preBuild] — **applied**
+- [x] [Review][Patch] Harden `SETUP.md`: recommend mapping `www` → apex (not "if desired" — bare `www.carriekroutil.com` otherwise fails to resolve); add a "if the first build fails, read the build log for the failing command" pointer; note in the upgrade section to keep `go.mod`'s `go` directive ≤ the installed `GO_VERSION` (avoid silent toolchain auto-download) [SETUP.md] — **applied**
+
+*Dismissed (recorded for traceability):* (1) **`export PATH` cross-phase persistence** (blind+edge) — empirically refuted: live site built from this spec; canonical gohugo.io pattern; Amplify runs frontend phases in one shell. (2) **`HUGO_CACHEDIR ${PWD}` vs relative cache path** — canonical gohugo.io pattern; worst case a cache no-op (perf), not a build break. (3) **`hugo mod get` no-arg** — valid (updates all configured modules; Hugo also resolves modules at build). (4) **`go.sum` uncommitted** — false positive: `go.sum` IS tracked with the Hextra `v0.12.3` checksum lock (reviewer couldn't see it from the diff).
 
 ## Dev Notes
 
@@ -222,3 +231,4 @@ claude-opus-4-8[1m] (Opus 4.8, 1M context)
 | --- | --- |
 | 2026-06-23 | Story 1.5 created (context-engineered): `amplify.yml` spec (Go + Hugo-extended install, `hugo mod get`, `hugo --gc --minify`, `public/`), remnant/brand verification, and `SETUP.md` Amplify+Route 53 runbook. Amplify recipe web-verified against gohugo.io and corrected for extended edition. Status → ready-for-dev. |
 | 2026-06-23 | Story 1.5 implemented on branch `story-1.5-amplify-pipeline`: authored `amplify.yml` (extended-edition build spec), wrote `SETUP.md` runbook, cross-linked from `README.md`, verified repo clean (0 remnants, no GCP/second-pipeline artifacts) and `hugo --gc --minify` exit 0. Repo-side ACs (1, 3, 4) done; AC2 console items (Amplify app + Route 53 domain) left as Carrie's manual task per Task 4. Status → review. |
+| 2026-06-23 | Code review (3-layer adversarial). Acceptance Auditor: clean pass on all ACs. 2 patches applied (`curl -fsSLO` fail-fast in `amplify.yml`; `SETUP.md` hardening — www→apex, first-build-failure pointer, go-directive note), 4 dismissed (headline `PATH`-cross-phase finding empirically refuted — live site built from this spec after old app deleted). Build re-verified exit 0. Status → done. |
