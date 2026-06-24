@@ -375,7 +375,34 @@ samp {
 .ck-card .ck-tags {
   position: relative;
   z-index: 1;
+  gap: 0;                                   /* middot separators replace the chip gap */
   margin: 0 0 8px;
+}
+/* On a card the whole surface is the click target, so loud pill chips compete with it
+   for attention (a first-time visitor clicked the tags expecting to reach the post). Quiet
+   the CARD tags back to the original mock's text-with-middots: still real links, still the
+   per-topic accent tint, but no pill — so the card's hover-lift is the one obvious "open the
+   post" affordance and the tags read as a secondary label. Chips stay loud on the single
+   post + term pages (no full-card overlay there, so no competing affordance). */
+.ck-card .ck-tag {
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  line-height: 1.4;
+}
+.ck-card .ck-tag:not(:first-child)::before {
+  content: "·" / "";                        /* quiet middot between topics, as in the mock;
+                                               "/ ''" gives it empty alt text so screen
+                                               readers skip the decorative separator */
+  display: inline-block;                    /* atomic inline → the link's hover underline
+                                               doesn't propagate onto the separator dot */
+  margin: 0 0.5em;
+  color: var(--ck-muted);
+  font-weight: 400;
+}
+.ck-card .ck-tag:hover {
+  text-decoration: underline;               /* the at-rest label still signals it's a link */
 }
 
 /* Thumb — image fills the slot; gradient fallback when no hero (a garnish, low-key). */
