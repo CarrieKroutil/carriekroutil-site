@@ -32,6 +32,12 @@ avatar = "/carrie-avatar.jpg"
 # `description` front matter overrides this; the avatar doubles as the default share image.
 description = "Carrie Kroutil's corner of the internet — notes on engineering leadership, building with AI, golf, and dogs."
 
+# Readership analytics (Story 5.3, FR-14, NFR-3): GoatCounter count endpoint for the
+# privacy-friendly page-view include (custom/analytics.html) — no cookies, no PII, no
+# consent banner. Emitted in production builds only; local previews never count. Value is
+# the full data-goatcounter URL from your GoatCounter site settings (Settings → "Site code").
+goatcounter = "https://carrie.goatcounter.com/count"
+
 [params.theme]
 # Dark is the default paint + AA-guaranteed path; functional toggle/persistence is Story 1.4.
 default = "dark"

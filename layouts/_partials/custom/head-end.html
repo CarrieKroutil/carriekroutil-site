@@ -10,3 +10,6 @@
 <meta property="og:image" content="{{ . }}" />
 <meta property="og:image:alt" content="{{ $img.alt }}" />
 {{- end -}}
+
+{{- /* Privacy-friendly readership analytics (Story 5.3, FR-14, NFR-3) — production-only include. */ -}}
+{{- partial "custom/analytics.html" . -}}

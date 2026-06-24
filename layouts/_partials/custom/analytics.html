@@ -1,0 +1,14 @@
+{{- /*
+  custom/analytics.html — privacy-friendly readership signal (Story 5.3, FR-14, NFR-3).
+  Emits the GoatCounter count.js include: no cookies, no PII, no consent banner (NFR-3),
+  script-include only. Gated two ways so it never skews real data:
+    1. Production only (hugo.IsProduction) — `hugo server` and previews never count (AR-4).
+    2. Only when params.goatcounter is set — a fork with no endpoint emits nothing.
+  count.js loads async from GoatCounter's CDN (gc.zgo.at); data-goatcounter is the per-site
+  count endpoint configured in hugo.toml (params.goatcounter).
+*/ -}}
+{{- if hugo.IsProduction -}}
+{{- with .Site.Params.goatcounter -}}
+<script data-goatcounter="{{ . }}" async src="//gc.zgo.at/count.js"></script>
+{{- end -}}
+{{- end -}}
