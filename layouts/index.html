@@ -1,0 +1,67 @@
+{{- /*
+  index.html — the Home front door (Epic 3). Shadows Hextra's home template.
+  Defines only `main`; Hextra's baseof supplies the Epic-1 navbar + footer.
+  920px content width (UX-DR10). Renders as static HTML with JS off (AD-13).
+
+  Sections, top to bottom:
+    - Hero (Story 3.1): avatar-ring · greeting · one-liner · topic chips.
+    - Featured slot (Story 3.3): one pinned post, distinct from the grid.
+    - Latest posts (Story 3.2): grid of the most-recent posts + "all posts →".
+*/ -}}
+{{ define "main" }}
+{{- /* Mobile nav drawer for the navbar hamburger (same pattern as posts/single.html):
+   hidden on desktop, rendered so the mobile menu has something to open. */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+<main id="content" class="ck-home">
+  <section class="ck-hero">
+    {{ partial "custom/avatar.html" . }}
+    <div class="ck-hero-text">
+      <h1 class="ck-hero-greeting">{{ .Params.greeting }}</h1>
+      {{- with .Params.oneliner }}<p class="ck-hero-oneliner">{{ . }}</p>{{ end -}}
+      {{- /* Topic chips straight from the live `tags` taxonomy (most-written first), so every
+         chip links to a real /tags/{topic}/ term page — no broken links, no maintenance as
+         topics grow. Same renderer + per-topic tint as cards/posts (custom/post-tags.html). */ -}}
+      {{- with partial "custom/topic-terms.html" . }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
+    </div>
+  </section>
+
+  {{- /* All posts, newest first — shared by the featured slot + the latest grid. */ -}}
+  {{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+
+  {{- /* Featured slot (Story 3.3, FR-15/AD-7): the first `featured: true` post taken in
+     date-desc order (deterministic tiebreak), falling back to the most-recent post when
+     none is flagged — so the slot is never empty while any post exists. Reuses the shared
+     post-card (no new card markup); the .ck-featured wrapper + label make it visually
+     distinct from the recent grid. Excluded from the grid below so it isn't shown twice. */ -}}
+  {{- $featured := "" -}}
+  {{- with where $posts "Params.featured" true -}}
+    {{- $featured = index . 0 -}}
+  {{- else -}}
+    {{- with $posts -}}{{- $featured = index . 0 -}}{{- end -}}
+  {{- end -}}
+  {{- with $featured }}
+  <section class="ck-featured" aria-labelledby="ck-featured-label">
+    <h2 id="ck-featured-label" class="ck-featured-label">Featured</h2>
+    {{ partial "custom/post-card.html" . }}
+  </section>
+  {{- end }}
+
+  {{- /* Latest posts (Story 3.2, FR-2): the most-recent posts (minus the featured one)
+     as shared post-cards, newest first, 2-up→1-up grid (.ck-grid, from Story 2.4). The
+     section only renders when such posts exist, so a sparse site stays intentional (the
+     hero + featured carry it) instead of a "Latest posts" header over an empty grid. */ -}}
+  {{- $recent := $posts -}}
+  {{- with $featured -}}{{- $recent = where $posts "RelPermalink" "!=" .RelPermalink -}}{{- end -}}
+  {{- with $recent }}
+  <section class="ck-latest">
+    <div class="ck-sec-head">
+      <h2 class="ck-sec-title">Latest posts</h2>
+      <a class="ck-sec-link" href="/posts/">all posts &rarr;</a>
+    </div>
+    <div class="ck-grid">
+      {{- range first 6 . -}}{{ partial "custom/post-card.html" . }}{{- end -}}
+    </div>
+  </section>
+  {{- end }}
+</main>
+{{ end }}

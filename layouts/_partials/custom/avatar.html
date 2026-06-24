@@ -1,0 +1,23 @@
+{{- /*
+  custom/avatar.html — gradient-ring avatar (Story 3.1, UX-DR3).
+  A gradient ring (gradient padding) around a surface-2 circle. Decorative and
+  NON-interactive (EXPERIENCE.md: avatar-ring; links live in nav/about), so the
+  whole component is aria-hidden and any photo carries alt="".
+
+  Photo source: site param `avatar` (e.g. avatar = "/avatar.jpg" with the file in
+  static/). When unset, falls back to an on-brand gradient "ck" monogram so the
+  ring still reads as intentional before Carrie drops a photo in — no broken image.
+
+  Context: optional dict { size: "lg" } for the larger About-page variant.
+*/ -}}
+{{- $size := "" -}}
+{{- if reflect.IsMap . -}}{{- $size = .size | default "" -}}{{- end -}}
+<div class="ck-avatar{{ with $size }} ck-avatar--{{ . }}{{ end }}" aria-hidden="true">
+  <div class="ck-avatar-inner">
+    {{- with site.Params.avatar -}}
+      <img src="{{ . | relURL }}" alt="">
+    {{- else -}}
+      <span class="ck-avatar-monogram ck-grad-text">ck</span>
+    {{- end -}}
+  </div>
+</div>

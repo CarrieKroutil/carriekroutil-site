@@ -8,12 +8,25 @@
   Accent tint is a stable hash of the topic name, so a topic keeps the SAME color everywhere
   it appears (single page, card, term page) — recognizable, and varied as topics diversify.
 
-  Context: a Page, OR a dict { page: <Page>, limit: <int> } (limit 0/absent = all tags).
+  Context (one of):
+    - a Page                          -> all of the page's `tags` terms
+    - dict { page: <Page>, limit: N } -> the page's terms, capped at N (0/absent = all)
+    - dict { terms: <slice> }         -> render exactly these taxonomy term Pages
+      (used by the Home hero, Story 3.1, to chip the site's topics straight from the
+       taxonomy — same renderer, same per-topic tint, so colors match everywhere).
 */ -}}
-{{- $page := . -}}
+{{- $terms := slice -}}
 {{- $limit := 0 -}}
-{{- if reflect.IsMap . -}}{{- $page = .page -}}{{- $limit = .limit | default 0 -}}{{- end -}}
-{{- $terms := $page.GetTerms "tags" -}}
+{{- if reflect.IsMap . -}}
+  {{- if isset . "terms" -}}
+    {{- $terms = .terms -}}
+  {{- else -}}
+    {{- $limit = .limit | default 0 -}}
+    {{- $terms = .page.GetTerms "tags" -}}
+  {{- end -}}
+{{- else -}}
+  {{- $terms = .GetTerms "tags" -}}
+{{- end -}}
 {{- if and $limit (gt (len $terms) $limit) -}}{{- $terms = first $limit $terms -}}{{- end -}}
 {{- $tints := slice "violet" "fuchsia" "amber" -}}
 {{- with $terms -}}

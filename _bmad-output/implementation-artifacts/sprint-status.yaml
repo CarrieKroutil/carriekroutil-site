@@ -42,6 +42,7 @@
 
 generated: 2026-06-22
 last_updated: 2026-06-23
+# epic-3 complete 2026-06-23: all 4 stories on one branch epic-3-front-door (off main @dbf0734, post-PR#6). Commits: 0b985b2 (3.1 hero), 58d6cc9 (3.2 latest grid), ea159c5 (3.3 featured), 4b813da (3.4 about), a630bb5 (review cleanups). Code review (parallel correctness + cleanup + a11y/spec finders) — correctness CLEAN (2 "empty chip label" findings were false positives: .Page from Taxonomies.tags.ByCount is the term page w/ .LinkTitle, verified in rendered HTML + screenshots); applied 2 convention cleanups (extract custom/topic-terms.html shared by hero+about; consolidate gradient text-clip onto .ck-grad-text); a11y CLEAN (1 GitHub-URL-casing nit kept as CarrieKroutil for site consistency — case-insensitive). Key decisions: hero/about topic chips driven from the LIVE tags taxonomy (ByCount) so every chip links a real /tags/{topic}/ page (no broken links, no maintenance); featured slot reuses post-card (no new markup) w/ featured:true→date-desc→fallback-to-recent + grid exclusion; avatar = gradient-ring w/ site.Params.avatar photo or on-brand monogram fallback (Carrie can drop a photo at static/ + set params.avatar); About via layout:about → layouts/_default/about.html. Home + About visually verified. Stories 3.1–3.4 → done. PR opened for Carrie's human review/merge. Next: Epic 4 (topics & search), then deferred 1.6/1.7.
 # epic-2 started 2026-06-23: story 2.1 contexted → ready-for-dev. Epic 2 (2.1–2.4) on single branch epic-2-post-reading-experience off main @7e04a52.
 # epic-2 complete 2026-06-23: all 4 stories implemented + verified on one branch (commits d3fdfcf, 7299385, 4ed9de1, ab627ea). Code review (parallel correctness + cleanup finders) — correctness CLEAN (all build gates fault-injected & confirmed); 3 convention-tier cleanups applied (chip/hover border tokens, card hero→gradient fallback), 1 dismissed (CSS↔SVG hex can't unify) in 991472e. Stories 2.1–2.4 → done. PR opened for Carrie's human review/merge. Key design decisions: cascade type:blog + layouts/blog/ overrides; accessible overlay post-card (whole-card→post + tag→term, resolves UX-DR5 vs FR-4 AC2); per-topic chip tint via hash.FNV32a; missing-date build gate via post-meta. Two reference posts ship (hello-corner-of-the-internet w/ hero, the-next-round heroless). NOTE: known Chroma code-block bg (#272822 monokai) is off-palette but functional — left for a future polish. Next: Epic 3 (Home & About), then deferred 1.6/1.7.
 # story 1.1 done; story 1.2 reviewed (3 patches applied) → done; epic-1 → in-progress
@@ -74,12 +75,12 @@ development_status:
   2-4-browse-the-full-post-stream-at-posts: done
   epic-2-retrospective: optional
 
-  # Epic 3: The front door — Home & About
-  epic-3: backlog
-  3-1-build-the-home-hero: backlog
-  3-2-show-the-latest-posts-preview-grid-on-home: backlog
-  3-3-pin-a-featured-post-on-home: backlog
-  3-4-build-the-about-page: backlog
+  # Epic 3: The front door — Home & About  — all 4 stories ship on ONE branch (epic-3-front-door), one review + one PR at epic end (Carrie's instruction, same as Epic 2)
+  epic-3: in-progress   # → done once the PR merges to main
+  3-1-build-the-home-hero: done
+  3-2-show-the-latest-posts-preview-grid-on-home: done
+  3-3-pin-a-featured-post-on-home: done
+  3-4-build-the-about-page: done
   epic-3-retrospective: optional
 
   # Epic 4: Wayfinding — topics & search
