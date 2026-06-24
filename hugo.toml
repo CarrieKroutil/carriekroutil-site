@@ -22,6 +22,15 @@ path = "github.com/imfing/hextra"
 [taxonomies]
 tag = "tags"
 
+# Syntax highlighting (Story 2.x polish): emit class-based markup, not inline styles.
+# Hugo's default (noClasses=true) bakes the off-palette Monokai style straight onto
+# each <pre> (background #272822), bypassing the theme. Class-based output defers to
+# Hextra's own bundled chroma stylesheet (assets/css/chroma/*.css), whose code surface
+# is a tint of the brand primary (fuchsia) and tracks the dark/light theme.
+[markup]
+[markup.highlight]
+noClasses = false
+
 [params]
 # Avatar photo for the Home hero + About page (custom/avatar.html). Lives in static/,
 # so the path is site-root-relative. Unset → falls back to the on-brand "CK" monogram.
