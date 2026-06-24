@@ -99,6 +99,15 @@ html.dark,
   color: var(--ck-fg);
 }
 
+/* Always reserve the scrollbar gutter so the usable width is constant whether or not a
+   page scrolls. Without this, navigating from a tall page (Home scrolls → 15px scrollbar)
+   to a short one (About fits → no scrollbar) widens the viewport and shifts the centered
+   layout + right-aligned nav controls — a visible horizontal "jump". Browsers without
+   scrollbar-gutter support (or with overlay scrollbars) simply keep their default. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Display headings: heavy weight + tight tracking (hero scale realized per-page later). */
 h1 {
   font-weight: var(--ck-weight-display);
