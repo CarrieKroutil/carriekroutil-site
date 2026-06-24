@@ -57,6 +57,12 @@ enable = true
 type = "flexsearch"
 [params.search.flexsearch]
 index = "content"
+# One result per post. Hextra's search is built for docs and returns a separate
+# result per matching heading/section, so a multi-heading post appeared several
+# times for one query (e.g. "dogs" returned the same post 3×). This is a blog —
+# cap to the single best-matching section so each post shows once. Full-content
+# matching is unchanged; only the per-post result count is collapsed.
+maxSectionResults = 1
 
 # Suppress Hextra's "Powered by Hextra" credit — the footer is a single muted
 # line with only GitHub/LinkedIn operable (Story 1.3, UX-DR9). Footer theme
