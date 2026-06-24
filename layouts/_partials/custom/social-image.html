@@ -1,0 +1,26 @@
+{{- /*
+  custom/social-image.html — resolve the page's social-share image (Story 5.1, FR-18).
+  Returns a dict {url, alt}: the post's `hero` (a page-bundle resource → absolute URL) when
+  present, else the site avatar as an on-brand default so every shared link unfurls with an
+  image. This is the single source of truth, shared by custom/head-end.html (og:image) and
+  the twitter_cards.html override (twitter:image), so the two never diverge.
+*/ -}}
+{{- $url := "" -}}
+{{- $alt := "" -}}
+{{- with .Params.hero -}}
+  {{- with .src -}}
+    {{- with $.Resources.GetMatch . -}}
+      {{- $url = .Permalink -}}
+    {{- else -}}
+      {{- $url = . | absURL -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $alt = .alt | default "" -}}
+{{- end -}}
+{{- if not $url -}}
+  {{- with site.Params.avatar -}}
+    {{- $url = . | absURL -}}
+    {{- $alt = "Carrie Kroutil" -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "url" $url "alt" $alt) -}}

@@ -1,0 +1,12 @@
+{{- /*
+  custom/head-end.html — Hextra's <head> extension hook (Story 5.1, FR-18).
+  Adds the Open Graph share image. Hextra's opengraph.html emits og:image only from a
+  `.Params.images` list, but our posts carry a `hero {src, alt}` map instead — so it emits
+  none and these are additive (no duplicate og:image). The image is resolved via
+  custom/social-image.html, the same source the twitter_cards.html override uses.
+*/ -}}
+{{- $img := partial "custom/social-image.html" . -}}
+{{- with $img.url }}
+<meta property="og:image" content="{{ . }}" />
+<meta property="og:image:alt" content="{{ $img.alt }}" />
+{{- end -}}

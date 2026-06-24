@@ -8,6 +8,11 @@ title = "carrie kroutil"
 # withhold mechanism. This is also Hugo's default — set explicitly so the intent is visible.
 buildFuture = false
 
+# Discoverability (Story 5.1, FR-18): emit a crawler-facing robots.txt that allows indexing
+# and points at the sitemap (template in layouts/robots.txt). Hugo generates sitemap.xml by
+# default; the in-page `index, follow` robots meta is handled by Hextra in production builds.
+enableRobotsTXT = true
+
 # Hextra consumed as a Hugo Module, version-locked in go.mod (AD-10) — never vendored/edited in place (AD-5).
 [module]
 [[module.imports]]
@@ -21,6 +26,11 @@ tag = "tags"
 # Avatar photo for the Home hero + About page (custom/avatar.html). Lives in static/,
 # so the path is site-root-relative. Unset → falls back to the on-brand "CK" monogram.
 avatar = "/carrie-avatar.jpg"
+
+# Site-level description (Story 5.1, FR-18): the meta description + OG/Twitter description
+# fallback for pages without their own (notably Home, which has no body summary). Per-post
+# `description` front matter overrides this; the avatar doubles as the default share image.
+description = "Carrie Kroutil's corner of the internet — notes on engineering leadership, building with AI, golf, and dogs."
 
 [params.theme]
 # Dark is the default paint + AA-guaranteed path; functional toggle/persistence is Story 1.4.
