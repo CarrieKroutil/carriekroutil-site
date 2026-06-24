@@ -190,6 +190,74 @@ Use Hugo's built-in shortcode in the markdown body — paste the video ID (the p
 It renders a responsive, lazy player. (Core reading still works without it — video is
 supplementary, in keeping with the no-JS-core principle.)
 
+## Analytics & privacy
+
+The site uses **[GoatCounter](https://www.goatcounter.com/)** for a lightweight readership
+signal — how many people viewed each page, and where they came from. It's a single async
+script include (`count.js`), no SDK and no build step.
+
+### Why there's no cookie-consent banner
+
+GoatCounter is privacy-friendly by design, which is the whole reason the site needs **no
+consent flow**:
+
+- **No cookies** — it doesn't set any, so there's nothing that triggers the EU ePrivacy
+  "cookie law".
+- **No personal data** — no IP storage, no cross-site identifiers, no fingerprinting; visits
+  are counted, visitors are not tracked across sites. With no PII collected, GDPR consent
+  isn't required either.
+- **No third-party ad/tracking network** — the only request is to GoatCounter's own CDN.
+
+So readers get a clean page with no interstitial banner, and the site still stays on the right
+side of privacy law. (This is the NFR-3 constraint: *no consent-requiring cookies, no PII,
+analytics is script-include only*.)
+
+### Collected in production only
+
+Analytics is emitted **only in production builds** — your local authoring loop never inflates
+the stats:
+
+| Command | Hugo environment | Counter emitted? |
+|---|---|---|
+| `hugo server -D` / `hugo server` | `development` (Hugo default) | No |
+| `hugo --gc --minify` (and Amplify's build) | `production` (Hugo default) | Yes |
+
+You don't pass any flag for this — it rides Hugo's built-in environment defaults, so the
+commands in **Run locally** already do the right thing.
+
+### How it works (technical details)
+
+Three small pieces, all in-repo:
+
+1. **`hugo.toml`** holds the endpoint as a param, so the code stays out of the template and is
+   easy to change:
+   ```toml
+   [params]
+   goatcounter = "https://carrie.goatcounter.com/count"
+   ```
+2. **`layouts/_partials/custom/analytics.html`** emits the include, gated **twice**:
+   ```go-html-template
+   {{- if hugo.IsProduction -}}
+   {{- with .Site.Params.goatcounter -}}
+   <script data-goatcounter="{{ . }}" async src="//gc.zgo.at/count.js"></script>
+   {{- end -}}
+   {{- end -}}
+   ```
+   - `hugo.IsProduction` → true only in production builds (the environment-default behavior
+     above), so previews never count.
+   - `with .Site.Params.goatcounter` → emits nothing if the param is unset, so a fork or a
+     misconfigured build silently produces no script rather than a broken tag.
+3. **`layouts/_partials/custom/head-end.html`** — Hextra's `<head>` extension hook — calls the
+   partial, so the include lands on **every page** (posts, home, tags, 404, …).
+
+To verify the gating after a change: `hugo --gc --minify -d /tmp/out` then
+`grep -rl gc.zgo.at /tmp/out` should list every HTML page; the same grep against a
+`hugo server` build (or `--environment development`) should find none.
+
+The live numbers are in the GoatCounter dashboard at `carrie.goatcounter.com`. Counting starts
+only once a change is deployed to production on `main` — the script does nothing in local or
+preview builds.
+
 ## Project layout
 
 ```text
