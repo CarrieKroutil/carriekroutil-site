@@ -1,0 +1,17 @@
+{{- /*
+  ckbutton — a single CTA button (.ck-btn), matching the GitHub/LinkedIn buttons.
+  Wrap one or more in the `ckbuttons` shortcode to get a centered row; used alone
+  it renders inline. Params:
+    href  (required) — link target
+    label (required) — visible text
+    icon  (optional) — "briefcase" or "grid"; omit for none
+  See content/about.md for usage (nested inside ckbuttons).
+*/ -}}
+<a class="ck-btn" href="{{ .Get "href" }}">
+  {{- if eq (.Get "icon") "briefcase" -}}
+  <svg class="ck-btn-icon" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H2.5A1.5 1.5 0 0 0 1 4.5v8A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 13.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zM6 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V3H6v-.5zM2.5 4h11a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5z"/></svg>
+  {{- else if eq (.Get "icon") "grid" -}}
+  <svg class="ck-btn-icon" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.2" fill="currentColor"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1.2" fill="currentColor"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1.2" fill="currentColor"/><rect x="9" y="9" width="5.5" height="5.5" rx="1.2" fill="currentColor"/></svg>
+  {{- end -}}
+  {{ .Get "label" }}
+</a>

@@ -28,6 +28,10 @@
      fuchsia (#a21caf) so accent text passes on white too. Decorative fuchsia uses
      (gradient, ring, hover borders) keep --ck-accent-fuchsia and stay bright. */
   --ck-accent-text: #d946ef;
+  /* Amber used as TEXT on the page surface. #f59e0b clears AA on the dark bg
+     (~9:1); the light theme redefines this to the AA-safe burnt orange (#92400e)
+     so amber accent text passes on white too. */
+  --ck-accent-amber-text: #f59e0b;
 
   --ck-chip-violet-text: #c9b8ff;
   --ck-chip-fuchsia-text: #f3a8ff;
@@ -558,6 +562,18 @@ samp {
 .ck-hero .ck-tags {
   margin: 18px 0 0;
 }
+.ck-hero-extra {
+  margin: 16px 0 0;
+  font-size: 0.95rem;
+}
+.ck-hero-extra a {
+  color: var(--ck-accent-amber-text);    /* on-brand amber/orange — AA in both themes */
+  font-weight: var(--ck-weight-strong);
+  text-decoration: none;
+}
+.ck-hero-extra a:hover {
+  text-decoration: underline;
+}
 
 /* ----- avatar-ring (UX-DR3) — gradient ring around a surface-2 circle, decorative -----
    Shared by Home (default 128px) and About (--lg 150px). Shows site.Params.avatar
@@ -712,6 +728,15 @@ samp {
   letter-spacing: -0.01em;
   margin: 1.6em 0 0.3em;
 }
+/* Centered CTA button row rendered by the ckbuttons shortcode inside prose —
+   matches the .ck-socials row (GitHub/LinkedIn) below it. */
+.ck-cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 22px 0 4px;
+}
 
 /* ----- Social buttons — real <a>s with a visible label + decorative glyph ----- */
 .ck-socials {
@@ -793,6 +818,247 @@ samp {
 }
 
 /* ============================================================================
+   Projects (/projects) — layouts/_default/projects.html
+   ----------------------------------------------------------------------------
+   On-brand "coming soon" empty state: centered reading column, gradient eyebrow,
+   display title, a friendly line, and a path back to the posts (not a dead end).
+   Mirrors the 404 layout's tokens; replace the body with a card grid when real
+   projects land.
+   ========================================================================== */
+.ck-coming {
+  max-width: var(--ck-reading-max);   /* 720px */
+  margin: 0 auto;
+  padding: 72px var(--ck-gutter) 64px;
+  text-align: center;
+}
+.ck-coming-eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: var(--ck-weight-strong);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ck-accent-text);   /* AA in both themes */
+}
+.ck-coming-title {
+  margin: 0 0 14px;
+  font-size: var(--ck-scale-h1);   /* 2.5rem display */
+  line-height: 1.15;
+}
+.ck-coming-text {
+  margin: 0 auto 28px;
+  max-width: 52ch;
+  color: var(--ck-muted);          /* AA floor on dark */
+  font-size: 1.08rem;
+}
+
+/* ============================================================================
+   Experience timeline (/experience) — layouts/_default/experience.html
+   ----------------------------------------------------------------------------
+   Centered reading column matching About. The timeline is a single vertical
+   spine (accent gradient) with a surface card per stint; marker dots sit on the
+   spine. Tokens only, so light theme re-skins for free. A dedicated print block
+   below turns the page into a clean, ink-friendly résumé (chrome stripped, spine
+   and dots hidden, colors flattened to black on white).
+   ========================================================================== */
+.ck-exp {
+  max-width: var(--ck-reading-max);   /* 720px */
+  margin: 0 auto;
+  padding: 48px var(--ck-gutter) 48px;
+}
+.ck-exp-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.ck-exp-title {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+.ck-exp-lead {
+  color: var(--ck-muted);             /* AA floor on dark */
+  font-size: 1.1rem;
+  max-width: 56ch;
+  margin: 0 auto 22px;
+}
+.ck-print-btn {
+  /* native <button> reset so it reads exactly like the .ck-btn anchors */
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ----- The timeline list: a left spine with marker dots ----- */
+.ck-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.ck-tl-item {
+  position: relative;
+  padding-left: 28px;        /* room for the spine + dot */
+  padding-bottom: 22px;
+}
+/* The spine: a thin gradient rule running through every item except the last. */
+.ck-tl-item::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: -6px;
+  width: 2px;
+  background: var(--ck-accent-gradient);
+  opacity: 0.5;
+}
+.ck-tl-item:last-child::before { display: none; }
+.ck-tl-dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--ck-radius-pill);
+  background: var(--ck-accent-fuchsia);
+  box-shadow: 0 0 0 4px var(--ck-bg);   /* punches a clean hole through the spine */
+}
+.ck-tl-card {
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  background: var(--ck-surface);
+  padding: 16px 18px;
+}
+.ck-tl-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ck-tl-company {
+  font-size: 1.2rem;
+  font-weight: var(--ck-weight-strong);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.ck-tl-span {
+  font-size: 0.82rem;
+  font-weight: var(--ck-weight-strong);
+  color: var(--ck-accent-text);   /* AA in both themes */
+  white-space: nowrap;
+}
+.ck-tl-loc {
+  font-size: var(--ck-scale-small);   /* 0.85rem */
+  color: var(--ck-muted);
+  margin: 2px 0 0;
+}
+/* Each role within a stint: a heading row (title + optional dates) + bullet points. */
+.ck-tl-role-block {
+  margin-top: 12px;
+}
+.ck-tl-role-block:first-of-type {
+  margin-top: 10px;
+}
+.ck-tl-role-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ck-tl-role {
+  font-size: 1rem;
+  font-weight: var(--ck-weight-strong);
+  color: var(--ck-fg);
+  margin: 0;
+}
+.ck-tl-rdates {
+  font-size: 0.8rem;
+  color: var(--ck-muted);
+  white-space: nowrap;
+}
+.ck-tl-points {
+  margin: 6px 0 0;
+  padding-left: 1.1em;
+  list-style: disc;
+}
+.ck-tl-points li {
+  font-size: 0.94rem;
+  color: var(--ck-muted);
+  line-height: 1.5;
+  margin: 4px 0;
+}
+.ck-tl-points li::marker {
+  color: var(--ck-accent-fuchsia);
+}
+/* Inline links rendered from highlight/volunteer markdown. */
+.ck-tl-points a,
+.ck-exp-line a {
+  color: var(--ck-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ck-tl-points a:hover,
+.ck-exp-line a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ----- Closing sections (Education, Volunteer) ----- */
+.ck-exp-extra {
+  padding-left: 28px;   /* line up with the timeline cards' text column */
+  margin-top: 8px;
+}
+.ck-exp-h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  margin: 18px 0 8px;
+}
+.ck-exp-line {
+  margin: 4px 0;
+  font-size: 0.96rem;
+  color: var(--ck-muted);
+  line-height: 1.55;
+}
+.ck-exp-strong {
+  color: var(--ck-fg);
+  font-weight: var(--ck-weight-strong);
+}
+
+/* ----- Print-only résumé masthead — hidden on screen, shown on paper ----- */
+.ck-print-id { display: none; }
+
+/* ----- Print: the page becomes the résumé (UX — "Save as PDF" target) -----
+   Strip the site chrome, flatten the timeline to plain text, ink-friendly. */
+@media print {
+  /* Hextra navbar/footer + our print button never belong on paper. */
+  header.hextra-nav-container, .hextra-footer, footer, .ck-print-btn { display: none !important; }
+  .ck-exp { max-width: none; padding: 0; color: #000; }
+
+  /* Résumé masthead: name + title + links lead the printed page. */
+  .ck-print-id { display: block; margin: 0 0 14px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+  .ck-print-name { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin: 0; color: #000; }
+  .ck-print-role { font-size: 1rem; font-weight: 600; margin: 2px 0 0; color: #000; }
+  .ck-print-contact { font-size: 0.85rem; margin: 4px 0 0; color: #000; }
+
+  .ck-exp-head { text-align: left; margin-bottom: 14px; }
+  .ck-exp-title { font-size: 1.2rem; }
+  .ck-exp-lead { color: #000; margin: 0; font-size: 0.95rem; }
+  .ck-tl-item { padding-left: 0; padding-bottom: 12px; break-inside: avoid; }
+  .ck-tl-item::before, .ck-tl-dot { display: none; }   /* no spine/dots on paper */
+  .ck-tl-card {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+  }
+  /* Flatten every colored token to ink. */
+  .ck-tl-company, .ck-tl-role, .ck-tl-rdates, .ck-tl-loc, .ck-tl-span,
+  .ck-exp-title, .ck-exp-h2, .ck-exp-line, .ck-exp-strong,
+  .ck-tl-points li { color: #000 !important; }
+  .ck-tl-points li::marker { color: #000 !important; }
+  .ck-tl-points a, .ck-exp-line a { color: #000 !important; text-decoration: underline; }
+  .ck-exp-extra { padding-left: 0; break-inside: avoid; }
+}
+
+/* ============================================================================
    Light theme — AA-tuned (closes the deferred light-mode WCAG AA work)
    ----------------------------------------------------------------------------
    The dark theme above is the proven AA-guaranteed path and is left UNTOUCHED.
@@ -815,6 +1081,7 @@ html:not(.dark) {
   --ck-meta-min: #57575f;
 
   --ck-accent-text: #a21caf;   /* 6.3:1 on white — AA-safe fuchsia for accent text */
+  --ck-accent-amber-text: #92400e;   /* 9.5:1 on white — AA-safe burnt orange */
 
   /* Chip text darkened for AA on the light surface (5.8–6.5:1); chip borders are
      decorative (non-text) so they become light accent tints. */

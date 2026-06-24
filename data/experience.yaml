@@ -1,0 +1,87 @@
+# Experience timeline data — rendered by layouts/_default/experience.html.
+# Source of truth: "Carrie Kroutil Resume - Engineering Leader 2026.pdf". The on-screen
+# timeline and the print/"Download résumé" output are intentionally identical, so keep
+# this in sync with the résumé you actually send. Newest first. `dates` is free-text
+# display only (no build-time parsing). A stint with one role omits per-role `dates`
+# (the company span covers it); a multi-role stint lists each role, with per-role dates
+# only where the résumé gives them.
+jobs:
+  - company: "Spring Health"
+    location: "Remote"
+    dates: "Sep 2023 – Present"
+    roles:
+      - title: "Senior Software Engineering Manager"
+        highlights:
+          - "Delivered 15 major 0→1 product initiatives across web and mobile while leading a team of up to 12 engineers, achieving high-quality, on-time execution ($15.73M CACV)."
+          - "Built and scaled core product platforms, including content (video player, streaming, Self Care, [Journeys](https://www.springhealth.com/what-we-do/journeys), Courses), [Family Care](https://www.springhealth.com/what-we-do/family-care) (Teen Homepage, Teen Assessment, Teen Check-in, Aging Out), and [SpringWorks](https://www.springhealth.com/what-we-do/springworks-for-employers)."
+          - "Built and scaled a content translation pipeline supporting 500+ videos, developing AWS Lambda services (Python) and integrating AI tools (HeyGen, Azure OpenAI) for multilingual video transformation and captioning across 57 languages."
+          - "Drove team adoption of AI-assisted workflows by building automation using Atlassian MCP to generate project plans in Confluence, create Jira tickets, and open pull requests with code changes."
+          - "Led the Member Portal migration from Aptible to DuploCloud with zero downtime, contributing to architecture, rollout strategy, and execution across services."
+          - "Created an Engineering Manager runbook to standardize onboarding, on-call practices, leadership workflows, and team restructuring."
+          - "Coached a Senior Engineer to launch and lead a new Quality pod, resulting in promotion to Engineering Manager within six months."
+
+  - company: "Kalderos"
+    location: "Remote"
+    dates: "Apr 2022 – Sep 2023"
+    roles:
+      - title: "Software Engineering Manager"
+        highlights:
+          - "Reduced issue cycle time and increased team output by driving process improvements and clarifying execution priorities."
+
+  - company: "GitLab"
+    location: "Remote"
+    dates: "Oct 2022 – Feb 2023"
+    roles:
+      - title: "Fullstack Engineering Manager"
+        highlights:
+          - "Reduced triage backlog by 50%, improving team focus and reducing engineering overhead."
+          - "Coached and developed engineers, including promotion of a Backend Engineer to Staff level."
+          - "Introduced async retrospective practices to improve participation and effectiveness across distributed teams."
+
+  - company: "Degreed"
+    location: "Remote"
+    dates: "Nov 2019 – Oct 2022"
+    roles:
+      - title: "Engineering Director"
+        highlights:
+          - "Reduced outstanding RCA follow-up work by 90%, improving system reliability and preventing recurring production issues."
+          - "Led two Engineering Managers and 26 engineers across five teams (APIs, UI, integrations, and platform services), driving technical direction, system design, and execution."
+      - title: "Engineering Manager"
+        highlights:
+          - "Improved code quality and delivery speed by leading a cross-team initiative to increase backend test coverage."
+          - "Drove prioritization and execution of tech debt reduction efforts, improving system stability and developer velocity."
+          - "Coached and developed engineers, resulting in promotion of one Tech Lead and two Engineering Managers."
+          - "Stepped in to lead additional teams during transition periods, supporting up to 18 engineers across multiple domains."
+      - title: "Technical Lead / Database Developer"
+        highlights:
+          - "Designed system and data diagrams adopted across the engineering organization to improve shared understanding and development efficiency."
+          - "Led migration of a legacy ETL process to Azure Data Factory, enabling scheduled, reliable data pipelines to support global content access."
+          - "Utilized Elasticsearch queries for performant search and wrote SQL to support object hydration and business logic."
+
+  - company: "CampMinder"
+    location: "Boulder, CO (Remote)"
+    dates: "Mar 2015 – Nov 2019"
+    roles:
+      - title: "Senior Software Engineer"
+        highlights:
+          - "Designed and built Go microservices with REST APIs via NGINX gateway and gRPC inter-service communication, deploying via Docker, Kubernetes, and Terraform in Azure Kubernetes Service."
+          - "Implemented facial recognition via Java Swing to tag and train photos through Azure's Face API."
+          - "Reengineered a C# / SQL service to use AWS SQS to manage scalability and increase speed."
+          - "Converted a single-point-of-failure email server to send through SendGrid."
+
+  - company: "Jack Henry & Associates"
+    location: "Lenexa, KS (Remote)"
+    dates: "Aug 2010 – Nov 2014"
+    roles:
+      - title: "Senior Software Engineer"
+        highlights:
+          - "Architected and wrote a 3rd-party handshake from a bank app to a check-ordering platform using SAML."
+          - "Maintained web services in WCF / C# using a Dapper ORM to SQL for the mobile banking app."
+
+# ----- Closing sections (shown on the page and in the printed résumé) -----
+education:
+  - school: "Missouri State University"
+    credential: "BS, Computer Information Systems"
+
+volunteer:
+  - "Provided technical specification development for a nonprofit (Catchafire), delivering $7.8K in estimated impact — see github.com/CarrieKroutil/KareoTool."
