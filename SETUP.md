@@ -92,10 +92,10 @@ native behavior plus one notification toggle covers this:
   to configure.)*
 - **Email on failure** — enable once in the console *(manual, one-time — only Carrie can do
   this in the AWS account)*:
-  1. AWS Console → **Amplify** → this app → **App settings** → **Notifications**.
-  2. **Add notification** → enter Carrie's email → save. Amplify creates the SNS topic and
-     sends a confirmation email — **click the confirm link** or notifications won't send.
-  3. Keep the **failure** notification on (start/success can be left off).
+  1. AWS Console → **Amplify** → this app → **Hosting** → **Build notifications**.
+  2. **Add** → type in the email address → select the **`main`** branch → **Save**.
+  3. A confirmation email is sent — **click the link in that email** to start receiving
+     notifications (otherwise none will send).
 - **Distinguishing outcomes.** A failed build shows **red** in the Amplify console *and* sends
   the failure email; a successful build shows **green** and (with success notifications off)
   sends nothing. So "failed" is always distinguishable from "succeeded" — including the case
@@ -107,9 +107,9 @@ native behavior plus one notification toggle covers this:
 - **In scope (Story 1.5):** the single Amplify pipeline, build spec, correct brand, custom domain.
 - **Story 1.6 — Publish by push:** the push-to-publish path, documented above. Proven live —
   every post under `content/posts/` reached carriekroutil.com via `write markdown → git push`.
-- **Story 1.7 — Build-failure alerts:** documented above. Failed builds keep the prior good
-  site live (native); enabling email-on-failure is the one manual console toggle still on
-  Carrie — follow the Notifications steps above.
+- **Story 1.7 — Build-failure alerts:** documented above and **enabled** — failed builds keep
+  the prior good site live (native), and email-on-failure is configured via **Hosting → Build
+  notifications** (email confirmed). Re-run the steps above only if the address changes.
 
 ## Upgrading Hugo / Go later (deliberate, never automatic)
 
