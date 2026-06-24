@@ -4,14 +4,26 @@
   present, else the site avatar as an on-brand default so every shared link unfurls with an
   image. This is the single source of truth, shared by custom/head-end.html (og:image) and
   the twitter_cards.html override (twitter:image), so the two never diverge.
+
+  SVG heroes: social scrapers (Slack/LinkedIn/X/…) reject SVG og:images, so when the hero
+  is an `.svg` we prefer a raster sibling (`hero.png`, then `hero.jpg`) in the same bundle
+  for the SHARE image only — the on-page hero (rendered in layouts/posts/single.html) still
+  uses the crisp SVG. No raster sibling → leave $url empty so the avatar fallback below fires.
+  Regenerate the PNG after editing an SVG hero: `rsvg-convert -w 1200 -h 600 hero.svg -o hero.png`
+  (see svg-demystified.md).
 */ -}}
 {{- $url := "" -}}
 {{- $alt := "" -}}
 {{- with .Params.hero -}}
   {{- with .src -}}
-    {{- with $.Resources.GetMatch . -}}
-      {{- $url = .Permalink -}}
-    {{- else -}}
+    {{- $img := $.Resources.GetMatch . -}}
+    {{- if and $img (eq (path.Ext .) ".svg") -}}
+      {{- $base := strings.TrimSuffix ".svg" . -}}
+      {{- $img = or ($.Resources.GetMatch (print $base ".png")) ($.Resources.GetMatch (print $base ".jpg")) -}}
+    {{- end -}}
+    {{- if $img -}}
+      {{- $url = $img.Permalink -}}
+    {{- else if ne (path.Ext .) ".svg" -}}
       {{- $url = . | absURL -}}
     {{- end -}}
   {{- end -}}

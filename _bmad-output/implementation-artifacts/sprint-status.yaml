@@ -121,4 +121,4 @@ action_items:
   - epic: 5
     action: "Consider a raster (PNG) social-image fallback since SVG hero images don't preview on some older social scrapers"
     owner: "Carrie"
-    status: open
+    status: done   # 2026-06-24 PR #15: social-image.html swaps an SVG hero for a raster sibling (hero.png/.jpg) in og:image/twitter:image; SVG stays on-page; hero.png generated for all 4 posts
