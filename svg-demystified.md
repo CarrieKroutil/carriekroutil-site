@@ -249,7 +249,15 @@ Use this as a checklist, or paste section 5 + 5.1 to an AI as a prompt.
      src: hero.svg
      alt: A short, literal description of the image for screen readers.
    ```
-9. **Preview:** run `hugo server` and open the post.
+9. **Generate a `hero.png` sibling for social sharing** (see §6). The site keeps
+   showing the crisp `hero.svg` on the page but automatically uses `hero.png` for
+   link previews. From the post folder:
+   ```bash
+   rsvg-convert -w 1200 -h 600 hero.svg -o hero.png
+   ```
+   Commit **both** files. (Skip this only if you don't care about the share-card
+   image — without a PNG sibling, shared links fall back to the site avatar.)
+10. **Preview:** run `hugo server` and open the post.
 
 ### 5.1 Copy-paste starter template
 
@@ -289,13 +297,32 @@ Use this as a checklist, or paste section 5 + 5.1 to an AI as a prompt.
 
 ---
 
-## 6. Convert an SVG to PNG (so it works as a share image)
+## 6. The PNG sibling (how sharing works on this site)
 
-Because scrapers don't render SVG (section 1), you may want a raster version.
-This repo has `rsvg-convert` available (install with `brew install librsvg` if a
-new machine doesn't).
+Because scrapers don't render SVG (§1), an SVG hero needs a raster companion for
+link previews. **This site handles that automatically** — you keep the crisp SVG
+on the page *and* get a working share image, with no front-matter juggling.
 
-**The command** — run it from the post's bundle folder:
+### How it's wired
+
+`layouts/_partials/custom/social-image.html` resolves the share image (`og:image` /
+`twitter:image`) like this:
+
+1. Look at the post's `hero.src`.
+2. **If it's an `.svg`**, look for a raster sibling in the same bundle —
+   `hero.png` first, then `hero.jpg` — and use *that* for the share meta.
+3. If no raster sibling exists, leave it empty → the site falls back to the
+   **avatar** (`carrie-avatar.jpg`) as a generic share image.
+
+Meanwhile `layouts/posts/single.html` renders the on-page `<img>` straight from
+`hero.src` (the SVG), untouched. So the two jobs are decoupled: **vector on the
+page, raster in the share card.** You never change `hero.src` — leave it as
+`hero.svg`.
+
+### What you do: generate the PNG
+
+This repo has `rsvg-convert` available (install with `brew install librsvg` on a
+new machine). From the post's bundle folder:
 
 ```bash
 rsvg-convert -w 1200 -h 600 hero.svg -o hero.png
@@ -304,29 +331,24 @@ rsvg-convert -w 1200 -h 600 hero.svg -o hero.png
 - `-w 1200 -h 600` matches the SVG's native size → no stretching. (1200×600 works
   for both `og:image` and Twitter `summary_large_image`; the "textbook" share size
   is 1200×630, also fine.)
-- Output `hero.png` lands next to `hero.svg` in the same folder.
+- `hero.png` lands next to `hero.svg`. **Commit both.**
 
-**Then wire which file the post uses** — point the front matter at the raster:
+> **Maintenance:** the PNG is a *snapshot* of the SVG, so whenever you edit a
+> `hero.svg`, **re-run the command** to refresh its `hero.png` — otherwise the
+> share card shows the old art. (No PNG yet = share card shows the avatar, never
+> broken.)
 
-```yaml
-hero:
-  src: hero.png      # was hero.svg
-  alt: ...
-```
+**No `rsvg-convert`?** Any of these also produce the PNG: open the SVG in a browser
+and screenshot, use a design tool (Figma/Illustrator → export PNG at 1200×600), or
+a reputable online SVG→PNG converter. Just drop the result in as `hero.png`.
 
-With `src: hero.png`, **both** the on-page hero **and** the social-share `og:image`
-become the PNG (a raster every scraper can read). That's the whole fix — no
-template changes needed, because the site resolves whatever `hero.src` points to.
+### The all-raster alternative (future-you, maybe)
 
-> **Trade-off:** the on-page hero is now a raster (still sharp at the size it's
-> shown, ~720px wide). You lose SVG's infinite-zoom crispness on the page but gain
-> working share previews. If you ever want SVG *on the page* but PNG *only* for
-> sharing, that needs a small template tweak in `layouts/_partials/custom/social-image.html`
-> — ask, it's about 6 lines.
-
-**No `rsvg-convert`?** Any of these also work: open the SVG in a browser and
-screenshot, use a design tool (Figma/Illustrator → export PNG at 1200×600), or a
-reputable online SVG→PNG converter.
+If you ever switch a post to a **real photo**, there's no SVG and no sibling to
+maintain — just set `hero.src: hero.jpg` (or `.png`). One raster file then does
+both jobs (on-page *and* sharing), and the SVG machinery above simply doesn't apply
+to that post. You can mix freely: some posts SVG-art + PNG sibling, others a single
+photo.
 
 ---
 
@@ -335,7 +357,9 @@ reputable online SVG→PNG converter.
 | I want to… | Do this |
 |---|---|
 | Understand a hero | Open `content/posts/<slug>/hero.svg` — it's readable text. |
-| Make a new hero | Copy the template in §5.1, swap the subject shapes, save as `hero.svg` in the post bundle, add `hero: {src, alt}` to front matter. |
+| Make a new hero | Copy the template in §5.1, swap the subject shapes, save as `hero.svg` in the post bundle, add `hero: {src, alt}` to front matter, then generate its `hero.png` sibling (§6). |
 | Keep brand consistency | Never change the `accent` gradient or the 1200×600 canvas; keep accents low-opacity. |
-| Make a post link unfurl with an image | Convert to PNG (§6) and set `hero.src: hero.png`. |
+| Make a post link unfurl with an image | Generate a `hero.png` sibling next to `hero.svg` (§6) — the site auto-uses it for sharing. Leave `hero.src` as the SVG. |
+| After editing an SVG hero | Re-run `rsvg-convert -w 1200 -h 600 hero.svg -o hero.png` to refresh the share image. |
+| Use a real photo instead | Set `hero.src: hero.jpg` — one raster file does on-page + sharing, no sibling needed. |
 | Keep SVG for logos/icons/wordmark | Leave them — SVG is the right tool there. |

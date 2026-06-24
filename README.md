@@ -100,13 +100,18 @@ with no `hero` falls back to an on-brand gradient thumb. Two ways to set one:
    are hand-written SVGs on a `1200×600` canvas using the brand palette
    (violet `#8b5cf6` → fuchsia `#d946ef` → amber `#f59e0b`, defined as `--ck-accent-*` in
    `assets/css/custom.css`). Copy an existing `hero.svg`, tweak the gradient stops and shapes,
-   and save it into the new post's folder.
+   and save it into the new post's folder. **For SVG heroes, also generate a `hero.png`
+   sibling for social sharing** (`rsvg-convert -w 1200 -h 600 hero.svg -o hero.png`) — the
+   site keeps the crisp SVG on the page but auto-uses the PNG in link previews. A full
+   explainer + authoring recipe lives in [svg-demystified.md](svg-demystified.md).
 3. **A web URL** — `hero.src` can also be a full external image URL (e.g. from Unsplash); it's
    used as-is on both the post page and the card. See **"Using a web image"** below for the
    one gotcha (the page URL is not the image URL).
 
-`alt` is **required** on any hero — an empty alt fails the build. (Note: some link-preview
-scrapers don't render SVG share images, so prefer a photo hero for posts you'll share widely.)
+`alt` is **required** on any hero — an empty alt fails the build. (Note: link-preview scrapers
+don't render SVG share images, so for an SVG hero the site automatically substitutes a `hero.png`
+sibling in the share meta — generate one as shown above; without it, shared links fall back to
+the site avatar.)
 
 ### Additional (inline) images
 
