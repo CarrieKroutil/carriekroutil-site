@@ -75,7 +75,8 @@ code change. The moment a post uses a new tag, the site wires it up automaticall
 - a topic page is generated at **`/tags/{topic}/`**, listing every post under it, newest first;
 - the topic appears as a clickable **chip** on the post, on every post card, and in the
   **Home hero + About** lists (ordered most-written-first);
-- it's added to the **search index**, the **sitemap**, and the `/tags/` index.
+- the topic page is included in the **sitemap** and the `/tags/` index, and its posts stay
+  findable in search (search indexes post content, so a topic surfaces through its posts).
 
 To retire a topic, just remove it from the post(s) — its page and chips disappear on the next
 build. (Chips only show for topics that have at least one published post.)
@@ -92,8 +93,9 @@ with no `hero` falls back to an on-brand gradient thumb. Two ways to set one:
      src: dogs.jpg          # the file content/posts/<this-post>/dogs.jpg
      alt: "My three dogs on the trail"
    ```
-   There's no automatic resizing yet, so export photos **~1200px wide and compressed** to
-   keep pages fast (lazy-loading is applied for you).
+   There's no automatic resizing yet, so export photos **~1600px wide and compressed** to
+   keep pages fast (see *"Sizing & compressing a local image"* below; lazy-loading is applied
+   for you).
 2. **A gradient SVG** — the abstract banners (e.g. `content/posts/hello-corner-of-the-internet/hero.svg`)
    are hand-written SVGs on a `1200×600` canvas using the brand palette
    (violet `#8b5cf6` → fuchsia `#d946ef` → amber `#f59e0b`, defined as `--ck-accent-*` in
