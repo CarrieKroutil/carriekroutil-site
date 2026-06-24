@@ -124,7 +124,7 @@ samp {
 .ck-wordmark {
   font-weight: var(--ck-weight-display);   /* 800 */
   letter-spacing: -0.02em;
-  font-size: 1.12rem;
+  font-size: 1.4rem;
   /* Solid fallback first: rendered wherever background-clip:text is unsupported. */
   color: var(--ck-accent-fuchsia);
   background: var(--ck-accent-gradient);
