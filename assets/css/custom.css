@@ -451,6 +451,24 @@ samp {
 }
 
 /* ============================================================================
+   Story 4.1 — tag term pages at /tags/{topic}/
+   (FR-8 · AD-8 · UX-DR12 empty state) — reuses the .ck-stream/.ck-grid shell
+   above; only the topic eyebrow and the empty state are term-specific.
+   ========================================================================== */
+.ck-term-eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ck-muted);
+}
+.ck-empty {
+  color: var(--ck-muted);
+  padding: 24px 0;
+  font-size: 1.05rem;
+}
+
+/* ============================================================================
    Story 3.1 — Home hero
    (FR-1 · UX-DR3 avatar-ring · UX-DR10 layout · UX-DR13 voice)
    Centered 920px content column; hero is avatar + greeting/one-liner/chips,
