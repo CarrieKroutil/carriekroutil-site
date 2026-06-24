@@ -4,6 +4,9 @@ date: 2026-06-22T08:30:00-07:00
 tags: [dogs]
 draft: false
 description: "Some days the to-do list wins. The dogs don't care. They just want the walk — and honestly, so do I."
+hero:
+  src: hero.svg
+  alt: "Abstract gradient banner with three overlapping glowing orbs in violet, fuchsia, and amber"
 ---
 
 There's a moment every morning, somewhere between the first coffee and the first meeting,

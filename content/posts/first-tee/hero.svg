@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#2a1d4a"/>
+      <stop offset="0.5" stop-color="#3a2640"/>
+      <stop offset="1"   stop-color="#3d3312"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#8b5cf6"/>
+      <stop offset="0.5" stop-color="#d946ef"/>
+      <stop offset="1"   stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#g)"/>
+  <!-- rolling fairway -->
+  <path d="M0 470 Q 400 400 720 450 T 1200 430 L1200 600 L0 600 Z" fill="#8b5cf6" opacity="0.10"/>
+  <path d="M0 505 Q 500 455 900 495 T 1200 485 L1200 600 L0 600 Z" fill="#f59e0b" opacity="0.10"/>
+  <!-- horizon -->
+  <rect x="0" y="300" width="1200" height="14" fill="url(#accent)" opacity="0.8"/>
+  <!-- the flag on the green -->
+  <rect x="300" y="250" width="4" height="205" rx="2" fill="#ededed" opacity="0.55"/>
+  <path d="M304 256 L372 275 L304 294 Z" fill="#d946ef" opacity="0.9"/>
+  <!-- low sun + soft accent -->
+  <circle cx="950" cy="185" r="80"  fill="#f59e0b" opacity="0.18"/>
+  <circle cx="180" cy="430" r="100" fill="#8b5cf6" opacity="0.12"/>
+</svg>
