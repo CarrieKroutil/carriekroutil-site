@@ -133,9 +133,14 @@ the image URL, open the photo, **right-click it → "Copy image address"** (it w
 `https://images.unsplash.com/photo-…`). Paste that into `hero.src` or the markdown `![alt](…)`.
 Unsplash photos are free to use; crediting the photographer is a nice touch.
 
-Trade-off: a **repo file is more durable** (a web image can move, change, or disappear, and it
-adds a third-party request to your page). For posts that matter, download the image into the
-post's folder and reference it by filename instead.
+Trade-off — durability **and** performance: a repo file is more durable (a web image can move,
+change, or disappear) and usually a touch faster — it's served from the site's own CDN with no
+extra connection to a third-party host, and you control the exact compressed size. A web image
+adds a cross-origin request, and a **bare** Unsplash URL can pull a multi-megabyte original;
+append sizing params like `?w=1200&q=80&auto=format` to get an optimized WebP/AVIF instead.
+Either way, size is the real lever — there's no automatic resizing yet, so compress before you
+ship. For posts that matter, download the image into the post's folder and reference it by
+filename.
 
 ### Embedding a YouTube video
 
