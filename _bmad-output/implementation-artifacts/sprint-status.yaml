@@ -105,19 +105,19 @@ action_items:
   - epic: 1
     action: "Light-mode WCAG AA: tune the fuchsia accent (or keep brand scoped to .dark) if/when light mode becomes a real path"
     owner: "Carrie"
-    status: open
+    status: done   # 2026-06-24 PR #14: full AA-tuned light theme via html:not(.dark) token block; browser-verified
   - epic: 1
     action: "When tuning light mode, resolve the double focus-ring on Hextra controls and the phantom border-color transition on .hextra-nav-container-blur"
     owner: "Carrie"
-    status: open
+    status: done   # 2026-06-24 PR #14: ring-shadow neutralizer + explicit light header border
   - epic: 2
     action: "Retheme the Chroma monokai code-block background (#272822) to the brand palette in a future polish pass"
     owner: "Carrie"
-    status: open
+    status: done   # 2026-06-24 PR #14: markup.highlight noClasses=false → Hextra theme-aware chroma stylesheet
   - epic: 3
     action: "Optional: drop a real avatar photo at static/ and set params.avatar to replace the monogram fallback"
     owner: "Carrie"
-    status: open
+    status: done   # already shipped: static/carrie-avatar.jpg wired via params.avatar in hugo.toml
   - epic: 5
     action: "Consider a raster (PNG) social-image fallback since SVG hero images don't preview on some older social scrapers"
     owner: "Carrie"

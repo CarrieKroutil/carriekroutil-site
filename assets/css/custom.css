@@ -23,6 +23,11 @@
 
   --ck-link: #d946ef;
   --ck-focus: #d946ef;
+  /* Accent fuchsia used specifically as TEXT on the page surface. #d946ef clears
+     AA on the dark bg (5.7:1); the light theme redefines this to an AA-safe darker
+     fuchsia (#a21caf) so accent text passes on white too. Decorative fuchsia uses
+     (gradient, ring, hover borders) keep --ck-accent-fuchsia and stay bright. */
+  --ck-accent-text: #d946ef;
 
   --ck-chip-violet-text: #c9b8ff;
   --ck-chip-fuchsia-text: #f3a8ff;
@@ -222,6 +227,15 @@ samp {
 .hextra-search-input:focus {
   outline: var(--ck-focus-ring);
   outline-offset: 2px;
+}
+
+/* Collapse to a SINGLE focus ring on Hextra-managed controls (search input,
+   hamburger). Those carry `hextra-focus-visible*` classes whose Tailwind `ring`
+   (a box-shadow) would render *in addition to* the brand outline above — a doubled
+   ring. Zero out Hextra's ring shadow so only the brand 2px fuchsia outline shows.
+   (Closes the Story 1.3 "double focus ring" deferral.) */
+[class*="hextra-focus-visible"]:focus-visible {
+  --tw-ring-shadow: 0 0 #0000;
 }
 
 /* ============================================================================
@@ -586,7 +600,7 @@ samp {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--ck-accent-fuchsia);   /* 5.7:1 on --ck-bg — clears AA */
+  color: var(--ck-accent-text);   /* AA in both themes (5.7:1 dark · #a21caf light) */
 }
 /* Accent the featured card's edge so it reads as pinned, not just another grid card. */
 .ck-featured .ck-card {
@@ -725,7 +739,7 @@ samp {
   font-weight: var(--ck-weight-strong);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ck-accent-fuchsia);
+  color: var(--ck-accent-text);   /* AA in both themes */
 }
 .ck-404-title {
   margin: 0 0 14px;
@@ -736,4 +750,82 @@ samp {
   margin: 0 0 28px;
   color: var(--ck-muted);                   /* AA floor on dark */
   font-size: 1.08rem;
+}
+
+/* ============================================================================
+   Light theme — AA-tuned (closes the deferred light-mode WCAG AA work)
+   ----------------------------------------------------------------------------
+   The dark theme above is the proven AA-guaranteed path and is left UNTOUCHED.
+   Light mode is the absence of Hextra's `.dark` class on <html>, so everything
+   here is scoped to `html:not(.dark)` (specificity 0,1,1 — beats the :root token
+   block at 0,1,0, and never matches in dark mode). Because every component reads
+   its colors through var(--ck-*), redefining the token VALUES re-skins the whole
+   site for light with no per-component changes. Surface-application rules that
+   were `.dark`-scoped (body, header, footer, nav) get light counterparts below.
+   Every text pair verified >= 4.5:1; focus/border (UI) >= 3:1.
+   ========================================================================== */
+html:not(.dark) {
+  --ck-bg: #ffffff;
+  --ck-surface: #f4f4f6;
+  --ck-surface-2: #e9e9ee;
+  --ck-border: #dcdce3;
+  --ck-border-bright: #c4c4cd;
+  --ck-fg: #18181b;            /* 17.7:1 on bg · 16.1:1 on surface */
+  --ck-muted: #57575f;         /* 7.2:1 on bg · 6.5:1 on surface — light AA floor */
+  --ck-meta-min: #57575f;
+
+  --ck-accent-text: #a21caf;   /* 6.3:1 on white — AA-safe fuchsia for accent text */
+
+  /* Chip text darkened for AA on the light surface (5.8–6.5:1); chip borders are
+     decorative (non-text) so they become light accent tints. */
+  --ck-chip-violet-text: #6d28d9;
+  --ck-chip-fuchsia-text: #a21caf;
+  --ck-chip-amber-text: #92400e;
+  --ck-chip-violet-border: #c4b5fd;
+  --ck-chip-fuchsia-border: #f0abfc;
+  --ck-chip-amber-border: #fcd34d;
+
+  /* Darken Hextra's derived primary scale for light: content links use
+     --hx-color-primary-600 = hsl(h s · lightness*0.9). At 44% that resolves to
+     #a410ba (~6.3:1 on white) — AA. Hue/saturation inherit from :root (fuchsia).
+     Brand garnish (gradient, avatar ring, --ck-accent-*) is hardcoded hex and
+     unaffected by this. */
+  --primary-lightness: 44%;
+}
+
+/* Brand owns the light page surface + text (parallels the `.dark body` rules). */
+html:not(.dark),
+html:not(.dark) body { background-color: var(--ck-bg); }
+html:not(.dark) body { color: var(--ck-fg); }
+
+/* Frosted header — light translucent backdrop + brand border. Giving the light
+   header a real border also resolves the deferred "phantom border" easing: the
+   border-color transition now runs between two real values, never from unset. */
+html:not(.dark) .hextra-nav-container-blur {
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ck-border);
+  box-shadow: none;
+}
+
+/* Header nav links/controls: muted, brighten to fg on hover (parallels `.dark`). */
+html:not(.dark) .hextra-nav-container nav a:not(.ck-wordmark-link),
+html:not(.dark) .hextra-nav-container nav button:not([data-item]) {
+  color: var(--ck-muted);
+  font-weight: var(--ck-weight-strong);
+}
+html:not(.dark) .hextra-nav-container nav a:not(.ck-wordmark-link):hover {
+  color: var(--ck-fg);
+}
+
+/* Footer surface + muted line (parallels the `.dark` footer rules, same insets). */
+html:not(.dark) .hextra-footer {
+  background: var(--ck-bg);
+  padding-top: 40px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+html:not(.dark) .hextra-custom-footer .ck-footer-line,
+html:not(.dark) .hextra-custom-footer .ck-footer-line a {
+  color: var(--ck-muted);
 }
