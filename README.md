@@ -85,28 +85,57 @@ build. (Chips only show for topics that have at least one published post.)
 The hero is the banner at the top of the post (and the card thumbnail). It's opt-in: a post
 with no `hero` falls back to an on-brand gradient thumb. Two ways to set one:
 
-1. **A photo** — drop a `.jpg`/`.png`/`.webp` in the post folder and point `hero.src` at it.
-   There's no automatic resizing yet, so export it **~1200px wide and compressed** to keep
-   pages fast (lazy-loading is applied for you).
+1. **A file in the repo** — drop a `.jpg`/`.png`/`.webp`/`.svg` into the post's folder
+   (beside `index.md`) and point `hero.src` at it **by filename**:
+   ```yaml
+   hero:
+     src: dogs.jpg          # the file content/posts/<this-post>/dogs.jpg
+     alt: "My three dogs on the trail"
+   ```
+   There's no automatic resizing yet, so export photos **~1200px wide and compressed** to
+   keep pages fast (lazy-loading is applied for you).
 2. **A gradient SVG** — the abstract banners (e.g. `content/posts/hello-corner-of-the-internet/hero.svg`)
    are hand-written SVGs on a `1200×600` canvas using the brand palette
    (violet `#8b5cf6` → fuchsia `#d946ef` → amber `#f59e0b`, defined as `--ck-accent-*` in
    `assets/css/custom.css`). Copy an existing `hero.svg`, tweak the gradient stops and shapes,
    and save it into the new post's folder.
+3. **A web URL** — `hero.src` can also be a full external image URL (e.g. from Unsplash); it's
+   used as-is on both the post page and the card. See **"Using a web image"** below for the
+   one gotcha (the page URL is not the image URL).
 
 `alt` is **required** on any hero — an empty alt fails the build. (Note: some link-preview
 scrapers don't render SVG share images, so prefer a photo hero for posts you'll share widely.)
 
 ### Additional (inline) images
 
-Use standard markdown, with the file sitting in the post folder:
+Use standard markdown. The source can be a **file in the post's folder** (referenced by
+filename)…
 
 ```markdown
-![Two dogs mid-zoomies on the trail](trail-photo.jpg)
+![Three dogs mid-zoomies on the trail](trail-photo.jpg)
+```
+
+…or a **full web URL**:
+
+```markdown
+![A sleepy golden retriever](https://images.unsplash.com/photo-XXXXXXXXXXXX)
 ```
 
 Every inline image **must** have alt text — an empty `![](…)` fails the build (accessibility).
-Images lazy-load automatically; the same ~1200px-and-compressed guidance applies.
+Images lazy-load automatically; the same ~1200px-and-compressed guidance applies to files you
+add to the repo.
+
+### Using a web image (e.g. Unsplash)
+
+For a hero or an inline image, an external URL must be the **direct image URL**, not the
+gallery/page URL. On Unsplash, `https://unsplash.com/photos/9-iXBal9Ww0` is the *page* — to get
+the image URL, open the photo, **right-click it → "Copy image address"** (it will look like
+`https://images.unsplash.com/photo-…`). Paste that into `hero.src` or the markdown `![alt](…)`.
+Unsplash photos are free to use; crediting the photographer is a nice touch.
+
+Trade-off: a **repo file is more durable** (a web image can move, change, or disappear, and it
+adds a third-party request to your page). For posts that matter, download the image into the
+post's folder and reference it by filename instead.
 
 ### Embedding a YouTube video
 
