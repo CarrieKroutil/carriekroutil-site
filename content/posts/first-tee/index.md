@@ -4,6 +4,9 @@ date: 2026-06-20T16:30:00-07:00
 tags: [golf]
 draft: false
 description: "If you're looking for swing tips or my latest score, you'll be disappointed. This is golf as a reason to slow down, be present, and enjoy the walk."
+hero:
+  src: hero.svg
+  alt: "Abstract violet-to-amber gradient banner with a pennant flag on a rolling fairway and a low amber sun"
 ---
 
 If you're looking for swing tips, equipment reviews, or a breakdown of my latest score, you might be disappointed.

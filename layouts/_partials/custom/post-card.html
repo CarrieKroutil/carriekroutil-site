@@ -6,24 +6,31 @@
   Accessible overlay pattern (UX-DR5 single click target + Story 2.4 AC2 clickable tag):
     - The card root is an <article>; the title link's ::after (see .ck-card-link in CSS)
       overlays the whole card, so the ENTIRE surface navigates to the post.
-    - The tag is a REAL <a> to its term page (via custom/post-tags.html), raised above the
-      overlay (z-index) so it stays independently clickable — /tags/{topic}/.
-  Two real anchors (card→post primary, tag→term secondary), both keyboard-focusable.
+    - Every tag is a REAL <a> to its term page (via custom/post-tags.html), raised above
+      the overlay (z-index) so each stays independently clickable — /tags/{topic}/.
+  Real anchors throughout (card→post primary, each tag→term secondary), all keyboard-focusable.
+  All of the post's tags show, matching the UX home mock (e.g. a card reads "code · AI").
 
   Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback.
+  The hero src may be a local bundle file (resolved to its RelPermalink) or an external
+  URL (used as-is) — mirroring how single.html renders the hero, so cards match the post.
   Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
 */ -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $img := false -}}
-{{- with .Params.hero -}}{{- $img = $.Resources.GetMatch .src -}}{{- end -}}
+{{- $thumb := "" -}}
+{{- with .Params.hero -}}
+  {{- $r := $.Resources.GetMatch .src -}}
+  {{- if $r -}}{{- $thumb = $r.RelPermalink -}}
+  {{- else if hasPrefix .src "http" -}}{{- $thumb = .src -}}{{- end -}}
+{{- end -}}
 <article class="ck-card">
-  {{- if $img -}}
-    <div class="ck-card-thumb"><img src="{{ $img.RelPermalink }}" alt="" loading="lazy"></div>
+  {{- if $thumb -}}
+    <div class="ck-card-thumb"><img src="{{ $thumb }}" alt="" loading="lazy"></div>
   {{- else -}}
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}
   <div class="ck-card-body">
-    {{ partial "custom/post-tags.html" (dict "page" . "limit" 1) }}
+    {{ partial "custom/post-tags.html" . }}
     <h3 class="ck-card-title"><a class="ck-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     {{- $excerpt := or .Description (.Summary | plainify) -}}
     {{- with $excerpt -}}<p class="ck-card-excerpt">{{ . }}</p>{{- end -}}

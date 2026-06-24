@@ -1,0 +1,10 @@
+{{- /*
+  robots.txt — crawler-facing indexing policy (Story 5.1, FR-18). Rendered because
+  `enableRobotsTXT = true` in hugo.toml. Allows full indexing and points crawlers at the
+  sitemap via the absolute production URL (derived from baseURL, so it's correct in prod
+  without hard-coding the domain here).
+*/ -}}
+User-agent: *
+Allow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}

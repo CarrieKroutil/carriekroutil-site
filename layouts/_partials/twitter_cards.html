@@ -1,0 +1,25 @@
+{{- /*
+  twitter_cards.html — project override of Hugo's internal Twitter-card partial (Story 5.1,
+  FR-18). Hugo's built-in reads `.Params.images` for the card image; our posts carry a
+  `hero {src, alt}` map, so the default emits only a small `summary` card with no image.
+  This version resolves the image via custom/social-image.html (shared with the og:image
+  hook) and upgrades to `summary_large_image` whenever a share image exists, with alt text.
+  Title/description reuse utils/page-description.html so they mirror the page's own meta.
+*/ -}}
+{{- $img := partial "custom/social-image.html" . -}}
+{{- $desc := partial "utils/page-description.html" . -}}
+{{ if $img.url -}}
+<meta name="twitter:card" content="summary_large_image" />
+{{ else -}}
+<meta name="twitter:card" content="summary" />
+{{ end -}}
+{{- with .Title }}
+<meta name="twitter:title" content="{{ . }}" />
+{{- end }}
+{{- with $desc }}
+<meta name="twitter:description" content="{{ . }}" />
+{{- end }}
+{{- with $img.url }}
+<meta name="twitter:image" content="{{ . }}" />
+<meta name="twitter:image:alt" content="{{ $img.alt }}" />
+{{- end -}}

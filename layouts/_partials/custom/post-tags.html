@@ -1,7 +1,8 @@
 {{- /*
   custom/post-tags.html — THE clickable topic-chip renderer. Reused by the single post
-  (Story 2.2, all tags), the post-card (Story 2.3, primary tag via limit), and the term
-  page (Epic 4). Do not duplicate chip markup elsewhere.
+  (Story 2.2), the post-card (Story 2.3 — all of the post's tags), and the term page
+  (Epic 4). Do not duplicate chip markup elsewhere. The optional `limit` (below) is kept
+  for callers that want a capped set; the card passes the bare Page, so it shows all tags.
 
   Each chip links the real taxonomy term page (/tags/{topic}/) via .GetTerms, so links stay
   correct once Epic 4 styles the term page. Labels are lowercase as authored; CSS uppercases.
