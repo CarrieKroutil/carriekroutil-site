@@ -92,7 +92,7 @@ development_status:
   epic-4-retrospective: optional
 
   # Epic 5: Discoverability & launch  — active stories (5.1, 5.4, 5.2) ship on ONE branch (epic-5-discoverability-launch), one review + one PR (Carrie's instruction, same as Epics 2/3/4)
-  epic-5: in-progress   # → done once the PR merges to main
+  epic-5: done   # 2026-06-24: all 5 stories done (5.3 analytics on PR #11; 5.1/5.2/5.4 merged via PR #10)
   5-1-basic-discoverability-sitemap-robots-and-clean-share-metadata: done
   5-2-publish-the-bmad-build-in-public-launch-post: done
   5-3-wire-a-lightweight-privacy-friendly-analytics-include: done   # 2026-06-24: GoatCounter (carrie.goatcounter.com) via custom/analytics.html, prod-only, no cookies/PII — branch story-5-3-analytics
