@@ -66,14 +66,50 @@ to follow once, then keep for reference.
 
 6. **Verify.** Visit **https://carriekroutil.com/** — it should serve the built site over HTTPS.
 
+## Publishing a post — the push-to-publish path (Story 1.6)
+
+Once the pipeline above is live, publishing is just:
+
+1. Write a markdown post under `content/posts/` (see [README → Writing a post](README.md#writing-a-post)).
+2. Commit and `git push` to `main`.
+
+Pushing to `main` automatically triggers an Amplify build — the Amplify GitHub App notifies
+Amplify on every push to the connected branch. When the build succeeds (a few minutes later),
+Amplify swaps in the new `public/` and the post is live at its Post Page and in the Post Stream
+at `/posts/`. No CMS login, web editor, or manual file copy/upload is involved: the whole path
+is **write markdown → git push**.
+
+Drafts (`draft: true` front matter) are withheld from the production build, so pushing a draft
+deploys everything *except* that post — preview drafts locally with `hugo server -D` first.
+
+## Build-failure alerts (Story 1.7)
+
+A failed publish must never silently leave the old site up without Carrie knowing. Amplify's
+native behavior plus one notification toggle covers this:
+
+- **A failed build keeps the prior good site live.** Amplify swaps `public/` in only on a
+  *successful* build; a failed build leaves the last good deploy serving. *(Native — nothing
+  to configure.)*
+- **Email on failure** — enable once in the console *(manual, one-time — only Carrie can do
+  this in the AWS account)*:
+  1. AWS Console → **Amplify** → this app → **App settings** → **Notifications**.
+  2. **Add notification** → enter Carrie's email → save. Amplify creates the SNS topic and
+     sends a confirmation email — **click the confirm link** or notifications won't send.
+  3. Keep the **failure** notification on (start/success can be left off).
+- **Distinguishing outcomes.** A failed build shows **red** in the Amplify console *and* sends
+  the failure email; a successful build shows **green** and (with success notifications off)
+  sends nothing. So "failed" is always distinguishable from "succeeded" — including the case
+  where a build succeeds but published no new post (e.g. the post was left `draft`): that's
+  still a green, no-email success, clearly not a failure.
+
 ## Scope — what this setup does and doesn't cover
 
 - **In scope (Story 1.5):** the single Amplify pipeline, build spec, correct brand, custom domain.
-- **Story 1.6 — Publish by push:** verifying that adding a markdown post and pushing `main`
-  puts it live with no further steps. (The pipeline above is what makes that work.)
-- **Story 1.7 — Build-failure alerts:** enabling Amplify's native **email-on-failure** so a
-  broken push is never silent, and confirming a failed build keeps the prior good site live.
-  Set that up when you do Story 1.7 — not part of this initial setup.
+- **Story 1.6 — Publish by push:** the push-to-publish path, documented above. Proven live —
+  every post under `content/posts/` reached carriekroutil.com via `write markdown → git push`.
+- **Story 1.7 — Build-failure alerts:** documented above. Failed builds keep the prior good
+  site live (native); enabling email-on-failure is the one manual console toggle still on
+  Carrie — follow the Notifications steps above.
 
 ## Upgrading Hugo / Go later (deliberate, never automatic)
 
