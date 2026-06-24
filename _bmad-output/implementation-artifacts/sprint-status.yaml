@@ -76,17 +76,17 @@ development_status:
   epic-2-retrospective: optional
 
   # Epic 3: The front door — Home & About  — all 4 stories ship on ONE branch (epic-3-front-door), one review + one PR at epic end (Carrie's instruction, same as Epic 2)
-  epic-3: in-progress   # → done once the PR merges to main
+  epic-3: done          # PR #7 merged to main
   3-1-build-the-home-hero: done
   3-2-show-the-latest-posts-preview-grid-on-home: done
   3-3-pin-a-featured-post-on-home: done
   3-4-build-the-about-page: done
   epic-3-retrospective: optional
 
-  # Epic 4: Wayfinding — topics & search
-  epic-4: backlog
-  4-1-styled-tag-term-pages-at-tags-topic: backlog
-  4-2-header-full-text-search: backlog
+  # Epic 4: Wayfinding — topics & search  — both stories ship on ONE branch (epic-4-wayfinding), one review + one PR at epic end (Carrie's instruction, same as Epics 2/3)
+  epic-4: in-progress   # → done once the PR merges to main
+  4-1-styled-tag-term-pages-at-tags-topic: done
+  4-2-header-full-text-search: done   # satisfied by existing Hextra FlexSearch config (Story 1.3); verified titles+body indexed, focusable aria-labelled control, graceful no-JS
   epic-4-retrospective: optional
 
   # Epic 5: Discoverability & launch

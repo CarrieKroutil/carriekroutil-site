@@ -1,0 +1,40 @@
+{{- /*
+  _default/term.html — styled tag term page at /tags/{topic}/ (Story 4.1, FR-8 · AD-8 · UX-DR12).
+  Hugo routes each `tags` term here. Reuses custom/post-card.html (THE card renderer — no new
+  card markup, AR-9/AD-6) inside the same .ck-stream/.ck-grid shell as the post stream
+  (Story 2.4), so a topic reads as a filtered stream. Filtering is Hugo-native taxonomy —
+  no client-side JavaScript. Defines only `main`; Hextra baseof supplies navbar + footer.
+
+  The post set is derived from the SAME collection the stream uses — (where site.RegularPages
+  "Section" "posts") — narrowed to this term, so a topic page is always a strict subset of
+  /posts/ (identical membership rules: no drafts, no future-dated, regular pages only).
+  .Data.Term is the authored (lowercase) term, so the heading reads "ai" — not Hugo's
+  auto-title-cased "Ai" — matching the lowercase brand voice and the chip labels elsewhere.
+
+  Empty state (UX-DR12): a defensive fallback. In practice Hugo only generates a term page for
+  a term referenced by at least one published post, so $posts is non-empty whenever this page
+  exists; the branch satisfies the AC and guards against a blank page rather than handling a
+  routinely-reachable case.
+*/ -}}
+{{ define "main" }}
+{{- /* Mobile nav drawer for the navbar hamburger (matches posts/list.html). Hidden on
+   desktop (disableSidebar + no placeholder); rendered so the hamburger has something to open. */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+{{- $term := .Data.Term -}}
+{{- $posts := (where (where site.RegularPages "Section" "posts") "Params.tags" "intersect" (slice $term)).ByDate.Reverse -}}
+<main id="content" class="ck-stream">
+  <p class="ck-term-eyebrow">topic</p>
+  <h1 class="ck-stream-title">{{ $term }}</h1>
+  {{- with .Content }}<div class="content ck-stream-intro">{{ . }}</div>{{ end -}}
+  {{- with $posts -}}
+  <p class="ck-stream-intro">{{ len . }} post{{ if ne (len .) 1 }}s{{ end }} under this topic.</p>
+  <div class="ck-grid">
+    {{- range . -}}
+      {{ partial "custom/post-card.html" . }}
+    {{- end -}}
+  </div>
+  {{- else -}}
+  <p class="ck-empty">Nothing here yet — check back.</p>
+  {{- end -}}
+</main>
+{{ end }}
