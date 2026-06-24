@@ -142,6 +142,40 @@ Either way, size is the real lever — there's no automatic resizing yet, so com
 ship. For posts that matter, download the image into the post's folder and reference it by
 filename.
 
+### Sizing & compressing a local image
+
+The site doesn't resize images yet, so size and compress **before** you add the file. Targets:
+
+| Use | Displays at | Export to (long side) | Shape |
+|---|---|---|---|
+| **Hero banner** | up to 720px wide | **~1600px** | Landscape, ~2:1 (e.g. 1600×800). It's also center-cropped to a short band on cards, so **keep the subject centered**. |
+| **Inline — landscape** | up to 720px wide | **~1440px** | Any landscape ratio. |
+| **Inline — portrait** | up to 720px wide | **~1200px** | Portraits get tall fast in the 720px column — keep them modest. |
+
+Rule of thumb: export at **~2× the display size** (for sharp retina rendering), then compress to
+**≤ ~250 KB**, quality ~80, in **WebP** (smallest) or optimized JPEG — PNG only for graphics or
+transparency. Never enlarge past the original; upscaling just adds bytes with no extra detail.
+
+**How (macOS):**
+
+- **Preview** (no install) — open the image → *Tools → Adjust Size* (set Width, keep "Scale
+  proportionally") → *File → Export* and pick JPEG with Quality ~80. Save into the post's folder.
+- **`sips`** (built-in CLI) — `-Z` scales the **longest side** to N px, preserving aspect ratio:
+  ```bash
+  # Hero → 1600px wide, JPEG quality 80
+  sips -Z 1600 -s format jpeg -s formatOptions 80 original.jpg \
+    --out content/posts/<post-folder>/hero.jpg
+
+  # Inline landscape → 1440px;  inline portrait → 1200px (swap the -Z value)
+  sips -Z 1440 -s format jpeg -s formatOptions 80 original.jpg \
+    --out content/posts/<post-folder>/photo.jpg
+  ```
+- **[squoosh.app](https://squoosh.app)** (no install, best compression) — drag the image in, choose
+  **WebP**, set the width and quality ~80, download into the post's folder. Often roughly half the
+  size of the equivalent JPEG.
+
+Then reference the file by name in `hero.src` or `![alt](filename.webp)`.
+
 ### Embedding a YouTube video
 
 Use Hugo's built-in shortcode in the markdown body — paste the video ID (the part after
