@@ -706,3 +706,34 @@ samp {
     color: var(--ck-accent-fuchsia);
   }
 }
+
+/* ============================================================================
+   Story 5.4 — On-brand 404
+   (UX-DR12 — "This page wandered off the fairway." + a path home)
+   Centered reading column reusing the shared .ck-btn for "Back home". Tokens
+   only; meta/body text stays at the --ck-muted AA floor on dark.
+   ========================================================================== */
+.ck-404 {
+  max-width: var(--ck-reading-max);   /* 720px */
+  margin: 0 auto;
+  padding: 72px var(--ck-gutter) 64px;
+  text-align: center;
+}
+.ck-404-code {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: var(--ck-weight-strong);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ck-accent-fuchsia);
+}
+.ck-404-title {
+  margin: 0 0 14px;
+  font-size: var(--ck-scale-h1);            /* 2.5rem display */
+  line-height: 1.15;
+}
+.ck-404-text {
+  margin: 0 0 28px;
+  color: var(--ck-muted);                   /* AA floor on dark */
+  font-size: 1.08rem;
+}

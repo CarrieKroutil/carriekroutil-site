@@ -1,0 +1,17 @@
+{{- /*
+  404.html — on-brand "not found" page (Story 5.4, UX-DR12).
+  Defines only `main`; Hextra's baseof supplies the same navbar + footer + styles as every
+  other page, so a wrong URL still feels like the site, not a bare server error. Golf-tinted
+  copy ("wandered off the fairway") with a clear path Home. Static HTML, no JS (AD-13).
+*/ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+<main id="content" class="ck-404">
+  <p class="ck-404-code">404</p>
+  <h1 class="ck-404-title">This page wandered off the fairway.</h1>
+  <p class="ck-404-text">The link's a little lost — but the course is still here. Let's get you back on the path.</p>
+  <a class="ck-btn" href="{{ "/" | relLangURL }}">
+    <span class="ck-btn-icon" aria-hidden="true">&larr;</span> Back home
+  </a>
+</main>
+{{ end }}
