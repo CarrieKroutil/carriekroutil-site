@@ -124,7 +124,11 @@ samp {
 .ck-wordmark {
   font-weight: var(--ck-weight-display);   /* 800 */
   letter-spacing: -0.02em;
-  font-size: 1.4rem;
+  /* Fluid size: big on desktop, shrinks to stay on ONE line inside the fixed 64px
+     nav row on phones (the brand string is long; a flat large size wraps ~≤375px).
+     Floor 1.2rem fits a 360px viewport one-line; cap 1.85rem on wide screens. */
+  font-size: clamp(1.2rem, 0.95rem + 1.1vw, 1.85rem);
+  white-space: nowrap;                     /* never wrap to a 2nd line / break the row */
   /* Solid fallback first: rendered wherever background-clip:text is unsupported. */
   color: var(--ck-accent-fuchsia);
   background: var(--ck-accent-gradient);
