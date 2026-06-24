@@ -6,8 +6,10 @@
 
   Each chip links the real taxonomy term page (/tags/{topic}/) via .GetTerms, so links stay
   correct once Epic 4 styles the term page. Labels are lowercase as authored; CSS uppercases.
-  Accent tint is a stable hash of the topic name, so a topic keeps the SAME color everywhere
-  it appears (single page, card, term page) — recognizable, and varied as topics diversify.
+  Accent tint is assigned by the topic's position in the site-wide alphabetical tag list,
+  cycling the three brand accents — so a topic keeps the SAME color everywhere it appears
+  (single page, card, term page), adjacent chips never match, and all three colors show up
+  even with only a few topics. (A plain hash-mod-3 clustered 3 of 4 topics onto one color.)
 
   Context (one of):
     - a Page                          -> all of the page's `tags` terms
@@ -30,10 +32,19 @@
 {{- end -}}
 {{- if and $limit (gt (len $terms) $limit) -}}{{- $terms = first $limit $terms -}}{{- end -}}
 {{- $tints := slice "violet" "fuchsia" "amber" -}}
+{{- /* Site-wide alphabetical tag list — gives every topic a fixed global position so its
+       tint is stable across pages, while cycling the accents avoids the hash-collision
+       clustering. */ -}}
+{{- $names := slice -}}
+{{- range $name, $_ := site.Taxonomies.tags -}}{{- $names = $names | append $name -}}{{- end -}}
+{{- $names = sort $names -}}
 {{- with $terms -}}
 <div class="ck-tags">
   {{- range $t := . -}}
-  <a class="ck-tag ck-tag--{{ index $tints (mod (hash.FNV32a $t.LinkTitle) 3) }}" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>
+  {{- $key := lower $t.LinkTitle -}}
+  {{- $idx := 0 -}}
+  {{- range $i, $name := $names -}}{{- if eq $name $key -}}{{- $idx = $i -}}{{- end -}}{{- end -}}
+  <a class="ck-tag ck-tag--{{ index $tints (mod $idx 3) }}" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>
   {{- end -}}
 </div>
 {{- end -}}

@@ -1,0 +1,84 @@
+{{- /*
+  _default/experience.html — the Experience timeline / résumé. Selected via
+  `layout: experience` in content/experience.md; URL stays /experience/. Defines only
+  `main`; Hextra's baseof supplies the navbar + footer. Static / no-JS core: the page IS
+  the résumé, and a print stylesheet (custom.css) lets a reader "Save as PDF" via the
+  button or Cmd/Ctrl+P. Career data is the single source of truth in data/experience.yaml.
+
+  Print-only identity header (.ck-print-id): hidden on screen (the site header already
+  names Carrie), shown only on paper so the saved PDF leads with name + title + links.
+  Phone/citizenship are intentionally NOT here — this HTML is public and would be scraped.
+*/ -}}
+{{ define "main" }}
+{{- /* Mobile nav drawer for the navbar hamburger (same pattern as the other pages). */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+<main id="content" class="ck-exp">
+
+  {{- /* Print-only: gives the downloaded PDF a proper résumé masthead. */ -}}
+  <div class="ck-print-id" aria-hidden="true">
+    <p class="ck-print-name">Carrie Kroutil</p>
+    <p class="ck-print-role">Engineering Leader</p>
+    <p class="ck-print-contact">carriekroutil.com · linkedin.com/in/carriekroutil</p>
+  </div>
+
+  <header class="ck-exp-head">
+    <h1 class="ck-exp-title">Experience</h1>
+    {{- with .Params.lead }}<p class="ck-exp-lead">{{ . }}</p>{{ end -}}
+    {{- /* Convenience print/download control. Without JS the page still IS the résumé and
+           Cmd/Ctrl+P prints it cleanly; this button just saves that discovery step. The
+           button hides itself from the printed output (custom.css). */ -}}
+    <button class="ck-btn ck-print-btn" type="button" onclick="window.print()">
+      <svg class="ck-btn-icon" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5 1a1 1 0 0 0-1 1v3h8V2a1 1 0 0 0-1-1H5zM3 5V2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3a2 2 0 0 1 2 2v4a1 1 0 0 1-1 1h-2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1H1a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2h1zm9 7H4v3h8v-3zm1-1h1V7a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v4h1v-1a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v1zm-1-4.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0z"/></svg>
+      Download résumé
+    </button>
+  </header>
+
+  <ol class="ck-timeline">
+    {{- range site.Data.experience.jobs }}
+    <li class="ck-tl-item">
+      <span class="ck-tl-dot" aria-hidden="true"></span>
+      <div class="ck-tl-card">
+        <div class="ck-tl-top">
+          <h2 class="ck-tl-company">{{ .company }}</h2>
+          {{- with .dates }}<span class="ck-tl-span">{{ . }}</span>{{ end -}}
+        </div>
+        {{- with .location }}<p class="ck-tl-loc">{{ . }}</p>{{ end -}}
+        {{- range .roles }}
+        <div class="ck-tl-role-block">
+          <div class="ck-tl-role-head">
+            <h3 class="ck-tl-role">{{ .title }}</h3>
+            {{- with .dates }}<span class="ck-tl-rdates">{{ . }}</span>{{ end -}}
+          </div>
+          {{- with .highlights }}
+          <ul class="ck-tl-points">
+            {{- /* Inline markdown so `[label](url)` links (and emphasis) render; display:inline drops the wrapping <p>. */ -}}
+            {{- range . }}<li>{{ $.RenderString (dict "display" "inline") . }}</li>{{ end }}
+          </ul>
+          {{- end }}
+        </div>
+        {{- end }}
+      </div>
+    </li>
+    {{- end }}
+  </ol>
+
+  {{- with site.Data.experience.education }}
+  <section class="ck-exp-extra">
+    <h2 class="ck-exp-h2">Education</h2>
+    {{- range . }}
+    <p class="ck-exp-line"><span class="ck-exp-strong">{{ .school }}</span> — {{ .credential }}</p>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  {{- with site.Data.experience.volunteer }}
+  <section class="ck-exp-extra">
+    <h2 class="ck-exp-h2">Volunteer</h2>
+    {{- range . }}
+    <p class="ck-exp-line">{{ $.RenderString (dict "display" "inline") . }}</p>
+    {{- end }}
+  </section>
+  {{- end }}
+
+</main>
+{{ end }}

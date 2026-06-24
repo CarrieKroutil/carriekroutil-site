@@ -22,6 +22,7 @@
          chip links to a real /tags/{topic}/ term page — no broken links, no maintenance as
          topics grow. Same renderer + per-topic tint as cards/posts (custom/post-tags.html). */ -}}
       {{- with partial "custom/topic-terms.html" . }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
+      <p class="ck-hero-extra"><a href="/projects/">See what I've built &rarr;</a></p>
     </div>
   </section>
 

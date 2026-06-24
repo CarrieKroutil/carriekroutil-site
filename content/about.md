@@ -16,6 +16,11 @@ It's all me.
 I lead engineering teams and love turning fuzzy ideas into things that ship. Lately I've been
 building side projects with AI tooling — this site is one of them.
 
+{{< ckbuttons >}}
+{{< ckbutton href="/experience/" label="Experience" icon="briefcase" >}}
+{{< ckbutton href="/projects/" label="Projects" icon="grid" >}}
+{{< /ckbuttons >}}
+
 ## Say hi
 
 Find me where I actually post:
