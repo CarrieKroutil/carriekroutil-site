@@ -12,14 +12,20 @@
   All of the post's tags show, matching the UX home mock (e.g. a card reads "code · AI").
 
   Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback.
+  The hero src may be a local bundle file (resolved to its RelPermalink) or an external
+  URL (used as-is) — mirroring how single.html renders the hero, so cards match the post.
   Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
 */ -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $img := false -}}
-{{- with .Params.hero -}}{{- $img = $.Resources.GetMatch .src -}}{{- end -}}
+{{- $thumb := "" -}}
+{{- with .Params.hero -}}
+  {{- $r := $.Resources.GetMatch .src -}}
+  {{- if $r -}}{{- $thumb = $r.RelPermalink -}}
+  {{- else if hasPrefix .src "http" -}}{{- $thumb = .src -}}{{- end -}}
+{{- end -}}
 <article class="ck-card">
-  {{- if $img -}}
-    <div class="ck-card-thumb"><img src="{{ $img.RelPermalink }}" alt="" loading="lazy"></div>
+  {{- if $thumb -}}
+    <div class="ck-card-thumb"><img src="{{ $thumb }}" alt="" loading="lazy"></div>
   {{- else -}}
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}
