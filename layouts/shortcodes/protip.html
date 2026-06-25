@@ -1,0 +1,20 @@
+{{- /*
+  protip.html — a first-person "Pro Tip" aside (Epic 2 / Story 2.1).
+
+  Wraps Hextra's callout partial so a Pro Tip is a real Hextra callout, but tinted
+  with the brand fuchsia/amber family instead of the generic blue "info" style
+  (Story 2.1 AC). Colors live in the .ck-protip rule in assets/css/custom.css
+  (theme-aware tokens, no new colors — AD-17/FR-11).
+
+  Usage in a topic:
+      {{< protip >}}
+      The thing I'd actually tell you over coffee.
+      {{< /protip >}}
+*/ -}}
+{{- $content := .InnerDeindent | markdownify -}}
+{{- partial "shortcodes/callout.html" (dict
+  "content" $content
+  "emoji" "💡"
+  "class" "ck-protip"
+  )
+-}}

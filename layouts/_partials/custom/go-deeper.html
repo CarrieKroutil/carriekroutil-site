@@ -1,0 +1,54 @@
+{{- /*
+  custom/go-deeper.html — renders a topic's curated "📚 Go Deeper" block from the
+  `goDeeper` front-matter list (Epic 2 / Story 2.2, AD-17).
+
+  Contract (AD-15): each item is { group, title, url, why } where
+  group ∈ Books · Courses · Tools (exactly those three). Groups render in that
+  fixed order; a group only appears when it has ≥1 item. Group labels are tinted
+  with the existing --ck-chip-{violet|fuchsia|amber}-text tokens (theme-aware,
+  AA-verified in both themes — no new colors, AD-17/FR-11).
+
+  Hard rules the build enforces (errorf → fails the build, never ships silently):
+    - every topic needs ≥ 1 goDeeper item — including stubs (AD-17);
+    - group must be exactly Books · Courses · Tools — a typo fails the build.
+
+  External links open in a new tab with rel="noopener" (Story 2.2 AC).
+*/ -}}
+{{- $page := . -}}
+{{- $items := .Params.goDeeper -}}
+{{- if not $items -}}
+  {{- /* errorf logs but does not halt the template, so guard the render in else
+         to avoid a second noisy "can't iterate over <nil>" error after this one. */ -}}
+  {{- errorf "topic %q has no goDeeper items — every topic (including stubs) needs ≥1 Go Deeper entry (AD-17)" .Path -}}
+{{- else -}}
+  {{- /* Fixed group order + accent token suffix per group. */ -}}
+  {{- $order := slice "Books" "Courses" "Tools" -}}
+  {{- $accent := dict "Books" "violet" "Courses" "fuchsia" "Tools" "amber" -}}
+
+  {{- /* Validate every group value up front so a typo fails the build, not silently drops. */ -}}
+  {{- range $items -}}
+    {{- if not (in $order .group) -}}
+      {{- errorf "Go Deeper item %q in %q has group %q — must be exactly one of Books · Courses · Tools" .title $page.Path (.group | default "<missing>") -}}
+    {{- end -}}
+  {{- end -}}
+
+  <section class="ck-go-deeper" aria-labelledby="ck-go-deeper-heading">
+    <h2 id="ck-go-deeper-heading" class="ck-go-deeper__title">📚 Go Deeper</h2>
+    {{- range $group := $order -}}
+      {{- $inGroup := where $items "group" $group -}}
+      {{- with $inGroup -}}
+        <div class="ck-go-deeper__group">
+          <p class="ck-go-deeper__label ck-go-deeper__label--{{ index $accent $group }}">{{ $group }}</p>
+          <ul class="ck-go-deeper__list">
+            {{- range . -}}
+              <li class="ck-go-deeper__item">
+                <a class="ck-go-deeper__link" href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ .title }}</a>
+                {{- with .why }}<span class="ck-go-deeper__why">{{ . }}</span>{{ end -}}
+              </li>
+            {{- end -}}
+          </ul>
+        </div>
+      {{- end -}}
+    {{- end -}}
+  </section>
+{{- end -}}

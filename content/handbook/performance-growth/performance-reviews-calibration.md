@@ -1,0 +1,28 @@
+---
+title: "Performance Reviews & Calibration"
+weight: 40
+description: "Writing reviews that say something true, and surviving calibration with your ratings — and your integrity — intact."
+lastUpdated: 2026-06-25
+stub: true
+goDeeper:
+  - group: Tools
+    title: "GitLab Handbook — 360 Feedback & performance reviews"
+    url: "https://handbook.gitlab.com/handbook/people-group/360-feedback/"
+    why: "An open, detailed reference for running reviews and feedback cycles with fairness and structure — the closest thing to a neutral playbook."
+  - group: Books
+    title: "Radical Candor — Kim Scott"
+    url: "https://www.radicalcandor.com/the-book/"
+    why: "The growth/performance axes that make a review about trajectory, not just a snapshot rating."
+  - group: Books
+    title: "High Output Management — Andy Grove"
+    url: "https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884"
+    why: "Grove's chapter on performance reviews — why they're hard, and how to do them honestly rather than comfortably."
+---
+
+A performance review should never be a surprise. If the rating lands as news, the failure happened months earlier in the [1:1s]({{< relref "/handbook/performance-growth/running-great-1-1s.md" >}}) and feedback that should have set it up. The review itself is just the moment you write down, clearly and in writing, what's already been said out loud — and calibration is where you defend that assessment against everyone else's, and adjust for the bias and grade-inflation that creep in across a whole organization.
+
+When this page is filled in, it'll cover how to write a review that's specific and evidence-based rather than a vague vibe, how to separate performance from potential, how calibration actually works and how to walk in prepared to advocate for your people, how to spot the common biases (recency, halo, similarity) before they skew a rating, and how to deliver the result so it's heard. Until then, the Go Deeper links carry the day-one value.
+
+{{< protip >}}
+Keep a running ["brag doc"]({{< relref "/handbook/managing-yourself/staying-organized.md" >}}) on every person all year — a few lines after each notable win or stumble. Calibration is decided by who can cite specifics, and the manager working from memory in December always loses to the one with receipts. It's the cheapest insurance you can buy for your team's ratings.
+{{< /protip >}}

@@ -64,6 +64,10 @@
   --ck-gutter: 22px;
   --ck-content-max: 920px;
   --ck-reading-max: 720px;
+  /* Footer height (40px top + 40px bottom padding + content line). Used to size the
+     docs article min-height so short handbook pages don't overflow by the footer's
+     height (Story 3.2/U4). Revisit if the footer's padding/contents change. */
+  --ck-footer-h: 123px;
 
   /* ----- Focus ----- */
   --ck-focus-ring: 2px solid #d946ef;
@@ -1135,4 +1139,395 @@ html:not(.dark) .hextra-footer {
 html:not(.dark) .hextra-custom-footer .ck-footer-line,
 html:not(.dark) .hextra-custom-footer .ck-footer-line a {
   color: var(--ck-muted);
+}
+
+/* ============================================================================
+   Story 1.3 (Handbook) — docs-mode sidebar brand match
+   (FR-11 brand continuity · UX-DR4 sidebar active state + ~300px width)
+   ----------------------------------------------------------------------------
+   The Handbook (/handbook/**, Hextra docs mode) inherits the whole brand for
+   free: the --primary-* HSL mapping above already drives Hextra's
+   --hx-color-primary-* scale, so the sidebar active item is fuchsia + bold
+   (hextra-sidebar-active-item → text-primary-600 + font-semibold) and the
+   header/footer/toggle/focus-ring are the site's. Only two docs specifics that
+   Hextra doesn't ship are added here: a left accent bar on the active item, and
+   the ~300px sidebar width. Tokens only — no new colors (AD-5, AD-17/FR-11).
+   ========================================================================== */
+:root {
+  --ck-sidebar-w: 300px;   /* UX-DR4 ~300px (Hextra default is w-64 = 256px) */
+}
+
+/* Widen the docs sidebar. custom.css loads last, so this equal-specificity rule
+   wins over Hextra's `hx:md:w-64`. Scoped to the docs breakpoint (md+); on mobile
+   the sidebar is the full-width drawer and keeps Hextra's behavior. */
+@media (min-width: 768px) {
+  .hextra-sidebar-container {
+    width: var(--ck-sidebar-w);
+  }
+}
+
+/* Left accent bar on the current sidebar item (UX-DR4). A positioned ::before so
+   it never shifts the label text or fights the rounded active pill. The active
+   item already reads fuchsia + bold from Hextra's primary-* classes (now fuchsia
+   via the mapping) — the bar is the only addition. --ck-accent-fuchsia is the
+   bright decorative fuchsia (correct for a non-text accent element). */
+.hextra-sidebar-active-item {
+  position: relative;
+}
+.hextra-sidebar-active-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.15em;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--ck-accent-fuchsia);
+}
+
+/* Hextra renders a theme switch at the BOTTOM of the docs sidebar, gated by the
+   same `params.theme.displayToggle` as the top-nav toggle — so config can't drop
+   one without dropping the other. On /handbook the docs sidebar is visible on
+   desktop, so that switch duplicates the navbar toggle (which is present at every
+   breakpoint). Hide the sidebar's bottom switch on desktop (md+) only — leaving
+   the navbar toggle as the single control. The element is the sole direct-child
+   `[data-toggle-animation]` of the sidebar container. The mobile drawer switch is
+   left intact (matches the blog's drawer; the navbar toggle still covers mobile),
+   and the blog is unaffected (its sidebar is `md:hidden` on desktop anyway). */
+@media (min-width: 768px) {
+  .hextra-sidebar-container > [data-toggle-animation] {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Epic 2 — Topic anatomy, stub badge, Go Deeper, Pro Tip
+   (Stories 2.1 · 2.2 · 2.3 — content model + complete IA)
+   ----------------------------------------------------------------------------
+   Scoped to .ck-handbook-topic (the docs/single.html body wrapper, handbook-only)
+   and the Epic-2 component classes. Tokens only — no new colors; the chip/accent
+   tokens above already carry theme-aware AA-verified light companions, so every
+   rule here re-skins for free in light mode (AD-17/FR-11).
+   ========================================================================== */
+
+/* Story 2.1 — topic anatomy. Narrow the reading column to ~760px and set the
+   H1 to 2.0rem (the docs reading measure; the blog keeps --ck-content-max 920px
+   and the 2.5rem display H1 — this class never appears outside /handbook). */
+.ck-handbook-topic {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.ck-handbook-topic h1 {
+  font-size: 2rem;
+  letter-spacing: var(--ck-tracking-display);
+}
+
+/* Title + inline stub badge sit on one line and wrap together as a unit. */
+.ck-topic-title {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* Story 2.3 — stub badge. Inline amber pill beside the title: theme-aware amber
+   text (never red), decorative amber border, surface fill. Not a link. The
+   --ck-chip-amber-* tokens are AA-verified in both themes. */
+.ck-stub-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--ck-scale-small);
+  font-weight: var(--ck-weight-strong);
+  line-height: 1;
+  padding: 0.3em 0.7em;
+  border-radius: var(--ck-radius-pill);
+  white-space: nowrap;
+  color: var(--ck-chip-amber-text);
+  border: 1px solid var(--ck-chip-amber-border);
+  background: var(--ck-surface-2);
+}
+
+/* Story 2.2 — Go Deeper card. Surface card after the body; group labels tinted
+   per the fixed Books→violet · Courses→fuchsia · Tools→amber mapping using the
+   chip text tokens. Item links are body color and go fuchsia on hover. */
+.ck-go-deeper {
+  margin-top: 3rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  background: var(--ck-surface);
+}
+.ck-go-deeper__title {
+  font-size: 1.15rem;
+  font-weight: var(--ck-weight-strong);
+  margin: 0 0 0.75rem;
+}
+.ck-go-deeper__group + .ck-go-deeper__group {
+  margin-top: 1rem;
+}
+.ck-go-deeper__label {
+  font-size: var(--ck-scale-small);
+  font-weight: var(--ck-weight-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.35rem;
+}
+.ck-go-deeper__label--violet  { color: var(--ck-chip-violet-text); }
+.ck-go-deeper__label--fuchsia { color: var(--ck-chip-fuchsia-text); }
+.ck-go-deeper__label--amber   { color: var(--ck-chip-amber-text); }
+.ck-go-deeper__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ck-go-deeper__item + .ck-go-deeper__item {
+  margin-top: 0.5rem;
+}
+.ck-go-deeper__link {
+  color: var(--ck-fg);
+  font-weight: var(--ck-weight-strong);
+  text-decoration: underline;       /* persistent underline so links aren't color-only (WCAG 1.4.1) */
+  text-underline-offset: 2px;
+}
+.ck-go-deeper__link:hover {
+  /* --ck-accent-text (not --ck-link) — it carries an AA light companion (#a21caf,
+     5.8:1 on the light card); --ck-link is bright fuchsia and only clears AA on dark. */
+  color: var(--ck-accent-text);
+}
+.ck-go-deeper__why {
+  display: block;
+  color: var(--ck-muted);
+  font-size: var(--ck-scale-small);
+  line-height: 1.5;
+  margin-top: 0.1rem;
+}
+
+/* Story 2.1 — Pro Tip callout. The {{< protip >}} shortcode renders a Hextra
+   callout carrying this class; here it gets the brand fuchsia/amber tint (a faint
+   fuchsia wash + fuchsia edge) instead of Hextra's generic blue. color-mix keeps
+   it derived from the existing accent token — no new color is introduced. */
+.ck-protip {
+  border-color: color-mix(in srgb, var(--ck-accent-fuchsia) 38%, transparent);
+  background: color-mix(in srgb, var(--ck-accent-fuchsia) 9%, var(--ck-surface));
+  color: var(--ck-fg);
+}
+
+/* ============================================================================
+   Story 3.1 — Start Here landing (the /handbook/ root, AD-19).
+   Rendered by layouts/docs/list.html (root branch): a single centered column that
+   deliberately breaks the three-column docs frame (sidebar stays, no TOC rail).
+   No new colors — every value derives from an existing --ck-* token (FR-11/AD-17).
+   Card hover-lift lives under prefers-reduced-motion: no-preference, matching the
+   site-wide pattern, so reduced-motion users get no transform. Focus rings come
+   from the global :focus-visible rule (the cards are real <a> elements).
+   ========================================================================== */
+.ck-start-here {
+  max-width: 880px;
+  margin-inline: auto;
+}
+.ck-start-h1 {
+  font-size: var(--ck-scale-h1);
+  font-weight: var(--ck-weight-display);
+  letter-spacing: var(--ck-tracking-display);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+.ck-start-lede {
+  max-width: 60ch;
+  color: var(--ck-muted);
+  font-size: 1.1rem;
+  line-height: var(--ck-leading-body);
+  margin: 0 0 1.25rem;
+}
+.ck-start-jump {
+  color: var(--ck-muted);
+  font-size: var(--ck-scale-small);
+  margin: 0 0 2rem;
+}
+.ck-start-jump .ck-kbd {
+  border: 1px solid var(--ck-border);
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-family: var(--ck-font-mono);
+  font-size: 0.85em;
+  color: var(--ck-fg);
+  white-space: nowrap;
+}
+.ck-eyebrow {
+  margin: 0 0 0.85rem;
+  font-size: 0.78rem;
+  font-weight: var(--ck-weight-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ck-accent-text);   /* theme-aware fuchsia — AA on dark and light */
+}
+
+/* ----- Guided-path step cards ----- */
+.ck-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 0.85rem;
+}
+.ck-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-step:hover { border-color: var(--ck-border-bright); }
+.ck-step-n {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--ck-radius-pill);
+  background: var(--ck-accent-gradient);   /* gradient garnish — decorative */
+  color: var(--ck-bg);                     /* dark glyph on the bright gradient */
+  font-size: 0.95rem;
+  font-weight: var(--ck-weight-display);
+}
+.ck-step-t { flex: 1; min-width: 0; }
+.ck-step-t b {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: var(--ck-weight-strong);
+}
+.ck-step-t span {
+  display: block;
+  color: var(--ck-muted);
+  font-size: 0.9rem;
+}
+.ck-step-arrow { color: var(--ck-muted); }
+.ck-branch {
+  margin: 0.25rem 0 2.25rem;
+  padding-left: 46px;   /* aligns under the card text, past the number disc */
+  color: var(--ck-muted);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+/* ----- Section grid ----- */
+.ck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 2.5rem;
+}
+.ck-gcard {
+  padding: 14px 15px;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: 14px;
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-gcard:hover { border-color: var(--ck-border-bright); }
+.ck-gn {
+  color: var(--ck-muted);
+  font-size: 0.78rem;
+  font-weight: var(--ck-weight-strong);
+}
+.ck-gcard b {
+  display: block;
+  margin: 3px 0;
+  font-size: 0.95rem;
+}
+.ck-gcard span {
+  color: var(--ck-muted);
+  font-size: 0.83rem;
+}
+@media (max-width: 900px) { .ck-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .ck-grid { grid-template-columns: 1fr; } }
+
+/* ----- About nudge ----- */
+.ck-start-about {
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ck-border);
+  color: var(--ck-muted);
+  font-size: 0.92rem;
+}
+.ck-start-about a {
+  color: var(--ck-accent-text);
+  font-weight: var(--ck-weight-strong);
+}
+
+/* Card hover-lift only when motion is welcome (matches the site-wide pattern). */
+@media (prefers-reduced-motion: no-preference) {
+  .ck-step,
+  .ck-gcard { transition: transform 0.15s ease, border-color 0.15s ease; }
+  .ck-step:hover,
+  .ck-gcard:hover { transform: translateY(-2px); }
+}
+
+/* Story 3.2 (U4) — Docs article min-height. Hextra's default forces the docs
+   content row to calc(100vh - navbar) regardless of content, so navbar + row +
+   footer always exceeds the viewport → a scrollbar of the footer's height on every
+   handbook page. Subtracting the footer height makes short pages fit exactly (footer
+   still sits at the bottom); long pages / tall sidebars still scroll naturally. */
+.ck-docs-article { min-height: calc(100vh - var(--navbar-height) - var(--ck-footer-h)); }
+/* The sticky sidebar is sized to calc(100vh - navbar - menu-height), taller than the
+   article above, so on a short page it (not the content) drives the row height and the
+   footer still overflows. Cap it to the same footer-aware height. Desktop only — the
+   bottom toggle that --menu-height reserves space for is hidden on desktop (Story 1.3),
+   and on mobile the sidebar is an off-canvas drawer that doesn't affect page height. */
+@media (min-width: 768px) {
+  .hextra-sidebar-container .hextra-scrollbar {
+    height: calc(100vh - var(--navbar-height) - var(--ck-footer-h));
+  }
+}
+
+/* ============================================================================
+   Story 3.2 (U2) — Section index topic cards. Auto-rendered on each of the 12
+   section pages from the section's topics (zero upkeep). No new colors — existing
+   --ck-* tokens only; stub badge reuses .ck-stub-badge (Epic 2).
+   ========================================================================== */
+/* Match the Start Here eyebrow gap (2rem above "New to management? Start here →"):
+   the section "In this section" eyebrow follows the intro .content with a 0 gap, so
+   give it 2rem top. Scoped to .content + .ck-eyebrow so Start Here is untouched. */
+.content + .ck-eyebrow { margin-top: 2rem; }
+.ck-sec-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin: 0.85rem 0 0;
+}
+.ck-tcard {
+  display: block;
+  padding: 14px 16px;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-tcard:hover { border-color: var(--ck-border-bright); }
+.ck-tcard-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ck-tcard-h b {
+  font-size: 1rem;
+  font-weight: var(--ck-weight-strong);
+}
+.ck-tcard-d {
+  display: block;
+  margin-top: 4px;
+  color: var(--ck-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ck-tcard { transition: transform 0.15s ease, border-color 0.15s ease; }
+  .ck-tcard:hover { transform: translateY(-2px); }
 }
