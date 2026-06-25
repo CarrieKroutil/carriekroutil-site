@@ -1181,3 +1181,18 @@ html:not(.dark) .hextra-custom-footer .ck-footer-line a {
   border-radius: 3px;
   background: var(--ck-accent-fuchsia);
 }
+
+/* Hextra renders a theme switch at the BOTTOM of the docs sidebar, gated by the
+   same `params.theme.displayToggle` as the top-nav toggle — so config can't drop
+   one without dropping the other. On /handbook the docs sidebar is visible on
+   desktop, so that switch duplicates the navbar toggle (which is present at every
+   breakpoint). Hide the sidebar's bottom switch on desktop (md+) only — leaving
+   the navbar toggle as the single control. The element is the sole direct-child
+   `[data-toggle-animation]` of the sidebar container. The mobile drawer switch is
+   left intact (matches the blog's drawer; the navbar toggle still covers mobile),
+   and the blog is unaffected (its sidebar is `md:hidden` on desktop anyway). */
+@media (min-width: 768px) {
+  .hextra-sidebar-container > [data-toggle-animation] {
+    display: none;
+  }
+}
