@@ -1196,3 +1196,113 @@ html:not(.dark) .hextra-custom-footer .ck-footer-line a {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Epic 2 — Topic anatomy, stub badge, Go Deeper, Pro Tip
+   (Stories 2.1 · 2.2 · 2.3 — content model + complete IA)
+   ----------------------------------------------------------------------------
+   Scoped to .ck-handbook-topic (the docs/single.html body wrapper, handbook-only)
+   and the Epic-2 component classes. Tokens only — no new colors; the chip/accent
+   tokens above already carry theme-aware AA-verified light companions, so every
+   rule here re-skins for free in light mode (AD-17/FR-11).
+   ========================================================================== */
+
+/* Story 2.1 — topic anatomy. Narrow the reading column to ~760px and set the
+   H1 to 2.0rem (the docs reading measure; the blog keeps --ck-content-max 920px
+   and the 2.5rem display H1 — this class never appears outside /handbook). */
+.ck-handbook-topic {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.ck-handbook-topic h1 {
+  font-size: 2rem;
+  letter-spacing: var(--ck-tracking-display);
+}
+
+/* Title + inline stub badge sit on one line and wrap together as a unit. */
+.ck-topic-title {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* Story 2.3 — stub badge. Inline amber pill beside the title: theme-aware amber
+   text (never red), decorative amber border, surface fill. Not a link. The
+   --ck-chip-amber-* tokens are AA-verified in both themes. */
+.ck-stub-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--ck-scale-small);
+  font-weight: var(--ck-weight-strong);
+  line-height: 1;
+  padding: 0.3em 0.7em;
+  border-radius: var(--ck-radius-pill);
+  white-space: nowrap;
+  color: var(--ck-chip-amber-text);
+  border: 1px solid var(--ck-chip-amber-border);
+  background: var(--ck-surface-2);
+}
+
+/* Story 2.2 — Go Deeper card. Surface card after the body; group labels tinted
+   per the fixed Books→violet · Courses→fuchsia · Tools→amber mapping using the
+   chip text tokens. Item links are body color and go fuchsia on hover. */
+.ck-go-deeper {
+  margin-top: 3rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  background: var(--ck-surface);
+}
+.ck-go-deeper__title {
+  font-size: 1.15rem;
+  font-weight: var(--ck-weight-strong);
+  margin: 0 0 0.75rem;
+}
+.ck-go-deeper__group + .ck-go-deeper__group {
+  margin-top: 1rem;
+}
+.ck-go-deeper__label {
+  font-size: var(--ck-scale-small);
+  font-weight: var(--ck-weight-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.35rem;
+}
+.ck-go-deeper__label--violet  { color: var(--ck-chip-violet-text); }
+.ck-go-deeper__label--fuchsia { color: var(--ck-chip-fuchsia-text); }
+.ck-go-deeper__label--amber   { color: var(--ck-chip-amber-text); }
+.ck-go-deeper__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ck-go-deeper__item + .ck-go-deeper__item {
+  margin-top: 0.5rem;
+}
+.ck-go-deeper__link {
+  color: var(--ck-fg);
+  font-weight: var(--ck-weight-strong);
+  text-decoration: none;
+}
+.ck-go-deeper__link:hover {
+  color: var(--ck-link);
+  text-decoration: underline;
+}
+.ck-go-deeper__why {
+  display: block;
+  color: var(--ck-muted);
+  font-size: var(--ck-scale-small);
+  line-height: 1.5;
+  margin-top: 0.1rem;
+}
+
+/* Story 2.1 — Pro Tip callout. The {{< protip >}} shortcode renders a Hextra
+   callout carrying this class; here it gets the brand fuchsia/amber tint (a faint
+   fuchsia wash + fuchsia edge) instead of Hextra's generic blue. color-mix keeps
+   it derived from the existing accent token — no new color is introduced. */
+.ck-protip {
+  border-color: color-mix(in srgb, var(--ck-accent-fuchsia) 38%, transparent);
+  background: color-mix(in srgb, var(--ck-accent-fuchsia) 9%, var(--ck-surface));
+  color: var(--ck-fg);
+}

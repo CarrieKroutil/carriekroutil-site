@@ -1,0 +1,60 @@
+{{- /*
+  docs/single.html — project override of Hextra's docs single template.
+
+  /handbook/** is the only docs-type content on the site (cascade type:docs on
+  content/handbook/_index.md, AD-14), so this override is effectively the Handbook
+  topic template. It is a thin copy of the theme's layouts/docs/single.html with
+  three Epic 2 additions, each flagged inline:
+
+    1. Stub badge — an inline "🚧 Expanding" badge beside the H1 when stub:true
+       (Story 2.3). Non-heading span, so it never disturbs heading order / auto-TOC.
+    2. Authored "Last updated" — rendered from the front-matter `lastUpdated`
+       field, NOT git/file mod time (architecture: deterministic, immune to
+       Amplify's shallow clone). Replaces the theme's components/last-updated.html.
+    3. Go Deeper — the curated next-steps block after the body (Story 2.2, AD-17),
+       which build-fails when a topic has no goDeeper items.
+
+  The content column is narrowed to ~760px and H1 to 2.0rem via the
+  `ck-handbook-topic` class (Story 2.1 AC), scoped in assets/css/custom.css.
+  Everything else (sidebar, toc, breadcrumb, pager) is the theme's, untouched.
+*/ -}}
+{{ define "main" }}
+  <div class='hx:mx-auto hx:flex hextra-max-page-width'>
+    {{ partial "sidebar.html" (dict "context" .) }}
+    {{ partial "toc.html" . }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+        <div class="content ck-handbook-topic">
+          {{ if .Title }}
+          <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
+            {{- /* Addition 1: title + inline stub badge (Story 2.3). */ -}}
+            <div class="ck-topic-title">
+              <h1 class="hx:mb-0">{{ .Title }}</h1>
+              {{- if .Params.stub -}}
+                <span class="ck-stub-badge">🚧 Expanding</span>
+              {{- end -}}
+            </div>
+            {{ partial "components/page-context-menu" . }}
+          </div>
+          {{ end }}
+          {{ .Content }}
+          {{- /* Addition 3: curated Go Deeper block (Story 2.2, AD-17). */ -}}
+          {{ partial "custom/go-deeper.html" . }}
+        </div>
+        {{- /* Addition 2: authored last-updated, not git-derived (architecture). */ -}}
+        {{- with .Params.lastUpdated -}}
+          <div class="hx:mt-12 hx:mb-8 hx:block hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400">
+            {{ T "lastUpdated" | default "Last updated on" }} <time datetime="{{ . }}">{{ dateFormat "January 2, 2006" . }}</time>
+          </div>
+        {{- else -}}
+          <div class="hx:mt-16"></div>
+        {{- end -}}
+        {{- if (site.Params.page.displayPagination | default true) -}}
+          {{- partial "components/pager.html" . -}}
+        {{- end -}}
+        {{ partial "components/comments.html" . }}
+      </main>
+    </article>
+  </div>
+{{ end }}
