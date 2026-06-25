@@ -80,11 +80,14 @@ url = "/posts/"
 weight = 10
 
 # Engineering Manager Handbook (AD-14). Slots between Posts (10) and About (20);
-# weight (not source order) drives render order. Literal URL — not pageRef —
-# matching the Posts/About convention above (avoids build-time pageRef validation).
+# weight (not source order) drives render order. Uses pageRef (not a literal URL):
+# Hextra's mobile sidebar drawer only renders a nav entry's nested tree when the
+# entry is page-backed, so pageRef is what surfaces the 12-section handbook tree on
+# mobile (Story 3.2 fix). Safe now that /handbook exists (was a literal URL in Epic 1
+# only to dodge build-time pageRef validation before the section was built).
 [[menu.main]]
 name = "Handbook"
-url = "/handbook/"
+pageRef = "/handbook"
 weight = 15
 
 [[menu.main]]

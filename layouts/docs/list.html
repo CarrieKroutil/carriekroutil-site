@@ -55,7 +55,7 @@
     -}}
     <div class='hx:mx-auto hx:flex hextra-max-page-width'>
       {{ partial "sidebar.html" (dict "context" .) }}
-      <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8">
+      <article class="hx:w-full hx:break-words hx:flex ck-docs-article hx:min-w-0 hx:justify-center hx:pb-8">
         <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-4 hx:md:px-12 ck-start-here">
 
           <h1 class="ck-start-h1">The Engineering Manager Handbook</h1>
@@ -95,15 +95,16 @@
       </article>
     </div>
   {{ else }}
-    {{- /* ===== DELEGATE: verbatim copy of Hextra's layouts/docs/list.html "main" body =====
-           Source: github.com/imfing/hextra@v0.12.3 (pinned in go.mod). Keeps the 12 Section
-           index pages on the theme default (AC #2). ⚠️ This is a frozen copy: on a Hextra
-           upgrade it will NOT auto-update and the override wins with no build error — re-copy
-           this block from the new module's layouts/docs/list.html and diff. */ -}}
+    {{- /* ===== SECTION INDEX (the 12 Section _index pages) =====
+           Body is a copy of Hextra's layouts/docs/list.html "main" (source:
+           github.com/imfing/hextra@v0.12.3, pinned in go.mod) PLUS an auto topic-card index
+           (Story 3.2/U2) so a section landing isn't a lone intro paragraph. ⚠️ The copied part
+           is frozen: on a Hextra upgrade it won't auto-update and the override wins with no
+           build error — re-copy the theme block from the new module and diff. */ -}}
     <div class='hx:mx-auto hx:flex hextra-max-page-width'>
       {{ partial "sidebar.html" (dict "context" .) }}
       {{ partial "toc.html" . }}
-      <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <article class="hx:w-full hx:break-words hx:flex ck-docs-article hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
         <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
           {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
           <div class="content">
@@ -115,6 +116,23 @@
             {{ end }}
             {{ .Content }}
           </div>
+
+          {{- /* Auto topic index (Story 3.2/U2): the section's topics as cards, so the landing
+                 isn't a lone intro. Auto-derived from child pages by weight — zero upkeep: new
+                 topics appear automatically; the 🚧 badge comes from each topic's stub flag.
+                 Rendered outside .content so Hextra prose link styles don't bleed into the cards. */ -}}
+          {{- with .Pages.ByWeight -}}
+            <p class="ck-eyebrow">In this section</p>
+            <div class="ck-sec-cards">
+              {{- range . }}
+              <a class="ck-tcard" href="{{ .RelPermalink }}">
+                <span class="ck-tcard-h"><b>{{ .LinkTitle }}</b>{{- if .Params.stub }} <span class="ck-stub-badge">🚧 Expanding</span>{{ end -}}</span>
+                {{- with .Params.description }}<span class="ck-tcard-d">{{ . }}</span>{{ end -}}
+              </a>
+              {{- end }}
+            </div>
+          {{- end -}}
+
           {{ partial "components/last-updated.html" . }}
           {{- if (site.Params.page.displayPagination | default true) -}}
             {{- partial "components/pager.html" . -}}

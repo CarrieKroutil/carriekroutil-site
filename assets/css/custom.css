@@ -64,6 +64,10 @@
   --ck-gutter: 22px;
   --ck-content-max: 920px;
   --ck-reading-max: 720px;
+  /* Footer height (40px top + 40px bottom padding + content line). Used to size the
+     docs article min-height so short handbook pages don't overflow by the footer's
+     height (Story 3.2/U4). Revisit if the footer's padding/contents change. */
+  --ck-footer-h: 123px;
 
   /* ----- Focus ----- */
   --ck-focus-ring: 2px solid #d946ef;
@@ -1462,4 +1466,68 @@ html:not(.dark) .hextra-custom-footer .ck-footer-line a {
   .ck-gcard { transition: transform 0.15s ease, border-color 0.15s ease; }
   .ck-step:hover,
   .ck-gcard:hover { transform: translateY(-2px); }
+}
+
+/* Story 3.2 (U4) — Docs article min-height. Hextra's default forces the docs
+   content row to calc(100vh - navbar) regardless of content, so navbar + row +
+   footer always exceeds the viewport → a scrollbar of the footer's height on every
+   handbook page. Subtracting the footer height makes short pages fit exactly (footer
+   still sits at the bottom); long pages / tall sidebars still scroll naturally. */
+.ck-docs-article { min-height: calc(100vh - var(--navbar-height) - var(--ck-footer-h)); }
+/* The sticky sidebar is sized to calc(100vh - navbar - menu-height), taller than the
+   article above, so on a short page it (not the content) drives the row height and the
+   footer still overflows. Cap it to the same footer-aware height. Desktop only — the
+   bottom toggle that --menu-height reserves space for is hidden on desktop (Story 1.3),
+   and on mobile the sidebar is an off-canvas drawer that doesn't affect page height. */
+@media (min-width: 768px) {
+  .hextra-sidebar-container .hextra-scrollbar {
+    height: calc(100vh - var(--navbar-height) - var(--ck-footer-h));
+  }
+}
+
+/* ============================================================================
+   Story 3.2 (U2) — Section index topic cards. Auto-rendered on each of the 12
+   section pages from the section's topics (zero upkeep). No new colors — existing
+   --ck-* tokens only; stub badge reuses .ck-stub-badge (Epic 2).
+   ========================================================================== */
+/* Match the Start Here eyebrow gap (2rem above "New to management? Start here →"):
+   the section "In this section" eyebrow follows the intro .content with a 0 gap, so
+   give it 2rem top. Scoped to .content + .ck-eyebrow so Start Here is untouched. */
+.content + .ck-eyebrow { margin-top: 2rem; }
+.ck-sec-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin: 0.85rem 0 0;
+}
+.ck-tcard {
+  display: block;
+  padding: 14px 16px;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-tcard:hover { border-color: var(--ck-border-bright); }
+.ck-tcard-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ck-tcard-h b {
+  font-size: 1rem;
+  font-weight: var(--ck-weight-strong);
+}
+.ck-tcard-d {
+  display: block;
+  margin-top: 4px;
+  color: var(--ck-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ck-tcard { transition: transform 0.15s ease, border-color 0.15s ease; }
+  .ck-tcard:hover { transform: translateY(-2px); }
 }
