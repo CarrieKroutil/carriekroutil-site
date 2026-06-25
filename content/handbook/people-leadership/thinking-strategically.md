@@ -6,7 +6,7 @@ lastUpdated: 2026-06-25
 goDeeper:
   - group: Books
     title: "Good Strategy Bad Strategy — Richard Rumelt"
-    url: "https://www.penguinrandomhouse.com/books/204203/good-strategy-bad-strategy-by-richard-rumelt/"
+    url: "https://www.penguinrandomhouse.com/books/208668/good-strategy-bad-strategy-by-richard-rumelt/"
     why: "The clearest dismantling of strategy-as-buzzwords and the best definition of what an actual strategy is."
   - group: Books
     title: "An Elegant Puzzle — Will Larson"

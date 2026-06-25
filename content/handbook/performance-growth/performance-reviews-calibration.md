@@ -6,9 +6,9 @@ lastUpdated: 2026-06-25
 stub: true
 goDeeper:
   - group: Tools
-    title: "Google re:Work — Performance management guides"
-    url: "https://rework.withgoogle.com/en/guides/managers-give-feedback-that-promotes-growth"
-    why: "Research-backed practices for reviews, fairness, and reducing bias in evaluation — the closest thing to a neutral reference."
+    title: "GitLab Handbook — 360 Feedback & performance reviews"
+    url: "https://handbook.gitlab.com/handbook/people-group/360-feedback/"
+    why: "An open, detailed reference for running reviews and feedback cycles with fairness and structure — the closest thing to a neutral playbook."
   - group: Books
     title: "Radical Candor — Kim Scott"
     url: "https://www.radicalcandor.com/the-book/"

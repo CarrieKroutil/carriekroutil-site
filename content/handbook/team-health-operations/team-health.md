@@ -13,9 +13,9 @@ goDeeper:
     url: "https://engineering.atspotify.com/2014/09/squad-health-check-model"
     why: "A lightweight, team-run way to surface health signals across delivery, fun, learning, and support — the format I steal from most."
   - group: Tools
-    title: "Google re:Work — Understanding team effectiveness"
-    url: "https://rework.withgoogle.com/en/guides/understanding-team-effectiveness"
-    why: "The Project Aristotle research naming psychological safety as the number-one predictor of a healthy, effective team."
+    title: "The Fearless Organization — Amy Edmondson"
+    url: "https://fearlessorganization.com/"
+    why: "From the researcher behind the work Google's Project Aristotle drew on — psychological safety as the number-one predictor of a healthy, effective team."
 ---
 
 A healthy team is the one thing that makes everything else easier. When a team is healthy, work flows, people tell you the truth, and problems surface while they're still small. When it isn't, you spend your weeks firefighting symptoms — missed estimates, quiet resentment, a slow drip of attrition — without ever touching the cause. So team health isn't a soft, end-of-quarter concern. It's the substrate everything else runs on.

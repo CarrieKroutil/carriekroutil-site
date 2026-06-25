@@ -7,7 +7,7 @@ stub: true
 goDeeper:
   - group: Books
     title: "Co-Intelligence — Ethan Mollick"
-    url: "https://www.penguinrandomhouse.com/books/740855/co-intelligence-by-ethan-mollick/"
+    url: "https://www.penguinrandomhouse.com/books/741805/co-intelligence-by-ethan-mollick/"
     why: "Mollick's framing of working with AI as a collaborator, not a threat — useful language for the conversations you'll have with your team."
   - group: Books
     title: "One Useful Thing — Ethan Mollick's blog"

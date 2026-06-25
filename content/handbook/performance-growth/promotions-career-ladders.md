@@ -5,12 +5,12 @@ description: "Using the ladder as a development tool, sponsoring people fairly, 
 lastUpdated: 2026-06-25
 goDeeper:
   - group: Tools
-    title: "Lara Hogan — \"Getting a promotion\" resources"
-    url: "https://larahogan.me/blog/getting-a-promotion/"
-    why: "How to advocate for and document a promotion case — manager-side and IC-side, both worth reading."
+    title: "Lara Hogan — \"How to announce promotions fairly\""
+    url: "https://larahogan.me/blog/how-to-announce-promotions-fairly/"
+    why: "How to handle promotions fairly and visibly — what you recognize is what the rest of the team learns to value."
   - group: Tools
-    title: "Google re:Work — Career development & growth"
-    url: "https://rework.withgoogle.com/en/guides/managers-enable-and-coach-for-career-development"
+    title: "GitLab Handbook — Career development"
+    url: "https://handbook.gitlab.com/handbook/people-group/learning-and-development/career-development/"
     why: "Practices for coaching career growth and making development conversations a normal part of managing."
   - group: Books
     title: "The Manager's Path — Camille Fournier"

@@ -10,12 +10,12 @@ goDeeper:
     url: "https://www.oreilly.com/library/view/the-managers-path/9781491973882/"
     why: "Grounded, practical guidance on bringing people onto a team and setting them up to succeed."
   - group: Tools
-    title: "Google re:Work — Onboarding"
-    url: "https://rework.withgoogle.com/en/guides/onboarding"
-    why: "Evidence-backed onboarding practices, including the outsized impact of an engaged manager in week one."
+    title: "GitLab Handbook — Onboarding"
+    url: "https://handbook.gitlab.com/handbook/people-group/general-onboarding/"
+    why: "An open, detailed onboarding playbook, including the outsized impact of an engaged manager in week one."
   - group: Books
     title: "The First 90 Days — Michael D. Watkins"
-    url: "https://www.harvardbusiness.org/books/the-first-90-days/"
+    url: "https://store.hbr.org/product/the-first-90-days-updated-and-expanded-proven-strategies-for-getting-up-to-speed-faster-and-smarter/11323"
     why: "The transition playbook — useful for shaping a new hire's first three months, not just your own."
 ---
 

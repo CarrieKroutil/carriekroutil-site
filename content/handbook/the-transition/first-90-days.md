@@ -7,7 +7,7 @@ stub: true
 goDeeper:
   - group: Books
     title: "The First 90 Days — Michael D. Watkins"
-    url: "https://www.harvardbusiness.org/books/the-first-90-days/"
+    url: "https://store.hbr.org/product/the-first-90-days-updated-and-expanded-proven-strategies-for-getting-up-to-speed-faster-and-smarter/11323"
     why: "The canonical playbook for transitions, with frameworks you can lift directly."
   - group: Books
     title: "The Manager's Path — Camille Fournier"

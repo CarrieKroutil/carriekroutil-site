@@ -7,11 +7,11 @@ stub: true
 goDeeper:
   - group: Books
     title: "Work Rules! — Laszlo Bock"
-    url: "https://www.workrules.net/"
+    url: "https://www.porchlightbooks.com/products/work-rules-laszlo-bock-9781455554799"
     why: "Why credential and pedigree signals predict less than we think, and what to weight instead."
   - group: Tools
-    title: "Google re:Work — Use structured interviewing"
-    url: "https://rework.withgoogle.com/en/guides/hiring-use-structured-interviewing"
+    title: "GitLab Handbook — Hiring & Talent Acquisition"
+    url: "https://handbook.gitlab.com/handbook/hiring/"
     why: "The structured, criteria-first mindset that should start at the résumé, not the interview."
   - group: Tools
     title: "Project Include — Hiring recommendations"

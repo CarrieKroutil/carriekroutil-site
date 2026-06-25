@@ -1283,11 +1283,13 @@ html:not(.dark) .hextra-custom-footer .ck-footer-line a {
 .ck-go-deeper__link {
   color: var(--ck-fg);
   font-weight: var(--ck-weight-strong);
-  text-decoration: none;
+  text-decoration: underline;       /* persistent underline so links aren't color-only (WCAG 1.4.1) */
+  text-underline-offset: 2px;
 }
 .ck-go-deeper__link:hover {
-  color: var(--ck-link);
-  text-decoration: underline;
+  /* --ck-accent-text (not --ck-link) — it carries an AA light companion (#a21caf,
+     5.8:1 on the light card); --ck-link is bright fuchsia and only clears AA on dark. */
+  color: var(--ck-accent-text);
 }
 .ck-go-deeper__why {
   display: block;

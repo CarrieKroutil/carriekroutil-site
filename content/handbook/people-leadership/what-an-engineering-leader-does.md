@@ -10,7 +10,7 @@ goDeeper:
     why: "The clearest map of what each rung of the engineering-management ladder actually demands."
   - group: Books
     title: "High Output Management — Andrew Grove"
-    url: "https://www.penguinrandomhouse.com/books/417633/high-output-management-by-andrew-s-grove/"
+    url: "https://www.penguinrandomhouse.com/books/72467/high-output-management-by-andrew-s-grove-former-chairman-and-ceo-of-intel/"
     why: "The foundational text on a manager's output being the output of their team and everyone they influence."
   - group: Courses
     title: "Exponent — Engineering Management"

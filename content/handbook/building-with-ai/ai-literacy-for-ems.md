@@ -7,7 +7,7 @@ stub: true
 goDeeper:
   - group: Books
     title: "Co-Intelligence — Ethan Mollick"
-    url: "https://www.penguinrandomhouse.com/books/740855/co-intelligence-by-ethan-mollick/"
+    url: "https://www.penguinrandomhouse.com/books/741805/co-intelligence-by-ethan-mollick/"
     why: "The best non-hype, non-doom orientation to what these tools are and how to actually work alongside them. Start here."
   - group: Courses
     title: "DeepLearning.AI — short courses"

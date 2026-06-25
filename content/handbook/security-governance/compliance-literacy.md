@@ -10,9 +10,9 @@ goDeeper:
     url: "https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2"
     why: "The body behind SOC 2. Worth a skim so you understand what an auditor is actually attesting to before you're sitting in an audit."
   - group: Tools
-    title: "ISO/IEC 27001"
-    url: "https://www.iso.org/standard/27001"
-    why: "The international standard for information security management systems — the certification your enterprise customers may ask whether you hold."
+    title: "ISO/IEC 27001 — overview and standard"
+    url: "https://en.wikipedia.org/wiki/ISO/IEC_27001"
+    why: "A readable overview of the international standard for information security management systems — the certification your enterprise customers may ask whether you hold."
   - group: Tools
     title: "GDPR — official text and guidance"
     url: "https://gdpr.eu/"

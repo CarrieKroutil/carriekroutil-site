@@ -13,9 +13,9 @@ goDeeper:
     url: "https://www.tablegroup.com/product/the-advantage/"
     why: "Source of the four-types-of-values exercise for building team values everyone actually owns."
   - group: Tools
-    title: "Google re:Work — Project Aristotle"
-    url: "https://rework.withgoogle.com/en/guides/understanding-team-effectiveness"
-    why: "The research showing psychological safety is the single biggest factor in team effectiveness."
+    title: "The Fearless Organization — Amy Edmondson"
+    url: "https://fearlessorganization.com/"
+    why: "From the researcher behind the work Google's Project Aristotle drew on — psychological safety as the single biggest factor in team effectiveness."
 ---
 
 Inclusive teams have a particular feel to them. The work flows. Communication is easy. People float ideas that are a little out there without bracing for impact. And when a deadline gets tight, people jump in to help each other across the line instead of guarding their own lane. That's not luck or chemistry — it's the visible surface of psychological safety and belonging, and you can build it on purpose.

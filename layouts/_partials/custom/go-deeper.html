@@ -28,7 +28,7 @@
   {{- /* Validate every group value up front so a typo fails the build, not silently drops. */ -}}
   {{- range $items -}}
     {{- if not (in $order .group) -}}
-      {{- errorf "Go Deeper item %q in %q has group %q — must be exactly one of Books · Courses · Tools" .title $page.Path .group -}}
+      {{- errorf "Go Deeper item %q in %q has group %q — must be exactly one of Books · Courses · Tools" .title $page.Path (.group | default "<missing>") -}}
     {{- end -}}
   {{- end -}}
 
@@ -42,7 +42,7 @@
           <ul class="ck-go-deeper__list">
             {{- range . -}}
               <li class="ck-go-deeper__item">
-                <a class="ck-go-deeper__link" href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                <a class="ck-go-deeper__link" href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ .title }}</a>
                 {{- with .why }}<span class="ck-go-deeper__why">{{ . }}</span>{{ end -}}
               </li>
             {{- end -}}

@@ -14,9 +14,9 @@ goDeeper:
     url: "https://www.oreilly.com/library/view/the-managers-path/9781491973882/"
     why: "How team composition and growth evolve as the team and your role scale."
   - group: Tools
-    title: "Google re:Work — Hiring guides"
-    url: "https://rework.withgoogle.com/en/guides/hiring"
-    why: "Research-backed practices for building a team through consistent, fair hiring."
+    title: "Project Include — Hiring recommendations"
+    url: "https://projectinclude.org/hiring"
+    why: "Concrete, evidence-based practices for building a team through consistent, fair, and inclusive hiring."
 ---
 
 Still expanding this one, but here's the through-line I want up front: building a team is not the same as filling seats. The strongest teams are assembled — you hire for the shape of the whole, for strengths that complement what's already there, rather than cloning the people you already have. That deliberate composition is also where diversity stops being a slogan and becomes a competitive advantage: different perspectives catch problems a monoculture never sees. The mechanics of actually getting there live in [inclusive interviewing]({{< relref "/handbook/hiring-team-building/inclusive-interviewing.md" >}}) and in keeping bias out of [résumé screening]({{< relref "/handbook/hiring-team-building/resume-screening-without-bias.md" >}}).

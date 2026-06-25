@@ -6,19 +6,19 @@ lastUpdated: 2026-06-25
 goDeeper:
   - group: Books
     title: "Inclusion on Purpose — Ruchika Tulshyan"
-    url: "https://www.penguinrandomhouse.com/books/655488/inclusion-on-purpose-by-ruchika-tulshyan/"
+    url: "https://www.penguinrandomhouse.com/books/691615/inclusion-on-purpose-by-ruchika-tulshyan/"
     why: "Makes the case that inclusion happens by intentional design, not goodwill — directly applicable to how you structure an interview loop."
   - group: Tools
-    title: "Google re:Work — Hiring guides"
-    url: "https://rework.withgoogle.com/en/guides/hiring"
-    why: "The research behind structured interviewing, work-sample tests, and reducing bias in candidate evaluation."
+    title: "GitLab Handbook — Hiring & Talent Acquisition"
+    url: "https://handbook.gitlab.com/handbook/hiring/"
+    why: "An open, detailed playbook for structured interviewing, work-sample evaluation, and reducing bias in candidate selection."
   - group: Tools
     title: "Project Include"
     url: "https://projectinclude.org/"
     why: "Concrete, open-source recommendations for inclusive hiring and interview practices in tech."
   - group: Books
     title: "Work Rules! — Laszlo Bock"
-    url: "https://www.workrules.net/"
+    url: "https://www.porchlightbooks.com/products/work-rules-laszlo-bock-9781455554799"
     why: "How Google moved from gut-feel interviews to structured, signal-based hiring — and why it works."
 ---
 

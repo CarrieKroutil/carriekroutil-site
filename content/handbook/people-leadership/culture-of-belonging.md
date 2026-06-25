@@ -10,7 +10,7 @@ goDeeper:
     why: "The LinkedIn Learning course this page is built on, including the head-heart-hands method."
   - group: Books
     title: "Inclusion on Purpose — Ruchika Tulshyan"
-    url: "https://www.penguinrandomhouse.com/books/645937/inclusion-on-purpose-by-ruchika-tulshyan/"
+    url: "https://www.penguinrandomhouse.com/books/691615/inclusion-on-purpose-by-ruchika-tulshyan/"
     why: "A practical playbook for building inclusion and belonging intentionally rather than hoping it happens."
   - group: Tools
     title: "Truity Enneagram test"
