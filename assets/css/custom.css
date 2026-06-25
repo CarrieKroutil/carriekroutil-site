@@ -1136,3 +1136,48 @@ html:not(.dark) .hextra-custom-footer .ck-footer-line,
 html:not(.dark) .hextra-custom-footer .ck-footer-line a {
   color: var(--ck-muted);
 }
+
+/* ============================================================================
+   Story 1.3 (Handbook) — docs-mode sidebar brand match
+   (FR-11 brand continuity · UX-DR4 sidebar active state + ~300px width)
+   ----------------------------------------------------------------------------
+   The Handbook (/handbook/**, Hextra docs mode) inherits the whole brand for
+   free: the --primary-* HSL mapping above already drives Hextra's
+   --hx-color-primary-* scale, so the sidebar active item is fuchsia + bold
+   (hextra-sidebar-active-item → text-primary-600 + font-semibold) and the
+   header/footer/toggle/focus-ring are the site's. Only two docs specifics that
+   Hextra doesn't ship are added here: a left accent bar on the active item, and
+   the ~300px sidebar width. Tokens only — no new colors (AD-5, AD-17/FR-11).
+   ========================================================================== */
+:root {
+  --ck-sidebar-w: 300px;   /* UX-DR4 ~300px (Hextra default is w-64 = 256px) */
+}
+
+/* Widen the docs sidebar. custom.css loads last, so this equal-specificity rule
+   wins over Hextra's `hx:md:w-64`. Scoped to the docs breakpoint (md+); on mobile
+   the sidebar is the full-width drawer and keeps Hextra's behavior. */
+@media (min-width: 768px) {
+  .hextra-sidebar-container {
+    width: var(--ck-sidebar-w);
+  }
+}
+
+/* Left accent bar on the current sidebar item (UX-DR4). A positioned ::before so
+   it never shifts the label text or fights the rounded active pill. The active
+   item already reads fuchsia + bold from Hextra's primary-* classes (now fuchsia
+   via the mapping) — the bar is the only addition. --ck-accent-fuchsia is the
+   bright decorative fuchsia (correct for a non-text accent element). */
+.hextra-sidebar-active-item {
+  position: relative;
+}
+.hextra-sidebar-active-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.15em;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--ck-accent-fuchsia);
+}

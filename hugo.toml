@@ -79,6 +79,14 @@ name = "Posts"
 url = "/posts/"
 weight = 10
 
+# Engineering Manager Handbook (AD-14). Slots between Posts (10) and About (20);
+# weight (not source order) drives render order. Literal URL — not pageRef —
+# matching the Posts/About convention above (avoids build-time pageRef validation).
+[[menu.main]]
+name = "Handbook"
+url = "/handbook/"
+weight = 15
+
 [[menu.main]]
 name = "About"
 url = "/about/"
