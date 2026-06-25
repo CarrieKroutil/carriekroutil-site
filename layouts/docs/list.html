@@ -1,0 +1,127 @@
+{{- /*
+  docs/list.html — Start Here landing override (Story 3.1, AD-19).
+
+  WHY THIS SLOT (not layouts/handbook/list.html):
+  cascade {type: docs} on content/handbook/_index.md makes Hugo resolve every handbook
+  section-list page to the `docs` TYPE slot, and in Hugo's lookup order TYPE beats SECTION.
+  A layouts/handbook/list.html (section slot) is therefore never reached — verified
+  empirically: Hextra's module layouts/docs/list.html wins. So the override must live at
+  the docs list.html slot, exactly as AD-19's prose states ("renders via the docs list.html
+  slot, so it must guard on the root path"). This file overrides Hextra's docs/list.html the
+  same way the sibling docs/single.html overrides the theme's topic template. /handbook/** is
+  the only docs-type content on the site, so this only affects handbook section-list pages.
+
+  THE ROOT GUARD: this template serves BOTH the /handbook/ root index AND all 12 Section
+  index pages (all are kind=section, type=docs). Rendering Start Here unconditionally would
+  leak it onto every Section index (AD-19's named failure mode). Hence:
+    - root (/handbook/)       -> the Start Here landing: single centered column, sidebar
+                                 present, the three-column docs frame deliberately broken.
+    - any other handbook page -> a verbatim copy of Hextra's docs/list.html body, so the 12
+                                 Section indexes render EXACTLY as the theme default (AC #2).
+                                 Keep this else-branch in sync with the theme on upgrade.
+
+  All internal links use the relref function (build-failing on a missing target, AD-22).
+  No new colors — styling uses existing --ck-* tokens in assets/css/custom.css (FR-11/AD-17).
+*/ -}}
+{{ define "main" }}
+  {{- /* Root guard: compare the page to the handbook section root itself, not a hardcoded
+         "/handbook/" URL string. .RelPermalink would shift to "/site/handbook/" under a
+         baseURL path prefix or "/en/handbook/" with a language subdir and silently send the
+         root to the else-branch (a bare empty docs index). Comparing page objects is immune. */ -}}
+  {{- $root := .Site.GetPage "/handbook" -}}
+  {{ if eq . $root }}
+    {{- /* ===================== START HERE LANDING (root only, AD-19) ===================== */ -}}
+    {{- $path := slice
+      (dict "n" "1" "name" "The Transition (Engineer → Manager)" "why" "Is this the right move? What changes, and your first 90 days." "ref" "/handbook/the-transition")
+      (dict "n" "2" "name" "Managing Yourself" "why" "Time, energy, boundaries — keep your own tank full first." "ref" "/handbook/managing-yourself")
+      (dict "n" "3" "name" "People & Leadership" "why" "What the job actually is: leading, communicating, inclusive teams." "ref" "/handbook/people-leadership")
+    -}}
+    {{- /* Grid is hand-maintained (the bespoke taglines aren't on the section pages).
+           Manual-sync obligation: if a Section is renamed/reordered/re-slugged, update here too.
+           relref still build-fails on a DELETED slug, but won't catch a rename/reorder drift. */ -}}
+    {{- $grid := slice
+      (dict "n" "01" "name" "The Transition" "tag" "Engineer → Manager" "ref" "/handbook/the-transition")
+      (dict "n" "02" "name" "Managing Yourself" "tag" "Sustain & grow" "ref" "/handbook/managing-yourself")
+      (dict "n" "03" "name" "People & Leadership" "tag" "Lead & communicate" "ref" "/handbook/people-leadership")
+      (dict "n" "04" "name" "Performance & Growth" "tag" "1:1s, feedback, reviews" "ref" "/handbook/performance-growth")
+      (dict "n" "05" "name" "Hiring & Team Building" "tag" "Recruit & onboard" "ref" "/handbook/hiring-team-building")
+      (dict "n" "06" "name" "Team Health & Operations" "tag" "Health, ceremonies, lifecycle" "ref" "/handbook/team-health-operations")
+      (dict "n" "07" "name" "Delivery & Execution" "tag" "Scope, resources, time" "ref" "/handbook/delivery-execution")
+      (dict "n" "08" "name" "Operational Excellence" "tag" "On-call, monitoring, incidents" "ref" "/handbook/operational-excellence")
+      (dict "n" "09" "name" "Tools & Productivity" "tag" "Automation & tips" "ref" "/handbook/tools-productivity")
+      (dict "n" "10" "name" "Building with AI" "tag" "Literacy & AI-native eng" "ref" "/handbook/building-with-ai")
+      (dict "n" "11" "name" "Security & Governance" "tag" "OWASP, NIST, compliance" "ref" "/handbook/security-governance")
+      (dict "n" "12" "name" "Engineering Foundations" "tag" "i18n, a11y, the must-knows" "ref" "/handbook/engineering-foundations")
+    -}}
+    <div class='hx:mx-auto hx:flex hextra-max-page-width'>
+      {{ partial "sidebar.html" (dict "context" .) }}
+      <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8">
+        <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-4 hx:md:px-12 ck-start-here">
+
+          <h1 class="ck-start-h1">The Engineering Manager Handbook</h1>
+          <p class="ck-start-lede">This is the handbook I wish someone had handed me when I started leading engineering teams. It's the stuff I've picked up over the years — managing people, the hands-on tooling, and the engineering foundations nobody really teaches you but you're expected to know — all in one place. Every topic ends with my favorite picks for going deeper, so there's always a next step waiting.</p>
+
+          {{- /* Experienced-jump escape hatch (AC #4): no on-page search box — points at the
+                 always-present sidebar reference and the header ⌘K search. */ -}}
+          <p class="ck-start-jump">Been here before? Skip the path — browse the full reference in the sidebar, or press <kbd class="ck-kbd">⌘K</kbd> to search.</p>
+
+          <p class="ck-eyebrow">New to management? Start here →</p>
+          <div class="ck-steps">
+            {{- range $path }}
+            <a class="ck-step" href="{{ relref $ .ref }}">
+              <span class="ck-step-n" aria-hidden="true">{{ .n }}</span>
+              <span class="ck-step-t"><b>{{ .name }}</b><span>{{ .why }}</span></span>
+              <span class="ck-step-arrow" aria-hidden="true">→</span>
+            </a>
+            {{- end }}
+          </div>
+          <p class="ck-branch">…then branch by what you're facing — delivery, on-call, AI, security, or the engineering must-knows.</p>
+
+          <p class="ck-eyebrow">Browse all 12 sections</p>
+          <div class="ck-grid">
+            {{- range $grid }}
+            <a class="ck-gcard" href="{{ relref $ .ref }}">
+              <span class="ck-gn" aria-hidden="true">{{ .n }}</span>
+              <b>{{ .name }}</b>
+              <span>{{ .tag }}</span>
+            </a>
+            {{- end }}
+          </div>
+
+          {{- /* About nudge (AC #5) — approved verbatim (Carrie, 2026-06-25). */ -}}
+          <p class="ck-start-about">Written and curated by Carrie Kroutil. <a href="{{ relref $ "/about" }}">More about me →</a></p>
+
+        </main>
+      </article>
+    </div>
+  {{ else }}
+    {{- /* ===== DELEGATE: verbatim copy of Hextra's layouts/docs/list.html "main" body =====
+           Source: github.com/imfing/hextra@v0.12.3 (pinned in go.mod). Keeps the 12 Section
+           index pages on the theme default (AC #2). ⚠️ This is a frozen copy: on a Hextra
+           upgrade it will NOT auto-update and the override wins with no build error — re-copy
+           this block from the new module's layouts/docs/list.html and diff. */ -}}
+    <div class='hx:mx-auto hx:flex hextra-max-page-width'>
+      {{ partial "sidebar.html" (dict "context" .) }}
+      {{ partial "toc.html" . }}
+      <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+        <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+          {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+          <div class="content">
+            {{ if .Title }}
+            <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
+              <h1 class="hx:mb-0">{{ .Title }}</h1>
+              {{ partial "components/page-context-menu" . }}
+            </div>
+            {{ end }}
+            {{ .Content }}
+          </div>
+          {{ partial "components/last-updated.html" . }}
+          {{- if (site.Params.page.displayPagination | default true) -}}
+            {{- partial "components/pager.html" . -}}
+          {{- end -}}
+          {{ partial "components/comments.html" . }}
+        </main>
+      </article>
+    </div>
+  {{ end }}
+{{ end }}

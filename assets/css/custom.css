@@ -1308,3 +1308,158 @@ html:not(.dark) .hextra-custom-footer .ck-footer-line a {
   background: color-mix(in srgb, var(--ck-accent-fuchsia) 9%, var(--ck-surface));
   color: var(--ck-fg);
 }
+
+/* ============================================================================
+   Story 3.1 — Start Here landing (the /handbook/ root, AD-19).
+   Rendered by layouts/docs/list.html (root branch): a single centered column that
+   deliberately breaks the three-column docs frame (sidebar stays, no TOC rail).
+   No new colors — every value derives from an existing --ck-* token (FR-11/AD-17).
+   Card hover-lift lives under prefers-reduced-motion: no-preference, matching the
+   site-wide pattern, so reduced-motion users get no transform. Focus rings come
+   from the global :focus-visible rule (the cards are real <a> elements).
+   ========================================================================== */
+.ck-start-here {
+  max-width: 880px;
+  margin-inline: auto;
+}
+.ck-start-h1 {
+  font-size: var(--ck-scale-h1);
+  font-weight: var(--ck-weight-display);
+  letter-spacing: var(--ck-tracking-display);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+.ck-start-lede {
+  max-width: 60ch;
+  color: var(--ck-muted);
+  font-size: 1.1rem;
+  line-height: var(--ck-leading-body);
+  margin: 0 0 1.25rem;
+}
+.ck-start-jump {
+  color: var(--ck-muted);
+  font-size: var(--ck-scale-small);
+  margin: 0 0 2rem;
+}
+.ck-start-jump .ck-kbd {
+  border: 1px solid var(--ck-border);
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-family: var(--ck-font-mono);
+  font-size: 0.85em;
+  color: var(--ck-fg);
+  white-space: nowrap;
+}
+.ck-eyebrow {
+  margin: 0 0 0.85rem;
+  font-size: 0.78rem;
+  font-weight: var(--ck-weight-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ck-accent-text);   /* theme-aware fuchsia — AA on dark and light */
+}
+
+/* ----- Guided-path step cards ----- */
+.ck-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 0.85rem;
+}
+.ck-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius-card);
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-step:hover { border-color: var(--ck-border-bright); }
+.ck-step-n {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--ck-radius-pill);
+  background: var(--ck-accent-gradient);   /* gradient garnish — decorative */
+  color: var(--ck-bg);                     /* dark glyph on the bright gradient */
+  font-size: 0.95rem;
+  font-weight: var(--ck-weight-display);
+}
+.ck-step-t { flex: 1; min-width: 0; }
+.ck-step-t b {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: var(--ck-weight-strong);
+}
+.ck-step-t span {
+  display: block;
+  color: var(--ck-muted);
+  font-size: 0.9rem;
+}
+.ck-step-arrow { color: var(--ck-muted); }
+.ck-branch {
+  margin: 0.25rem 0 2.25rem;
+  padding-left: 46px;   /* aligns under the card text, past the number disc */
+  color: var(--ck-muted);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+/* ----- Section grid ----- */
+.ck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 2.5rem;
+}
+.ck-gcard {
+  padding: 14px 15px;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: 14px;
+  color: var(--ck-fg);
+  text-decoration: none;
+}
+.ck-gcard:hover { border-color: var(--ck-border-bright); }
+.ck-gn {
+  color: var(--ck-muted);
+  font-size: 0.78rem;
+  font-weight: var(--ck-weight-strong);
+}
+.ck-gcard b {
+  display: block;
+  margin: 3px 0;
+  font-size: 0.95rem;
+}
+.ck-gcard span {
+  color: var(--ck-muted);
+  font-size: 0.83rem;
+}
+@media (max-width: 900px) { .ck-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .ck-grid { grid-template-columns: 1fr; } }
+
+/* ----- About nudge ----- */
+.ck-start-about {
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ck-border);
+  color: var(--ck-muted);
+  font-size: 0.92rem;
+}
+.ck-start-about a {
+  color: var(--ck-accent-text);
+  font-weight: var(--ck-weight-strong);
+}
+
+/* Card hover-lift only when motion is welcome (matches the site-wide pattern). */
+@media (prefers-reduced-motion: no-preference) {
+  .ck-step,
+  .ck-gcard { transition: transform 0.15s ease, border-color 0.15s ease; }
+  .ck-step:hover,
+  .ck-gcard:hover { transform: translateY(-2px); }
+}
