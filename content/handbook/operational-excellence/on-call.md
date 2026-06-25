@@ -19,9 +19,9 @@ goDeeper:
     why: "Battle-tested guidance on on-call practices, handoffs, and escalation from a company that lives this."
 ---
 
-On-call is where your operational values stop being abstract. You can say you care about your people all day long, but the rotation is the thing that either protects their evenings and weekends or quietly eats them. I treat on-call load as something I'm personally on the hook for — if my team is getting paged at 3am for things that aren't real, that's a problem I own, not one they should just tough out.
+On-call is where your operational values stop being abstract. You can say you care about your people all day long, but the rotation is the thing that either protects their evenings and weekends or quietly eats them. I treat on-call load as something I'm personally on the hook for — if my team is getting paged at 3am for things that aren't real, that's a problem I own, not one they should just tough out, and it usually traces back to [alerting that fires when it shouldn't]({{< relref "/handbook/operational-excellence/monitoring-alerting.md" >}}).
 
-This topic is about building a rotation that catches the things that genuinely need a human, fast, while leaving people rested enough to do their day jobs and stay on the team.
+This topic is about building a rotation that catches the things that genuinely need a human, fast, while leaving people rested enough to do their day jobs and stay on the team. When a page does turn into a real outage, [incident response]({{< relref "/handbook/operational-excellence/incident-response.md" >}}) takes over from here.
 
 What the full version will cover:
 

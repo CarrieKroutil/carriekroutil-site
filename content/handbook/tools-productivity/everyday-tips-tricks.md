@@ -45,7 +45,7 @@ Set one of these up for every tool you search more than a few times a day — Ji
 
 ## Searching emojis in Slack
 
-In Slack's search bar, use the `hasmy:` keyword with an `:emoji:` to recall messages quickly. For example, `hasmy::pushpin:` pulls up every message I've added a 📌 to as a "do this later" marker. I use 👀 the same way for "needs more of my time."
+In Slack's search bar, use the `hasmy:` keyword with an `:emoji:` to recall messages quickly. For example, `hasmy::pushpin:` pulls up every message I've added a 📌 to as a "do this later" marker — a lightweight way to [get a task out of your head]({{< relref "/handbook/managing-yourself/staying-organized.md" >}}) without losing it. I use 👀 the same way for "needs more of my time."
 
 You can do the same through the UI: run any search, then click the **Reactions** dropdown and pick a reaction to filter by.
 
@@ -78,4 +78,4 @@ Multi-cursor editing is the single biggest VS Code productivity unlock — once 
 
 ## Git
 
-You don't need to memorize git — but a good cheat sheet next to your keyboard pays for itself. I keep Julia Evans' one within reach: the [git cheat sheet PDF](https://wizardzines.com/git-cheat-sheet.pdf) from [Wizard Zines](https://wizardzines.com). When you want to actually understand what those commands are doing, the free [Pro Git book](https://git-scm.com/book) is the canonical reference.
+You don't need to memorize git — but a good cheat sheet next to your keyboard pays for itself. I keep Julia Evans' one within reach: the [git cheat sheet PDF](https://wizardzines.com/git-cheat-sheet.pdf) from [Wizard Zines](https://wizardzines.com) — the same Wizardzines I lean on across the whole [learning path]({{< relref "/handbook/engineering-foundations/software-engineering-learning-path.md" >}}). When you want to actually understand what those commands are doing, the free [Pro Git book](https://git-scm.com/book) is the canonical reference.

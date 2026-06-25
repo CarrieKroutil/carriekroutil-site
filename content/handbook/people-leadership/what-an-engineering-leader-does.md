@@ -28,19 +28,19 @@ The title says "manager," but the work spans a handful of distinct responsibilit
 
 ### Managing individuals
 
-This is the bedrock: 1:1s that are actually about the person and not just a status meeting, onboarding that sets people up to succeed, and feedback delivered often and honestly. Most of your real impact happens here, one conversation at a time.
+This is the bedrock: [1:1s]({{< relref "/handbook/performance-growth/running-great-1-1s.md" >}}) that are actually about the person and not just a status meeting, [onboarding]({{< relref "/handbook/hiring-team-building/onboarding.md" >}}) that sets people up to succeed, and [feedback]({{< relref "/handbook/performance-growth/giving-feedback.md" >}}) delivered often and honestly. Most of your real impact happens here, one conversation at a time.
 
 ### Performance management
 
-Building a high-performing team means both growing your strong contributors and dealing squarely with underperformance. The second one is where new managers freeze. Avoiding a hard conversation feels kind in the moment and is almost always unkind in the long run — to the person, and to everyone around them carrying the slack.
+Building a high-performing team means both growing your strong contributors and dealing squarely with [underperformance]({{< relref "/handbook/performance-growth/handling-underperformance.md" >}}). The second one is where new managers freeze. Avoiding a hard conversation feels kind in the moment and is almost always unkind in the long run — to the person, and to everyone around them carrying the slack.
 
 ### Recruitment and hiring
 
-You'll screen resumes, run interviews, and shape who joins the team. Doing it well means doing it without bias and interviewing inclusively, so you're actually evaluating people on what matters. Who you hire is one of the highest-leverage decisions you make.
+You'll screen resumes, run interviews, and shape who joins the team. Doing it well means doing it without bias and [interviewing inclusively]({{< relref "/handbook/hiring-team-building/inclusive-interviewing.md" >}}), so you're actually evaluating people on what matters. Who you hire is one of the highest-leverage decisions you make.
 
 ### Managing team execution
 
-Shipping the work. That means balancing feature delivery against tech debt, weighing engineering cost against business impact, and making the calls that keep the team moving without mortgaging next quarter to make this one look good.
+Shipping the work. That means balancing feature delivery against [tech debt, weighing engineering cost against business impact]({{< relref "/handbook/delivery-execution/tech-debt-vs-business-impact.md" >}}), and making the calls that keep the team moving without mortgaging next quarter to make this one look good.
 
 ### Cross-functional collaboration
 

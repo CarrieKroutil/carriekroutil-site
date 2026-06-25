@@ -19,11 +19,11 @@ goDeeper:
     why: "Deep, field-tested essays on starting a new leadership role well."
 ---
 
-I'm still building this topic out into the full guide, but the most important advice fits in a sentence: your first 90 days are for listening, not fixing. The instinct when you're new and nervous is to prove your value by changing things fast — and that's almost always how new managers lose the trust they'll need for the changes that actually matter. This topic is about spending your early weeks earning the right to be heard before you spend any capital.
+I'm still building this topic out into the full guide, but the most important advice fits in a sentence: your first 90 days are for listening, not fixing. The instinct when you're new and nervous is to prove your value by changing things fast — and that's almost always how new managers lose the trust they'll need for the changes that actually matter. (If you're inheriting or assembling a team in these weeks, [building a team]({{< relref "/handbook/hiring-team-building/building-a-team.md" >}}) deliberately is its own deep-dive.) This topic is about spending your early weeks earning the right to be heard before you spend any capital.
 
 What the full version will cover:
 
-- A listening-first plan: 1:1s, the questions to ask, and what to write down
+- A listening-first plan: [1:1s]({{< relref "/handbook/performance-growth/running-great-1-1s.md" >}}), the questions to ask, and what to write down
 - How to tell what's genuinely broken from what just looks unfamiliar
 - Picking one early, visible win without doing a "new manager reorg"
 - Setting expectations with your own boss in week one

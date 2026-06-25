@@ -32,7 +32,7 @@ The trap is treating these as independent dials. They're not. Pull one and the o
 
 - **Cut time, and you have to give something back.** Less time means less scope, or more people — and adding people late rarely buys you the time you hoped, because they need ramp-up and coordination before they're net-positive. A shorter deadline with the same scope and the same team isn't a plan; it's a wish.
 - **Add scope, and you've spent time or resources you didn't budget.** The "while we're in there, let's also…" conversation is where deadlines go to die. Every addition is a withdrawal from one of the other two levers, whether or not you account for it.
-- **Add resources, and you don't get linear speedup.** Two engineers are not twice as fast as one on the same problem. Coordination overhead, onboarding, and the simple fact that some work can't be parallelized all eat into the gain. Resources are the lever people reach for first and the one that disappoints most.
+- **Add resources, and you don't get linear speedup.** Two engineers are not twice as fast as one on the same problem. Coordination overhead, [onboarding]({{< relref "/handbook/hiring-team-building/onboarding.md" >}}), and the simple fact that some work can't be parallelized all eat into the gain. Resources are the lever people reach for first and the one that disappoints most.
 
 Of the three, **scope is usually the one you have the most honest room to move** — and the one teams are most reluctant to touch, because cutting scope feels like admitting defeat. It isn't. Shipping the 80% that delivers the value, on time, and coming back for the rest is almost always better than shipping 100% late or 100% half-broken.
 

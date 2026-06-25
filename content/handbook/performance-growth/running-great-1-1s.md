@@ -19,7 +19,7 @@ goDeeper:
     why: "Seven questions that keep a 1:1 in their court instead of yours — the antidote to advice-monster 1:1s."
 ---
 
-The 1:1 is the highest-leverage recurring meeting you have, and it's the easiest one to quietly ruin. The failure mode is almost always the same: it slides into a status update you could have read in a ticket. A great 1:1 is *their* meeting — a standing, protected space where the person you manage sets the agenda and you mostly listen, ask, and unblock.
+The 1:1 is the highest-leverage recurring meeting you have, and it's the easiest one to quietly ruin. The failure mode is almost always the same: it slides into a status update you could have read in a ticket. A great 1:1 is *their* meeting — a standing, protected space where the person you manage sets the agenda and you mostly listen, ask, and unblock. It's also the natural home for [coaching]({{< relref "/handbook/performance-growth/coaching-skills.md" >}}): the same habit of asking rather than answering is what keeps a 1:1 in their court.
 
 When this page is filled in, it'll cover how to structure a 1:1 without making it rigid, how to build the trust that gets you the real conversation instead of the polished one, what to do when someone always says "everything's fine," and how to keep notes and follow-through so the meeting actually compounds over time. Until then, the Go Deeper links below carry the weight — Lara Hogan's first-1:1 questions are where I'd start today.
 

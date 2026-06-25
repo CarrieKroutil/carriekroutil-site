@@ -25,7 +25,7 @@ goDeeper:
 
 *This page is a stub — I'm still filling it out. What's here is the honest skeleton.*
 
-I'll be straight with you: compliance is the part of the job I find least fun and most necessary. It's easy to dismiss as someone else's problem until an enterprise deal stalls on a security questionnaire, or a privacy law you didn't know applied turns out to apply. You don't need to become a compliance officer. You do need to be literate enough to know which regime is which, what it asks of your team, and when to pull in the people who do this for a living.
+I'll be straight with you: compliance is the part of the job I find least fun and most necessary. It's easy to dismiss as someone else's problem until an enterprise deal stalls on a security questionnaire, or a privacy law you didn't know applied turns out to apply. You don't need to become a compliance officer. You do need to be literate enough to know which regime is which, what it asks of your team, and when to pull in the people who do this for a living. (The companion piece on the [security standards bodies]({{< relref "/handbook/security-governance/security-standards-orgs.md" >}}) — OWASP and NIST — covers the controls side of the same coin.)
 
 This page will cover the four regimes that come up most, plus the cookie-compliance corner that quietly touches almost every website.
 

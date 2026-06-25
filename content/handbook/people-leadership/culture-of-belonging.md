@@ -20,7 +20,7 @@ goDeeper:
 
 In Maslow's hierarchy, belonging sits near the foundation — right above our physiological and safety needs. That's not a metaphor for the workplace; it's a real description of what people need before they can do their best work. Belonging isn't a perk you add once the roadmap is done. It's load-bearing.
 
-The thing most managers miss is that belonging starts with *you*. You can't build a culture of belonging for others while you're still managing yourself as someone who doesn't quite fit. So we'll start there, then move outward to the team and the org.
+The thing most managers miss is that belonging starts with *you*. You can't build a culture of belonging for others while you're still managing yourself as someone who doesn't quite fit. So we'll start there, then move outward to the team and the org — the day-to-day practices of [building inclusive teams]({{< relref "/handbook/people-leadership/inclusive-teams.md" >}}) are where that outward work actually lives.
 
 ## Start with what belonging feels like
 

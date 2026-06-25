@@ -45,8 +45,8 @@ It's a running record of noteworthy actions, results, and behaviors: the project
 
 You'll reach for that list constantly:
 
-- **Promotion cases** — yours and your reports'. A promotion packet built from a year of contemporaneous notes is dramatically stronger than one reconstructed from memory the week before the deadline.
-- **Performance reviews** — both writing your own self-review and giving specific, evidence-backed feedback to your team.
+- **[Promotion cases]({{< relref "/handbook/performance-growth/promotions-career-ladders.md" >}})** — yours and your reports'. A promotion packet built from a year of contemporaneous notes is dramatically stronger than one reconstructed from memory the week before the deadline.
+- **[Performance reviews]({{< relref "/handbook/performance-growth/performance-reviews-calibration.md" >}})** — both writing your own self-review and giving specific, evidence-backed feedback to your team.
 - **Resumes and brag-worthy moments** — when you need to articulate impact, the raw material is already there.
 
 {{< protip >}}

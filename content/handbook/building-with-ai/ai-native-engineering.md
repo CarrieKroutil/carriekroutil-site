@@ -19,13 +19,13 @@ goDeeper:
     why: "Hands-on courses on building real LLM applications and agentic systems — RAG, evaluation, orchestration."
 ---
 
-There's a difference between adding an AI feature and building an AI-native system. When the model is at the core of how your product works, the whole engineering discipline shifts: behavior is probabilistic, "correct" gets fuzzy, and your hardest problems move from logic to evaluation, prompts, context, and graceful failure. This is genuinely new territory for most teams, and it's easy to underestimate how much the surrounding system — guardrails, evals, observability — matters more than the model call itself. This page is a stub, but the through-line is that AI-native work rewards teams who treat the non-deterministic core as an engineering problem, not magic.
+There's a difference between adding an AI feature and building an AI-native system. When the model is at the core of how your product works, the whole engineering discipline shifts: behavior is probabilistic, "correct" gets fuzzy, and your hardest problems move from logic to evaluation, prompts, context, and graceful failure. This is genuinely new territory for most teams, and it leans hard on the [failure modes]({{< relref "/handbook/building-with-ai/ai-literacy-for-ems.md" >}}) every manager needs to understand — hallucination, drift, the confident-but-wrong answer. It's easy to underestimate how much the surrounding system — guardrails, evals, observability — matters more than the model call itself. This page is a stub, but the through-line is that AI-native work rewards teams who treat the non-deterministic core as an engineering problem, not magic.
 
 What this will eventually cover:
 
 - Designing for non-determinism: what changes when output isn't guaranteed
 - Evals as a first-class discipline — how you know the system works and stays working
-- Context, retrieval, and agents as architecture, not afterthoughts
+- Context, retrieval, and agents as [architecture]({{< relref "/handbook/engineering-foundations/software-architecture-design.md" >}}), not afterthoughts
 - The new failure modes: hallucination, drift, prompt injection, runaway cost
 
 {{< protip >}}

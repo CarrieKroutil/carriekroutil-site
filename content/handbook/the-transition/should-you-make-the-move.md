@@ -19,13 +19,13 @@ goDeeper:
     why: "Proof that the senior IC path is a real, well-paid alternative to managing."
 ---
 
-I'm still expanding this one into the full deep-dive it deserves, but here's the heart of it: deciding to manage isn't a promotion you accept, it's a job you choose. Your output stops being the code you write and starts being what your team produces — and that's a genuinely different job, not a more senior version of the one you have now. This topic is about making that choice with clear eyes instead of taking the title because it was offered.
+I'm still expanding this one into the full deep-dive it deserves, but here's the heart of it: deciding to manage isn't a promotion you accept, it's a job you choose. Your output stops being the code you write and starts being [what your team produces]({{< relref "/handbook/people-leadership/what-an-engineering-leader-does.md" >}}) — and that's a genuinely different job, not a more senior version of the one you have now. This topic is about making that choice with clear eyes instead of taking the title because it was offered.
 
 What the full version will cover:
 
 - The trade-offs you're actually making (deep technical focus for breadth, building things for building people)
 - Signals that you'd find the work energizing — and signals you'd resent it
-- Why "the only way up is management" is a lie, and what to do about it
+- Why "the only way up is management" is a lie, and what to do about it (the [engineer/manager pendulum]({{< relref "/handbook/the-transition/engineer-manager-pendulum.md" >}}) is the better mental model)
 - How to test-drive the role before committing
 
 {{< protip >}}

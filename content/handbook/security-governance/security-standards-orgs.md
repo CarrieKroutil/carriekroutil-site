@@ -31,14 +31,14 @@ The **Open Worldwide Application Security Project (OWASP)** is an open, nonprofi
 The flagship is the [**OWASP Top 10**](https://owasp.org/www-project-top-ten/): a periodically updated list of the ten most critical web application security risks — things like broken access control, injection, and security misconfiguration. It's widely recognized, it's written for developers, and it's a genuinely good shared reference. I treat it as the floor, not the ceiling: if a team can't speak to how they handle the Top 10, that's a gap worth closing before we worry about anything more exotic.
 
 {{< protip >}}
-Don't hand your team the Top 10 as a compliance checklist. Use it as a conversation starter in a tech-design review or a threat-modeling session: "Which of these ten could actually bite us, given what this service does?" The list is most valuable as a prompt for thinking, not a box to tick.
+Don't hand your team the Top 10 as a compliance checklist. Use it as a conversation starter in a [tech-design review]({{< relref "/handbook/team-health-operations/development-lifecycle.md" >}}) or a threat-modeling session: "Which of these ten could actually bite us, given what this service does?" The list is most valuable as a prompt for thinking, not a box to tick.
 {{< /protip >}}
 
 ## NIST — the standards-and-frameworks one
 
 The **National Institute of Standards and Technology (NIST)** is a U.S. government agency that develops standards and guidelines across many fields, including a large body of work on cybersecurity. Where OWASP is bottom-up and app-focused, NIST tends to be broader and more organizational — frameworks, control catalogs, and detailed publications that security teams and auditors lean on.
 
-For a manager, the one to recognize is the [**NIST Cybersecurity Framework (CSF)**](https://www.nist.gov/cyberframework). Its five functions — *identify, protect, detect, respond, recover* — give you a clean mental model for talking about security posture, and your security and compliance partners are very likely mapping their own work to it. You don't need to memorize the control families; you do need to know what someone means when they say "this maps to the Protect function."
+For a manager, the one to recognize is the [**NIST Cybersecurity Framework (CSF)**](https://www.nist.gov/cyberframework). Its five functions — *identify, protect, detect, respond, recover* — give you a clean mental model for talking about security posture, and your security and [compliance]({{< relref "/handbook/security-governance/compliance-literacy.md" >}}) partners are very likely mapping their own work to it. You don't need to memorize the control families; you do need to know what someone means when they say "this maps to the Protect function."
 
 ## How I actually use this
 

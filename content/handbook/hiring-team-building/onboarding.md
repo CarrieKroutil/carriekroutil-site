@@ -19,7 +19,7 @@ goDeeper:
     why: "The transition playbook — useful for shaping a new hire's first three months, not just your own."
 ---
 
-This topic is still in progress, but I didn't want to leave it empty, because onboarding is where a lot of hiring effort quietly succeeds or fails. You can run the most inclusive, well-structured interview loop in the world and still lose the person in their first month if those weeks are vague, lonely, or improvised. Good onboarding is the same inclusion work — access, belonging, clarity — applied to someone who's brand new and watching closely to learn how things really work here.
+This topic is still in progress, but I didn't want to leave it empty, because onboarding is where a lot of hiring effort quietly succeeds or fails. You can run the most [inclusive, well-structured interview loop]({{< relref "/handbook/hiring-team-building/inclusive-interviewing.md" >}}) in the world and still lose the person in their first month if those weeks are vague, lonely, or improvised. Good onboarding is the same inclusion work — access, [belonging]({{< relref "/handbook/people-leadership/culture-of-belonging.md" >}}), clarity — applied to someone who's brand new and watching closely to learn how things really work here.
 
 What the full version will cover:
 

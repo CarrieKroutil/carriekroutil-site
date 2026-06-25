@@ -21,7 +21,7 @@ goDeeper:
 
 Monitoring is easy to do badly in a way that feels productive — you add a dashboard, you add an alert, you add another, and a year later your team has trained itself to ignore the pager because most of what it says is noise. The hard, valuable work is the opposite: deciding what's actually worth waking someone up for, and being ruthless about everything else. An alert that doesn't require a human to act is not an alert; it's a distraction with a sound effect.
 
-This topic is about building monitoring that tells you the truth about what your users are experiencing, and alerting that earns the trust of the people who carry the pager.
+This topic is about building monitoring that tells you the truth about what your users are experiencing, and alerting that earns the trust of the people who carry the pager — so that when a page does fire, it kicks off [incident response]({{< relref "/handbook/operational-excellence/incident-response.md" >}}) instead of getting ignored.
 
 What the full version will cover:
 

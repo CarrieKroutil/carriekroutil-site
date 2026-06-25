@@ -19,7 +19,7 @@ goDeeper:
     why: "Practical steps for reducing bias at the top of the funnel, including screening."
 ---
 
-I'm still building this one out, but the headline is worth saying now: by the time you reach the interview, you've already made dozens of decisions about who *gets* an interview — and that's where some of the most invisible bias lives. A résumé carries a lot of noise that has nothing to do with whether someone can do the job (a name, a school, a gap, a non-traditional path), and that noise quietly nudges decisions unless you build the screen to resist it.
+I'm still building this one out, but the headline is worth saying now: by the time you reach the [interview]({{< relref "/handbook/hiring-team-building/inclusive-interviewing.md" >}}), you've already made dozens of decisions about who *gets* an interview — and that's where some of the most invisible bias lives. A résumé carries a lot of noise that has nothing to do with whether someone can do the job (a name, a school, a gap, a non-traditional path), and that noise quietly nudges decisions unless you build the screen to resist it.
 
 What the full version will cover:
 

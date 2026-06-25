@@ -24,10 +24,10 @@ Adopting AI tools is less a tooling rollout than a change-management problem wea
 What this will eventually cover:
 
 - Meeting engineers where they are — enthusiasts, skeptics, and the anxious
-- Setting norms before tools spread: review, ownership, what's okay to delegate to a model
+- Setting norms before tools spread: review, ownership, and what's okay to [delegate to a model]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}})
 - The trust conversation — addressing job-security fear openly instead of pretending it away
 - Avoiding the two failure modes: mandate-driven backlash and unmanaged free-for-all
 
 {{< protip >}}
-The most important thing I did wasn't picking tools — it was saying out loud, early, that the goal is to make people more capable, not more replaceable, and then backing it with how I evaluate work. Engineers can smell a rollout that's secretly about headcount. Name the fear, be honest about what you don't know, and adoption stops being something you have to push.
+The most important thing I did wasn't picking tools — it was saying out loud, early, that the goal is to make people more capable, not more replaceable, and then backing it with how I evaluate work. Engineers can smell a rollout that's secretly about headcount. Name the fear, be honest about what you don't know — the same [direct, honest conversation]({{< relref "/handbook/people-leadership/communicating-effectively.md" >}}) you'd want in any hard moment — and adoption stops being something you have to push.
 {{< /protip >}}

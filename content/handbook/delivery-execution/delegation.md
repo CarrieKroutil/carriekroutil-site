@@ -29,7 +29,7 @@ The most common delegation mistake is handing off a task and judging the result 
 A useful way to think about it: for any given task, the person is somewhere on a spectrum from "can't do it yet" to "could do it in their sleep." Match your involvement to that.
 
 - **New to this kind of work** — they need direction. Be specific about the *what* and the *how*, check in often, and treat early misses as teaching moments, not failures. You're investing now so you can step back later.
-- **Getting the hang of it** — they need coaching and a safety net. Hand off the task, agree on what "done" looks like, and make yourself available without hovering. Let them make small, recoverable mistakes; that's where the learning lives.
+- **Getting the hang of it** — they need [coaching]({{< relref "/handbook/performance-growth/coaching-skills.md" >}}) and a safety net. Hand off the task, agree on what "done" looks like, and make yourself available without hovering. Let them make small, recoverable mistakes; that's where the learning lives.
 - **Solidly capable** — they need ownership. Give them the goal and the constraints, not the steps. Your job here is to remove blockers and stay out of the *how*.
 - **Better at it than you** — they need air cover and recognition. Get out of the way entirely, make sure they get the credit, and use the time you've freed up on something only you can do.
 

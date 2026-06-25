@@ -19,7 +19,7 @@ goDeeper:
     why: "Frames IC and management as parallel tracks rather than a one-way climb."
 ---
 
-This deep-dive is still being expanded, but the core idea is too good to make you wait for: Charity Majors' "pendulum" reframes management and engineering not as a ladder you climb once, but as two poles you can swing between across a whole career. A stint managing makes you a sharper engineer; time back in the code makes you a more credible manager. Neither swing is a demotion. This topic is about why that movement is healthy and how to do it without torching your reputation or your skills.
+This deep-dive is still being expanded, but the core idea is too good to make you wait for: Charity Majors' "pendulum" reframes management and engineering not as a ladder you climb once, but as two poles you can swing between across a whole career. A stint managing makes you a sharper engineer; time back in the code makes you a more credible manager. Neither swing is a demotion — and [going back to IC]({{< relref "/handbook/the-transition/going-back-to-ic.md" >}}) is just one half of that pendulum. This topic is about why that movement is healthy and how to do it without torching your reputation or your skills.
 
 What the full version will cover:
 

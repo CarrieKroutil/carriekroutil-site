@@ -44,10 +44,10 @@ When those things erode, that's your signal — long before it shows up in a res
 
 Don't wait for the engagement survey. The most useful health signals are the ones you can pick up in your normal week:
 
-- **In 1:1s** — Is the conversation candid or performative? Are people bringing you real problems, or just status? A sudden shift to "everything's fine" is itself a signal.
-- **In ceremonies** — Who talks in retro? Is conflict happening, or is everyone agreeing too quickly? Silence in a retro usually means the real conversation is happening somewhere you're not.
+- **In [1:1s]({{< relref "/handbook/performance-growth/running-great-1-1s.md" >}})** — Is the conversation candid or performative? Are people bringing you real problems, or just status? A sudden shift to "everything's fine" is itself a signal.
+- **In [ceremonies]({{< relref "/handbook/team-health-operations/team-ceremonies.md" >}})** — Who talks in retro? Is conflict happening, or is everyone agreeing too quickly? Silence in a retro usually means the real conversation is happening somewhere you're not.
 - **In the work** — Rising rework, ballooning PR cycle times, and estimates that quietly stopped meaning anything are health problems wearing a delivery costume.
-- **In the small stuff** — People skipping breaks, going quiet in channels, working visibly odd hours. Burnout shows up in the texture of the week before it shows up in output.
+- **In the small stuff** — People skipping breaks, going quiet in channels, working visibly odd hours. [Burnout]({{< relref "/handbook/managing-yourself/boundaries-burnout.md" >}}) shows up in the texture of the week before it shows up in output.
 
 {{< protip >}}
 Run a lightweight team health check a few times a year — the Spotify Squad Health Check format works well. The point isn't the colored dots. It's that the team rates *itself* out loud, together, and you get a structured excuse to talk about the things people otherwise wouldn't raise. Track the trend, not the absolute score.

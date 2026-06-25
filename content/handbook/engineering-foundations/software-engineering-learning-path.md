@@ -28,7 +28,7 @@ The hardest thing about learning software engineering isn't any single topic —
 
 [Julia Evans](https://jvns.ca/) is an inspiring tech leader who excels at teaching topics in a bite-size way using zines. She's also written a ton of [blog posts](https://jvns.ca/) and given [talks](https://jvns.ca/talks/) worth your time.
 
-Her [Wizardzines](https://wizardzines.com/) site is an extensive, genuinely fun library of zines on technical topics — HTTP, DNS, debugging, containers, the command line, and more. If a foundational concept hasn't clicked from the official docs, there's a good chance a Wizardzine will get you there in twenty minutes.
+Her [Wizardzines](https://wizardzines.com/) site is an extensive, genuinely fun library of zines on technical topics — HTTP, DNS, [debugging]({{< relref "/handbook/engineering-foundations/debugging-craft.md" >}}), containers, the command line, and more. If a foundational concept hasn't clicked from the official docs, there's a good chance a Wizardzine will get you there in twenty minutes.
 
 {{< protip >}}
 When I onboard an engineer who's strong but has gaps in the fundamentals, I don't hand them a 600-page reference. I point them at the relevant Wizardzine first. Getting the shape of an idea fast — then going deep where it matters — beats slogging through a spec you don't yet have the hooks to understand.
@@ -57,7 +57,7 @@ This is a structured reading list rather than a pile of recommendations — each
 | [**The Pragmatic Programmer**](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/) | Timeless guidance on becoming a better, more adaptive engineer — habits that scale with you. |
 | [**Clean Code**](https://www.oreilly.com/library/view/clean-code-a/9780136083238/) | A reference point for writing maintainable, readable, testable code (take its rules as prompts, not law). |
 | [**Extreme Programming Explained**](https://www.amazon.com/Extreme-Programming-Explained-Embrace-Change/dp/0321278658) | How Agile really works in practice, and the developer's role in feedback-driven teams. |
-| [**Accelerate**](https://itrevolution.com/product/accelerate/) | The evidence behind what makes software teams elite — and the home of DORA metrics. |
+| [**Accelerate**](https://itrevolution.com/product/accelerate/) | The evidence behind what makes software teams elite — and the home of the [DORA metrics]({{< relref "/handbook/engineering-foundations/delivery-metrics-agile.md" >}}). |
 
 ### 2. Next steps — architecture, DDD & microservices
 

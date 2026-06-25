@@ -19,7 +19,7 @@ goDeeper:
     why: "Practical scripts and frameworks for difficult management conversations, including performance and feedback situations."
 ---
 
-Underperformance is the work managers avoid the longest and regret avoiding the most. Every week you don't name it, it gets harder to name — and it's unfair to the person, who deserves the chance to fix something they may not even know is a problem. The kindest thing you can do is be early and be clear: name the gap directly, make sure they truly understand it, and find out *why* before you decide what to do.
+Underperformance is the work managers avoid the longest and regret avoiding the most. Every week you don't name it, it gets harder to name — and it's unfair to the person, who deserves the chance to fix something they may not even know is a problem. The kindest thing you can do is be early and be clear: name the gap directly, make sure they truly understand it, and find out *why* before you decide what to do. Most of that early naming is just ordinary [feedback]({{< relref "/handbook/performance-growth/giving-feedback.md" >}}) done honestly — and if you've done it well all along, the eventual [performance review]({{< relref "/handbook/performance-growth/performance-reviews-calibration.md" >}}) holds no surprises.
 
 When this page is filled in, it'll cover how to diagnose the real cause (is it skill, will, clarity, or something happening outside work?), how to separate a temporary dip from a genuine pattern, what a fair improvement plan looks like and when a formal PIP is the honest move versus a box-checking exercise, how to document along the way, and how to handle the outcome — recovery or exit — with dignity for everyone. Until then, the Go Deeper links carry it.
 

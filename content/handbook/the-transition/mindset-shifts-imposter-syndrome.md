@@ -19,7 +19,7 @@ goDeeper:
     why: "Practical skill-building for the people-leadership muscles that feel new."
 ---
 
-This deep-dive is still in progress, but the central shift is worth stating plainly now: as an engineer your value came from knowing the answer; as a manager it comes from helping other people find theirs. That trade — from being the smartest person in the room to making the room smarter — is also where impostor syndrome moves in, because your wins become quieter and harder to point at. This topic is about navigating that identity change without losing your footing.
+This deep-dive is still in progress, but the central shift is worth stating plainly now: as an engineer your value came from knowing the answer; as a manager it comes from [helping other people find theirs]({{< relref "/handbook/performance-growth/coaching-skills.md" >}}). That trade — from being the smartest person in the room to making the room smarter — is also where impostor syndrome moves in, because your wins become quieter and harder to point at. This topic is about navigating that identity change without losing your footing.
 
 What the full version will cover:
 

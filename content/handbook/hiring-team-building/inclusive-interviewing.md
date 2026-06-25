@@ -22,7 +22,7 @@ goDeeper:
     why: "How Google moved from gut-feel interviews to structured, signal-based hiring — and why it works."
 ---
 
-Most of the bias in hiring doesn't show up as someone being unfair on purpose. It shows up in the structure: who gets access to the process, what signals we treat as "talent" versus learned advantage, and how much room we leave for gut feel to do the deciding. The good news is that the same inclusion principles that build a strong existing team — access, fair signals, reducing bias — translate almost directly into how you run an interview. This page is specifically about the interview process; the broader work of building belonging on a team you already have lives elsewhere.
+Most of the bias in hiring doesn't show up as someone being unfair on purpose. It shows up in the structure: who gets access to the process, what signals we treat as "talent" versus learned advantage, and how much room we leave for gut feel to do the deciding. The good news is that the same inclusion principles that build a strong existing team — access, fair signals, reducing bias — translate almost directly into how you run an interview. This page is specifically about the interview process; the broader work of [building belonging on a team you already have]({{< relref "/handbook/people-leadership/inclusive-teams.md" >}}) lives elsewhere.
 
 ## Access: lower the barrier to even getting through the door
 
@@ -57,7 +57,7 @@ Unstructured interviews are where bias does its best work — labels and snap ge
 
 ## Close the loop
 
-Inclusion doesn't end at the offer. Give every candidate a respectful, timely response — including the ones you pass on. How you treat people who don't get the job is a belonging cue too: it's the clearest signal of what your team is actually like, and word travels.
+Inclusion doesn't end at the offer. Give every candidate a respectful, timely response — including the ones you pass on. How you treat people who don't get the job is a belonging cue too: it's the clearest signal of what your team is actually like, and word travels. And for the person who *does* get the offer, the inclusion work just moves into [onboarding]({{< relref "/handbook/hiring-team-building/onboarding.md" >}}) — the same access and belonging, applied to someone brand new.
 
 ## Learn more
 

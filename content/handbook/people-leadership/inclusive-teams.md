@@ -20,7 +20,7 @@ goDeeper:
 
 Inclusive teams have a particular feel to them. The work flows. Communication is easy. People float ideas that are a little out there without bracing for impact. And when a deadline gets tight, people jump in to help each other across the line instead of guarding their own lane. That's not luck or chemistry — it's the visible surface of psychological safety and belonging, and you can build it on purpose.
 
-What makes someone feel included usually comes down to three things: having access to the information and decisions that affect them, being encouraged to take risks, and feeling genuinely recognized for their work. The rest of this page is about how you create those conditions for a team you already have.
+What makes someone feel included usually comes down to three things: having access to the information and decisions that affect them, being encouraged to take risks, and feeling genuinely recognized for their work. The rest of this page is about how you create those conditions for a team you already have — and the same principles, applied to who you let in the door, are what [inclusive interviewing]({{< relref "/handbook/hiring-team-building/inclusive-interviewing.md" >}}) is about.
 
 ## Your role as the manager
 
@@ -75,7 +75,7 @@ This doesn't mean every decision gets vetted by every person; that just makes pe
 
 ## Encourage risk-taking
 
-Psychological safety is the foundation here. Make it comfortable for people to take risks and be a little vulnerable. Set team norms for how you disagree, debate, and give feedback — including practical things like what good, kind feedback looks like in a code review.
+Psychological safety is the foundation here. Make it comfortable for people to take risks and be a little vulnerable. Set team norms for how you disagree, debate, and [give feedback]({{< relref "/handbook/performance-growth/giving-feedback.md" >}}) — including practical things like what good, kind feedback looks like in a code review.
 
 Reward vulnerability and make it clear it will never be used against someone. Model it yourself: share how you're actually doing, or something you're struggling with, and then invite others to do the same — without pushing anyone who isn't ready.
 

@@ -36,7 +36,7 @@ A few things to hold onto before you start:
 - It's a **relationship, not an event**. One good conversation isn't coaching; a sustained one is.
 - It can be formal or informal — a scheduled session or two minutes after a meeting.
 - It's about asking and listening, not supplying all the answers.
-- It is *not* the right tool for every situation. Sometimes someone needs a decision, a directive, or training — not a coaching question.
+- It is *not* the right tool for every situation. Sometimes someone needs a decision, a directive, or training — not a coaching question. And it's distinct from [giving feedback]({{< relref "/handbook/performance-growth/giving-feedback.md" >}}): feedback tells someone what you've observed; coaching draws the answer out of them.
 
 ## The coaching process
 
@@ -116,7 +116,7 @@ When you catch yourself about to hand over the answer, ask "And what else?" inst
 
 ## Be present
 
-Managers wear a lot of hats in a day — strategist, problem-solver, firefighter — and your attention gets yanked in ten directions an hour. But coaching only works when you're genuinely present. The person needs to feel that you're focused, interested, and invested in them. Half-attention isn't coaching; it's a meeting they'll learn to dread.
+Managers wear a lot of hats in a day — strategist, problem-solver, firefighter — and your attention gets yanked in ten directions an hour. But coaching only works when you're genuinely present, which is one reason a protected [1:1]({{< relref "/handbook/performance-growth/running-great-1-1s.md" >}}) is where so much of it happens. The person needs to feel that you're focused, interested, and invested in them. Half-attention isn't coaching; it's a meeting they'll learn to dread.
 
 ## Coaching difficult people
 

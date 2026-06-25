@@ -19,9 +19,9 @@ goDeeper:
     why: "Practical templates and process for response, communication, and postmortems you can adapt to a small team."
 ---
 
-How a team handles an incident tells you almost everything about its culture. The good ones are eerily calm — clear roles, one person coordinating, steady communication out to the people waiting on a fix. The bad ones are five engineers all typing into the same box at once while nobody knows who's actually in charge. The difference is rarely talent; it's that the calm teams decided how they'd respond *before* the pager went off.
+How a team handles an incident tells you almost everything about its [culture]({{< relref "/handbook/team-health-operations/team-health.md" >}}). The good ones are eerily calm — clear roles, one person coordinating, steady communication out to the people waiting on a fix. The bad ones are five engineers all typing into the same box at once while nobody knows who's actually in charge. The difference is rarely talent; it's that the calm teams decided how they'd respond *before* the pager went off.
 
-This topic is about building that muscle: a response that resolves the outage fast, and a postmortem afterward that makes the next one less likely instead of finding someone to blame.
+This topic is about building that muscle: a response that resolves the outage fast — which leans hard on the same systematic [debugging craft]({{< relref "/handbook/engineering-foundations/debugging-craft.md" >}}), just under more pressure — and a postmortem afterward that makes the next one less likely instead of finding someone to blame.
 
 What the full version will cover:
 

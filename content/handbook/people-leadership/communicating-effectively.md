@@ -89,7 +89,7 @@ Not every conversation needs the same container. Some meetings should be deliber
 
 ### Strategic meetings
 
-Give these the time and space communication actually requires — room to listen, room to brainstorm, no rushing to a decision the moment the calendar invite ends.
+Give these the time and space communication actually requires — room to listen, room to brainstorm, no rushing to a decision the moment the calendar invite ends. This is also where you coach the team to [think and act strategically]({{< relref "/handbook/people-leadership/thinking-strategically.md" >}}): the simpler and clearer your own communication, the easier it is for them to grab the essence and run with it.
 
 ### Quarterly conversations
 

@@ -27,7 +27,7 @@ Here's how I think about it.
 You don't have "more time" — you have a fixed budget you keep overspending. Treat your calendar like the budget it is.
 
 - **Audit where it actually goes.** Once a quarter, look back at two real weeks. How much went to 1:1s, status meetings, firefighting, deep work? Most managers are shocked by how little is left for the work they think they do.
-- **Decline more than feels comfortable.** Every "yes" to a meeting is a "no" to something else. If you can't name what you'd contribute, you probably don't need to be there. Ask for the notes instead.
+- **Decline more than feels comfortable.** Every "yes" to a meeting is a "no" to something else. If you can't name what you'd contribute, you probably don't need to be there. Ask for the notes instead — or, if it's work rather than a meeting, ask whether it's something you should be [delegating]({{< relref "/handbook/delivery-execution/delegation.md" >}}) rather than absorbing.
 - **Default to shorter.** A 30-minute meeting expands to fill 30 minutes; a 20-minute one usually doesn't. Trim your defaults.
 
 {{< protip >}}
@@ -56,6 +56,6 @@ Time and energy are nothing without attention, and attention is what notificatio
 
 - **Turn off most notifications.** You do not need a badge for every Slack message and email. Check on your schedule, not the app's.
 - **Single-task the important things.** "Multitasking" in a meeting means doing two things badly. If a conversation matters, close the laptop.
-- **Have a system for capturing the noise** so your brain isn't holding it. (More on that in staying organized.) An overloaded working memory is its own kind of fatigue.
+- **Have a system for capturing the noise** so your brain isn't holding it. (More on that in [staying organized]({{< relref "/handbook/managing-yourself/staying-organized.md" >}}).) An overloaded working memory is its own kind of fatigue.
 
-The goal isn't a perfectly optimized calendar. It's ending most weeks with enough left in the tank to lead well — and to still be doing this a decade from now.
+The goal isn't a perfectly optimized calendar. It's ending most weeks with enough left in the tank to lead well — without burning out — and to still be doing this a decade from now.

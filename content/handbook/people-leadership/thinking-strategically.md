@@ -26,11 +26,11 @@ Coach the muscle instead. Get curious about how they arrived at their decision, 
 
 **Strategic** means leading in a way that advances goals and creates long-term advantage. Put plainly: taking actions that lead to goals, with an eye on the future, focused on things that matter. It shows up in three places.
 
-**Strategic skills** — understanding trends, anticipating problems and opportunities, seeing things differently, prioritizing well, communicating simply, and bringing others along.
+**Strategic skills** — understanding trends, anticipating problems and opportunities, seeing things differently, [prioritizing well]({{< relref "/handbook/delivery-execution/prioritization-roadmaps.md" >}}), communicating simply, and bringing others along.
 
 **Strategic thinking** — connecting dots, recognizing threats and opportunities, staying curious, asking questions, and holding multiple perspectives at once.
 
-**Strategic behavior** — communicating effectively, managing your time, and inviting risks and challenges rather than avoiding them.
+**Strategic behavior** — [communicating effectively]({{< relref "/handbook/people-leadership/communicating-effectively.md" >}}), managing your time, and inviting risks and challenges rather than avoiding them.
 
 ## Prepare yourself before you coach
 

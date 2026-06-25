@@ -24,7 +24,7 @@ A development lifecycle is just the path a piece of work takes from idea to ship
 
 In an ideal world, before anyone starts work on an epic or ticket, a few things are true:
 
-- The epic or ticket meets the team's **Definition of Ready (DoR)**.
+- The epic or ticket meets the team's **Definition of Ready (DoR)** — one of the [team norms]({{< relref "/handbook/team-health-operations/team-ceremonies.md" >}}) worth agreeing on explicitly up front.
 - Scope and acceptance criteria (AC) are clear — and if they aren't, you clarify them *before* writing code, not after.
 - Work that's too big is broken down into appropriately sized tickets.
 
@@ -36,7 +36,7 @@ The development stage is where the work happens, but a few practices reliably se
 
 - **Feature flags** — so you can merge and deploy continuously and decouple release from rollout.
 - **Reasonable PR sizes** — small PRs get reviewed faster, reviewed better, and broken less. This is the single biggest lever on review speed.
-- **Accessibility considerations** — built in from the start, not bolted on before launch.
+- **[Accessibility]({{< relref "/handbook/engineering-foundations/accessibility-a11y.md" >}}) considerations** — built in from the start, not bolted on before launch.
 - **Telemetry** — instrument as you build, so you can actually answer "is this working in production?"
 - **Automated testing** — new code ships with tests, and the suite stays green.
 
@@ -131,7 +131,7 @@ A high-level shape of the release process:
 
 Shipping isn't done; it's a state change. After release:
 
-- **Monitor** — watch your telemetry and error rates. The feature flag you added in development is what lets you roll back calmly instead of in a panic.
+- **Monitor** — watch your telemetry and error rates, ideally through [monitoring and alerting]({{< relref "/handbook/operational-excellence/monitoring-alerting.md" >}}) you trust. The feature flag you added in development is what lets you roll back calmly instead of turning a bad deploy into an [incident]({{< relref "/handbook/operational-excellence/incident-response.md" >}}).
 - **Communicate** — keep stakeholders (Product, Data, and others) in the loop on rollout, results, and anything you're watching.
 
 ## Jira workflow tips

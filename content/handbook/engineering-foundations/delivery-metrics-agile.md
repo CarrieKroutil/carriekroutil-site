@@ -18,7 +18,7 @@ goDeeper:
     why: "Four values and twelve principles, in the original two pages — read the source, not the consultancy version."
 ---
 
-Two things shape how most engineering teams work: a set of metrics for measuring delivery, and a set of values for how to build software in the first place. DORA gives you the first; the Agile Manifesto gives you the second. Knowing both keeps you honest about whether a team is actually high-performing or just busy.
+Two things shape how most engineering teams work: a set of metrics for measuring delivery, and a set of values for how to build software in the first place. DORA gives you the first; the Agile Manifesto gives you the second. Both show up in practice in the [development lifecycle]({{< relref "/handbook/team-health-operations/development-lifecycle.md" >}}) — small batches and fast review are where elite numbers actually come from. Knowing both keeps you honest about whether a team is actually high-performing or just busy.
 
 ## DORA metrics
 
@@ -31,7 +31,7 @@ Two things shape how most engineering teams work: a set of metrics for measuring
 | **Change Failure Rate** | % of deployments that degrade service | A lower rate means higher quality and confidence | < 15% |
 | **Time to Restore Service** | Time to recover from a production failure | Fast recovery means resilience and user trust | < 1 hour |
 
-The first two measure **velocity**; the last two measure **stability**. You want all four moving in the right direction, because optimizing speed at the cost of stability (or vice versa) is how teams fool themselves.
+The first two measure **velocity**; the last two measure **stability** — and Time to Restore is really a measure of how good your [incident response]({{< relref "/handbook/operational-excellence/incident-response.md" >}}) is. You want all four moving in the right direction, because optimizing speed at the cost of stability (or vice versa) is how teams fool themselves.
 
 **Where to get the numbers:**
 

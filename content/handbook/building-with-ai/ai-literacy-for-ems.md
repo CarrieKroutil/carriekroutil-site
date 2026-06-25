@@ -19,7 +19,7 @@ goDeeper:
     why: "Read how a frontier model actually works — context windows, tool use, prompting. Concepts here carry across every provider."
 ---
 
-You don't need to train a model to lead engineers who use them — but you do need a working mental model, the kind that lets you smell a bad claim, scope a feature realistically, and ask the question that cuts through a demo. AI literacy for a manager isn't about prompt tricks; it's about understanding what these systems are good at, where they quietly fail, and what that means for how your team builds. This page is a stub, but the goal is to get you to "dangerous enough to be useful" without drowning you in research papers.
+You don't need to train a model to lead engineers who use them — but you do need a working mental model, the kind that lets you smell a bad claim, scope a feature realistically, and ask the question that cuts through a demo. AI literacy for a manager isn't about prompt tricks; it's about understanding what these systems are good at, where they quietly fail, and what that means for how your team builds. It's the foundation under everything else in this section — whether your engineers are leaning on assistants in their [everyday workflow]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) or putting a model at the [core of the product]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}). This page is a stub, but the goal is to get you to "dangerous enough to be useful" without drowning you in research papers.
 
 What this will eventually cover:
 

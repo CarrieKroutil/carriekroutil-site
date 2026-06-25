@@ -36,7 +36,7 @@ Architecture styles are the foundational blueprints for building software system
 - **Interpreter** — High-level code is translated to machine instructions line by line and executed directly rather than compiled ahead of time, trading performance for flexibility.
 - **Data-Centric** — The system is organized around managing and using data, optimizing integrity, storage, and retrieval, with functionality built atop efficient data processing.
 
-There's no "best" style — only the one that fits. Most real systems blend several.
+There's no "best" style — only the one that fits. Most real systems blend several, and a distributed, microservice-based one usually lands on the [cloud-native infrastructure]({{< relref "/handbook/engineering-foundations/cloud-native-infrastructure.md" >}}) the next page covers.
 
 ## The 12-Factor App
 

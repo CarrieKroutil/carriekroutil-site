@@ -18,12 +18,12 @@ goDeeper:
     why: "No-code glue between tools when you don't want to write a script."
 ---
 
-As an engineering leader, time is your scarcest resource. Any task you do more than a couple of times is a candidate for automation — so before you grind through it again, ask whether a tool could do it for you.
+As an engineering leader, [time is your scarcest resource]({{< relref "/handbook/managing-yourself/time-energy-management.md" >}}). Any task you do more than a couple of times is a candidate for automation — so before you grind through it again, ask whether a tool could do it for you.
 
 Below is a high-level tour of the automation tools I reach for most, with concrete recipes. The examples use the free online REST API at [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com), so you can run them as-is.
 
 {{< protip >}}
-Automate to demonstrate value, not just to save keystrokes. A small script that surfaces team health data nobody had before is worth more than one that shaves five seconds off a task you do once a week.
+Automate to demonstrate value, not just to save keystrokes. A small script that surfaces [team health]({{< relref "/handbook/team-health-operations/team-health.md" >}}) data nobody had before is worth more than one that shaves five seconds off a task you do once a week.
 {{< /protip >}}
 
 ## curl
@@ -129,7 +129,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.API_CALLS_TOKEN }}
 ```
 
-Now every PR gets a size label automatically — which gives you a concrete, data-backed way to coach engineers toward smaller, more iterative pull requests.
+Now every PR gets a size label automatically — which gives you a concrete, data-backed way to coach engineers toward [smaller, more iterative pull requests]({{< relref "/handbook/team-health-operations/development-lifecycle.md" >}}).
 
 ## Google tools
 

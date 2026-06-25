@@ -18,9 +18,9 @@ goDeeper:
     why: "Interactive diagrams when words alone won't land the concept."
 ---
 
-Part of the job is leveling people up — and the right tool makes that far less painful. When you're building training, the trap is reaching for whatever you already know (usually slides) instead of what the content actually calls for.
+Part of the job is [leveling people up]({{< relref "/handbook/performance-growth/coaching-skills.md" >}}) — and the right tool makes that far less painful. When you're building training, the trap is reaching for whatever you already know (usually slides) instead of what the content actually calls for.
 
-A grounding reference I keep coming back to is [GitLab's Learning & Development handbook](https://handbook.gitlab.com/handbook/people-group/learning-and-development) — and their [Learning Content Accessibility Guidelines](https://handbook.gitlab.com/handbook/legal/ethics-compliance-program/learning-content-accessibility-guidelines/), because training that some of your team can't actually use isn't training.
+A grounding reference I keep coming back to is [GitLab's Learning & Development handbook](https://handbook.gitlab.com/handbook/people-group/learning-and-development) — and their [Learning Content Accessibility Guidelines](https://handbook.gitlab.com/handbook/legal/ethics-compliance-program/learning-content-accessibility-guidelines/), because training that some of your team can't actually use — the same [accessibility]({{< relref "/handbook/engineering-foundations/accessibility-a11y.md" >}}) bar you'd hold any product to — isn't training.
 
 {{< protip >}}
 Match the tool to the outcome, not the other way around. If the goal is "people can do X afterward," reach for something interactive; if it's "people understand why X matters," a short video or a clean diagram usually beats a 30-slide deck.

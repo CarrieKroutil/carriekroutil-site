@@ -34,7 +34,7 @@ Planning is where the team turns a prioritized backlog into a shared commitment 
 
 A few things that make planning work:
 
-- Come in with a groomed, prioritized backlog. Planning is for committing, not for discovering scope for the first time.
+- Come in with a groomed, [prioritized backlog]({{< relref "/handbook/delivery-execution/prioritization-roadmaps.md" >}}). Planning is for committing, not for discovering scope for the first time.
 - Talk through acceptance criteria and unknowns out loud — the conversation is half the value.
 - Plan to a sustainable capacity, not a heroic one. A sprint that's full to the brim has no room for the inevitable surprise.
 - Leave with the top of the sprint clear enough that people can start Monday without waiting on you.
@@ -46,7 +46,7 @@ The retro is the team's standing invitation to improve how it works, and it's th
 A couple of things keep retros healthy:
 
 - **Rotate the format.** The same three columns every two weeks goes stale fast. Pull from a catalog like FunRetrospectives to keep people engaged.
-- **Make it safe.** Retro only works if people will say the real thing. If it's gone quiet, that's a psychological-safety signal, not a sign everything's fine.
+- **Make it safe.** Retro only works if people will say the real thing. If it's gone quiet, that's a [team-health]({{< relref "/handbook/team-health-operations/team-health.md" >}}) signal, not a sign everything's fine.
 - **Close the loop.** Pick one or two actions, assign owners, and revisit them next time. A retro whose actions never happen teaches the team that the retro is theater.
 
 {{< protip >}}

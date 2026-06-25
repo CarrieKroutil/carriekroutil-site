@@ -30,8 +30,8 @@ You don't need to be able to operate a Kubernetes cluster to manage a team that 
 
 - **Containerized** — packaged with their dependencies (e.g., Docker), so they run the same everywhere.
 - **Dynamically orchestrated** — scheduled and scaled automatically (e.g., Kubernetes).
-- **Microservice-based** — modular and loosely coupled, so pieces can change independently.
-- **Resilient, scalable, and observable** — built to survive failure, grow under load, and tell you what they're doing.
+- **Microservice-based** — modular and loosely coupled, so pieces can change independently (one of the [architecture styles]({{< relref "/handbook/engineering-foundations/software-architecture-design.md" >}}) worth knowing).
+- **Resilient, scalable, and observable** — built to survive failure, grow under load, and tell you what they're doing. That last property is what good [monitoring and alerting]({{< relref "/handbook/operational-excellence/monitoring-alerting.md" >}}) turns into something you can act on.
 
 The point isn't to check every box. It's that these properties tend to reinforce each other, and the tooling below exists to make them achievable without heroics.
 
