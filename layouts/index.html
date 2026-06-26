@@ -6,7 +6,7 @@
   Sections, top to bottom:
     - Hero (Story 3.1): avatar-ring · greeting · one-liner · CTA. (Topic chips removed —
       they belong on cards / Posts / term pages, not the front door.)
-    - Featured slot (Story 3.3): one pinned post, distinct from the grid.
+    - Featured Project (Story 7.1): one project (featured: true, else most-recent), distinct from the grid.
     - Latest posts (Story 3.2): grid of the most-recent posts + "all posts →".
 */ -}}
 {{ define "main" }}
@@ -27,34 +27,30 @@
     </div>
   </section>
 
-  {{- /* All posts, newest first — shared by the featured slot + the latest grid. */ -}}
-  {{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
-
-  {{- /* Featured slot (Story 3.3, FR-15/AD-7): the first `featured: true` post taken in
-     date-desc order (deterministic tiebreak), falling back to the most-recent post when
-     none is flagged — so the slot is never empty while any post exists. Reuses the shared
-     post-card (no new card markup); the .ck-featured wrapper + label make it visually
-     distinct from the recent grid. Excluded from the grid below so it isn't shown twice. */ -}}
-  {{- $featured := "" -}}
-  {{- with where $posts "Params.featured" true -}}
-    {{- $featured = index . 0 -}}
+  {{- /* Featured Project (Story 7.1): the first project flagged `featured: true` (date-desc
+     tiebreak), falling back to the most-recent project when none is flagged — so the slot is
+     never empty while any project exists. A project leads the page so building shows up next
+     to writing. Reuses the shared project-card; the .ck-featured wrapper + label make it
+     distinct from the grid below. */ -}}
+  {{- $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse -}}
+  {{- $featuredProject := "" -}}
+  {{- with where $projects "Params.featured" true -}}
+    {{- $featuredProject = index . 0 -}}
   {{- else -}}
-    {{- with $posts -}}{{- $featured = index . 0 -}}{{- end -}}
+    {{- with $projects -}}{{- $featuredProject = index . 0 -}}{{- end -}}
   {{- end -}}
-  {{- with $featured }}
+  {{- with $featuredProject }}
   <section class="ck-featured" aria-labelledby="ck-featured-label">
-    <h2 id="ck-featured-label" class="ck-featured-label">Featured</h2>
-    {{ partial "custom/post-card.html" . }}
+    <h2 id="ck-featured-label" class="ck-featured-label">Featured Project</h2>
+    {{ partial "custom/project-card.html" . }}
   </section>
   {{- end }}
 
-  {{- /* Latest posts (Story 3.2, FR-2): the most-recent posts (minus the featured one)
-     as shared post-cards, newest first, 2-up→1-up grid (.ck-grid, from Story 2.4). The
-     section only renders when such posts exist, so a sparse site stays intentional (the
-     hero + featured carry it) instead of a "Latest posts" header over an empty grid. */ -}}
-  {{- $recent := $posts -}}
-  {{- with $featured -}}{{- $recent = where $posts "RelPermalink" "!=" .RelPermalink -}}{{- end -}}
-  {{- with $recent }}
+  {{- /* Latest posts (Story 3.2, FR-2): the most-recent posts as shared post-cards, newest
+     first, 2-up→1-up grid (.ck-grid). No exclusion needed now that the featured slot is a
+     project, not a post. Renders only when posts exist, so a sparse site stays intentional. */ -}}
+  {{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- with $posts }}
   <section class="ck-latest">
     <div class="ck-sec-head">
       <h2 class="ck-sec-title">Latest posts</h2>

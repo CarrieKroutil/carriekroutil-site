@@ -567,8 +567,8 @@ samp {
   margin: 18px 0 0;
 }
 .ck-hero-extra {
-  margin: 16px 0 0;
-  font-size: 0.95rem;
+  margin: 18px 0 0;
+  font-size: 1.2rem;    /* larger than the original 0.95rem so the text link is easier to notice */
 }
 .ck-hero-extra a {
   color: var(--ck-accent-amber-text);    /* on-brand amber/orange — AA in both themes */

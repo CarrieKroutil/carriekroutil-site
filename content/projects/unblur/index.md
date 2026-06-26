@@ -1,6 +1,7 @@
 ---
 title: "Unblur"
 date: 2026-04-04T12:00:00-07:00
+featured: true   # leads the Home "Featured Project" slot (Story 7.1)
 description: "A multiplayer photo party game: a blurred Unsplash photo races into focus while everyone guesses from their phones. My first from-scratch build with Claude Code — a BMAD rebuild is coming next."
 tags: [ai, code, game]
 links:
