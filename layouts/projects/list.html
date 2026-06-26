@@ -1,0 +1,21 @@
+{{- /*
+  projects/list.html — the project grid at /projects/ (Epic 6). Mirrors posts/list.html.
+  Hugo routes the `projects` section list here by section name (no `type` set). Replaces the
+  old "coming soon" placeholder. Every non-draft project, reverse-chronological, as shared
+  project-cards in the same .ck-grid the post stream uses. Defines only `main`; Hextra baseof
+  supplies the navbar + footer.
+*/ -}}
+{{ define "main" }}
+{{- /* Mobile nav drawer for the navbar hamburger — hidden on desktop, rendered for mobile
+   (same pattern as posts/list.html). */ -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+<main id="content" class="ck-stream">
+  {{ if .Title }}<h1 class="ck-stream-title">{{ .Title }}</h1>{{ end }}
+  {{- with .Content }}<div class="content ck-stream-intro">{{ . }}</div>{{ end -}}
+  <div class="ck-grid">
+    {{- range (where site.RegularPages "Section" "projects").ByDate.Reverse -}}
+      {{ partial "custom/project-card.html" . }}
+    {{- end -}}
+  </div>
+</main>
+{{ end }}

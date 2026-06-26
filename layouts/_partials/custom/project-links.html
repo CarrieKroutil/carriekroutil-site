@@ -1,0 +1,13 @@
+{{- /*
+  custom/project-links.html — outbound action buttons (Live / GitHub / Try it / …) for a
+  project detail page (Epic 6). Driven by front-matter `links: [{label, url}]`, rendered with
+  the shared .ck-btn. Internal links (starting "/") open in place; external links open in a new
+  tab with rel="noopener". Context = the `links` slice.
+*/ -}}
+{{- with . -}}
+<div class="ck-project-links">
+  {{- range . -}}
+  <a class="ck-btn" href="{{ .url }}"{{ if not (hasPrefix .url "/") }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a>
+  {{- end -}}
+</div>
+{{- end -}}

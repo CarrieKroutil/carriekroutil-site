@@ -1,0 +1,18 @@
+{{- /*
+  custom/video-embed.html — responsive, lazy-loaded video embed so a project's video plays
+  IN PLACE (no leaving the site). Context: dict { provider, id }. youtube-nocookie / vimeo
+  only. Uses native loading="lazy"; a poster-thumbnail click-to-play swap is a later
+  enhancement. Rendered inline from markdown via the `video` shortcode.
+*/ -}}
+{{- $p := .provider -}}{{- $id := .id -}}
+{{- if and $p $id -}}
+<div class="ck-video">
+  {{- if eq $p "youtube" -}}
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ $id }}" title="Embedded video" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  {{- else if eq $p "vimeo" -}}
+  <iframe src="https://player.vimeo.com/video/{{ $id }}" title="Embedded video" loading="lazy" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  {{- else -}}
+  {{- errorf "video-embed: unknown provider %q (use youtube or vimeo)" $p -}}
+  {{- end -}}
+</div>
+{{- end -}}

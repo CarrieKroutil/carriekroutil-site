@@ -4,7 +4,8 @@
   920px content width (UX-DR10). Renders as static HTML with JS off (AD-13).
 
   Sections, top to bottom:
-    - Hero (Story 3.1): avatar-ring · greeting · one-liner · topic chips.
+    - Hero (Story 3.1): avatar-ring · greeting · one-liner · CTA. (Topic chips removed —
+      they belong on cards / Posts / term pages, not the front door.)
     - Featured slot (Story 3.3): one pinned post, distinct from the grid.
     - Latest posts (Story 3.2): grid of the most-recent posts + "all posts →".
 */ -}}
@@ -18,10 +19,10 @@
     <div class="ck-hero-text">
       <h1 class="ck-hero-greeting">{{ .Params.greeting }}</h1>
       {{- with .Params.oneliner }}<p class="ck-hero-oneliner">{{ . }}</p>{{ end -}}
-      {{- /* Topic chips straight from the live `tags` taxonomy (most-written first), so every
-         chip links to a real /tags/{topic}/ term page — no broken links, no maintenance as
-         topics grow. Same renderer + per-topic tint as cards/posts (custom/post-tags.html). */ -}}
-      {{- with partial "custom/topic-terms.html" . }}{{ partial "custom/post-tags.html" (dict "terms" .) }}{{ end -}}
+      {{- /* Topic chips intentionally NOT on the hero: a front-door visitor hasn't read anything
+         yet, so a filter/browse affordance is just noise here. Tags live where they help — post/
+         project cards, the Posts list, and term pages — and still render on About (Story 3.4)
+         via custom/topic-terms.html. */ -}}
       <p class="ck-hero-extra"><a href="/projects/">See what I've built &rarr;</a></p>
     </div>
   </section>

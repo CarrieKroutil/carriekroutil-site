@@ -1,0 +1,33 @@
+{{- /*
+  projects/single.html — a single project page (Epic 6). Mirrors posts/single.html (centered
+  720px reading column; <main id="content"> so the skip-link still targets it) but tuned for
+  projects: display-only tech chips (project-chips), date-only meta (no read-time), outbound
+  action buttons (project-links), then the body. Inline videos are placed in the body via the
+  `video` shortcode. Defines only `main`; Hextra baseof supplies navbar + footer.
+*/ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+<main id="content" class="ck-reading ck-post">
+  <article>
+    <a class="ck-back" href="/projects/">&larr; all projects</a>
+    {{ partial "custom/post-tags.html" . }}
+    <h1 class="ck-post-title">{{ .Title }}</h1>
+    <div class="ck-post-meta">{{ .Date.Format "Jan 2, 2006" }}</div>
+    {{- /* Hero renders ONLY when the image actually exists (local bundle resource) or is an
+       external URL — so a project can declare hero.png in front matter before the file is
+       dropped in, without showing a broken image. alt is required once we render. */ -}}
+    {{- with .Params.hero -}}
+      {{- $img := $.Resources.GetMatch .src -}}
+      {{- if or $img (hasPrefix .src "http") -}}
+        {{- if not .alt -}}{{- errorf "project %q hero is missing required alt text" $.Path -}}{{- end -}}
+        <img class="ck-hero" src="{{ with $img }}{{ .RelPermalink }}{{ else }}{{ $.Params.hero.src }}{{ end }}" alt="{{ .alt }}" loading="lazy">
+      {{- end -}}
+    {{- end -}}
+    {{ partial "custom/project-links.html" .Params.links }}
+    <div class="content ck-prose">
+      {{ .Content }}
+    </div>
+    <nav class="ck-postnav"><a class="ck-back" href="/projects/">&larr; all projects</a></nav>
+  </article>
+</main>
+{{ end }}

@@ -1,0 +1,34 @@
+{{- /*
+  custom/project-card.html — project grid card (Epic 6). Mirrors custom/post-card.html (same
+  .ck-card markup + whole-card overlay link via .ck-card-link), with two differences:
+    - meta is the DATE ONLY (a project isn't "N min read"), and
+    - tags use the shared custom/post-tags.html renderer (clickable → /tags/ term pages),
+      same as posts. Projects now participate in the `tags` taxonomy, and term pages group
+      posts and projects in separate sections (see _default/term.html).
+  Outbound repo/live links live on the detail page (project-links), not the card, so the whole
+  card stays a single click target. Context = a project Page.
+
+  Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback —
+  identical resolution to post-card (local bundle resource → RelPermalink, else external URL).
+*/ -}}
+{{- $g := add 1 (mod (len .Title) 4) -}}
+{{- $thumb := "" -}}
+{{- with .Params.hero -}}
+  {{- $r := $.Resources.GetMatch .src -}}
+  {{- if $r -}}{{- $thumb = $r.RelPermalink -}}
+  {{- else if hasPrefix .src "http" -}}{{- $thumb = .src -}}{{- end -}}
+{{- end -}}
+<article class="ck-card">
+  {{- if $thumb -}}
+    <div class="ck-card-thumb"><img src="{{ $thumb }}" alt="" loading="lazy"></div>
+  {{- else -}}
+    <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
+  {{- end -}}
+  <div class="ck-card-body">
+    {{ partial "custom/post-tags.html" . }}
+    <h3 class="ck-card-title"><a class="ck-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{- $excerpt := or .Description (.Summary | plainify) -}}
+    {{- with $excerpt -}}<p class="ck-card-excerpt">{{ . }}</p>{{- end -}}
+    <div class="ck-post-meta">{{ .Date.Format "Jan 2, 2006" }}</div>
+  </div>
+</article>
