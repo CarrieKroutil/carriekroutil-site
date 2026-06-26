@@ -567,27 +567,16 @@ samp {
   margin: 18px 0 0;
 }
 .ck-hero-extra {
-  margin: 24px 0 0;
+  margin: 18px 0 0;
+  font-size: 1.2rem;    /* larger than the original 0.95rem so the text link is easier to notice */
 }
-/* The hero CTA is the primary action on Home — render it as a prominent solid button
-   (not a text link) so visitors register it as clickable. Solid on-brand amber with dark
-   text reads well above AA contrast in both themes. */
 .ck-hero-extra a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 12px;
-  background: var(--ck-accent-amber);
-  color: #0a0a0a;
-  font-size: 1.05rem;
+  color: var(--ck-accent-amber-text);    /* on-brand amber/orange — AA in both themes */
   font-weight: var(--ck-weight-strong);
   text-decoration: none;
-  transition: filter 0.15s ease;
 }
 .ck-hero-extra a:hover {
-  filter: brightness(1.06);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 /* ----- avatar-ring (UX-DR3) — gradient ring around a surface-2 circle, decorative -----
