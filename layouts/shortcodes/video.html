@@ -1,0 +1,6 @@
+{{- /*
+  video.html — inline video shortcode (Epic 6). Lets a project body place a lazy, responsive
+  embed exactly where it belongs in the narrative. Delegates to custom/video-embed.html.
+  Usage in markdown: a `video` shortcode with `provider` (youtube|vimeo) and `id` params.
+*/ -}}
+{{- partial "custom/video-embed.html" (dict "provider" (.Get "provider") "id" (.Get "id")) -}}

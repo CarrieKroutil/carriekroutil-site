@@ -5,16 +5,16 @@
   (Story 2.4), so a topic reads as a filtered stream. Filtering is Hugo-native taxonomy —
   no client-side JavaScript. Defines only `main`; Hextra baseof supplies navbar + footer.
 
-  The post set is derived from the SAME collection the stream uses — (where site.RegularPages
-  "Section" "posts") — narrowed to this term, so a topic page is always a strict subset of
-  /posts/ (identical membership rules: no drafts, no future-dated, regular pages only).
+  A term groups two collections, each narrowed to this term and shown in its own section:
+  Posts (custom/post-card.html) and Projects (custom/project-card.html). Both follow the same
+  site-wide rules the streams use (no drafts, no future-dated, regular pages only), so a topic
+  page is always a strict subset of /posts/ + /projects/.
   .Data.Term is the authored (lowercase) term, so the heading reads "ai" — not Hugo's
   auto-title-cased "Ai" — matching the lowercase brand voice and the chip labels elsewhere.
 
-  Empty state (UX-DR12): a defensive fallback. In practice Hugo only generates a term page for
-  a term referenced by at least one published post, so $posts is non-empty whenever this page
-  exists; the branch satisfies the AC and guards against a blank page rather than handling a
-  routinely-reachable case.
+  Empty state (UX-DR12): a defensive fallback. Hugo only generates a term page for a term
+  referenced by at least one published post OR project, so at least one section is non-empty
+  whenever this page exists; the branch guards against a blank page rather than a routine case.
 */ -}}
 {{ define "main" }}
 {{- /* Mobile nav drawer for the navbar hamburger (matches posts/list.html). Hidden on
@@ -22,17 +22,30 @@
 {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
 {{- $term := .Data.Term -}}
 {{- $posts := (where (where site.RegularPages "Section" "posts") "Params.tags" "intersect" (slice $term)).ByDate.Reverse -}}
+{{- $projects := (where (where site.RegularPages "Section" "projects") "Params.tags" "intersect" (slice $term)).ByDate.Reverse -}}
 <main id="content" class="ck-stream">
   <p class="ck-term-eyebrow">topic</p>
   <h1 class="ck-stream-title">{{ $term }}</h1>
   {{- with .Content }}<div class="content ck-stream-intro">{{ . }}</div>{{ end -}}
-  {{- with $posts -}}
-  <p class="ck-stream-intro">{{ len . }} post{{ if ne (len .) 1 }}s{{ end }} under this topic.</p>
-  <div class="ck-grid">
-    {{- range . -}}
-      {{ partial "custom/post-card.html" . }}
+  {{- /* Section headings ("Posts"/"Projects") appear ONLY when a tag spans both collections.
+     For a single-collection tag the grid renders exactly as the post stream always has — no
+     redundant heading — preserving the pre-Epic-6 look of posts-only topic pages. */ -}}
+  {{- $both := and $posts $projects -}}
+  {{- if or $posts $projects -}}
+    {{- with $posts -}}
+    {{- if $both }}<h2 class="ck-term-group">Posts</h2>{{ end }}
+    <p class="ck-stream-intro">{{ len . }} post{{ if ne (len .) 1 }}s{{ end }} under this topic.</p>
+    <div class="ck-grid">
+      {{- range . -}}{{ partial "custom/post-card.html" . }}{{- end -}}
+    </div>
     {{- end -}}
-  </div>
+    {{- with $projects -}}
+    {{- if $both }}<h2 class="ck-term-group">Projects</h2>{{ end }}
+    <p class="ck-stream-intro">{{ len . }} project{{ if ne (len .) 1 }}s{{ end }} under this topic.</p>
+    <div class="ck-grid">
+      {{- range . -}}{{ partial "custom/project-card.html" . }}{{- end -}}
+    </div>
+    {{- end -}}
   {{- else -}}
   <p class="ck-empty">Nothing here yet — check back.</p>
   {{- end -}}
