@@ -567,16 +567,27 @@ samp {
   margin: 18px 0 0;
 }
 .ck-hero-extra {
-  margin: 16px 0 0;
-  font-size: 0.95rem;
+  margin: 24px 0 0;
 }
+/* The hero CTA is the primary action on Home — render it as a prominent gradient button
+   (not a text link) so visitors register it as clickable. Dark text passes AA on every stop
+   of the bright violet→fuchsia→amber gradient, in both themes. */
 .ck-hero-extra a {
-  color: var(--ck-accent-amber-text);    /* on-brand amber/orange — AA in both themes */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: var(--ck-accent-gradient);
+  color: #0a0a0a;
+  font-size: 1.05rem;
   font-weight: var(--ck-weight-strong);
   text-decoration: none;
+  transition: filter 0.15s ease;
 }
 .ck-hero-extra a:hover {
-  text-decoration: underline;
+  filter: brightness(1.06);
+  text-decoration: none;
 }
 
 /* ----- avatar-ring (UX-DR3) — gradient ring around a surface-2 circle, decorative -----
