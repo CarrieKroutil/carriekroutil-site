@@ -29,6 +29,6 @@
     <h3 class="ck-card-title"><a class="ck-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     {{- $excerpt := or .Description (.Summary | plainify) -}}
     {{- with $excerpt -}}<p class="ck-card-excerpt">{{ . }}</p>{{- end -}}
-    <div class="ck-post-meta">{{ .Date.Format "Jan 2, 2006" }}</div>
+    <div class="ck-post-meta">{{ with .Params.dateDisplay }}{{ . }}{{ else }}{{ $.Date.Format "Jan 2, 2006" }}{{ end }}</div>
   </div>
 </article>

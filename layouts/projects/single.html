@@ -12,7 +12,9 @@
     <a class="ck-back" href="/projects/">&larr; all projects</a>
     {{ partial "custom/post-tags.html" . }}
     <h1 class="ck-post-title">{{ .Title }}</h1>
-    <div class="ck-post-meta">{{ .Date.Format "Jan 2, 2006" }}</div>
+    {{- /* dateDisplay overrides the formatted date for projects with year-only (or otherwise
+       imprecise) dating, e.g. "2020" — falls back to the standard format when unset. */ -}}
+    <div class="ck-post-meta">{{ with .Params.dateDisplay }}{{ . }}{{ else }}{{ $.Date.Format "Jan 2, 2006" }}{{ end }}</div>
     {{- /* Hero renders ONLY when the image actually exists (local bundle resource) or is an
        external URL — so a project can declare hero.png in front matter before the file is
        dropped in, without showing a broken image. alt is required once we render. */ -}}
