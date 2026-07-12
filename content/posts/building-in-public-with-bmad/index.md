@@ -67,4 +67,7 @@ The proof is the page you're reading. Same method, top to bottom. If you're curi
 piece — the tokens, the no-JS choices, the deploy pipeline — that's what the rest of this corner
 of the internet is for.
 
+And if you want to try BMAD yourself, I wrote a step-by-step [Getting Started with BMAD](/handbook/building-with-ai/getting-started-with-bmad/)
+in the handbook — install, the agent roles, and the plan-then-build loop.
+
 More on the way. 👋
