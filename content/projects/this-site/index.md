@@ -14,7 +14,7 @@ draft: false
 
 This site is itself a project — and one I built in public using agentic spec-driven development.
 
-At work we're adopting an AI-native approach and trialing the [BMAD method](/posts/building-in-public-with-bmad/) — a spec-first workflow — and this site was my first go at it. The full paper trail (brief, PRD, UX, architecture, epics and stories) lives in the repo's `_bmad-output` folder, and an AI coding agent ([Claude Code](https://claude.com/claude-code)) built the site one story at a time, with a retro after each completed epic. I wrote up how the method actually felt in that post — short version: front-loading the thinking made the building calm. If you want to try the method yourself, there's a step-by-step [Getting Started with BMAD](/handbook/building-with-ai/getting-started-with-bmad/) in the handbook.
+At work we're adopting an AI-native approach and trialing the [BMAD method](/posts/building-in-public-with-bmad/) — a spec-first workflow — and this site was my first go at it. The full paper trail (brief, PRD, UX, architecture, epics and stories) lives in the repo's `_bmad-output` folder, and an AI coding agent ([Claude Code](https://claude.com/claude-code)) built the site one story at a time, with a retro after each completed epic. I wrote up how the method actually felt in that post — short version: front-loading the thinking made the building calm. If you want to try the method yourself, there's a step-by-step [BMAD 101](/handbook/building-with-ai/bmad-101/) in the handbook.
 
 Overall, I was delighted by the experience — and now I find myself wanting to try it again on something more complicated.
 

@@ -10,9 +10,9 @@ goDeeper:
     url: "https://docs.anthropic.com/en/docs/build-with-claude/overview"
     why: "The patterns that matter when a model is load-bearing — tool use, structured outputs, agents, evals. Concepts transfer across providers."
   - group: Tools
-    title: "OpenAI platform documentation"
-    url: "https://platform.openai.com/docs/overview"
-    why: "Worth reading alongside Anthropic's to see the shared shape of the problem space and where providers diverge."
+    title: "Anthropic — Building Effective Agents"
+    url: "https://www.anthropic.com/engineering/building-effective-agents"
+    why: "The essay to read on the workflow-vs-agent distinction and when *not* to build an agent. Speaks straight to treating context, retrieval, and agents as architecture."
   - group: Courses
     title: "DeepLearning.AI — agents and LLM app courses"
     url: "https://www.deeplearning.ai/"
@@ -25,10 +25,10 @@ There's a difference between adding an AI feature and building an AI-native syst
 
 The fastest way to internalize "engineering problem, not magic" is to build something with a method that forces the discipline on you — traceable requirements, decisions captured once, code written against a spec instead of a vibe. A couple of ways in:
 
-- **[Getting Started with BMAD]({{< relref "/handbook/building-with-ai/getting-started-with-bmad.md" >}})** — a spec-first, role-based workflow where an AI agent plays each role (analyst, PM, architect, developer) with you, producing a documented artifact at every step. Our guide covers install, the agent roles, and the planning-to-implementation flow. I built this handbook and site this way, so the whole paper trail is public if you want to see it in practice.
+- **[BMAD 101]({{< relref "/handbook/building-with-ai/bmad-101.md" >}})** — a spec-first, role-based workflow where an AI agent plays each role (analyst, PM, architect, developer) with you, producing a documented artifact at every step. Our guide covers install, the agent roles, and the planning-to-implementation flow. I built this handbook and site this way, so the whole paper trail is public if you want to see it in practice.
 - **[GSD Core](https://github.com/open-gsd/gsd-core)** — a lighter-weight, spec-driven system that works with Claude Code and other coding agents. Instead of BMAD's role-by-role cast, it runs a repeating loop — discuss, plan, build, verify, ship — with far less ceremony, so it's a good fit when the full process feels like too much for the job in front of you.
 
-Either way, the method supplies the discipline and [Claude Code]({{< relref "/handbook/building-with-ai/getting-started-with-claude-code.md" >}}) does the building — see [Getting Started with Claude Code]({{< relref "/handbook/building-with-ai/getting-started-with-claude-code.md" >}}) for that side.
+Either way, the method supplies the discipline and [Claude Code]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) does the building — see [Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) for that side.
 
 What this will eventually cover:
 

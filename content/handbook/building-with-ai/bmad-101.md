@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with BMAD"
+title: "BMAD 101"
 weight: 35
 description: "A practical on-ramp for BMAD — install it into a project, meet the agent roles, and walk the planning-to-implementation flow that turns 'build me a thing' into a spec you can trust."
 lastUpdated: 2026-07-12
@@ -16,13 +16,21 @@ goDeeper:
     title: "BMAD Getting Started tutorial"
     url: "https://docs.bmad-method.org/tutorials/getting-started/"
     why: "A guided run from install to your first story, entirely in the IDE. The fastest way to feel the loop instead of just reading about it."
+  - group: Courses
+    title: "The Official BMAD-Method Masterclass"
+    url: "https://www.youtube.com/watch?v=LorEJPrALcg"
+    why: "The complete IDE workflow, end to end — the deep how-to companion once the idea has clicked. Filmed against one version, so cross-check the specifics against the docs."
+  - group: Courses
+    title: "Stop Vibe Coding: Spec-Driven Development with BMAD"
+    url: "https://www.youtube.com/watch?v=3goqlnVyEXk"
+    why: "The best *why-this-exists* framing on video — watch this first if you're still deciding whether the ceremony is worth it. Shows a specific version, so treat the exact steps as illustrative."
   - group: Tools
     title: "BMAD Discord community"
     url: "https://discord.gg/gk8jAdXWmj"
     why: "The method moves fast across versions. The community is where you'll find out what changed and how people are actually using it."
 ---
 
-BMAD — the **Breakthrough Method for Agile AI-Driven Development** — is a spec-first way of working with an AI coding agent. Instead of "hey, build me a blog" and hoping, you move through a series of expert roles — analyst, PM, architect, UX, developer — and the AI plays each one *with* you, producing a documented artifact at every step. The planning is front-loaded so the building stays calm. This page gets you from nothing installed to your first story; it pairs naturally with [Getting Started with Claude Code]({{< relref "/handbook/building-with-ai/getting-started-with-claude-code.md" >}}), which is the agent that does the building.
+BMAD — the **Breakthrough Method for Agile AI-Driven Development** — is a spec-first way of working with an AI coding agent. Instead of "hey, build me a blog" and hoping, you move through a series of expert roles — analyst, PM, architect, UX, developer — and the AI plays each one *with* you, producing a documented artifact at every step. The planning is front-loaded so the building stays calm. This page gets you from nothing installed to your first story; it pairs naturally with [Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}), which is the agent that does the building.
 
 I built [this site](/projects/this-site/) and the [handbook you're reading](/projects/engineering-manager-handbook/) this way — the full paper trail (brief, PRD, UX, architecture, epics and stories) is public in each repo's `_bmad-output/` folder if you want to see the method in practice before you try it. For the fuller story of what that felt like, see [Building in public with BMAD](/posts/building-in-public-with-bmad/).
 
@@ -34,7 +42,7 @@ The thing to internalize before you install anything: **BMAD isn't magic, and th
 
 - **Node.js 20.12 or newer** — the one hard requirement enforced at install.
 - **Git** — used to pull in modules.
-- **An AI coding agent** — [Claude Code]({{< relref "/handbook/building-with-ai/getting-started-with-claude-code.md" >}}) or Cursor are the common choices. Get that working first; BMAD installs *into* the tool you already use.
+- **An AI coding agent** — [Claude Code]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) or Cursor are the common choices. Get that working first; BMAD installs *into* the tool you already use.
 
 ## 2. Install it into your project
 
@@ -83,7 +91,7 @@ BMAD splits work into two big movements — **planning** (heavy human-AI collabo
 A newcomer path: after install, ask BMAD's help/guide to inspect your project and recommend the next step. For small, well-understood work there's a **quick** track that clarifies, plans, implements, and reviews in a single pass — you don't need the full ceremony for a bug fix.
 
 {{< protip >}}
-**Start a fresh chat for each workflow.** It's the single habit that most reliably keeps BMAD working well — a clean context per phase stops the analyst's tangents from leaking into the architect's decisions. Same instinct as reaching for `/clear` in [Claude Code]({{< relref "/handbook/building-with-ai/getting-started-with-claude-code.md" >}}): new task, new context.
+**Start a fresh chat for each workflow.** It's the single habit that most reliably keeps BMAD working well — a clean context per phase stops the analyst's tangents from leaking into the architect's decisions. Same instinct as reaching for `/clear` in [Claude Code]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}): new task, new context.
 {{< /protip >}}
 
 ## Why it's worth the ceremony
