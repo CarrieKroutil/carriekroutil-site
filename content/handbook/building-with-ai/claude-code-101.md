@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Claude Code"
+title: "Claude Code 101"
 weight: 25
 description: "A practical on-ramp for Claude Code — install it, point it at an existing repo with /init, and learn the handful of commands that matter on day one."
 lastUpdated: 2026-07-12

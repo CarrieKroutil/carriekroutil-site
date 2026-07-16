@@ -25,7 +25,7 @@ AI coding assistants are already in your team's editors and terminals whether yo
 
 If you want hands-on experience before forming opinions — and you should — pick one tool and actually ship something small with it. A few reasonable entry points:
 
-- **[Claude Code]({{< relref "/handbook/building-with-ai/getting-started-with-claude-code.md" >}})** — an agentic, terminal-based tool that works across your whole repo. Our step-by-step guide covers install, pointing it at an existing project with `/init`, and the handful of commands worth knowing on day one.
+- **[Claude Code]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}})** — an agentic, terminal-based tool that works across your whole repo. Our step-by-step guide covers install, pointing it at an existing project with `/init`, and the handful of commands worth knowing on day one.
 - **[GitHub Copilot](https://docs.github.com/en/copilot)** — the most widely adopted in-editor assistant; likely already in your team's IDEs, so worth knowing well.
 - **Whatever your team already reaches for** — meet people where they are before standardizing on anything.
 

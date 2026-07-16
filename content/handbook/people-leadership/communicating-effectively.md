@@ -20,7 +20,7 @@ goDeeper:
 
 The biggest problem with communication is the illusion that it has occurred. You said the words, you heard yourself say them, you walked away thinking you'd been clear — and the other person walked away with something else entirely. Most of the time you never find out, until a deliverable shows up wrong or a decision gets relitigated three weeks later.
 
-Almost everything below is an attempt to close that gap.
+Almost everything below is an attempt to close that gap. This page is about communication up close — one-on-one and in the room; for the *speaking on your feet* side — presentations, standups, thinking on the spot — see [Speaking & Presenting]({{< relref "/handbook/people-leadership/speaking-and-presenting.md" >}}).
 
 ## Be clear
 
