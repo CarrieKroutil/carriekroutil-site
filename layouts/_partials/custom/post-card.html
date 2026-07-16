@@ -12,17 +12,13 @@
   All of the post's tags show, matching the UX home mock (e.g. a card reads "code · AI").
 
   Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback.
-  The hero src may be a local bundle file (resolved to its RelPermalink) or an external
-  URL (used as-is) — mirroring how single.html renders the hero, so cards match the post.
+  Resolution + build-time resizing is centralized in custom/hero-src.html (local raster →
+  small WebP Fill crop; SVG/external → as-is), so cards, single pages, and share images all
+  agree. Fixed-height (.ck-card-thumb) container means no CLS, so no width/height needed here.
   Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
 */ -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $thumb := "" -}}
-{{- with .Params.hero -}}
-  {{- $r := $.Resources.GetMatch .src -}}
-  {{- if $r -}}{{- $thumb = $r.RelPermalink -}}
-  {{- else if hasPrefix .src "http" -}}{{- $thumb = .src -}}{{- end -}}
-{{- end -}}
+{{- $thumb := (partial "custom/hero-src.html" (dict "page" . "spec" "760x400" "method" "Fill")).url -}}
 <article class="ck-card">
   {{- if $thumb -}}
     <div class="ck-card-thumb"><img src="{{ $thumb }}" alt="" loading="lazy"></div>

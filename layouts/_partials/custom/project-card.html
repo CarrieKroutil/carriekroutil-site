@@ -9,15 +9,11 @@
   card stays a single click target. Context = a project Page.
 
   Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback —
-  identical resolution to post-card (local bundle resource → RelPermalink, else external URL).
+  identical resolution to post-card via the shared custom/hero-src.html helper (local raster →
+  small WebP Fill crop; SVG/external → as-is).
 */ -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $thumb := "" -}}
-{{- with .Params.hero -}}
-  {{- $r := $.Resources.GetMatch .src -}}
-  {{- if $r -}}{{- $thumb = $r.RelPermalink -}}
-  {{- else if hasPrefix .src "http" -}}{{- $thumb = .src -}}{{- end -}}
-{{- end -}}
+{{- $thumb := (partial "custom/hero-src.html" (dict "page" . "spec" "760x400" "method" "Fill")).url -}}
 <article class="ck-card">
   {{- if $thumb -}}
     <div class="ck-card-thumb"><img src="{{ $thumb }}" alt="" loading="lazy"></div>

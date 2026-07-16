@@ -13,7 +13,19 @@
 {{- end -}}
 {{- $src := .Destination -}}
 {{- $img := .Page.Resources.GetMatch .Destination -}}
-{{- if $img -}}{{- $src = $img.RelPermalink -}}{{- end -}}
+{{- $w := 0 -}}
+{{- $h := 0 -}}
+{{- if $img -}}
+  {{- $src = $img.RelPermalink -}}
+  {{- /* Intrinsic dimensions on local raster images let the browser reserve space and avoid
+         layout shift (CLS). Tailwind preflight (Hextra) sets img{height:auto}, so the aspect
+         ratio scales correctly under the prose max-width. SVG has no raster .Width — skip it. */ -}}
+  {{- if in (slice ".png" ".jpg" ".jpeg" ".webp" ".gif" ".tif" ".tiff" ".bmp") (path.Ext .Destination | lower) -}}
+    {{- $w = $img.Width -}}
+    {{- $h = $img.Height -}}
+  {{- end -}}
+{{- end -}}
 <img src="{{ $src | safeURL }}" alt="{{ .PlainText }}" loading="lazy"
+  {{- if $w }} width="{{ $w }}" height="{{ $h }}"{{ end -}}
   {{- with .Title }} title="{{ . }}"{{ end -}}
 >

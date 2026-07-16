@@ -1,0 +1,53 @@
+{{- /*
+  custom/hero-src.html — single source of truth for resolving a page's hero into a
+  render-ready image. Returns a dict { url, width, height }.
+
+  WHY THIS EXISTS: four templates (post-card, project-card, posts/single, projects/single)
+  each resolved the hero the same way by hand. That duplication is now here, and this is also
+  the one place image processing happens — change the sizing once and every surface follows.
+
+  Local RASTER heroes (png/jpg/jpeg/webp/tif/bmp) are processed at build time to a right-sized
+  WebP — cards ask for a small Fill crop, single pages for a width-bounded Resize — so a 300–600KB
+  original no longer ships full-res into a 120px thumbnail. `width`/`height` are the PROCESSED
+  intrinsic dimensions, so callers can reserve space and avoid layout shift (CLS).
+
+  Pass-through (returns url only; width/height = 0):
+    - SVG heroes — Hugo's raster pipeline can't Fill/Resize them (would error). Served crisp
+      as-is; share images swap in a raster sibling via custom/social-image.html.
+    - External http(s) heroes — not local resources, nothing to process.
+    - Declared-but-missing local files — url stays empty so the caller renders no <img>
+      (a hero can be declared in front matter before the file is dropped in — no broken image).
+
+  Input dict: { page, spec, method }
+    method ∈ "Fill" | "Resize" (default "Resize").
+    spec   e.g. "760x400" for a Fill crop, "960x" for a width-bounded Resize.
+*/ -}}
+{{- $page := .page -}}
+{{- $spec := .spec -}}
+{{- $method := .method | default "Resize" -}}
+{{- $url := "" -}}
+{{- $w := 0 -}}
+{{- $h := 0 -}}
+{{- with $page.Params.hero -}}
+  {{- $r := $page.Resources.GetMatch .src -}}
+  {{- if $r -}}
+    {{- $ext := path.Ext .src | lower -}}
+    {{- if in (slice ".png" ".jpg" ".jpeg" ".webp" ".tif" ".tiff" ".bmp") $ext -}}
+      {{- $p := "" -}}
+      {{- if eq $method "Fill" -}}
+        {{- $p = $r.Fill (printf "%s webp q80" $spec) -}}
+      {{- else -}}
+        {{- $p = $r.Resize (printf "%s webp q82" $spec) -}}
+      {{- end -}}
+      {{- $url = $p.RelPermalink -}}
+      {{- $w = $p.Width -}}
+      {{- $h = $p.Height -}}
+    {{- else -}}
+      {{- /* SVG (or any non-raster) local resource: serve as-is, unprocessed. */ -}}
+      {{- $url = $r.RelPermalink -}}
+    {{- end -}}
+  {{- else if hasPrefix .src "http" -}}
+    {{- $url = .src -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "url" $url "width" $w "height" $h) -}}

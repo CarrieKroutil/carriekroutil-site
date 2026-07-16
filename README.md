@@ -276,3 +276,7 @@ static/            # favicon and other static files copied as-is
 ```
 
 Customizations live in `layouts/` and `assets/`, which shadow the Hextra module by Hugo's lookup order — the theme module itself is treated as read-only and is never edited in place.
+
+### Upgrading Hextra
+
+Bumping the theme (`hugo mod get -u github.com/imfing/hextra`) is usually safe because our overrides shadow the module. The one thing to check by hand: **frozen copies of theme templates.** `layouts/docs/list.html` embeds a verbatim copy of Hextra's `docs/list.html` `main` block (currently from **v0.12.3**) in its section-index branch. Our override always wins with no build error, so a theme fix to that block won't reach the site until the copy is refreshed. After an upgrade, diff that branch against the new module's `docs/list.html` and re-copy if it changed. (`grep -rn "v0.12.3" layouts/` surfaces any other version-pinned copies to re-check.)
