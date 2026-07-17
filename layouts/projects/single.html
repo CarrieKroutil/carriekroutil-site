@@ -25,7 +25,8 @@
       {{- $hero := partial "custom/hero-src.html" (dict "page" $ "widths" (slice 400 640 900 1200)) -}}
       {{- with $hero.url -}}
         {{- if not $.Params.hero.alt -}}{{- errorf "project %q hero is missing required alt text" $.Path -}}{{- end -}}
-        <img class="ck-hero" src="{{ . }}" alt="{{ $.Params.hero.alt }}" loading="lazy"
+        {{- /* Above-the-fold LCP element — fetchpriority=high and NOT lazy (see posts/single.html). */ -}}
+        <img class="ck-hero" src="{{ . }}" alt="{{ $.Params.hero.alt }}" fetchpriority="high"
           {{- with $hero.srcset }} srcset="{{ . }}" sizes="(max-width: 760px) 92vw, 720px"{{ end }}
           {{- if $hero.width }} width="{{ $hero.width }}" height="{{ $hero.height }}"{{ end -}}>
       {{- end -}}

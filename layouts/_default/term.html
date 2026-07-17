@@ -36,14 +36,16 @@
     {{- if $both }}<h2 class="ck-term-group">Posts</h2>{{ end }}
     <p class="ck-stream-intro">{{ len . }} post{{ if ne (len .) 1 }}s{{ end }} under this topic.</p>
     <div class="ck-grid">
-      {{- range . -}}{{ partial "custom/post-card.html" . }}{{- end -}}
+      {{- /* First post card is the top-of-page LCP candidate → priority; the rest lazy. */ -}}
+      {{- range $i, $p := . -}}{{ partial "custom/post-card.html" (dict "page" $p "priority" (eq $i 0)) }}{{- end -}}
     </div>
     {{- end -}}
     {{- with $projects -}}
     {{- if $both }}<h2 class="ck-term-group">Projects</h2>{{ end }}
     <p class="ck-stream-intro">{{ len . }} project{{ if ne (len .) 1 }}s{{ end }} under this topic.</p>
     <div class="ck-grid">
-      {{- range . -}}{{ partial "custom/project-card.html" . }}{{- end -}}
+      {{- /* First project card is priority ONLY when no Posts group renders above it (else that's the LCP). */ -}}
+      {{- range $i, $p := . -}}{{ partial "custom/project-card.html" (dict "page" $p "priority" (and (not $posts) (eq $i 0))) }}{{- end -}}
     </div>
     {{- end -}}
   {{- else -}}

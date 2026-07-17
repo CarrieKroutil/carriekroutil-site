@@ -11,21 +11,28 @@
   Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback —
   identical resolution to post-card via the shared custom/hero-src.html helper, which returns
   a responsive WebP srcset (SVG/external → single as-is url). The `sizes` matches the grid.
+
+  Context: a project Page, OR a dict { page, priority } — same contract as custom/post-card.html.
+  priority=true marks this card's thumb as the LCP candidate (fetchpriority=high, not lazy); a
+  bare Page keeps the old lazy behavior. Callers set priority for the first/above-the-fold card.
 */ -}}
-{{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $hero := partial "custom/hero-src.html" (dict "page" . "widths" (slice 400 640 900 1200)) -}}
+{{- $page := . -}}{{- $priority := false -}}
+{{- if reflect.IsMap . -}}{{- $page = .page -}}{{- $priority = .priority -}}{{- end -}}
+{{- $g := add 1 (mod (len $page.Title) 4) -}}
+{{- $hero := partial "custom/hero-src.html" (dict "page" $page "widths" (slice 400 640 900 1200)) -}}
 <article class="ck-card">
   {{- if $hero.url -}}
-    <div class="ck-card-thumb"><img src="{{ $hero.url }}" alt="" loading="lazy"
+    <div class="ck-card-thumb"><img src="{{ $hero.url }}" alt=""
+      {{- if $priority }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}
       {{- with $hero.srcset }} srcset="{{ . }}" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 448px"{{ end -}}></div>
   {{- else -}}
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}
   <div class="ck-card-body">
-    {{ partial "custom/post-tags.html" . }}
-    <h3 class="ck-card-title"><a class="ck-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-    {{- $excerpt := or .Description (.Summary | plainify) -}}
+    {{ partial "custom/post-tags.html" $page }}
+    <h3 class="ck-card-title"><a class="ck-card-link" href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+    {{- $excerpt := or $page.Description ($page.Summary | plainify) -}}
     {{- with $excerpt -}}<p class="ck-card-excerpt">{{ . }}</p>{{- end -}}
-    <div class="ck-post-meta">{{ with .Params.dateDisplay }}{{ . }}{{ else }}{{ $.Date.Format "Jan 2, 2006" }}{{ end }}</div>
+    <div class="ck-post-meta">{{ with $page.Params.dateDisplay }}{{ . }}{{ else }}{{ $page.Date.Format "Jan 2, 2006" }}{{ end }}</div>
   </div>
 </article>
