@@ -12,16 +12,19 @@
   All of the post's tags show, matching the UX home mock (e.g. a card reads "code · AI").
 
   Thumb: hero image when present (decorative → alt="", lazy), else a gradient fallback.
-  Resolution + build-time resizing is centralized in custom/hero-src.html (local raster →
-  small WebP Fill crop; SVG/external → as-is), so cards, single pages, and share images all
-  agree. Fixed-height (.ck-card-thumb) container means no CLS, so no width/height needed here.
+  Resolution + build-time resizing is centralized in custom/hero-src.html, which returns a
+  responsive WebP srcset (SVG/external → single as-is url). The `sizes` below describes the
+  grid: full width 1-up (<=620px), ~half in the 920px container 2-up, capped at ~448px — plus
+  it comfortably covers the home Featured slot (320px, but height-bound). Fixed-height
+  (.ck-card-thumb) container + object-fit:cover means no CLS, so no width/height needed here.
   Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
 */ -}}
 {{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $thumb := (partial "custom/hero-src.html" (dict "page" . "spec" "760x400" "method" "Fill")).url -}}
+{{- $hero := partial "custom/hero-src.html" (dict "page" . "widths" (slice 400 640 900 1200)) -}}
 <article class="ck-card">
-  {{- if $thumb -}}
-    <div class="ck-card-thumb"><img src="{{ $thumb }}" alt="" loading="lazy"></div>
+  {{- if $hero.url -}}
+    <div class="ck-card-thumb"><img src="{{ $hero.url }}" alt="" loading="lazy"
+      {{- with $hero.srcset }} srcset="{{ . }}" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 448px"{{ end -}}></div>
   {{- else -}}
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}

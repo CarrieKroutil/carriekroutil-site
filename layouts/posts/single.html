@@ -18,12 +18,13 @@
     {{ partial "custom/post-meta.html" . }}
     {{- with .Params.hero -}}
       {{- if not .alt -}}{{- errorf "post %q hero is missing required alt text (AD-9: hero.alt is required)" $.Path -}}{{- end -}}
-      {{- /* Resolve + resize via the shared helper (local raster → width-bounded WebP;
-             SVG/external → as-is). width/height come back on processed images so the browser
-             reserves space (CLS). Empty url → declared-but-missing file → render nothing. */ -}}
-      {{- $hero := partial "custom/hero-src.html" (dict "page" $ "spec" "960x" "method" "Resize") -}}
+      {{- /* Resolve + resize via the shared helper → responsive WebP srcset (SVG/external →
+             single as-is url). `sizes` = the 720px reading column, full width on mobile.
+             width/height reserve space (CLS). Empty url → declared-but-missing → render nothing. */ -}}
+      {{- $hero := partial "custom/hero-src.html" (dict "page" $ "widths" (slice 400 640 900 1200)) -}}
       {{- with $hero.url -}}
         <img class="ck-hero" src="{{ . }}" alt="{{ $.Params.hero.alt }}" loading="lazy"
+          {{- with $hero.srcset }} srcset="{{ . }}" sizes="(max-width: 760px) 92vw, 720px"{{ end }}
           {{- if $hero.width }} width="{{ $hero.width }}" height="{{ $hero.height }}"{{ end -}}>
       {{- end -}}
     {{- end -}}

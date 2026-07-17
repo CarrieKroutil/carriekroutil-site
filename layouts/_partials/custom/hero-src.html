@@ -1,31 +1,39 @@
 {{- /*
   custom/hero-src.html — single source of truth for resolving a page's hero into a
-  render-ready image. Returns a dict { url, width, height }.
+  render-ready, responsive image. Returns a dict { url, srcset, width, height }.
 
   WHY THIS EXISTS: four templates (post-card, project-card, posts/single, projects/single)
-  each resolved the hero the same way by hand. That duplication is now here, and this is also
-  the one place image processing happens — change the sizing once and every surface follows.
+  each resolved the hero the same way by hand. That duplication lives here now, and this is
+  the one place image processing happens — tune sizing/quality once and every surface follows.
 
-  Local RASTER heroes (png/jpg/jpeg/webp/tif/bmp) are processed at build time to a right-sized
-  WebP — cards ask for a small Fill crop, single pages for a width-bounded Resize — so a 300–600KB
-  original no longer ships full-res into a 120px thumbnail. `width`/`height` are the PROCESSED
-  intrinsic dimensions, so callers can reserve space and avoid layout shift (CLS).
+  RESPONSIVE, NOT FIXED-SIZE (this is the important part): a single fixed-width variant looks
+  soft the moment a card renders wider than it — on 2-up desktop and especially on HiDPI/retina
+  where a 450px card is 900+ physical pixels. So local RASTER heroes emit a `srcset` of several
+  WebP widths and the browser downloads only the one that fits its actual box and pixel density.
+  Small bytes AND crisp at every size. Callers supply a `sizes` attribute describing the layout.
 
-  Pass-through (returns url only; width/height = 0):
-    - SVG heroes — Hugo's raster pipeline can't Fill/Resize them (would error). Served crisp
-      as-is; share images swap in a raster sibling via custom/social-image.html.
+    - widths are capped to the source's real width, so we never upscale (which is what caused
+      the blur). If the source is smaller than every requested rung, we still emit one variant
+      at native width so it's never under-served.
+    - quality defaults high (q90) because these heroes are smooth gradient art, where lower
+      WebP quality shows visible banding. The variants are tiny regardless (a 1200px gradient
+      is ~8-12KB), so the quality is cheap. Override per call if needed.
+    - width/height are the LARGEST variant's dimensions (all variants share one aspect), so a
+      caller can set them to reserve space and avoid layout shift (CLS).
+
+  Pass-through (returns url only; srcset empty, width/height = 0):
+    - SVG heroes — vector, scales infinitely and Hugo's raster pipeline can't Resize them.
+      Served as-is (crisp at any size). Share images swap in a raster sibling via social-image.html.
     - External http(s) heroes — not local resources, nothing to process.
-    - Declared-but-missing local files — url stays empty so the caller renders no <img>
-      (a hero can be declared in front matter before the file is dropped in — no broken image).
+    - Declared-but-missing local files — url stays empty so the caller renders no <img>.
 
-  Input dict: { page, spec, method }
-    method ∈ "Fill" | "Resize" (default "Resize").
-    spec   e.g. "760x400" for a Fill crop, "960x" for a width-bounded Resize.
+  Input dict: { page, widths (slice of ints, ascending), quality (int, optional) }
 */ -}}
 {{- $page := .page -}}
-{{- $spec := .spec -}}
-{{- $method := .method | default "Resize" -}}
+{{- $widths := .widths -}}
+{{- $q := .quality | default 90 -}}
 {{- $url := "" -}}
+{{- $srcset := "" -}}
 {{- $w := 0 -}}
 {{- $h := 0 -}}
 {{- with $page.Params.hero -}}
@@ -33,15 +41,33 @@
   {{- if $r -}}
     {{- $ext := path.Ext .src | lower -}}
     {{- if in (slice ".png" ".jpg" ".jpeg" ".webp" ".tif" ".tiff" ".bmp") $ext -}}
-      {{- $p := "" -}}
-      {{- if eq $method "Fill" -}}
-        {{- $p = $r.Fill (printf "%s webp q80" $spec) -}}
-      {{- else -}}
-        {{- $p = $r.Resize (printf "%s webp q82" $spec) -}}
+      {{- $maxW := $r.Width -}}
+      {{- /* Build one WebP per requested width that the source can honor without upscaling. */ -}}
+      {{- $variants := slice -}}
+      {{- $keptTop := 0 -}}
+      {{- range $widths -}}
+        {{- if le . $maxW -}}
+          {{- $variants = $variants | append ($r.Resize (printf "%dx webp q%d" . $q)) -}}
+          {{- $keptTop = . -}}
+        {{- end -}}
       {{- end -}}
-      {{- $url = $p.RelPermalink -}}
-      {{- $w = $p.Width -}}
-      {{- $h = $p.Height -}}
+      {{- /* Source smaller than our top rung → also offer native width so it's not under-served
+             (never ABOVE the top rung — that ceiling is deliberate, for bytes). */ -}}
+      {{- $topRung := index (last 1 $widths) 0 -}}
+      {{- if and (lt $keptTop $maxW) (lt $maxW $topRung) -}}
+        {{- $variants = $variants | append ($r.Resize (printf "%dx webp q%d" $maxW $q)) -}}
+      {{- end -}}
+      {{- /* Nothing kept (source narrower than the smallest rung) → single native-width variant. */ -}}
+      {{- if not $variants -}}
+        {{- $variants = slice ($r.Resize (printf "%dx webp q%d" $maxW $q)) -}}
+      {{- end -}}
+      {{- $set := slice -}}
+      {{- range $variants -}}{{- $set = $set | append (printf "%s %dw" .RelPermalink .Width) -}}{{- end -}}
+      {{- $largest := index $variants (sub (len $variants) 1) -}}
+      {{- $url = $largest.RelPermalink -}}
+      {{- $srcset = delimit $set ", " -}}
+      {{- $w = $largest.Width -}}
+      {{- $h = $largest.Height -}}
     {{- else -}}
       {{- /* SVG (or any non-raster) local resource: serve as-is, unprocessed. */ -}}
       {{- $url = $r.RelPermalink -}}
@@ -50,4 +76,4 @@
     {{- $url = .src -}}
   {{- end -}}
 {{- end -}}
-{{- return (dict "url" $url "width" $w "height" $h) -}}
+{{- return (dict "url" $url "srcset" $srcset "width" $w "height" $h) -}}

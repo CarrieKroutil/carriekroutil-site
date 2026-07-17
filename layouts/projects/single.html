@@ -19,13 +19,14 @@
        external URL — so a project can declare hero.png in front matter before the file is
        dropped in, without showing a broken image. alt is required once we render. */ -}}
     {{- with .Params.hero -}}
-      {{- /* Resolve + resize via the shared helper (local raster → width-bounded WebP;
-             SVG/external → as-is). width/height come back on processed images so the browser
-             reserves space (CLS). Empty url → declared-but-missing file → render nothing. */ -}}
-      {{- $hero := partial "custom/hero-src.html" (dict "page" $ "spec" "960x" "method" "Resize") -}}
+      {{- /* Resolve + resize via the shared helper → responsive WebP srcset (SVG/external →
+             single as-is url). `sizes` = the 720px reading column, full width on mobile.
+             width/height reserve space (CLS). Empty url → declared-but-missing → render nothing. */ -}}
+      {{- $hero := partial "custom/hero-src.html" (dict "page" $ "widths" (slice 400 640 900 1200)) -}}
       {{- with $hero.url -}}
         {{- if not $.Params.hero.alt -}}{{- errorf "project %q hero is missing required alt text" $.Path -}}{{- end -}}
         <img class="ck-hero" src="{{ . }}" alt="{{ $.Params.hero.alt }}" loading="lazy"
+          {{- with $hero.srcset }} srcset="{{ . }}" sizes="(max-width: 760px) 92vw, 720px"{{ end }}
           {{- if $hero.width }} width="{{ $hero.width }}" height="{{ $hero.height }}"{{ end -}}>
       {{- end -}}
     {{- end -}}
