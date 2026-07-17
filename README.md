@@ -93,9 +93,12 @@ with no `hero` falls back to an on-brand gradient thumb. Two ways to set one:
      src: dogs.jpg          # the file content/posts/<this-post>/dogs.jpg
      alt: "My three dogs on the trail"
    ```
-   There's no automatic resizing yet, so export photos **~1600px wide and compressed** to
-   keep pages fast (see *"Sizing & compressing a local image"* below; lazy-loading is applied
-   for you).
+   Local raster heroes (`.jpg`/`.png`/`.webp`) are **resized automatically at build time** into
+   a responsive set of WebP widths — the browser downloads only the size it needs — so you don't
+   have to compress or resize them by hand. Just supply a crisp source: **~1200px wide or more,
+   roughly 2:1**. The pipeline caps at your source width and never upscales, so a small source
+   limits how sharp the hero can look on retina. Lazy-loading is applied for you. (SVG and
+   external-URL heroes are used as-is — see below.)
 2. **A gradient SVG** — the abstract banners (e.g. `content/posts/hello-corner-of-the-internet/hero.svg`)
    are hand-written SVGs on a `1200×600` canvas using the brand palette
    (violet `#8b5cf6` → fuchsia `#d946ef` → amber `#f59e0b`, defined as `--ck-accent-*` in
@@ -129,8 +132,9 @@ filename)…
 ```
 
 Every inline image **must** have alt text — an empty `![](…)` fails the build (accessibility).
-Images lazy-load automatically; the same ~1200px-and-compressed guidance applies to files you
-add to the repo.
+Images lazy-load automatically and get intrinsic `width`/`height` so the page doesn't jump as
+they load. Unlike heroes, **inline images are not auto-resized** — size and compress them before
+you add them (see *"Sizing & compressing a local image"* below).
 
 ### Using a web image (e.g. Unsplash)
 
@@ -145,17 +149,19 @@ change, or disappear) and usually a touch faster — it's served from the site's
 extra connection to a third-party host, and you control the exact compressed size. A web image
 adds a cross-origin request, and a **bare** Unsplash URL can pull a multi-megabyte original;
 append sizing params like `?w=1200&q=80&auto=format` to get an optimized WebP/AVIF instead.
-Either way, size is the real lever — there's no automatic resizing yet, so compress before you
-ship. For posts that matter, download the image into the post's folder and reference it by
-filename.
+The build only resizes **local raster heroes** — external URLs (and inline images) bypass that,
+so size those yourself. For posts that matter, download the image into the post's folder and use
+it as the hero, where it's resized for you automatically.
 
 ### Sizing & compressing a local image
 
-The site doesn't resize images yet, so size and compress **before** you add the file. Targets:
+Local **hero** images are resized and converted to WebP automatically at build time — drop in a
+crisp ~1200px+ source and you're done. This section is for the cases the build **doesn't** touch:
+**inline images** and **external URLs**. Size and compress those **before** you add them. Targets:
 
 | Use | Displays at | Export to (long side) | Shape |
 |---|---|---|---|
-| **Hero banner** | up to 720px wide | **~1600px** | Landscape, ~2:1 (e.g. 1600×800). It's also center-cropped to a short band on cards, so **keep the subject centered**. |
+| **Hero banner** (source only — auto-resized after) | up to 720px wide | **~1200–1600px** | Landscape, ~2:1 (e.g. 1600×800). The build makes the WebP variants; you just supply a sharp source. It's center-cropped to a short band on cards, so **keep the subject centered**. |
 | **Inline — landscape** | up to 720px wide | **~1440px** | Any landscape ratio. |
 | **Inline — portrait** | up to 720px wide | **~1200px** | Portraits get tall fast in the 720px column — keep them modest. |
 
