@@ -277,6 +277,17 @@ static/            # favicon and other static files copied as-is
 
 Customizations live in `layouts/` and `assets/`, which shadow the Hextra module by Hugo's lookup order — the theme module itself is treated as read-only and is never edited in place.
 
+### Images
+
+Hero images are resolved and resized **at build time** by `layouts/_partials/custom/hero-src.html` — the single place cards, single pages, and share images agree on. Local raster heroes (PNG/JPG/…) become right-sized WebP (a small Fill crop for cards, a width-bounded Resize for single pages); SVG and external heroes pass through untouched. Content images (`![alt](src)` in Markdown) get intrinsic `width`/`height` via the `render-image.html` render hook to prevent layout shift. See each file's header comment for the details.
+
+**What you do as an author:** nothing new. Drop a `hero.png`/`hero.jpg` into the page bundle and point `hero.src` at it in front matter, exactly as before — the resize and WebP conversion happen automatically during `hugo`, no command to run and no output to commit. The generated variants land in `resources/` (gitignored) and are rebuilt fresh on every deploy. Provide a reasonably sized source image and the pipeline does the rest; you don't pick the dimensions or format.
+
+Two things that are **not** automatic, and are unchanged by this pipeline:
+
+- **SVG heroes still need a raster sibling for social sharing.** Scrapers reject SVG share images, so `custom/social-image.html` looks for a `hero.png`/`hero.jpg` next to the SVG. Regenerate it after editing the SVG: `rsvg-convert -w 1200 -h 600 hero.svg -o hero.png` (see `svg-demystified.md`). The on-page hero still uses the crisp SVG.
+- **External (`http`) heroes are not resized** — Hugo can only process local files. Prefer a local file in the bundle when you want the size benefit.
+
 ### Upgrading Hextra
 
 Bumping the theme (`hugo mod get -u github.com/imfing/hextra`) is usually safe because our overrides shadow the module. The one thing to check by hand: **frozen copies of theme templates.** `layouts/docs/list.html` embeds a verbatim copy of Hextra's `docs/list.html` `main` block (currently from **v0.12.3**) in its section-index branch. Our override always wins with no build error, so a theme fix to that block won't reach the site until the copy is refreshed. After an upgrade, diff that branch against the new module's `docs/list.html` and re-copy if it changed. (`grep -rn "v0.12.3" layouts/` surfaces any other version-pinned copies to re-check.)
