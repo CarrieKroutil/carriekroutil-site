@@ -21,6 +21,8 @@ goDeeper:
 
 AI coding assistants are already in your team's editors and terminals whether you've blessed them or not. The interesting management question isn't "should we use them" — it's how to get durable leverage out of them without trading away the rigor that keeps a codebase alive. Used well, they collapse the boring parts of the job and free people for the thinking that matters; used carelessly, they generate plausible code nobody understands at a pace your review process can't absorb. This page is a stub; the aim is to help you steer toward the first outcome. The tooling is only half the story — getting a whole team to adopt these tools well is its own [change-management problem]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}}).
 
+*Part of the **AI-Assisted** track — this page is the mindset; the hands-on path runs [Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) → [LeaderOS]({{< relref "/handbook/building-with-ai/leaderos.md" >}}).*
+
 ## Getting started
 
 If you want hands-on experience before forming opinions — and you should — pick one tool and actually ship something small with it. A few reasonable entry points:
