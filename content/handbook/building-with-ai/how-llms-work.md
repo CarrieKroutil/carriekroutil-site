@@ -4,6 +4,14 @@ weight: 15
 description: "A curated path from two friendly intros to a full Stanford course — for when 'good enough to lead' isn't enough and you (or a curious engineer) want to really understand what's under the hood."
 lastUpdated: 2026-07-19
 goDeeper:
+  - group: Books
+    title: "The Illustrated Transformer — Jay Alammar"
+    url: "https://jalammar.github.io/illustrated-transformer/"
+    why: "The canonical visual explainer of attention and the transformer. Read it alongside Stanford Lecture 1 and the architecture clicks twice as fast."
+  - group: Books
+    title: "Build a Large Language Model (From Scratch) — Sebastian Raschka"
+    url: "https://www.manning.com/books/build-a-large-language-model-from-scratch"
+    why: "The hands-on book for the 'build a small project' instinct — code a working LLM end to end, one chapter at a time, in plain PyTorch."
   - group: Courses
     title: "Andrej Karpathy on YouTube"
     url: "https://www.youtube.com/@AndrejKarpathy"
@@ -11,15 +19,15 @@ goDeeper:
   - group: Courses
     title: "Stanford CME 295 — course site"
     url: "https://cme295.stanford.edu/"
-    why: "The home of the deep-dive course below: syllabus, slides, exams, and the suggested readings behind every lecture. Skim the slides to preview or review without watching the full 1.75 hours."
+    why: "The home of the deep-dive course below: syllabus, slides, exams, and the readings behind every lecture. Skim the slides to preview or review without watching the full 1.75 hours."
   - group: Courses
     title: "3Blue1Brown — Neural Networks series"
     url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"
     why: "A visual, math-light picture of what a transformer is doing inside — a gentle warm-up before the Stanford depth, and the best animation of 'attention' out there."
-  - group: Courses
-    title: "DeepLearning.AI — short courses"
-    url: "https://www.deeplearning.ai/"
-    why: "Short, hands-on courses that turn watching into building — the 'recreate a small example' step made easy."
+  - group: Tools
+    title: "Hugging Face"
+    url: "https://huggingface.co/learn"
+    why: "Where open models and datasets live, plus a free hands-on LLM course — the natural place to actually run the small experiments this page keeps nudging you toward."
 ---
 
 [AI Literacy for EMs]({{< relref "/handbook/building-with-ai/ai-literacy-for-ems.md" >}}) gives you the manager's mental model — enough to scope work, smell a bad claim, and lead a team that uses these tools. This page is the step down from there: *actually understanding how a large language model works under the hood.*
