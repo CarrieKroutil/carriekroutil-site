@@ -41,3 +41,8 @@ What this will eventually cover:
 {{< protip >}}
 The trap I watch for is velocity that looks great and ages terribly. Generated code is easy to accept and hard to truly own. My rule for the team: you are accountable for code you commit exactly as if you'd typed every character — if you can't explain it in [review]({{< relref "/handbook/team-health-operations/development-lifecycle.md" >}}), it doesn't ship. That single norm does more than any tooling policy.
 {{< /protip >}}
+
+## Where to go next
+
+- **[Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}})** — the fastest way to get the hands-on reps this page keeps insisting on.
+- **[LeaderOS: Your Second Brain]({{< relref "/handbook/building-with-ai/leaderos.md" >}})** — the same assistant, pointed at the leadership job instead of the code.

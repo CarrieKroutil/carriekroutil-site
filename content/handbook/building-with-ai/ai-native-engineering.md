@@ -40,3 +40,8 @@ What this will eventually cover:
 {{< protip >}}
 The teams that struggle with AI-native work are usually the ones who skipped building evals because "we'll just eyeball it." You can't eyeball a probabilistic system at scale. The moment we invested in a real evaluation harness — before chasing model upgrades — every other decision got easier, because for the first time we could actually tell whether a change made things better or worse.
 {{< /protip >}}
+
+## Where to go next
+
+- **[BMAD 101]({{< relref "/handbook/building-with-ai/bmad-101.md" >}})** — the spec-first method that forces this discipline on you, step by step.
+- **[Leading AI-Adopting Teams]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}})** — getting a whole team to work this way, which is where it gets genuinely hard.
