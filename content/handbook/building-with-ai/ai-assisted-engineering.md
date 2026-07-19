@@ -69,16 +69,15 @@ The line that matters is the middle one. In AI-assisted work the human is always
 
 ## What it looks like: chasing down a production bug
 
-Here's a real example of the whole loop in one sitting. A service started throwing 500s after a deploy. I worked it through Claude Code with a **Datadog MCP** connected — an MCP is just a standard connector that lets Claude Code read from an outside tool like Datadog directly, so it can pull real logs and traces instead of me copy-pasting them in. That let me stay in one place the whole way:
+A flow like this shows the whole loop in one sitting. A service starts throwing 500s after a deploy, and an engineer works it through Claude Code with a **Datadog MCP** connected — an MCP is just a standard connector that lets Claude Code read from an outside tool like Datadog directly, so it can pull real logs and traces instead of having them copy-pasted in:
 
-- I pointed it at the alert and asked it to pull the relevant error traces and find the pattern.
-- It surfaced the spike, tied it to one endpoint, and traced the stack back into our code.
-- I asked it to locate the offending function; it read the repo, found the bug — an unhandled null from a changed API response — and explained it.
-- I had it draft the fix and a regression test, reviewed both closely, tightened the test, and opened the PR.
+- Pointed at the alert, it surfaces the error spike, ties it to one endpoint, and traces the stack back into the code.
+- Asked to find the cause, it reads the repo, spots the bug — an unhandled null from a changed API response — and explains it.
+- On request, it drafts the fix and a regression test, which the engineer reviews, tightens, and ships as a PR.
 
-The whole thing took a fraction of the usual dig. But notice what I did at every step: I chose what to investigate, read its findings with a skeptical eye, confirmed the root cause myself, and owned the PR that shipped. The model compressed the grunt work; the judgment stayed mine.
+The dig takes a fraction of the usual time — but the engineer directs every step, choosing what to investigate, confirming the root cause, and owning the PR that ships. The model compresses the grunt work; the judgment stays human.
 
-**Why this is AI-assisted and not AI-native.** I was in the loop the entire time, driving one step at a time. It would tip into [AI-native]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) only if we built the incident response *around* the model — say, an on-call agent designed to triage alerts, propose patches, and open PRs on its own as a standing part of the system, with people reviewing the output rather than directing each step. Same tool, different center of gravity: here it assists a person; there it's the architecture.
+**Why this is AI-assisted and not AI-native.** A person is in the loop the whole way, driving one step at a time. It would tip into [AI-native]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) only if the incident response were built *around* the model — an on-call agent that triages alerts, proposes patches, and opens PRs on its own, with people reviewing the output rather than directing each step. Same tool, different center of gravity: here it assists a person; there it's the architecture.
 
 ## Getting started
 
