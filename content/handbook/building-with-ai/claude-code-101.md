@@ -20,6 +20,10 @@ goDeeper:
     title: "Claude Code 101"
     url: "https://anthropic.skilljar.com/claude-code-101"
     why: "Anthropic's free intro course — a guided, hands-on walkthrough for anyone who learns better by doing than by reading docs."
+  - group: Courses
+    title: "Claude Code Beginner to Pro: Agentic Coding for Developers"
+    url: "https://www.udemy.com/course/learn-claude-code/"
+    why: "A paid, project-based Udemy course that takes you from beginner to genuinely productive — you build a real Next.js app with Claude Code, start to finish. About ten hours all in, course plus tinkering, and a fast on-ramp if you'd rather learn by shipping something."
 ---
 
 Claude Code is an agentic coding tool that runs in your terminal and works across a whole repository, not just the file you happen to have open. This page is the fast path from "installed nothing" to "productively pairing on an existing codebase." It's the practical companion to [AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) — that page is the *why* and the *when*; this one is the *how*.
