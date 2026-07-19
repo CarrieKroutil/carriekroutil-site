@@ -42,7 +42,9 @@
   {{- with $featuredProject }}
   <section class="ck-featured" aria-labelledby="ck-featured-label">
     <h2 id="ck-featured-label" class="ck-featured-label">Featured Project</h2>
-    {{ partial "custom/project-card.html" . }}
+    {{- /* The featured card leads the page — it's the LCP element on Home. Mark it priority so
+       its thumbnail is fetched eagerly (fetchpriority=high) instead of lazy. */ -}}
+    {{ partial "custom/project-card.html" (dict "page" . "priority" true) }}
   </section>
   {{- end }}
 

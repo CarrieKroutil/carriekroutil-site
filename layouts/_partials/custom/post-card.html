@@ -18,21 +18,30 @@
   it comfortably covers the home Featured slot (320px, but height-bound). Fixed-height
   (.ck-card-thumb) container + object-fit:cover means no CLS, so no width/height needed here.
   Date + read-time reuse custom/post-meta.html. Excerpt: .Description, else .Summary.
+
+  Context: a post Page, OR a dict { page, priority }. priority=true marks THIS card's thumb as
+  the LCP candidate — fetchpriority=high and NOT lazy — so the browser fetches it immediately
+  instead of deferring it (lazy-loading the LCP image adds ~1-2s of "load delay" on mobile,
+  per Lighthouse). Callers pass priority ONLY for the first/above-the-fold card; the rest stay
+  lazy. A bare Page keeps the old lazy behavior (matches custom/avatar.html's dict-or-not shape).
 */ -}}
-{{- $g := add 1 (mod (len .Title) 4) -}}
-{{- $hero := partial "custom/hero-src.html" (dict "page" . "widths" (slice 400 640 900 1200)) -}}
+{{- $page := . -}}{{- $priority := false -}}
+{{- if reflect.IsMap . -}}{{- $page = .page -}}{{- $priority = .priority -}}{{- end -}}
+{{- $g := add 1 (mod (len $page.Title) 4) -}}
+{{- $hero := partial "custom/hero-src.html" (dict "page" $page "widths" (slice 400 640 900 1200)) -}}
 <article class="ck-card">
   {{- if $hero.url -}}
-    <div class="ck-card-thumb"><img src="{{ $hero.url }}" alt="" loading="lazy"
+    <div class="ck-card-thumb"><img src="{{ $hero.url }}" alt=""
+      {{- if $priority }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}
       {{- with $hero.srcset }} srcset="{{ . }}" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 448px"{{ end -}}></div>
   {{- else -}}
     <div class="ck-card-thumb ck-card-thumb--g{{ $g }}" aria-hidden="true"></div>
   {{- end -}}
   <div class="ck-card-body">
-    {{ partial "custom/post-tags.html" . }}
-    <h3 class="ck-card-title"><a class="ck-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-    {{- $excerpt := or .Description (.Summary | plainify) -}}
+    {{ partial "custom/post-tags.html" $page }}
+    <h3 class="ck-card-title"><a class="ck-card-link" href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+    {{- $excerpt := or $page.Description ($page.Summary | plainify) -}}
     {{- with $excerpt -}}<p class="ck-card-excerpt">{{ . }}</p>{{- end -}}
-    {{ partial "custom/post-meta.html" . }}
+    {{ partial "custom/post-meta.html" $page }}
   </div>
 </article>

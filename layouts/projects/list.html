@@ -13,8 +13,9 @@
   {{ if .Title }}<h1 class="ck-stream-title">{{ .Title }}</h1>{{ end }}
   {{- with .Content }}<div class="content ck-stream-intro">{{ . }}</div>{{ end -}}
   <div class="ck-grid">
-    {{- range (where site.RegularPages "Section" "projects").ByDate.Reverse -}}
-      {{ partial "custom/project-card.html" . }}
+    {{- /* First card is the top-of-grid LCP candidate → priority (eager fetch); the rest stay lazy. */ -}}
+    {{- range $i, $p := (where site.RegularPages "Section" "projects").ByDate.Reverse -}}
+      {{ partial "custom/project-card.html" (dict "page" $p "priority" (eq $i 0)) }}
     {{- end -}}
   </div>
 </main>
