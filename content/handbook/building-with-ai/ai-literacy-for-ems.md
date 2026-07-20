@@ -63,14 +63,31 @@ When a feature leans on a model, three dials replace the usual "how long will it
 
 Good scoping is mostly figuring out which of the three is the real constraint, then asking whether a cheaper, smaller, or simpler approach still clears the bar.
 
+**In practice.** Say your team wants a "summarize this thread" button — a customer opens a long email or chat thread and clicks it for a three-sentence recap. Watch the three dials pull against each other:
+
+- *Capability.* On a tidy 10-message thread, any model nails it. The trouble is the 200-message thread with forwarded attachments and three side conversations — does the summary still catch the one detail that mattered, like a promised refund?
+- *Cost.* You feed the whole thread in on every click, and you pay per token. Thousands of clicks a day on huge threads adds up fast — so do you summarize everything, or cap it at the last 20 messages?
+- *Latency.* The most capable model might take 8 seconds on a long thread, and 8 seconds on a button someone is waiting on feels broken. A smaller, faster model returns in 1 second and is 90% as good.
+
+Here latency is probably the binding constraint — a slow button is a dead feature — so you reach for the faster model, check its capability still holds up on messy threads, and cap thread length to keep cost sane.
+
 ## Reading a capability claim without getting fooled
 
-Benchmarks and demos are marketing until proven otherwise. A few reflexes:
+Benchmarks and demos are marketing until proven otherwise. A few questions to ask by default:
 
 - **Ask about the long tail, not the demo.** "What's the failure rate on messy real inputs?" tells you more than any headline score.
 - **Watch for cherry-picked benchmarks.** A model that tops one leaderboard may lag on the work you actually do.
 - **Separate the model from the system around it.** Most production quality comes from the guardrails, retrieval, and evals *surrounding* the model call — not the model alone.
 - **Demand the "how would we know if it were wrong?" answer.** If nobody can give it, the claim isn't ready to bet on.
+
+**In practice.** A vendor demos a support agent that "resolves 95% of tickets automatically." You type three sample questions, it answers all three perfectly, and the room is sold. Ask these four questions to see if the claim holds up:
+
+- *The long tail.* The demo questions were clean ("how do I reset my password?"). Your real queue is misspelled, multi-part, and angry. Ask for the resolution rate on a random sample of *last month's actual tickets*, not the three they picked.
+- *Cherry-picked benchmarks.* "#1 on a support leaderboard" means little if that benchmark is mostly billing questions and you sell a developer tool. It measures the work they chose, not the work you do.
+- *The model vs. the system.* That flawless refund probably wasn't the model — it was retrieval pulling the right help doc plus a guardrail capping refunds. Swap in the same model without that scaffolding and the quality collapses. They're selling the model; the demo was the system.
+- *How would we know?* Ask what happens when the agent gives a confident, wrong answer to a customer. A real answer sounds like a confidence threshold, a human-review queue, or an eval that flags regressions. "It's very accurate, that rarely happens" is not an answer.
+
+The through-line: a demo is built to show the model at its best; your job is to probe how it behaves at its worst.
 
 ## Where to go next
 
