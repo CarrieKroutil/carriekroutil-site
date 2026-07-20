@@ -20,6 +20,10 @@ goDeeper:
     title: "Claude Code 101"
     url: "https://anthropic.skilljar.com/claude-code-101"
     why: "Anthropic's free intro course — a guided, hands-on walkthrough for anyone who learns better by doing than by reading docs."
+  - group: Courses
+    title: "Claude Code Beginner to Pro: Agentic Coding for Developers"
+    url: "https://www.udemy.com/course/learn-claude-code/"
+    why: "A paid, project-based Udemy course that takes you from beginner to genuinely productive — you build a real Next.js app with Claude Code, start to finish. About ten hours all in, course plus tinkering, and a fast on-ramp if you'd rather learn by shipping something."
 ---
 
 Claude Code is an agentic coding tool that runs in your terminal and works across a whole repository, not just the file you happen to have open. This page is the fast path from "installed nothing" to "productively pairing on an existing codebase." It's the practical companion to [AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) — that page is the *why* and the *when*; this one is the *how*.
@@ -102,10 +106,20 @@ You don't need the whole reference to be productive. These are the ones that ear
 
 Plan mode is worth a mention too: ask Claude to plan a change before it touches files, and you get a reviewable approach up front instead of a surprise diff. It's the single habit that most reliably keeps generated work inside the rails.
 
-{{< protip >}}
-Reach for `/clear` far more often than feels natural. A long, sprawling conversation costs more and drifts more; a tight one scoped to the task at hand gives sharper results. New task, new context — make it a reflex.
-{{< /protip >}}
+## 5. Context is not memory
+
+One distinction is worth getting straight early, because it quietly shapes how well everything above works.
+
+**Context** is the current conversation's working memory — everything Claude can "see" right now. It's finite, and the fuller it gets, the worse things go on two fronts. **Cost:** every new message re-sends the entire conversation, so a long session quietly burns more tokens with each turn — you pay for all that history over and over. **Accuracy:** a crowded window makes the model more likely to lose the thread and *hallucinate* — confidently inventing a detail instead of tracking what's actually there. That's why `/clear` between tasks and `/compact` on a long one aren't housekeeping — they keep answers both cheaper and sharper. Treat them as reflexes, not options: new task, fresh context.
+
+**Memory** is the opposite instinct: the durable notes that persist *across* conversations — your `CLAUDE.md` and auto memory. That, you let *grow*.
+
+So the rule of thumb is **prune context, cultivate memory** — keep each conversation tight and scoped, and let the long-term notes accumulate.
 
 ## Where to go next
 
-Once the mechanics feel routine, the interesting problems are human, not technical: what "AI wrote it" does to code review and ownership, and how to get a whole team to adopt these tools without losing rigor. That's covered in [AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) and [Leading AI-Adopting Teams]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}}).
+Three good next steps:
+
+- **[LeaderOS: Your Second Brain]({{< relref "/handbook/building-with-ai/leaderos.md" >}})** — grow that memory into a second brain for your whole job, not just code.
+- **[AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}})** — how to reinvent the software development lifecycle (SDLC) around AI-led work.
+- **[Leading AI-Adopting Teams]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}})** — helping your whole team pick up these tools well.

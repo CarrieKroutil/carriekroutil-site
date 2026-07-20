@@ -31,3 +31,10 @@ What this will eventually cover:
 {{< protip >}}
 The most important thing I did wasn't picking tools — it was saying out loud, early, that the goal is to make people more capable, not more replaceable, and then backing it with how I evaluate work. Engineers can smell a rollout that's secretly about headcount. Name the fear, be honest about what you don't know — the same [direct, honest conversation]({{< relref "/handbook/people-leadership/communicating-effectively.md" >}}) you'd want in any hard moment — and adoption stops being something you have to push.
 {{< /protip >}}
+
+## Where to go next
+
+This is where the arc closes — the human part is the hard part, and the least automatable. Two ways back in:
+
+- **[AI Literacy for EMs]({{< relref "/handbook/building-with-ai/ai-literacy-for-ems.md" >}})** — the foundation the whole section is built on, if you skipped ahead.
+- **[Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}})** — read the *why* but haven't put a tool in your own hands yet? Start here.

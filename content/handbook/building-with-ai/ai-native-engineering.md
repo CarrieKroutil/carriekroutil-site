@@ -21,6 +21,8 @@ goDeeper:
 
 There's a difference between adding an AI feature and building an AI-native system. When the model is at the core of how your product works, the whole engineering discipline shifts: behavior is probabilistic, "correct" gets fuzzy, and your hardest problems move from logic to evaluation, prompts, context, and graceful failure. This is genuinely new territory for most teams, and it leans hard on the [failure modes]({{< relref "/handbook/building-with-ai/ai-literacy-for-ems.md" >}}) every manager needs to understand — hallucination, drift, the confident-but-wrong answer. It's easy to underestimate how much the surrounding system — guardrails, evals, observability — matters more than the model call itself. This page is a stub, but the through-line is that AI-native work rewards teams who treat the non-deterministic core as an engineering problem, not magic.
 
+*Part of the **AI-Native** track — this page is the mindset; [BMAD 101]({{< relref "/handbook/building-with-ai/bmad-101.md" >}}) is the hands-on method that enforces it.*
+
 ## Getting started
 
 The fastest way to internalize "engineering problem, not magic" is to build something with a method that forces the discipline on you — traceable requirements, decisions captured once, code written against a spec instead of a vibe. A couple of ways in:
@@ -40,3 +42,8 @@ What this will eventually cover:
 {{< protip >}}
 The teams that struggle with AI-native work are usually the ones who skipped building evals because "we'll just eyeball it." You can't eyeball a probabilistic system at scale. The moment we invested in a real evaluation harness — before chasing model upgrades — every other decision got easier, because for the first time we could actually tell whether a change made things better or worse.
 {{< /protip >}}
+
+## Where to go next
+
+- **[BMAD 101]({{< relref "/handbook/building-with-ai/bmad-101.md" >}})** — the spec-first method that forces this discipline on you, step by step.
+- **[Leading AI-Adopting Teams]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}})** — getting a whole team to work this way, which is where it gets genuinely hard.

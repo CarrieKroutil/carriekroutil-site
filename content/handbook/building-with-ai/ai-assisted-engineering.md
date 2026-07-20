@@ -2,8 +2,7 @@
 title: "AI-Assisted Engineering"
 weight: 20
 description: "Coding assistants and agents in the everyday dev workflow — what changes, what doesn't, and how to help your team get real leverage instead of faster slop."
-lastUpdated: 2026-06-25
-stub: true
+lastUpdated: 2026-07-19
 goDeeper:
   - group: Tools
     title: "Claude Code documentation"
@@ -19,7 +18,66 @@ goDeeper:
     why: "The most clear-eyed running commentary on coding with LLMs — what genuinely works, written by someone who ships with these tools daily."
 ---
 
-AI coding assistants are already in your team's editors and terminals whether you've blessed them or not. The interesting management question isn't "should we use them" — it's how to get durable leverage out of them without trading away the rigor that keeps a codebase alive. Used well, they collapse the boring parts of the job and free people for the thinking that matters; used carelessly, they generate plausible code nobody understands at a pace your review process can't absorb. This page is a stub; the aim is to help you steer toward the first outcome. The tooling is only half the story — getting a whole team to adopt these tools well is its own [change-management problem]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}}).
+AI coding assistants are already in your team's editors and terminals whether you've blessed them or not. The interesting management question isn't whether to allow them — it's how to get durable leverage out of them without trading away the rigor that keeps a codebase alive. Used well, they collapse the boring parts of the job and free people for the thinking that matters; used carelessly, they generate plausible code nobody understands at a pace your review process can't absorb. The aim of this page is to help you steer toward the first outcome. The tooling is only half the story — getting a whole team to adopt these tools well is its own [change-management problem]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}}).
+
+*Part of the **AI-Assisted** track — this page is the mindset; the hands-on path runs [Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) → [LeaderOS]({{< relref "/handbook/building-with-ai/leaderos.md" >}}).*
+
+## What it actually means
+
+AI-assisted engineering is when engineers use AI tools to help with parts of the development process while the engineer still owns the decisions, design, validation, and final result. The one-line version:
+
+> AI is a development partner that speeds up delivery, while human engineers stay responsible for architecture, judgment, quality, and outcomes.
+
+It's broader than "ask the AI to write code." On any given day it might help an engineer:
+
+- explore an unfamiliar codebase
+- draft or refactor code
+- generate tests
+- debug an error
+- explain a confusing log or a production incident
+- review a pull request
+- write documentation
+- turn a rough idea into a technical plan or a Jira ticket
+- research implementation options
+- automate the repetitive parts of the job
+
+The common thread: the engineer sets the goal, and the model does some of the legwork faster than a person could alone.
+
+## A typical workflow
+
+Whatever the task, the loop tends to look the same:
+
+1. The engineer defines the problem and the constraints.
+2. The AI proposes an approach or generates a first draft.
+3. The engineer reviews it — correctness, security, maintainability, fit with the rest of the system.
+4. Tests and validation confirm whether it actually works.
+5. The engineer revises, or rejects the output and steers again.
+
+That loop can run in seconds for a one-line change or over an afternoon for a big one, but the shape holds: human sets direction, AI drafts, human verifies.
+
+## Who's in control
+
+The clearest way to place AI-assisted engineering is on a spectrum of who's doing the work:
+
+| Approach | Who does the work |
+|---|---|
+| **Traditional engineering** | The engineer performs nearly every step by hand. |
+| **AI-assisted engineering** | AI speeds up selected steps; the engineer directs and verifies the work. |
+| **[AI-native engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}})** | The process itself is designed around AI agents and automation, often letting AI complete larger, multi-step workflows. |
+
+The line that matters is the middle one. In AI-assisted work the human is always holding the wheel — the model is a very fast pair of hands, not the driver.
+
+## What it looks like: chasing down a production bug
+
+A flow like this shows the whole loop in one sitting. A service starts throwing 500s after a deploy, and an engineer works it through Claude Code with a **Datadog MCP** connected — an MCP is just a standard connector that lets Claude Code read from an outside tool like Datadog directly, so it can pull real logs and traces instead of having them copy-pasted in:
+
+- Pointed at the alert, it surfaces the error spike, ties it to one endpoint, and traces the stack back into the code.
+- Asked to find the cause, it reads the repo, spots the bug — an unhandled null from a changed API response — and explains it.
+- On request, it drafts the fix and a regression test, which the engineer reviews, tightens, and ships as a PR.
+
+The dig takes a fraction of the usual time — but the engineer directs every step, choosing what to investigate, confirming the root cause, and owning the PR that ships. The model compresses the grunt work; the judgment stays human.
+
+**Why this is AI-assisted and not AI-native.** A person is in the loop the whole way, driving one step at a time. It would tip into [AI-native]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) only if the incident response were built *around* the model — an on-call agent that triages alerts, proposes patches, and opens PRs on its own, with people reviewing the output rather than directing each step. That's not the same setup pointed differently — it's a system you'd have to build: an agent or workflow wired around the model. The difference isn't which model you reach for; it's whether a person drives it step by step or you've engineered something that runs it.
 
 ## Getting started
 
@@ -29,15 +87,13 @@ If you want hands-on experience before forming opinions — and you should — p
 - **[GitHub Copilot](https://docs.github.com/en/copilot)** — the most widely adopted in-editor assistant; likely already in your team's IDEs, so worth knowing well.
 - **Whatever your team already reaches for** — meet people where they are before standardizing on anything.
 
-The tool matters less than the reps. Spend a week doing real work through one of these and the trade-offs below stop being abstract.
-
-What this will eventually cover:
-
-- Where assistants genuinely help (boilerplate, tests, unfamiliar APIs, exploration) vs. where they mislead
-- Autocomplete vs. chat vs. agentic tools — and when each fits the work
-- What "AI wrote it" does to code review, ownership, and the definition of done
-- Measuring whether it's actually helping, not just feeling fast
+The tool matters less than the reps. Spend a week doing real work through one of these and the trade-offs stop being abstract.
 
 {{< protip >}}
-The trap I watch for is velocity that looks great and ages terribly. Generated code is easy to accept and hard to truly own. My rule for the team: you are accountable for code you commit exactly as if you'd typed every character — if you can't explain it in [review]({{< relref "/handbook/team-health-operations/development-lifecycle.md" >}}), it doesn't ship. That single norm does more than any tooling policy.
+The trap to watch for is velocity that looks great and ages terribly. Generated code is easy to accept and hard to truly own. A rule worth holding the team to: you are accountable for code you commit exactly as if you'd typed every character — if you can't explain it in [review]({{< relref "/handbook/team-health-operations/development-lifecycle.md" >}}), it doesn't ship. That single norm does more than any tooling policy.
 {{< /protip >}}
+
+## Where to go next
+
+- **[Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}})** — the fastest way to get the hands-on reps this page keeps insisting on.
+- **[LeaderOS: Your Second Brain]({{< relref "/handbook/building-with-ai/leaderos.md" >}})** — the same assistant, pointed at the leadership job instead of the code.
