@@ -77,7 +77,7 @@ A flow like this shows the whole loop in one sitting. A service starts throwing 
 
 The dig takes a fraction of the usual time — but the engineer directs every step, choosing what to investigate, confirming the root cause, and owning the PR that ships. The model compresses the grunt work; the judgment stays human.
 
-**Why this is AI-assisted and not AI-native.** A person is in the loop the whole way, driving one step at a time. It would tip into [AI-native]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) only if the incident response were built *around* the model — an on-call agent that triages alerts, proposes patches, and opens PRs on its own, with people reviewing the output rather than directing each step. Same tool, different center of gravity: here it assists a person; there it's the architecture.
+**Why this is AI-assisted and not AI-native.** A person is in the loop the whole way, driving one step at a time. It would tip into [AI-native]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) only if the incident response were built *around* the model — an on-call agent that triages alerts, proposes patches, and opens PRs on its own, with people reviewing the output rather than directing each step. That's not the same setup pointed differently — it's a system you'd have to build: an agent or workflow wired around the model. The difference isn't which model you reach for; it's whether a person drives it step by step or you've engineered something that runs it.
 
 ## Getting started
 
