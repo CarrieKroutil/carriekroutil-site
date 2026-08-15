@@ -4,12 +4,9 @@ date: 2026-08-08T15:30:00-07:00
 tags: [golf, science]
 draft: false
 description: "A lightning siren cleared the course, and the guy next to me knew exactly when we'd be let back out. Turns out the system watches the storm's electrical energy drain away in real time."
-hero:
-  src: hero.svg
-  alt: "TODO: describe the hero image once it's generated"
 ---
 
-I learned something totally new — and pretty cool — while playing the Tower Course at Torreon.
+Today I learned something totally new — and pretty cool — while playing the Tower Course at Torreon.
 
 A storm rolled through and the lightning siren went off, which meant everyone off the course and into the clubhouse.
 
@@ -33,15 +30,11 @@ Torreon uses a lightning warning system from **THOR GUARD**.
 
 Most of what we're used to — the radar app, the lightning map — shows you lightning that has _already happened_. THOR GUARD is doing something different. It watches the electrostatic field in the air right over the property: the static charge that builds up in the atmosphere before a storm produces a strike. Lightning is born inside that field, so if you can watch the field build, you can see a strike coming before there's anything to see.
 
-![How Torreon detects unsafe play weather](thor-guard.png)
+![How Torreon detects unsafe play weather](thor-guard.webp)
 
 The system turns all of that into a single number called the **Force Level**.
 
-That was the number the guy was watching.
-
-**1.1.**
-
-And it was falling.
+That was the number the guy was watching, and at **1.1** it was closing in on the all-clear.
 
 ## The part that actually surprised me
 
@@ -68,7 +61,7 @@ He was watching the storm's electrical energy drain away in real time, and readi
 
 ## And yes, there's an app for that
 
-The app is called **ThorAlert**, and it connects to a specific THOR GUARD system by ID. The one I was given for Torreon is **031A** — enter that into ThorAlert and you can watch Torreon's lightning status yourself.
+The app is called **ThorAlert**, and it connects to an individual THOR GUARD system by ID — so if your course runs one, you can watch its live Force Level from your phone. The pro shop can tell you the system ID.
 
 Which means the next time we're sitting in the clubhouse waiting out a monsoon storm, I'll absolutely be the person staring at the Force Level thinking:
 
