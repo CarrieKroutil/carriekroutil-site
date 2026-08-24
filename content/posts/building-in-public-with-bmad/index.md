@@ -3,8 +3,7 @@ title: "Building this site in public with the BMAD method"
 date: 2026-06-23T12:00:00-07:00
 tags: [code, ai]
 draft: false
-# Takes the single Home featured slot: newer date than the welcome post, so date-desc
-# selection (Story 3.3, AD-7) makes this win and the welcome post falls into the recent grid.
+# Takes the single Home featured slot (Story 3.3, AD-7).
 featured: true
 description: "I built this site with an AI coding agent — but the real story is the planning. Here's how the BMAD method made building it calm instead of chaotic."
 hero:
