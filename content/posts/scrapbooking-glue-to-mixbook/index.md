@@ -2,7 +2,7 @@
 title: "Scrapbooking, from glue to Mixbook"
 date: 2026-08-23T10:00:00-07:00
 tags: [scrapbooking, dogs]
-draft: true
+draft: false
 description: "Seventeen years of making photo books, and the eight I never finished. What I've learned about turning a camera roll into something you can actually hold."
 ---
 
