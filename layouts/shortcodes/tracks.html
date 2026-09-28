@@ -1,0 +1,17 @@
+{{- /*
+  tracks.html — the numbered-track list on the Building with AI index.
+
+  A semantic <ol> wrapper around one or more nested `track` shortcodes. Each
+  track renders as an <li> with a solid accent circle (1/2/3), tinted
+  violet→fuchsia→amber to mirror --ck-accent-gradient. Styling lives in the
+  .ck-tracks rules in assets/css/custom.css (theme-aware tokens, no new colors).
+
+  Usage:
+      {{< tracks >}}
+      {{< track num="1" color="violet" title="Foundations" tagline="understand the technology." >}}
+      [Page A]({{< relref "..." >}}) → [Page B]({{< relref "..." >}})
+      {{< /track >}}
+      ...
+      {{< /tracks >}}
+*/ -}}
+<ol class="ck-tracks">{{ .Inner }}</ol>

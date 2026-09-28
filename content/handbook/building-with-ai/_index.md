@@ -7,8 +7,16 @@ AI is reshaping how software gets built, and managers need a working grasp of it
 
 **How it's organized.** Three tracks, take them in any order:
 
-- **Foundations — understand the technology.** [AI Literacy for EMs]({{< relref "/handbook/building-with-ai/ai-literacy-for-ems.md" >}}) → [How LLMs Work]({{< relref "/handbook/building-with-ai/how-llms-work.md" >}})
-- **AI-Assisted — use AI in the everyday dev workflow.** [AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) → [Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) → [LeaderOS]({{< relref "/handbook/building-with-ai/leaderos.md" >}})
-- **AI-Native — build products with a model at the core.** [AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) → [BMAD 101]({{< relref "/handbook/building-with-ai/bmad-101.md" >}})
+{{< tracks >}}
+{{< track num="1" color="violet" title="Foundations" tagline="understand the technology." >}}
+[AI Literacy for EMs]({{< relref "/handbook/building-with-ai/ai-literacy-for-ems.md" >}}) → [How LLMs Work]({{< relref "/handbook/building-with-ai/how-llms-work.md" >}})
+{{< /track >}}
+{{< track num="2" color="fuchsia" title="AI-Assisted" tagline="use AI in the everyday dev workflow." >}}
+[AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) → [Claude Code 101]({{< relref "/handbook/building-with-ai/claude-code-101.md" >}}) → [LeaderOS]({{< relref "/handbook/building-with-ai/leaderos.md" >}})
+{{< /track >}}
+{{< track num="3" color="amber" title="AI-Native" tagline="build with AI agents across the whole lifecycle." >}}
+[AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}) → [BMAD 101]({{< relref "/handbook/building-with-ai/bmad-101.md" >}})
+{{< /track >}}
+{{< /tracks >}}
 
 Running under all three is the people problem: [Leading AI-Adopting Teams]({{< relref "/handbook/building-with-ai/leading-ai-adopting-teams.md" >}}).

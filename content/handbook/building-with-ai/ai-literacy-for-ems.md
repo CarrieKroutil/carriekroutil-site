@@ -18,7 +18,7 @@ goDeeper:
     why: "Read how a frontier model actually works — context windows, tool use, prompting. Concepts here carry across every provider."
 ---
 
-You don't need to train a model to lead engineers who use them — but you do need a working mental model, the kind that lets you smell a bad claim, scope a feature realistically, and ask the question that cuts through a demo. AI literacy for a manager isn't about prompt tricks; it's about understanding what these systems are good at, where they quietly fail, and what that means for how your team builds. It's the foundation under everything else in this section — whether your engineers are leaning on assistants in their [everyday workflow]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) or putting a model at the [core of the product]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}). The goal here is to get you "dangerous enough to be useful" without drowning you in research papers.
+You don't need to train a model to lead engineers who use them — but you do need a working mental model, the kind that lets you smell a bad claim, scope a feature realistically, and ask the question that cuts through a demo. AI literacy for a manager isn't about prompt tricks; it's about understanding what these systems are good at, where they quietly fail, and what that means for how your team builds. It's the foundation under everything else in this section — whether your engineers are leaning on assistants in their [everyday workflow]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}}) or [rebuilding the workflow around AI agents]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}}). The goal here is to get you "dangerous enough to be useful" without drowning you in research papers.
 
 *Part of the **Foundations** track — pair this manager's-eye view with [How LLMs Work]({{< relref "/handbook/building-with-ai/how-llms-work.md" >}}), the optional deep dive into how the machine really works.*
 
@@ -93,4 +93,4 @@ The through-line: a demo is built to show the model at its best; your job is to 
 
 - **[How LLMs Work]({{< relref "/handbook/building-with-ai/how-llms-work.md" >}})** — go under the hood: a curated path from two friendly intros to a full Stanford course, for when you want to *really* understand the machine, not just the vocabulary.
 - **[AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}})** — what changes when your team writes code with assistants every day.
-- **[AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}})** — what changes when the model *is* the product, not a feature bolted on.
+- **[AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}})** — what changes when the workflow itself is redesigned around AI agents, not just sped up.
