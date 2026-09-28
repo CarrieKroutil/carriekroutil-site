@@ -1,0 +1,21 @@
+{{- /*
+  track.html — a single numbered track inside the `tracks` shortcode.
+
+  Params:
+    num     (required) — the ordinal shown in the circle ("1", "2", "3")
+    color   (required) — accent family: "violet", "fuchsia", or "amber"
+    title   (required) — the track name, rendered bold
+    tagline (required) — the short "what it's for" clause after the em dash
+  Inner content is the link chain (markdown, nested relref links welcome).
+
+  The circle is decorative (aria-hidden) — the <ol>/<li> already carries the
+  ordinal for assistive tech. See ck-track rules in assets/css/custom.css.
+*/ -}}
+{{- $color := .Get "color" -}}
+<li class="ck-track ck-track--{{ $color }}">
+  <span class="ck-track-num" aria-hidden="true">{{ .Get "num" }}</span>
+  <div class="ck-track-body">
+    <p class="ck-track-head"><strong>{{ .Get "title" }}</strong> — {{ .Get "tagline" }}</p>
+    <div class="ck-track-path">{{ .InnerDeindent | markdownify }}</div>
+  </div>
+</li>

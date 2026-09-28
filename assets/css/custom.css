@@ -342,6 +342,55 @@ samp {
 .ck-tag--fuchsia { color: var(--ck-chip-fuchsia-text); border-color: var(--ck-chip-fuchsia-border); }
 .ck-tag--amber   { color: var(--ck-chip-amber-text);   border-color: var(--ck-chip-amber-border); }
 
+/* ============================================================================
+   Numbered track list — the three learning tracks on the Building with AI index.
+   Semantics: an <ol> (assistive tech gets the ordinal); the accent circle is
+   decorative. Circles run violet→fuchsia→amber to mirror --ck-accent-gradient,
+   reusing the existing --ck-accent-* tokens (no new colors).
+   ========================================================================== */
+.ck-tracks {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;                               /* matches .ck-steps on the handbook home */
+}
+.ck-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px;                      /* matches .ck-step on the handbook home */
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-left-width: 3px;
+  border-radius: var(--ck-radius-card);   /* 18px */
+}
+.ck-track-num {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ck-radius-pill);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  font-weight: var(--ck-weight-display);   /* 800 */
+  line-height: 1;
+  color: #0a0a0a;                          /* dark ink reads on all three accents */
+}
+.ck-track-body { min-width: 0; }           /* let long link chains wrap, not overflow */
+.ck-track-head { margin: 0 0 2px; line-height: 1.35; }   /* trim the inherited 1.6 body leading */
+.ck-track-path { margin: 0; color: var(--ck-muted); line-height: 1.4; }
+.ck-track-path a { font-weight: var(--ck-weight-strong); }
+
+/* Per-track accent — solid circle + tinted left edge, left→right across the brand gradient. */
+.ck-track--violet  { border-left-color: var(--ck-accent-violet); }
+.ck-track--violet  .ck-track-num { background: var(--ck-accent-violet); }
+.ck-track--fuchsia { border-left-color: var(--ck-accent-fuchsia); }
+.ck-track--fuchsia .ck-track-num { background: var(--ck-accent-fuchsia); }
+.ck-track--amber   { border-left-color: var(--ck-accent-amber); }
+.ck-track--amber   .ck-track-num { background: var(--ck-accent-amber); }
+
 /* ----- Post title + meta ----- */
 .ck-post-title {
   font-size: 2.3rem;

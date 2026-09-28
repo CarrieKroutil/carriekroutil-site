@@ -38,8 +38,8 @@ You don't need this to be a good manager. But the leaders who invest here stop t
 
 Andrej Karpathy — a founding member of OpenAI and former head of AI at Tesla — is the clearest LLM teacher working today. Watch these two, in order:
 
-- **[How I use LLMs](https://www.youtube.com/watch?v=EWvNQjAaOHw)** *(~2 hrs)* — the practical one. What these tools can actually do, feature by feature, with real examples. Start here; it's the gentlest on-ramp there is.
-- **[Deep Dive into LLMs like ChatGPT](https://www.youtube.com/watch?v=7xTGNNLPyMI)** *(~3.5 hrs)* — the mechanics. How a model is trained, what tokens really are, why it hallucinates, and where its stranger behaviors come from. This is the "aha" one — after it, most AI news stops being mysterious.
+- **[Deep Dive into LLMs like ChatGPT](https://www.youtube.com/watch?v=7xTGNNLPyMI)** *(~3.5 hrs)* — the mechanics. How a model is trained, what tokens really are, why it hallucinates, and where its stranger behaviors come from. Start here; it's the "aha" one — after it, most AI news stops being mysterious.
+- **[How I use LLMs](https://www.youtube.com/watch?v=EWvNQjAaOHw)** *(~2 hrs)* — the practical one. What these tools can actually do, feature by feature, with real examples. Watch it second, once the mechanics have clicked.
 
 If you only ever watch these two, you'll be ahead of most people talking confidently about AI in meetings.
 
@@ -79,4 +79,4 @@ You don't have to finish the course to get the payoff. Watch Karpathy's two talk
 You've got the foundation — now put it to work:
 
 - **[AI-Assisted Engineering]({{< relref "/handbook/building-with-ai/ai-assisted-engineering.md" >}})** — this understanding, applied in the everyday dev workflow.
-- **[AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}})** — designing systems with the model at the core, where knowing the failure modes really pays off.
+- **[AI-Native Engineering]({{< relref "/handbook/building-with-ai/ai-native-engineering.md" >}})** — building with AI agents across the lifecycle, where knowing the failure modes really pays off.
